@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
     ** É importante usar pra não dar choque de estilos no css
     em diferentes arquivos.
 
-    Basicamente é assim o uso
+    Basicamente é assim o uso.
 */
 
 const Login = () => {
