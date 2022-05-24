@@ -1,13 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import DataChart from "../../components/Chart";
 import ReportedProblems from "../../components/ReportedProblems";
 
 import logo from "../../assets/images/logo-pequeno.svg";
-import userIcon from "../../assets/icons/user-icon.svg";
-import groupIcon from "../../assets/icons/group-icon.svg";
-import adsIcon from "../../assets/icons/ads-icon.svg";
-import calendarIcon from "../../assets/icons/calendar-icon.svg";
 
 import styles from "./styles.module.css";
 import Select from "../../components/Select";
@@ -15,14 +11,23 @@ import Select from "../../components/Select";
 import { ChartData } from "../../data/Data";
 
 const Dashboard = () => {
-  const typeOptions = ["Usuários", "Anúncios", "Tribos"];
-  const scheduleOptions = ["Dia", "Mês", "Ano"];
+
+  const typeOptions = [
+    { label: "Usuários", value: "users" },
+    { label: "Anúncios", value: "ads" },
+    { label: "Tribos", value: "groups" },
+  ];
+  const scheduleOptions = [
+    { label: "Dia", value: "day" },
+    { label: "Mês", value: "month" },
+    { label: "Ano", value: "year" },
+  ];
 
   const [data, setData] = useState({
     labels: ChartData.map((data) => data.month),
     datasets: [
       {
-        label: "Users Gained",
+        label: "Usuários ganhos",
         data: ChartData.map((data) => data.userGain),
         backgroundColor: ["#9142C5"],
         tension: 0.4,
@@ -32,6 +37,10 @@ const Dashboard = () => {
       },
     ],
   });
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -43,16 +52,16 @@ const Dashboard = () => {
           <div className={styles.chartSelect}>
             <Select
               fieldName="type"
-              srcIcon={userIcon}
               optionsList={typeOptions}
+              defaultValue="users"
             />
             <Select
               fieldName="schedule"
-              srcIcon={calendarIcon}
               optionsList={scheduleOptions}
+              defaultValue="month"
             />
           </div>
-          <DataChart chartData={data}/>
+          <DataChart chartData={data} />
           <a href="">Ver mais...</a>
         </div>
         <nav className={styles.reportedProblemsContainer}>

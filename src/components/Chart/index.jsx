@@ -38,7 +38,3 @@ const DataChart = ({ chartData }) => {
   );
 };
 export default DataChart;
-
-// export default function LineChart({ chartData, chartOptions }) {
-//   return <Line data={chartData} options={chartOptions} />;
-// }
