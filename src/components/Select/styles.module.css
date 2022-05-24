@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    padding: 0.35rem;
+}
+
+.container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    border: none;
+    margin-left: 0.75rem;
+    outline: none;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--dark-light);
+}
+
+.container #selectIcon {
+    width: 24px;
+}
+
+select option {
+    padding: 1rem;
+}
