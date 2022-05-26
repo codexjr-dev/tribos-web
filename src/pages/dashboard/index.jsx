@@ -11,7 +11,6 @@ import Select from "../../components/Select";
 import { ChartData } from "../../data/Data";
 
 const Dashboard = () => {
-
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState("month");
 
