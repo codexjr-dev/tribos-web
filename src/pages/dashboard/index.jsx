@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import DataChart from "../../components/Chart";
 import ReportedProblems from "../../components/ReportedProblems";
@@ -12,12 +12,15 @@ import { ChartData } from "../../data/Data";
 
 const Dashboard = () => {
 
+  const [selectedType, setSelectedType] = useState("users");
+  const [selectedInterval, setSelectedInterval] = useState("month");
+
   const typeOptions = [
     { label: "Usuários", value: "users" },
     { label: "Anúncios", value: "ads" },
     { label: "Tribos", value: "groups" },
   ];
-  const scheduleOptions = [
+  const intervalOptions = [
     { label: "Dia", value: "day" },
     { label: "Mês", value: "month" },
     { label: "Ano", value: "year" },
@@ -38,10 +41,6 @@ const Dashboard = () => {
     ],
   });
 
-  useEffect(() => {
-
-  }, [])
-
   return (
     <div className={styles.container}>
       <header className={styles.logoContainer}>
@@ -53,16 +52,18 @@ const Dashboard = () => {
             <Select
               fieldName="type"
               optionsList={typeOptions}
-              defaultValue="users"
+              setValue={setSelectedType}
+              value={selectedType}
             />
             <Select
-              fieldName="schedule"
-              optionsList={scheduleOptions}
-              defaultValue="month"
+              fieldName="interval"
+              optionsList={intervalOptions}
+              setValue={setSelectedInterval}
+              value={selectedInterval}
             />
           </div>
           <DataChart chartData={data} />
-          <a href="">Ver mais...</a>
+          <a href="#">Ver mais...</a>
         </div>
         <nav className={styles.reportedProblemsContainer}>
           <ReportedProblems />

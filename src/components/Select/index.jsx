@@ -4,14 +4,12 @@ import userIcon from "../../assets/icons/user-icon.svg";
 import adsIcon from "../../assets/icons/ads-icon.svg";
 import groupIcon from "../../assets/icons/group-icon.svg";
 import calendarIcon from "../../assets/icons/calendar-icon.svg";
-import { useState } from "react";
 
-const Select = ({ fieldName, optionsList, defaultValue }) => {
-  const [selectedValue, setSelectedValue] = useState(defaultValue);
+const Select = ({ fieldName, optionsList, setValue, value }) => {
 
   const iconSwitcher = (selected) => {
     let iconSrc = null;
-    if (fieldName == "schedule") {
+    if (fieldName === "interval") {
       iconSrc = calendarIcon;
     } else {
       switch (selected) {
@@ -34,15 +32,15 @@ const Select = ({ fieldName, optionsList, defaultValue }) => {
   return (
     <div className={styles.container}>
       <img
-        src={iconSwitcher(selectedValue)}
+        src={iconSwitcher(value)}
         alt={fieldName}
         id={styles.fieldIcon}
       />
       <select
-        value={selectedValue}
-        name={fieldName}
-        id={fieldName}
-        onChange={(e) => setSelectedValue(e.target.value)}
+        value={value}
+        name={value}
+        id={value}
+        onChange={(e) => setValue(e.target.value)}
       >
         {optionsList.map((option) => {
           return (
