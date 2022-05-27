@@ -15,6 +15,11 @@
   font-size: 20px;
   color: var(--dark-light);
   padding: 0.2rem 0.3rem;
+  transition: all ease-in-out 0.2s;
+}
+
+.container select:hover {
+  color: var(--dark);
 }
 
 .container img {
@@ -28,8 +33,4 @@
 
 .container #selectIcon {
   width: 24px;
-}
-
-select option {
-  padding: 1rem;
 }

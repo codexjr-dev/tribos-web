@@ -6,18 +6,35 @@ import styles from "./styles.module.css";
 const DataChart = ({ chartData }) => {
   const options = {
     responsive: true,
+    fontStyle: "Inter",
     layout: {
       padding: 20,
     },
     scales: {
       x: {
+        ticks: {
+          callback: function (value, _) {
+            return window.innerWidth > 1000
+              ? this.getLabelForValue(value)
+              : this.getLabelForValue(value).slice(0, 3);
+          },
+          font: {
+            size: 16,
+            family: "Inter",
+          },
+        },
         grid: {
           display: false,
         },
       },
       y: {
+        beginAtZero: false,
         ticks: {
           stepSize: 200,
+          font: {
+            size: 16,
+            family: "Inter",
+          },
         },
         grid: {
           display: false,
@@ -27,6 +44,9 @@ const DataChart = ({ chartData }) => {
     plugins: {
       legend: {
         display: false,
+      },
+      tooltip: {
+        padding: 10,
       },
     },
   };

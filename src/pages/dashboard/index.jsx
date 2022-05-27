@@ -35,7 +35,7 @@ const Dashboard = () => {
         tension: 0.4,
         fill: false,
         borderColor: "#C48EF4",
-        radius: 8,
+        radius: 6,
       },
     ],
   });

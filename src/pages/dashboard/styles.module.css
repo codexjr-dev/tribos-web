@@ -22,6 +22,7 @@
   height: 100%;
   align-items: center;
   width: 100%;
+  margin-top: 2rem;
 }
 
 .container .infoContainer .chartContainer {
@@ -44,4 +45,19 @@
 
 .container .infoContainer .chartContainer a:hover {
   color: var(--purple);
+}
+
+@media (max-width: 1000px) {
+  .container .infoContainer .chartContainer {
+    width: 80%;
+  }
+
+  .infoContainer {
+    flex-direction: column;
+    margin: 1.5rem 0;
+  }
+
+  .reportedProblemsContainer {
+    margin-top: 2.5rem;
+  }
 }

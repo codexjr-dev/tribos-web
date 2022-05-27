@@ -6,6 +6,7 @@ import groupIcon from "../../assets/icons/group-icon.svg";
 import calendarIcon from "../../assets/icons/calendar-icon.svg";
 
 const Select = ({ fieldName, optionsList, setValue, value }) => {
+
   const iconSwitcher = (selected) => {
     let iconSrc = null;
     if (fieldName === "interval") {
@@ -30,7 +31,11 @@ const Select = ({ fieldName, optionsList, setValue, value }) => {
 
   return (
     <div className={styles.container}>
-      <img src={iconSwitcher(value)} alt={fieldName} id={styles.fieldIcon} />
+      <img
+        src={iconSwitcher(value)}
+        alt={fieldName}
+        id={styles.fieldIcon}
+      />
       <select
         value={value}
         name={value}
@@ -39,7 +44,7 @@ const Select = ({ fieldName, optionsList, setValue, value }) => {
       >
         {optionsList.map((option) => {
           return (
-            <option key={option.value} value={option.value}>
+            <option key={option.value} value={option.value} id={styles.option}>
               {option.label}
             </option>
           );

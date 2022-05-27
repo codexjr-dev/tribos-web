@@ -38,7 +38,25 @@ export const ChartData = [
   {
     id: 7,
     month: "Outubro",
-    userGain: 127,
+    userGain: 802,
     userLost: 49,
   },
+  // {
+  //   id: 8,
+  //   month: "Novembro",
+  //   userGain: 211,
+  //   userLost: 49,
+  // },
+  // {
+  //   id: 9,
+  //   month: "Dezembro",
+  //   userGain: 104,
+  //   userLost: 49,
+  // },
+  // {
+  //   id: 10,
+  //   month: "Janeiro",
+  //   userGain: 39,
+  //   userLost: 49,
+  // },
 ];
