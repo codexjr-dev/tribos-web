@@ -29,7 +29,6 @@ const DataChart = ({ chartData }) => {
       },
       y: {
         ticks: {
-          stepSize: 200,
           font: {
             size: 16,
             family: "Inter",

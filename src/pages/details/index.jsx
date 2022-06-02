@@ -12,9 +12,11 @@ import InfoCard from "../../components/InfoCard";
 import styles from "./styles.module.css";
 import { formatInfo, getMax, getSum } from "../../util/aux";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Details = () => {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     labels: ChartData.map((data) => data.month),
@@ -38,7 +40,7 @@ const Details = () => {
   return (
     <div className={styles.container}>
       <header>
-        <div>
+        <div onClick={() => navigate("/dashboard")}>
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2> Usuários - Mês </h2>
         </div>
@@ -61,7 +63,7 @@ const Details = () => {
           <InfoCard
             title="Novos usuários"
             iconSrc={UserGainIcon}
-            data={`500`}
+            data={formatInfo(1000)}
           />
         </div>
       </main>

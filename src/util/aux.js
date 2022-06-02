@@ -18,6 +18,15 @@ export const getSum = (array) => {
 
 export const formatInfo = (value) => {
   let output = "";
-  output = value < 1000 ? `${value}` : `${(value / 1000).toFixed(1)}K`;
+
+  if (value < 1000) {
+    output = `${value}`;
+  } else {
+    if (value % 1000 === 0) {
+      output = `${value / 1000}K`;
+    } else if (value % 1000) {
+      output = `${(value / 1000).toFixed(1)}K`;
+    }
+  }
   return output;
 };

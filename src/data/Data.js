@@ -20,7 +20,7 @@ export const ChartData = [
   {
     id: 4,
     month: "Julho",
-    userGain: 696,
+    userGain: 2096,
     userLost: 52,
   },
   {

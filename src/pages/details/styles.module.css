@@ -23,6 +23,7 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  transition: all ease-in-out .15s;
 }
 
 .container header div:hover {
