@@ -32,15 +32,15 @@ export const ChartData = [
   {
     id: 6,
     month: "Setembro",
-    userGain: 119,
+    userGain: 1409,
     userLost: 43,
   },
-  {
-    id: 7,
-    month: "Outubro",
-    userGain: 802,
-    userLost: 49,
-  },
+  // {
+  //   id: 7,
+  //   month: "Outubro",
+  //   userGain: 802,
+  //   userLost: 49,
+  // },
   // {
   //   id: 8,
   //   month: "Novembro",
@@ -56,6 +56,18 @@ export const ChartData = [
   // {
   //   id: 10,
   //   month: "Janeiro",
+  //   userGain: 39,
+  //   userLost: 49,
+  // },
+  // {
+  //   id: 11,
+  //   month: "Fevereiro",
+  //   userGain: 39,
+  //   userLost: 49,
+  // },
+  // {
+  //   id: 12,
+  //   month: "Março",
   //   userGain: 39,
   //   userLost: 49,
   // },

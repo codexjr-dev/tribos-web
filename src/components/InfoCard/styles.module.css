@@ -1,0 +1,33 @@
+.container {
+  background: #ffffff;
+  box-shadow: 0px 2px 4px 2px rgba(74, 0, 206, 0.17);
+  border-radius: 8px;
+  width: 130px;
+  padding: 1rem;
+  transition: all ease-out .15s;
+}
+
+.container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--dark);
+  margin-bottom: 0.75rem;
+}
+
+.container .header h3 {
+  font-weight: normal;
+  color: var(--dark-light);
+  font-weight: 700;
+}
+
+.container #mainInfo {
+  color: var(--purple);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.container:hover {
+  background-color: var(--light-gray);
+  cursor: pointer;
+}

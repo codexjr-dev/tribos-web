@@ -28,7 +28,6 @@ const DataChart = ({ chartData }) => {
         },
       },
       y: {
-        beginAtZero: false,
         ticks: {
           stepSize: 200,
           font: {
