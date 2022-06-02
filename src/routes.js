@@ -11,7 +11,7 @@ export default function MainRoutes() {
       <Route path="/" element={isLogged ? <Dashboard /> : <Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/details" element={<Details />} />
+      <Route path="/details/:type/:interval" element={<Details />} />
     </Routes>
   );
 }

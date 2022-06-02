@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 import Select from "../../components/Select";
 
 import { ChartData } from "../../data/Data";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
@@ -40,6 +41,12 @@ const Dashboard = () => {
     ],
   });
 
+  const navigate = useNavigate();
+
+  const handleCheckDetails = () => {
+    navigate(`/details/${selectedType}/${selectedInterval}`);
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.logoContainer}>
@@ -62,7 +69,7 @@ const Dashboard = () => {
             />
           </div>
           <DataChart chartData={data} />
-          <a href="#">Ver mais...</a>
+          <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
         <nav className={styles.reportedProblemsContainer}>
           <ReportedProblems />

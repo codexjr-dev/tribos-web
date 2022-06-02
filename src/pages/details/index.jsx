@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ChartData } from "../../data/Data";
 
@@ -11,8 +11,11 @@ import InfoCard from "../../components/InfoCard";
 
 import styles from "./styles.module.css";
 import { formatInfo, getMax, getSum } from "../../util/aux";
+import { useParams } from "react-router-dom";
 
 const Details = () => {
+  const params = useParams();
+
   const [data, setData] = useState({
     labels: ChartData.map((data) => data.month),
     datasets: [
@@ -27,6 +30,10 @@ const Details = () => {
       },
     ],
   });
+
+  useEffect(() => {
+    console.log(params.type);
+  }, []);
 
   return (
     <div className={styles.container}>
