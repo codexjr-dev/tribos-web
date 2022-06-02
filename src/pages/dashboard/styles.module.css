@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.container header img {
+  width: 112px;
+}
+
+.container .infoContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.container .infoContainer .chartContainer {
+  width: 65%;
+}
+
+.container .infoContainer .chartContainer .chartSelect {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.container .infoContainer .chartContainer a {
+  margin: 2rem 0 0 4rem;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--purple-light);
+  transition: all ease-in-out 0.15s;
+}
+
+.container .infoContainer .chartContainer a:hover {
+  color: var(--purple);
+}
+
+@media (max-width: 1000px) {
+  .container .infoContainer .chartContainer {
+    width: 80%;
+  }
+
+  .infoContainer {
+    flex-direction: column;
+    margin: 1.5rem 0;
+  }
+
+  .reportedProblemsContainer {
+    margin-top: 2.5rem;
+  }
+}

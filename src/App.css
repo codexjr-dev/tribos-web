@@ -37,6 +37,7 @@ p,
 blockquote,
 th,
 td {
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
 }
