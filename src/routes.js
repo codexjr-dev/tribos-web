@@ -18,6 +18,8 @@ export default function MainRoutes() {
       <Route path="/feedback" element={<Feedback />} />
       <Route path="/errors" element={<Errors />} />
       <Route path="/spam" element={<Spam />} />
+      <Route path="/details/:type/:interval" element={<Details />} />
+
     </Routes>
   );
 }

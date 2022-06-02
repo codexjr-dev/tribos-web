@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  padding: 0.35rem;
+}
+
+.container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  margin-left: 0.5rem;
+  outline: none;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--dark-light);
+  padding: 0.2rem 0.3rem;
+  transition: all ease-in-out 0.2s;
+}
+
+.container select:hover {
+  color: var(--dark);
+}
+
+.container img {
+  width: 36px;
+  height: 36px;
+}
+
+.container select:hover {
+  cursor: pointer;
+}
+
+.container #selectIcon {
+  width: 24px;
+}
