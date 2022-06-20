@@ -72,3 +72,31 @@ export const ChartData = [
   //   userLost: 49,
   // },
 ];
+
+export const FeedbackData = [
+  {
+    user: "matheusforlan",
+    feedback: "O sistema não está fazendo login por favor, consertem urgentemente",
+    time: "1h"
+  },
+  {
+    user: "lucipa",
+    feedback: "Tá muito brabo, mané",
+    time: "1d"
+  },
+  {
+    user: "casimiro",
+    feedback: "O silêncio não comete erros.",
+    time: "16h"
+  },
+  {
+    user: "rodrigoFaro",
+    feedback: "Dança gatinho dança",
+    time: "1h"
+  },
+  {
+    user: "mr.lorem",
+    feedback: "Lorem ipsum sula mfineinfewmfoe wooceoclolewolec olomcoei inienioo m manurnoaldjaijil",
+    time: "1h"
+  },
+];

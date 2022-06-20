@@ -1,13 +1,17 @@
 import styles from "./styles.module.css";
-import ReturnButton from "../../assets/return-button.svg";
+import ReturnButton from "../../assets/icons/return-button.svg";
 
 const Spam = () => {
     return(
-        <div>
-                  
-        <img src= {ReturnButton} alt= "Botão de Retorno" /> 
 
-        </div>
+    <div className= {styles.container}>
+
+        <div className= {styles.titleArea}>
+            <img src= {ReturnButton} alt= "Botão de retorno" /> 
+            <div className= {styles.title}>Spam ou Abusos</div>
+        </div>             
+
+    </div>
     )
 }
 

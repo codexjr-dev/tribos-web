@@ -1,0 +1,26 @@
+.container {
+    align-items: center;
+    justify-content: center;
+    width: 440px;
+    height: 700px;
+    position: relative;
+    background-color: gray;
+    left: 460px
+
+}
+
+.titleArea{
+    padding-top: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title{   
+    font-size: 36px;
+    color: var(--dark);
+    font-style: bold;
+    font-family: 'Inter';
+    font-weight: 700;      
+}
