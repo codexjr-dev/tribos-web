@@ -72,6 +72,7 @@
 }
 
 .headerInfo span {
+  font-size: 18px;
   transition: all ease-in-out 0.2s;
 }
 
@@ -130,7 +131,7 @@
 
 table thead tr th {
   padding: 1rem 0;
-  color: var(--purple);
+  color: var(--blue-dark);
   text-align: center;
 }
 
@@ -179,7 +180,4 @@ table thead tr th {
 #tableRow #price input[disabled] {
   background: none;
   padding: 0;
-
 }
-
-
