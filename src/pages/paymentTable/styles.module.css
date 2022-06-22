@@ -5,7 +5,7 @@
   width: 90%;
   padding: 1.5rem 0;
   margin-bottom: 2rem;
-  /* height: 90vh; */
+  /* max-height: 85vh; */
 }
 
 .container header {
@@ -37,16 +37,28 @@
   filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
     brightness(92%) contrast(98%);
   cursor: pointer;
-} 
+}
 
 .container main {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .mainContainer {
-    width: 75%;
+  width: 75%;
+}
+
+@media screen and (max-width: 1100px) {
+  .mainContainer {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .mainContainer {
+    width: 95%;
+  }
 }
 
 .container main .headerInfo {
@@ -82,7 +94,7 @@
 }
 
 .buttons button:first-child {
-    margin-right: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .buttons button:hover {
@@ -123,11 +135,11 @@ table thead tr th {
 }
 
 #tableRow {
-    border-radius: 8px;
+  border-radius: 8px;
 }
 #tableRow:hover {
-    cursor: pointer;
-    outline: 3px solid var(--purple);
+  cursor: pointer;
+  outline: 3px solid var(--purple);
 }
 
 #tableRow td {
@@ -145,3 +157,29 @@ table thead tr th {
 #tableRow td:last-child {
   border-radius: 0 8px 8px 0;
 }
+
+#tableRow #price {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+#tableRow #price input {
+  background-color: var(--gray);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 100px;
+  margin-left: 6px;
+  color: var(--dark);
+  font-size: 14px;
+  padding: 6px;
+}
+
+#tableRow #price input[disabled] {
+  background: none;
+  padding: 0;
+
+}
+
+

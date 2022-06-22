@@ -10,9 +10,20 @@ import styles from "./styles.module.css";
 export const PaymentTable = () => {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedButton, setSelectedButton] = useState(0);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleChangeSelectedButton = (event, actual) => {
     setSelectedButton(Math.abs(actual - 1));
+  };
+
+  const handleClickOnSave = () => {
+    alert("salvando");
+    setIsEditMode(!isEditMode);
+  };
+
+  const handleClickOnEdit = () => {
+    alert("editando");
+    setIsEditMode(!isEditMode);
   };
 
   return (
@@ -27,7 +38,15 @@ export const PaymentTable = () => {
         <div className={styles.mainContainer}>
           <div className={styles.headerInfo}>
             <h2>Tabela de valores</h2>
-            <span id={styles.editButton}> Editar </span>
+            {!isEditMode ? (
+              <span id={styles.editButton} onClick={handleClickOnEdit}>
+                Editar
+              </span>
+            ) : (
+              <span id={styles.editButton} onClick={handleClickOnSave}>
+                Salvar
+              </span>
+            )}
           </div>
           <div className={styles.buttons}>
             <button
@@ -52,7 +71,7 @@ export const PaymentTable = () => {
               <thead>
                 <tr>
                   <th>Nº participantes</th>
-                  <th>Preço</th>
+                  <th>Preço Total</th>
                   <th>
                     Imposto (<b>{`${20}%`}</b>)
                   </th>
@@ -66,11 +85,19 @@ export const PaymentTable = () => {
               </thead>
 
               <tbody>
-                {priceTable.map((object) => {
+                {priceTable.map((object, index) => {
                   return (
                     <tr key={object.id} id={styles.tableRow}>
                       <td>{`Acima de ${formatInfo(object.min)}`}</td>
-                      <td>{`R$ ${object.price.toFixed(2)}`}</td>
+                      <td id={styles.price}>
+                        {"R$ "}
+                        <input
+                          type="number"
+                          disabled={isEditMode ? false : true}
+                          value={object.price.toFixed(2)}
+                          name="price"
+                        />
+                      </td>
                       <td>{`R$ ${object.tax.toFixed(2)}`}</td>
                       <td>{`R$ ${object.common.toFixed(2)}`}</td>
                       <td>{`R$ ${object.master.toFixed(2)}`}</td>
