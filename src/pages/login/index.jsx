@@ -2,23 +2,14 @@ import styles from "./styles.module.css";
 import TribosLogo from "../../assets/logo-tribos.svg";
 import EyeOff from "../../assets/eye-off.svg";
 import { useCallback, useState } from "react";
-import { useContext } from "react";
-import { AuthContext, useAuth } from "../../contexts/auth";
-import { useEffect } from "react";
+import { useAuth } from "../../contexts/auth";
 import { useRef } from "react";
-import { authenticate } from "../../services/api";
-
-/*
-    Esse padrão de uso de css se chama css modules
-    
-    ** É importante usar pra não dar choque de estilos no css
-    em diferentes arquivos.
-
-    Basicamente é assim o uso.
-*/
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { signed, setUser } = useAuth();
+  const { authenticate, user } = useAuth();
+
+  const navigate = useNavigate();
 
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
@@ -34,16 +25,14 @@ const Login = () => {
   });
 
   const handleLogin = async () => {
-    const response = await authenticate(
+    const responseData = await authenticate(
       usernameRef.current.value,
       passwordRef.current.value
     );
-    response ? saveUser(response) : alert("Deu erro.");
-  };
 
-  const saveUser = (data) => {
-    setUser(data.user);
-    localStorage.setItem("@App:user", JSON.stringify(data.user));
+    if (responseData.user && responseData.token) {
+      navigate("/dashboard");
+    }
   };
 
   return (
