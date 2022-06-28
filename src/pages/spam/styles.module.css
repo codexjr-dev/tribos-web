@@ -1,0 +1,39 @@
+.container {
+    align-items: center;
+    justify-content: center;
+    width: 440px;
+    height: 700px;
+    position: relative;
+    left: 460px
+
+}
+
+.titleArea{
+    padding-top: 0.8rem;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-bottom: 1.6rem;
+    gap: 60px;
+}
+
+.returnButton{
+    height: 1.5rem;
+    margin-top: 14px;
+}
+
+.title{   
+    font-size: 36px;
+    color: var(--dark);
+    font-style: bold;
+    font-family: 'Inter';
+    font-weight: 700;      
+}
+
+.spamArea{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}

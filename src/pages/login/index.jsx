@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
-import TribosLogo from "../../assets/logo-tribos.svg";
-import EyeOff from "../../assets/eye-off.svg";
+import TribosLogo from "../../assets/images/logo-tribos.svg";
+import EyeOff from "../../assets/icons/eye-off.svg";
 import { useCallback, useState } from "react";
 import { useAuth } from "../../contexts/auth";
 import { useRef } from "react";
