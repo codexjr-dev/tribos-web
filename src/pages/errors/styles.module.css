@@ -1,20 +1,25 @@
 .container {
     align-items: center;
     justify-content: center;
-    width: 440px;
-    height: 700px;
+    width: 440px;   
     position: relative;
-    background-color: gray;
     left: 460px
 
 }
 
 .titleArea{
-    padding-top: 10px;
+    padding-top: 0.8rem;
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
+    padding-bottom: 1.6rem;
+    gap: 60px;
+}
+
+.returnButton{
+    height: 1.5rem;
+    margin-top: 14px;
 }
 
 .title{   
@@ -23,4 +28,11 @@
     font-style: bold;
     font-family: 'Inter';
     font-weight: 700;      
+}
+
+.errorArea{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }

@@ -16,6 +16,12 @@
     gap: 60px;
 }
 
+.returnButton{
+    height: 1.5rem;
+    margin-top: 14px;
+}
+
+
 .title{   
     font-size: 36px;
     color: var(--dark);
