@@ -11,20 +11,15 @@ import Select from "../../components/Select";
 import { ChartData } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
+import { typeOptions, intervalOptions } from "../../util/aux";
+import { useEffect } from "react";
+import { useAuth } from "../../contexts/auth";
+
 const Dashboard = () => {
+  // const { signed } = useAuth();
+
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState("month");
-
-  const typeOptions = [
-    { label: "Usuários", value: "users" },
-    { label: "Anúncios", value: "ads" },
-    { label: "Tribos", value: "groups" },
-  ];
-  const intervalOptions = [
-    { label: "Dia", value: "day" },
-    { label: "Mês", value: "month" },
-    { label: "Ano", value: "year" },
-  ];
 
   const [data, setData] = useState({
     labels: ChartData.map((data) => data.month),
@@ -47,6 +42,10 @@ const Dashboard = () => {
     navigate(`/details/${selectedType}/${selectedInterval}`);
   };
 
+  useEffect(() => {
+    // console.log(signed);
+  }, []);
+
   return (
     <div className={styles.container}>
       <header className={styles.logoContainer}>
@@ -68,6 +67,7 @@ const Dashboard = () => {
               value={selectedInterval}
             />
           </div>
+          <button>Requisição</button>
           <DataChart chartData={data} />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
