@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Feedback from "./pages/feedback";
 import Errors from "./pages/errors";
 import Spam from "./pages/spam";
+import { PaymentTable } from "./pages/paymentTable";
 import { useAuth } from "./contexts/auth";
 
 export default function MainRoutes() {
@@ -20,6 +21,7 @@ export default function MainRoutes() {
       <Route path="/errors" element={<Errors />} />
       <Route path="/spam" element={<Spam />} />
       <Route path="/details/:type/:interval" element={<Details />} />
+      <Route path="/payment/table" element={<PaymentTable />} />
     </Routes>
   );
 }
