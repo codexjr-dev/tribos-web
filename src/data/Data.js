@@ -1,5 +1,3 @@
-
-
 export const ChartData = [
   {
     id: 1,
@@ -37,40 +35,151 @@ export const ChartData = [
     userGain: 1409,
     userLost: 43,
   },
-  // {
-  //   id: 7,
-  //   month: "Outubro",
-  //   userGain: 802,
-  //   userLost: 49,
-  // },
-  // {
-  //   id: 8,
-  //   month: "Novembro",
-  //   userGain: 211,
-  //   userLost: 49,
-  // },
-  // {
-  //   id: 9,
-  //   month: "Dezembro",
-  //   userGain: 104,
-  //   userLost: 49,
-  // },
-  // {
-  //   id: 10,
-  //   month: "Janeiro",
-  //   userGain: 39,
-  //   userLost: 49,
-  // },
-  // {
-  //   id: 11,
-  //   month: "Fevereiro",
-  //   userGain: 39,
-  //   userLost: 49,
-  // },
-  // {
-  //   id: 12,
-  //   month: "Março",
-  //   userGain: 39,
-  //   userLost: 49,
-  // },
+];
+
+export const priceTable = [
+  {
+    id: 1,
+    min: 0,
+    price: 250,
+    tax: 50,
+    common: 60,
+    master: 140,
+  },
+  {
+    id: 2,
+    min: 500,
+    price: 300,
+    tax: 60,
+    common: 72,
+    master: 168,
+  },
+  {
+    id: 3,
+    min: 1000,
+    price: 400,
+    tax: 80,
+    common: 96,
+    master: 224,
+  },
+  {
+    id: 4,
+    min: 2000,
+    price: 480,
+    tax: 96,
+    common: 115.2,
+    master: 268.8,
+  },
+  {
+    id: 5,
+    min: 4000,
+    price: 605,
+    tax: 121,
+    common: 145.2,
+    master: 338.8,
+  },
+  {
+    id: 6,
+    min: 8000,
+    price: 690,
+    tax: 138,
+    common: 165.6,
+    master: 386.4,
+  },
+  {
+    id: 7,
+    min: 16000,
+    price: 890,
+    tax: 178,
+    common: 213.6,
+    master: 498.4,
+  },
+  {
+    id: 8,
+    min: 32000,
+    price: 124,
+    tax: 249,
+    common: 298.8,
+    master: 697.2,
+  },
+  {
+    id: 9,
+    min: 64000,
+    price: 185,
+    tax: 370,
+    common: 444,
+    master: 1036,
+  },
+];
+
+export const FeedbackData = [
+  {
+    user: "matheusforlan",
+    feedback: "O sistema não está fazendo login por favor, consertem urgentemente",
+    time: "1h"
+  },
+  {
+    user: "lucipa",
+    feedback: "Tá muito brabo, mané",
+    time: "1d"
+  },
+  {
+    user: "casimiro",
+    feedback: "O silêncio não comete erros.",
+    time: "16h"
+  },
+  {
+    user: "rodrigoFaro",
+    feedback: "Dança gatinho dança",
+    time: "1h"
+  },
+  {
+    user: "mr.lorem",
+    feedback: "Lorem ipsum sula mfineinfewmfoe wooceoclolewolec olomcoei inienioo m manurnoaldjaijil",
+    time: "1h"
+  },
+];
+
+export const ErrorData = [
+  {
+    user: "matheusforlan",
+    feedback: "O sistema não está fazendo login por favor, consertem urgentemente!!!",
+    image: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    time: "1h"
+  },
+
+  {
+    user: "lucipa",
+    feedback: "Não consigo me cadastrar, mané!!!",
+    image: "",
+    time: "5d"
+  },
+];
+
+export const PostData = [
+  {
+    icon: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    user: "matheusforlan",
+    image: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    subtitle: "São João de Caruaru é melhor que o de Campina Grande",
+    complaints: 5,
+    time:  "3h"
+  },
+];
+
+export const ProfileData = [
+  {
+    icon: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    name: "Matheus Forlán",
+    user: "matheusforlan",
+    time: "30m",
+    complaints: 8
+  },
+  {
+    icon: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    name: "North America Memes",
+    user: "NorthAmericaMemes",
+    time: "7d",
+    complaints: 85
+  },
 ];
