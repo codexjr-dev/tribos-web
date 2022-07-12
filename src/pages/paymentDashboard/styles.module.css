@@ -1,0 +1,164 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 75%;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0 3rem 0;
+}
+
+.container header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0 1rem 0 0;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.container header div h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 3rem;
+}
+
+.container header div:hover, .container .buttonsHeader img:hover {
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  cursor: pointer;
+}
+
+.container main {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.container .buttonsHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container .buttonsHeader img {
+  width: 30px;
+  transition: ease-in-out 0.15s;
+}
+
+button {
+  padding: 0.35rem 0.75rem;
+  border-radius: 24px;
+  background: none;
+  outline: none;
+  border: 2px solid var(--purple);
+  font-size: 16px;
+  color: var(--purple);
+}
+
+button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generalInfo,
+.paymentList {
+  width: 100%;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  margin-top: 3rem;
+}
+
+.generalInfo h2 {
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--dark);
+}
+
+.generalInfo #amount {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.generalInfo .graph {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: space-evenly;
+}
+
+.paymentList .tableHeader h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.paymentList .tableHeader .buttons {
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+}
+
+.container main .tableContainer {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+}
+
+.container main .tableContainer table {
+  flex: 1;
+  border-collapse: separate;
+  border-spacing: 0 0.75em;
+}
+
+table thead tr th {
+  padding: 1rem 0;
+  color: var(--blue-dark);
+  text-align: center;
+}
+
+.tableRow {
+  border-radius: 8px;
+}
+.tableRow:hover {
+  cursor: pointer;
+  outline: 3px solid var(--purple);
+}
+
+
+.tableRow td {
+  padding: 1.25rem 0;
+  font-size: 15px;
+  color: var(--dark);
+  background-color: #fff;
+  text-align: center;
+}
+
+.tableRow td:first-child {
+  border-radius: 8px 0 0 8px;
+  padding: 16px;
+  max-width: 160px;
+}
+
+.tableRow td:last-child {
+  border-radius: 0 8px 8px 0;
+}
