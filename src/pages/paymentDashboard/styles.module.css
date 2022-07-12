@@ -136,6 +136,7 @@ table thead tr th {
   padding: 1rem 0;
   color: var(--blue-dark);
   text-align: center;
+  border-bottom: 2px solid var(--blue-dark);
 }
 
 .tableRow {

@@ -4,8 +4,26 @@ import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { paymentListData } from "../../data/Data";
 import { useState } from "react";
 import { ButtonChain } from "../../components/ButtonChain";
+import { StackedChart } from "../../components/StackedChart";
 
 export const PaymentDashboard = () => {
+  
+  const [data, setData] = useState({
+    labels: paymentListData.map((data) => data.name),
+    datasets: [
+      {
+        label: "Usuários ganhos",
+        data: paymentListData.map((data) => data.common),
+        backgroundColor: ["#9142C5"],
+        tension: 0.4,
+        fill: false,
+        borderColor: "#C48EF4",
+        radius: 6,
+      },
+    ],
+  });
+
+  
   const intervalLabels = [
     {
       id: 0,
@@ -48,10 +66,8 @@ export const PaymentDashboard = () => {
         <div className={styles.generalInfo}>
           <h2>Visão Geral</h2>
           <p id={styles.amount}>R$ 2754.75</p>
-          <div className={styles.graph}>
-            <p>Imposto</p>
-            <p>Cacique</p>
-            <p>Tribo Master</p>
+          <div className={styles.chart}>
+            <StackedChart chartData={data}/>
           </div>
         </div>
         <div className={styles.paymentList}>
