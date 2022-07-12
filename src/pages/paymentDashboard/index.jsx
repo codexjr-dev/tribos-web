@@ -56,8 +56,8 @@ export const PaymentDashboard = () => {
         </div>
         <div className={styles.paymentList}>
           <div className={styles.tableHeader}>
-            <h2>Listagem</h2>
             <div className={styles.buttons}>
+              <h2>Listagem</h2>
               <ButtonChain labels={typeLabels} />
             </div>
           </div>
