@@ -1,3 +1,16 @@
+import {
+  subMonths,
+  eachMonthOfInterval,
+  startOfMonth,
+  format,
+  getMonth,
+  getDay,
+  getYear,
+} from "date-fns";
+
+import ptBR from "date-fns/locale/pt-BR";
+import { getStatiticsByDate } from "../services/api";
+
 export const ChartData = [
   {
     id: 1,
@@ -155,6 +168,24 @@ export const paymentListData = [
   },
 ];
 
+export const generalFinances = [
+  {
+    id: 1,
+    label: "Imposto",
+    value: 550.95,
+  },
+  {
+    id: 2,
+    label: "Cacique",
+    value: 661.14,
+  },
+  {
+    id: 3,
+    label: "Tribo Master",
+    value: 1542.66,
+  },
+];
+
 export const FeedbackData = [
   {
     user: "matheusforlan",
@@ -231,3 +262,47 @@ export const ProfileData = [
     complaints: 85,
   },
 ];
+
+const getLastSixMonthObject = () => {
+  const list = [];
+
+  const today = new Date();
+  const sixMonthsAgo = subMonths(today, 6);
+
+  const end = startOfMonth(today);
+  const start = startOfMonth(sixMonthsAgo);
+
+  const result = eachMonthOfInterval({ start: start, end: end });
+
+  result.map((date, index, array) => {
+    if (index === array.length - 1) {
+      // ignorar
+    } else {
+      list.push({
+        currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${
+          getMonth(date) + 1
+        }`,
+        nextDate: `${getYear(array[index + 1])}-${
+          getMonth(array[index + 1]) + 1 < 10 ? "0" : ""
+        }${getMonth(array[index + 1]) + 1}`,
+        month: `${format(date, "MMMM", { locale: ptBR })}`,
+        stats: null,
+      });
+    }
+  });
+
+  return list;
+};
+
+export const getLastSixMonthStatistics = async (type) => {
+  const list = getLastSixMonthObject();
+
+  list.map(async (month) => {
+    month.stats = await getStatiticsByDate(
+      type,
+      month.currentDate,
+      month.nextDate
+    );
+  });
+  return list;
+};
