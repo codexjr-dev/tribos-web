@@ -42,3 +42,8 @@ export const intervalOptions = [
   { label: "Mês", value: "month" },
   { label: "Ano", value: "year" },
 ];
+
+export const spamOptions = [
+  { label: "Mais Recentes", value: "time" },
+  { label: "Mais Denunciados", value: "quantity" },
+];

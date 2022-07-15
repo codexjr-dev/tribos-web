@@ -4,6 +4,7 @@ import userIcon from "../../assets/icons/user-icon.svg";
 import adsIcon from "../../assets/icons/ads-icon.svg";
 import groupIcon from "../../assets/icons/group-icon.svg";
 import calendarIcon from "../../assets/icons/calendar-icon.svg";
+import mostReported from "../../assets/icons/most-reported.svg";
 
 const Select = ({ fieldName, optionsList, setValue, value }) => {
 
@@ -22,6 +23,12 @@ const Select = ({ fieldName, optionsList, setValue, value }) => {
         case "groups":
           iconSrc = groupIcon;
           break;
+        case "time":
+          iconSrc = calendarIcon;
+        break;
+        case "quantity":
+          iconSrc = mostReported;
+        break;
         default:
           iconSrc = userIcon;
       }

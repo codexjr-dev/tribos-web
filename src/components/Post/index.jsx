@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 
 
-const Post = ({User, Icon, Image, Time, Subtitle, Complaints }) => {
+const Post = ({User, Icon, Image, Time, Subtitle, Complaints, SetValue}) => {
 
     return(
         
@@ -21,20 +21,23 @@ const Post = ({User, Icon, Image, Time, Subtitle, Complaints }) => {
                 {Subtitle}
                 </span>
 
-            </div>
-
-            
+            </div>         
 
         </div>
 
         <div className = {styles.actionsContent}>
+            
             <span className = {styles.time}> {Time} </span>
+
             <span className = {styles.buttons} id = {styles.reply} 
-            onClick = { () => {
-                window.alert("Abre form pra enviar resposta");
-            } 
-              }> Remover </span>
-            <span className = {styles.buttons} id = {styles.ignore}>Ignorar</span>
+            onClick = {(e) => SetValue(true)}> 
+            Remover 
+            </span>
+
+            <span className = {styles.buttons} id = {styles.ignore}
+            onClick = {(e) => SetValue(true)}>
+            Ignorar
+            </span>
         </div>
 
         </div>

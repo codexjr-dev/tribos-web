@@ -2,10 +2,10 @@
     align-items: center;
     justify-content: center;
     width: 440px;
-    height: 700px;
     position: relative;
-    left: 460px
-
+    left: 440px;
+    justify-content: center;
+    align-items: center;  
 }
 
 .titleArea{
@@ -16,6 +16,17 @@
     justify-content: flex-start;
     padding-bottom: 1.6rem;
     gap: 60px;
+}
+
+.titleAreaOpacity{
+    padding-top: 0.8rem;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-bottom: 1.6rem;
+    gap: 60px;
+    opacity: 20%;
 }
 
 .returnButton{
@@ -37,3 +48,13 @@
     flex-direction: column;
     gap: 1.5rem;
 }
+
+.spamAreaOpacity{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    opacity: 20%;
+}
+
+

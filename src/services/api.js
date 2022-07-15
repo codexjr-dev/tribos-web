@@ -20,3 +20,30 @@ export const api = axios.create({
 //     console.log(e);
 //   }
 // };
+
+ // export const findAllReports = async () => {
+ //  let data = null
+ //  await api.get("/report", {
+  //   Authorization: `${localStorage.getItem("@App:token")}`,
+ //  }).then((res) => {
+ //    data = res.data;
+ //    console.log(res.data.token)
+ //  }).catch(e => console.log(e));
+
+//   return data;
+// };
+
+export const getAllReports = async () => {
+  let data = null;
+  await api
+    .get("/report")
+    .then((res) => {
+      data = res.data;
+    })
+    .catch((e) => {
+      data = null;
+    });
+  return data;
+};
+
+
