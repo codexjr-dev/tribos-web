@@ -6,7 +6,7 @@ button {
   border: 2px solid var(--purple);
   font-size: 16px;
   color: var(--purple);
-  transition: all ease-in-out 0.2s;
+  transition: background-color ease-in-out 0.2s;
 }
 
 .selected {
