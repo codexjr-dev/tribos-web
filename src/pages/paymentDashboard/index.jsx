@@ -1,29 +1,33 @@
 import styles from "./styles.module.css";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
-import { paymentListData } from "../../data/Data";
+import { generalFinances, paymentListData } from "../../data/Data";
 import { useState } from "react";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
 
 export const PaymentDashboard = () => {
-  
   const [data, setData] = useState({
-    labels: paymentListData.map((data) => data.name),
+    labels: ["Tipo"],
     datasets: [
       {
-        label: "Usuários ganhos",
-        data: paymentListData.map((data) => data.common),
+        label: "Imposto",
+        data: [98],
         backgroundColor: ["#9142C5"],
-        tension: 0.4,
-        fill: false,
-        borderColor: "#C48EF4",
-        radius: 6,
+      },
+      {
+        label: "Venda Cacique",
+        data: [21, 67],
+        backgroundColor: ["#abcd"],
+      },
+      {
+        label: "Venda Tribo Master",
+        data: [67, 100],
+        backgroundColor: ["#ce1e"],
       },
     ],
   });
 
-  
   const intervalLabels = [
     {
       id: 0,
@@ -67,7 +71,7 @@ export const PaymentDashboard = () => {
           <h2>Visão Geral</h2>
           <p id={styles.amount}>R$ 2754.75</p>
           <div className={styles.chart}>
-            <StackedChart chartData={data}/>
+            <StackedChart chartData={data} />
           </div>
         </div>
         <div className={styles.paymentList}>
