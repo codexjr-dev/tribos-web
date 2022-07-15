@@ -2,8 +2,24 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
 import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
 
-const DataChart = ({ chartData }) => {
+const DataChart = ({ data }) => {
+  const [state, setState] = useState({
+    labels: data.map(monthData => monthData.month),
+    datasets: [
+      {
+        label: `Quantidade de usuários`,
+        data: data.map(monthData => monthData.stats),
+        backgroundColor: ["#9142C5"],
+        tension: 0.4,
+        fill: false,
+        borderColor: "#C48EF4",
+        radius: 6,
+      },
+    ],
+  });
+
   const options = {
     responsive: true,
     fontStyle: "Inter",
@@ -49,9 +65,13 @@ const DataChart = ({ chartData }) => {
     },
   };
 
+  useEffect(() => {
+    console.log(data);
+  }, []);
+
   return (
     <div className={styles.container}>
-      <Line data={chartData} options={options} />
+      <Line data={state} options={options} />
     </div>
   );
 };
