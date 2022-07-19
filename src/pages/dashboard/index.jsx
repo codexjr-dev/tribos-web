@@ -8,15 +8,15 @@ import logo from "../../assets/images/logo-pequeno.svg";
 import styles from "./styles.module.css";
 import Select from "../../components/Select";
 
-import { ChartData, getLastSixMonthStatistics } from "../../data/Data";
+import { getLastSixMonthStatistics } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
+import { mapLabelToValueType } from "../../util/aux";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState("month");
-
   const [statistics, setStatistics] = useState([]);
 
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Dashboard = () => {
     }
 
     loadData();
-  }, [selectedType, selectedInterval]);
+  }, [selectedInterval, selectedType]);
 
   return (
     <div className={styles.container}>
@@ -54,8 +54,10 @@ const Dashboard = () => {
               value={selectedInterval}
             />
           </div>
-          <button onClick={() => console.log(statistics)}>Requisição</button>
-          {statistics.length === 0 ? <span>Carregando</span> : <DataChart data={statistics} />}
+          <DataChart
+            data={statistics}
+            selected={mapLabelToValueType(selectedType)}
+          />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
         <nav className={styles.reportedProblemsContainer}>

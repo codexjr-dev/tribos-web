@@ -16,13 +16,14 @@
   width: 112px;
 }
 
-.container .infoContainer {
+.container main {
   display: flex;
   justify-content: center;
   height: 100%;
   align-items: center;
   width: 100%;
   margin-top: 2rem;
+  flex-direction: row;
 }
 
 .container .infoContainer .chartContainer {
@@ -32,6 +33,7 @@
 .container .infoContainer .chartContainer .chartSelect {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 1.5rem;
 }
 
@@ -48,11 +50,15 @@
 }
 
 @media (max-width: 1000px) {
+  .container main {
+    flex-direction: column;
+  }
+  
   .container .infoContainer .chartContainer {
     width: 80%;
   }
 
-  .infoContainer {
+  main {
     flex-direction: column;
     margin: 1.5rem 0;
   }

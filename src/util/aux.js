@@ -30,3 +30,13 @@ export const formatInfo = (value) => {
   }
   return output;
 };
+
+export const mapLabelToValueType = (label) => {
+  if (label === "users") {
+    return "Usuários";
+  } else if (label === "companies") {
+    return "Empresas";
+  } else {
+    return "Tribos";
+  }
+};

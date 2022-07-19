@@ -4,7 +4,6 @@ import {
   startOfMonth,
   format,
   getMonth,
-  getDay,
   getYear,
 } from "date-fns";
 
@@ -274,7 +273,7 @@ const getLastSixMonthObject = () => {
 
   const result = eachMonthOfInterval({ start: start, end: end });
 
-  result.map((date, index, array) => {
+  result.forEach((date, index, array) => {
     if (index === array.length - 1) {
       // ignorar
     } else {
