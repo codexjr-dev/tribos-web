@@ -8,11 +8,14 @@ import logo from "../../assets/images/logo-pequeno.svg";
 import styles from "./styles.module.css";
 import Select from "../../components/Select";
 
+import moneyIcon from "../../assets/icons/money-icon.svg";
+
 import { getLastSixMonthStatistics } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/aux";
+import { NavigateButton } from "../../components/NavigateButton";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
@@ -60,7 +63,15 @@ const Dashboard = () => {
           />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
-        <nav className={styles.reportedProblemsContainer}>
+        <nav className={styles.asideContainer}>
+          <div className={styles.paymentButtonContainer}>
+            <h2>Controle Financeiro</h2>
+            <NavigateButton
+              name="Pagamentos"
+              srcIcon={moneyIcon}
+              navigateTo="payment"
+            />
+          </div>
           <ReportedProblems />
         </nav>
       </main>

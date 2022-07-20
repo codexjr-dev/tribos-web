@@ -49,6 +49,24 @@
   cursor: pointer;
 }
 
+.container .asideContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 3.5rem;
+}
+
+.container .asideContainer .paymentButtonContainer {
+  margin-bottom: 1.5rem;
+}
+
+.container .asideContainer .paymentButtonContainer h2{
+  font-weight: 700;
+  color: var(--purple);
+  font-size: 24px;
+  margin-bottom: 1.5rem;
+}
+
 @media (max-width: 1000px) {
   .container main {
     flex-direction: column;
@@ -63,7 +81,7 @@
     margin: 1.5rem 0;
   }
 
-  .reportedProblemsContainer {
+  .asideContainer {
     margin-top: 2.5rem;
   }
 }
