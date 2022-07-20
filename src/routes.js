@@ -23,7 +23,7 @@ export default function MainRoutes() {
       <Route path="/spam" element={<Spam />} />
       <Route path="/details/:type/:interval" element={<Details />} />
       <Route path="/payment/table" element={<PaymentTable />} />
-      <Route path="/payment/dashboard" element={<PaymentDashboard />} />
+      <Route path="/payment" element={<PaymentDashboard />} />
     </Routes>
   );
 }
