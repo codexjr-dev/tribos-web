@@ -2,8 +2,43 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
 import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
 
-const DataChart = ({ chartData }) => {
+const DataChart = ({ data, selected }) => {
+  const getStats = () => {
+    let result = [];
+    data.forEach((element) => {
+      if (element.stats !== null) {
+        return result.push(element.stats);
+      }
+    });
+    if (result.length > 0) {
+      localStorage.setItem("@Tribos:dashboardData", result);
+    }
+    return result;
+  };
+
+  const [state, setState] = useState({
+    labels: data.map(
+      (monthData) =>
+        monthData.month[0].toUpperCase() + monthData.month.substr(1)
+    ),
+    datasets: [
+      {
+        label: `Quantidade de ${selected}`,
+        data:
+          getStats().length > 0
+            ? getStats()
+            : localStorage.getItem("@Tribos:dashboardData").split(","),
+        backgroundColor: ["#9142C5"],
+        tension: 0.4,
+        fill: false,
+        borderColor: "#C48EF4",
+        radius: 6,
+      },
+    ],
+  });
+
   const options = {
     responsive: true,
     fontStyle: "Inter",
@@ -29,6 +64,8 @@ const DataChart = ({ chartData }) => {
       },
       y: {
         ticks: {
+          autoSkip: true,
+          maxTicksLimit: 8,
           font: {
             size: 16,
             family: "Inter",
@@ -49,9 +86,32 @@ const DataChart = ({ chartData }) => {
     },
   };
 
+  useEffect(() => {
+    setState({
+      labels: data.map(
+        (monthData) =>
+          monthData.month[0].toUpperCase() + monthData.month.substr(1)
+      ),
+      datasets: [
+        {
+          label: `Quantidade de ${selected}`,
+          data:
+            getStats().length > 0
+              ? getStats()
+              : localStorage.getItem("@Tribos:dashboardData").split(","),
+          backgroundColor: ["#9142C5"],
+          tension: 0.4,
+          fill: false,
+          borderColor: "#C48EF4",
+          radius: 6,
+        },
+      ],
+    });
+  }, [data, selected]);
+
   return (
     <div className={styles.container}>
-      <Line data={chartData} options={options} />
+      <Line data={state} options={options} />
     </div>
   );
 };

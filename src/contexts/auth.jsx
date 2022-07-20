@@ -17,8 +17,8 @@ export default function AuthProvider({ children }) {
         password: password,
       })
       .then((res) => {
-        localStorage.setItem("@App:user", JSON.stringify(res.data.user));
-        localStorage.setItem("@App:token", res.data.token);
+        localStorage.setItem("@Tribos:user", JSON.stringify(res.data.user));
+        localStorage.setItem("@Tribos:token", res.data.token);
         data = res.data;
       })
       .catch((e) => {
@@ -28,23 +28,9 @@ export default function AuthProvider({ children }) {
     return data;
   };
 
-  // const logout = async () => {
-  //   try {
-  //     await api
-  //       .patch(`/logout/${localStorage.getItem("@App:token")}`)
-  //       .then((res) => console.log(res.data));
-  //     setUser(null);
-  //     localStorage.removeItem("@App:user");
-  //     localStorage.removeItem("@App:token");
-  //     console.log("Tirei.");
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   useEffect(() => {
-    const storagedUser = localStorage.getItem("@App:user");
-    const storagedToken = localStorage.getItem("@App:token");
+    const storagedUser = localStorage.getItem("@Tribos:user");
+    const storagedToken = localStorage.getItem("@Tribos:token");
 
     if (storagedToken && storagedUser) {
       setUser(JSON.parse(storagedUser));

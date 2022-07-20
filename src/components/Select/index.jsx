@@ -16,10 +16,10 @@ const Select = ({ fieldName, optionsList, setValue, value }) => {
         case "users":
           iconSrc = userIcon;
           break;
-        case "ads":
+        case "companies":
           iconSrc = adsIcon;
           break;
-        case "groups":
+        case "tribos":
           iconSrc = groupIcon;
           break;
         default:

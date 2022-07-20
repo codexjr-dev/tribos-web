@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import DataChart from "../../components/Chart";
 import ReportedProblems from "../../components/ReportedProblems";
@@ -8,33 +8,19 @@ import logo from "../../assets/images/logo-pequeno.svg";
 import styles from "./styles.module.css";
 import Select from "../../components/Select";
 
-import { ChartData } from "../../data/Data";
+import moneyIcon from "../../assets/icons/money-icon.svg";
+
+import { getLastSixMonthStatistics } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
-import { typeOptions, intervalOptions } from "../../util/aux";
-import { useEffect } from "react";
-import { useAuth } from "../../contexts/auth";
+import { typeOptions, intervalOptions } from "../../util/options";
+import { mapLabelToValueType } from "../../util/aux";
+import { NavigateButton } from "../../components/NavigateButton";
 
 const Dashboard = () => {
-  // const { signed } = useAuth();
-
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState("month");
-
-  const [data, setData] = useState({
-    labels: ChartData.map((data) => data.month),
-    datasets: [
-      {
-        label: "Usuários ganhos",
-        data: ChartData.map((data) => data.userGain),
-        backgroundColor: ["#9142C5"],
-        tension: 0.4,
-        fill: false,
-        borderColor: "#C48EF4",
-        radius: 6,
-      },
-    ],
-  });
+  const [statistics, setStatistics] = useState([]);
 
   const navigate = useNavigate();
 
@@ -43,8 +29,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    // console.log(signed);
-  }, []);
+    async function loadData() {
+      setStatistics(await getLastSixMonthStatistics(selectedType));
+    }
+
+    loadData();
+  }, [selectedInterval, selectedType]);
 
   return (
     <div className={styles.container}>
@@ -67,11 +57,21 @@ const Dashboard = () => {
               value={selectedInterval}
             />
           </div>
-          <button>Requisição</button>
-          <DataChart chartData={data} />
+          <DataChart
+            data={statistics}
+            selected={mapLabelToValueType(selectedType)}
+          />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
-        <nav className={styles.reportedProblemsContainer}>
+        <nav className={styles.asideContainer}>
+          <div className={styles.paymentButtonContainer}>
+            <h2>Controle Financeiro</h2>
+            <NavigateButton
+              name="Pagamentos"
+              srcIcon={moneyIcon}
+              navigateTo="payment"
+            />
+          </div>
           <ReportedProblems />
         </nav>
       </main>

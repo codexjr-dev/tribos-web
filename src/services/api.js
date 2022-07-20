@@ -4,19 +4,26 @@ export const api = axios.create({
   baseURL: "https://tribos-project.herokuapp.com",
 });
 
-// export const getStatisticsByDate = async (type, date) => {
-//   const targetDate = new Date(date);
-//   const today = new Date();
+export const getStatiticsByDate = async (type, beginDate, finalDate) => {
+  let data;
+  await api
+    .get(`/statistics/${type}/${beginDate}${finalDate ? `/${finalDate}` : ""}`)
+    .then((res) => {
+      data = res.data;
+    })
+    .catch((e) => console.log(e));
+  return data;
+};
 
-//   try {
-//     const response = await api.get(
-//       `/statistics/${type}/${targetDate.getFullYear()}-${targetDate.getMonth()}/${today.getFullYear()}-${today.getMonth()}`,
-//       {
-//         Authorization: `Basic ${localStorage.getItem("@App:token")}`,
-//       }
-//     );
-//     console.log(response.data);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+export const getAllReports = async () => {
+  let data = null;
+  await api
+    .get("/report")
+    .then((res) => {
+      data = res.data;
+    })
+    .catch((e) => {
+      data = null;
+    });
+  return data;
+};
