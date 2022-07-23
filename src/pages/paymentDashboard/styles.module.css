@@ -105,6 +105,10 @@ main {
   justify-content: space-evenly;
 }
 
+.container .chart {
+  padding-top: 2rem;
+}
+
 .paymentList .tableHeader h2 {
   font-size: 1.65rem;
   font-weight: 700;
