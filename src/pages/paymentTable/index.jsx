@@ -8,6 +8,8 @@ import { formatInfo } from "../../util/aux";
 import styles from "./styles.module.css";
 
 export const PaymentTable = () => {
+  const navigate = useNavigate();
+
   const [isSelected, setIsSelected] = useState(false);
   const [selectedButton, setSelectedButton] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -29,7 +31,7 @@ export const PaymentTable = () => {
   return (
     <div className={styles.container}>
       <header>
-        <div>
+        <div onClick={() => navigate('/payment')}>
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2> Ajustes </h2>
         </div>
