@@ -4,7 +4,7 @@ import ReturnButton from "../../assets/icons/return-button.svg";
 import PostComponent from "../../components/Post";
 import ProfileComponent from "../../components/Profile";
 import RemoveModalComponent from "../../components/RemoveModal";
-import { getAllReports } from "../../services/api";
+import { getAllReports, getAllReportsByCount } from "../../services/api";
 import {PostData, ProfileData} from "../../data/Data.js";
 import { spamOptions, } from "../../util/aux";
 import Select from "../../components/Select";
@@ -15,23 +15,44 @@ const Spam = () => {
 
     const [selectedType, setSelectedType] = useState("time"); 
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isMostRecent, setIsMostRecent] = useState(true);
 
     const [reports, setReports] = useState([]);
+    const [reportsByCount, setReportsByCount] = useState([]);
 
-    useEffect(() => {
+
+    useEffect(() => { 
+               
       async function getReports(){
         const reportsData = await getAllReports();
         setReports(reportsData.reports);
       }
+
+      async function getReportsByCount(){
+        const reportsDataByCount = await getAllReportsByCount();
+        setReportsByCount(reportsDataByCount.reportsByCount);
+      }
       
+      getReportsByCount();    
       getReports();
     }, []);
 
 
+
     const printar = () => {
-        console.log(reports[2].reported.tribo.username)
+        console.log(reports)
+        console.log(reportsByCount)     
+        
     }
-    
+
+
+    useEffect(() => {
+        async function showReports(){           
+        }
+        
+        showReports();
+      }, []);
+  
 
     return(
   
@@ -58,8 +79,66 @@ const Spam = () => {
               value={selectedType}
         />
 
+        <div>
+
+        </div>
+        
+        { isMostRecent ?
+        reports.reverse().map((value) => {
+                if( value.type === "Post"){
+                    return <PostComponent 
+                    User ={value.reported.tribo.username}
+                    Icon = {value.reported.tribo.profilePic.url}
+                    Time = {PostData[0].time}
+                    Image = {value.reported.content[0].url}
+                    Subtitle = {value.reported.text}
+                    Complaints = {value.reported.reportsQty}
+                    SetValue = {setIsModalVisible}
+                /> 
+                }
+                else{
+                    return <ProfileComponent 
+                    User ={value.reported.username}
+                    Icon = {value.reported.profilePic.url}
+                    Time = {ProfileData[0].time}
+                    Name = {value.reported.name}
+                    Complaints = {value.reported.reportsQty}
+                    SetValue = {setIsModalVisible} 
+                /> 
+                }
+            }) : reportsByCount.map((value) => {
+                if( value.type === "Post"){
+                    return <PostComponent 
+                    User ={value.reported.tribo.username}
+                    Icon = {value.reported.tribo.profilePic.url}
+                    Time = {PostData[0].time}
+                    Image = {value.reported.content[0].url}
+                    Subtitle = {value.reported.text}
+                    Complaints = {value.reported.reportsQty}
+                    SetValue = {setIsModalVisible}
+                /> 
+                }
+                else{
+                    return <ProfileComponent 
+                    User ={value.reported.username}
+                    Icon = {value.reported.profilePic.url}
+                    Time = {ProfileData[0].time}
+                    Name = {value.reported.name}
+                    Complaints = {value.reported.reportsQty}
+                    SetValue = {setIsModalVisible} 
+                /> 
+                }
+            })
+        }
+        
+
         <PostComponent 
-            User = {reports[2].reported.tribo.username || null}
+            User = {reports.map((value,index) => {
+                if( index === 2){
+                    return value.reported.tribo.username;
+                }
+            })
+            }
             Icon = {PostData[0].icon}
             Time = {PostData[0].time}
             Image = {PostData[0].image}

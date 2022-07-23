@@ -46,4 +46,17 @@ export const getAllReports = async () => {
   return data;
 };
 
+export const getAllReportsByCount = async () => {
+  let dataByCount = null;
+  await api
+    .get("/report/count")
+    .then((resp) => {
+      dataByCount = resp.dataByCount;
+    })
+    .catch((ex) => {
+      dataByCount = null;
+    });
+  return dataByCount;
+};
+
 
