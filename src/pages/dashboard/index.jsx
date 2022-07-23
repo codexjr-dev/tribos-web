@@ -10,7 +10,7 @@ import Select from "../../components/Select";
 
 import moneyIcon from "../../assets/icons/money-icon.svg";
 
-import { getLastSixMonthStatistics } from "../../data/Data";
+import { getLastThreeYearsObject, getStatistics } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function loadData() {
-      setStatistics(await getLastSixMonthStatistics(selectedType));
+      setStatistics(await getStatistics(selectedInterval, selectedType));
     }
 
     loadData();
