@@ -15,13 +15,16 @@ const DataChart = ({ data, selected }) => {
     if (result.length > 0) {
       localStorage.setItem("@Tribos:dashboardData", result);
     }
+
+    console.log(result);
+
     return result;
   };
 
   const [state, setState] = useState({
     labels: data.map(
       (monthData) =>
-        monthData.month[0].toUpperCase() + monthData.month.substr(1)
+        monthData.label[0].toUpperCase() + monthData.label.substr(1)
     ),
     datasets: [
       {
@@ -90,7 +93,7 @@ const DataChart = ({ data, selected }) => {
     setState({
       labels: data.map(
         (monthData) =>
-          monthData.month[0].toUpperCase() + monthData.month.substr(1)
+          monthData.label[0].toUpperCase() + monthData.label.substr(1)
       ),
       datasets: [
         {
