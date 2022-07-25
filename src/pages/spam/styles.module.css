@@ -57,4 +57,9 @@
     opacity: 20%;
 }
 
+.test{
+    display: flex;
+    flex-direction: column;
+}
+
 
