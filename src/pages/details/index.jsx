@@ -1,40 +1,35 @@
 import { useEffect, useState } from "react";
 
-import { ChartData } from "../../data/Data";
-
-import DataChart from "../../components/Chart";
-
-import UserGainIcon from "../../assets/icons/user-gain-icon.svg";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 
 import InfoCard from "../../components/InfoCard";
+import { getSum, mapLabelToValueType } from "../../util/aux";
 
 import styles from "./styles.module.css";
-import { formatInfo, getMax, getSum } from "../../util/aux";
+import { formatInfo } from "../../util/aux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import DataChart from "../../components/Chart";
+
+import { getStatistics } from "../../data/Data";
+import { MapIconToLabel } from "./detailsData";
+import { getAmountStatistics } from "../../services/api";
 
 const Details = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const [data, setData] = useState({
-    labels: ChartData.map((data) => data.month),
-    datasets: [
-      {
-        label: "Usuários ganhos",
-        data: ChartData.map((data) => data.userGain),
-        backgroundColor: ["#9142C5"],
-        tension: 0.4,
-        fill: false,
-        borderColor: "#C48EF4",
-        radius: 6,
-      },
-    ],
-  });
+  const [statistics, setStatistics] = useState([]);
+  const [amountStatistics, setAmount] = useState(0);
+  const [newStats, setNewStats] = useState(0);
 
   useEffect(() => {
-    console.log(params.type);
+    async function loadData() {
+      setStatistics(await getStatistics(params.interval, params.type));
+      setAmount(await getAmountStatistics(params.type));
+    }
+
+    loadData();
   }, []);
 
   return (
@@ -42,28 +37,31 @@ const Details = () => {
       <header>
         <div onClick={() => navigate("/dashboard")}>
           <img src={LeftArrowIcon} alt="Voltar" />
-          <h2> Usuários - Mês </h2>
+          <h2> {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(params.interval)}`} </h2>
         </div>
       </header>
       <main>
         <div className={styles.chartContainer}>
-          <DataChart chartData={data} />
+          <DataChart
+            data={statistics}
+            selected={mapLabelToValueType(params.type)}
+          />
         </div>
         <div className={styles.detailsContainer}>
           <InfoCard
-            title="Usuários perdidos"
-            iconSrc={UserGainIcon}
-            data={formatInfo(getMax(data.datasets[0].data))}
+            title={`${params.type === "users" ? "Novos" : "Novas"} ${mapLabelToValueType(params.type)}`}
+            iconSrc={MapIconToLabel(params.type, "gain")}
+            data={newStats}
           />
           <InfoCard
-            title="Total usuários"
-            iconSrc={UserGainIcon}
-            data={formatInfo(getSum(data.datasets[0].data))}
+            title={`Total ${mapLabelToValueType(params.type)}`}
+            iconSrc={MapIconToLabel(params.type, "total")}
+            data={amountStatistics}
           />
           <InfoCard
-            title="Novos usuários"
-            iconSrc={UserGainIcon}
-            data={formatInfo(1000)}
+            title={`${mapLabelToValueType(params.type)} ${params.type === "users" ? "perdidos" : "perdidas"}`}
+            iconSrc={MapIconToLabel(params.type, "lost")}
+            data={0}
           />
         </div>
       </main>

@@ -2,68 +2,26 @@ import styles from "./styles.module.css";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { generalFinances, paymentListData } from "../../data/Data";
-import { useState } from "react";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
 
+import { typeLabels, intervalLabels } from "../../util/options";
+import { useNavigate } from "react-router-dom";
+
 export const PaymentDashboard = () => {
-  const [data, setData] = useState({
-    labels: ["Tipo"],
-    datasets: [
-      {
-        label: "Imposto",
-        data: [98],
-        backgroundColor: ["#9142C5"],
-      },
-      {
-        label: "Venda Cacique",
-        data: [21, 67],
-        backgroundColor: ["#abcd"],
-      },
-      {
-        label: "Venda Tribo Master",
-        data: [67, 100],
-        backgroundColor: ["#ce1e"],
-      },
-    ],
-  });
 
-  const intervalLabels = [
-    {
-      id: 0,
-      name: "Dia",
-    },
-    {
-      id: 1,
-      name: "Mês",
-    },
-    {
-      id: 2,
-      name: "Ano",
-    },
-  ];
-
-  const typeLabels = [
-    {
-      id: 0,
-      name: "Venda Cacique",
-    },
-    {
-      id: 1,
-      name: "Venda Tribo Master",
-    },
-  ];
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
       <header>
-        <div>
+        <div onClick={() => navigate('/dashboard')}>
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2> Pagamentos </h2>
         </div>
       </header>
       <div className={styles.buttonsHeader}>
-        <img src={ConfigIcon} />
+        <img src={ConfigIcon} alt="Ajustar" onClick={() => navigate('/payment/table')}/>
         <ButtonChain labels={intervalLabels} />
       </div>
       <main>
@@ -71,7 +29,7 @@ export const PaymentDashboard = () => {
           <h2>Visão Geral</h2>
           <p id={styles.amount}>R$ 2754.75</p>
           <div className={styles.chart}>
-            <StackedChart chartData={data} />
+            <StackedChart data={generalFinances} />
           </div>
         </div>
         <div className={styles.paymentList}>
@@ -95,7 +53,7 @@ export const PaymentDashboard = () => {
               <tbody>
                 {paymentListData.map((element) => {
                   return (
-                    <tr id={element.id} className={styles.tableRow}>
+                    <tr key={element.id} id={element.id} className={styles.tableRow}>
                       <td>{element.name}</td>
                       <td>{element.value}</td>
                       <td>{element.tax}</td>

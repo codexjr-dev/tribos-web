@@ -23,16 +23,17 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  transition: all ease-in-out .15s;
+  transition: all ease-in-out 0.15s;
 }
 
-.container header div:hover {
+.container header {
+  transition: all ease 0.2s;
+}
+
+.container header:hover {
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
   cursor: pointer;
-  color: var(--purple);
-}
-
-.container header div img:hover {
-  color: var(--purple);
 }
 
 .container header h2 {

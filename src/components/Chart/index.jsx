@@ -21,7 +21,7 @@ const DataChart = ({ data, selected }) => {
   const [state, setState] = useState({
     labels: data.map(
       (monthData) =>
-        monthData.month[0].toUpperCase() + monthData.month.substr(1)
+        monthData.label[0].toUpperCase() + monthData.label.substr(1)
     ),
     datasets: [
       {
@@ -64,8 +64,8 @@ const DataChart = ({ data, selected }) => {
       },
       y: {
         ticks: {
-          autoSkip: true,
-          maxTicksLimit: 8,
+          beginAtZero: true,
+          type: "linear",
           font: {
             size: 16,
             family: "Inter",
@@ -87,10 +87,11 @@ const DataChart = ({ data, selected }) => {
   };
 
   useEffect(() => {
+    getStats();
     setState({
       labels: data.map(
         (monthData) =>
-          monthData.month[0].toUpperCase() + monthData.month.substr(1)
+          monthData.label[0].toUpperCase() + monthData.label.substr(1)
       ),
       datasets: [
         {

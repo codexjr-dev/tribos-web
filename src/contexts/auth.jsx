@@ -31,6 +31,10 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const storagedUser = localStorage.getItem("@Tribos:user");
     const storagedToken = localStorage.getItem("@Tribos:token");
+    let data = localStorage.getItem("@Tribos:dashboardData");
+    if (!data || data[0] === ",") {
+      localStorage.setItem("@Tribos:dashboardData", [0, 0, 0, 0, 0, 0]);
+    }
 
     if (storagedToken && storagedUser) {
       setUser(JSON.parse(storagedUser));

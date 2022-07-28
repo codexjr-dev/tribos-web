@@ -11,7 +11,7 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
     .then((res) => {
       data = res.data;
     })
-    .catch((e) => console.log(e));
+    .catch((data = null));
   return data;
 };
 
@@ -50,6 +50,17 @@ export const getAllReports = async () => {
     .catch((e) => {
       data = null;
     });
+  return data;
+};
+
+export const getAmountStatistics = async (type) => {
+  let data;
+  await api
+    .get(`/statistics/${type}`)
+    .then((res) => {
+      data = res.data;
+    })
+    .catch(data = null);
   return data;
 };
 

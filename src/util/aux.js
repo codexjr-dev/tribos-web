@@ -10,8 +10,8 @@ export const getMax = (array) => {
 
 export const getSum = (array) => {
   let sum = 0;
-  sum = array.reduce((sum, value) => {
-    return sum + value;
+  array.forEach((element) => {
+    sum += element;
   });
   return sum;
 };
@@ -49,12 +49,21 @@ export const spamOptions = [
 ];
 
 export const mapLabelToValueType = (label) => {
-  if (label === "users") {
-    return "Usuários";
-  } else if (label === "companies") {
-    return "Empresas";
-  } else {
-    return "Tribos";
+  switch (label) {
+    case "users":
+      return "Usuários";
+    case "companies":
+      return "Empresas";
+    case "tribos":
+      return "Tribos";
+    case "day":
+      return "Dia";
+    case "month":
+      return "Mês";
+    case "year":
+      return "Ano";
+    default:
+      throw new Error("Valor inválido.");
   }
 };
 

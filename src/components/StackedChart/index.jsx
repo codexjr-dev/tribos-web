@@ -1,52 +1,58 @@
 import styles from "./styles.module.css";
 
-import { Bar } from "react-chartjs-2";
+import { useState } from "react";
 
-export const StackedChart = ({ chartData }) => {
-  // const options = {
-  //   indexAxis: "y",
-  //   scales: {
-  //     x: {
-  //       stacked: true,
-  //       suggestedMax: 100,
-  //     },
-  //     y: {
-  //       ticks: {
-  //         min: 0,
-  //         max: 100,
-  //       },
-  //       stacked: true,
-  //     },
-  //   },
-  //   elements: {
-  //     bar: {
-  //       borderWidth: 2,
-  //     },
-  //   },
-  //   plugins: {
-  //     legend: {
-  //       position: "bottom",
-  //     },
-  //   },
-  //   responsive: true,
-  //   fontStyle: "Inter",
-  //   layout: {
-  //     padding: 20,
-  //   },
-  // };
+import ChartDataLabels from "chartjs-plugin-datalabels";
+
+import { Bar } from "react-chartjs-2";
+import { getSum } from "../../util/aux";
+import { useEffect } from "react";
+
+export const StackedChart = ({ data }) => {
+  const [state, setState] = useState({
+    labels: ["Tipo"],
+    datasets: [
+      {
+        label: "Imposto",
+        data: [data[0].value],
+        backgroundColor: ["#9F3AE0"],
+      },
+      {
+        label: "Venda Cacique",
+        data: [data[1].value],
+        backgroundColor: ["#CC33B1"],
+      },
+      {
+        label: "Venda Tribo Master",
+        data: [data[2].value],
+        backgroundColor: ["#3911AD"],
+      },
+    ],
+  });
+
+  const getStats = () => {
+    let result = [];
+    data.forEach((element) => {
+      if (element) {
+        result.push(element.value);
+      }
+    });
+    return result;
+  };
 
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     indexAxis: "y",
     fontStyle: "Inter",
     layout: {
-      padding: 20,
+      padding: 0,
     },
     scales: {
       x: {
         ticks: {
           display: false,
-          max: 100,
+          max: getSum(getStats()),
           font: {
             size: 16,
             family: "Inter",
@@ -54,13 +60,13 @@ export const StackedChart = ({ chartData }) => {
         },
         grid: {
           display: false,
+          drawBorder: false,
         },
         stacked: true,
       },
       y: {
         ticks: {
           display: false,
-          max: 100,
           font: {
             size: 16,
             family: "Inter",
@@ -68,23 +74,43 @@ export const StackedChart = ({ chartData }) => {
         },
         grid: {
           display: false,
+          drawBorder: false,
         },
         stacked: true,
       },
     },
     plugins: {
       legend: {
-        position: "top"
+        position: "right",
       },
-      tooltip: {
-        display: false,
+      datalabels: {
+        display: true,
+        color: "#FFFFFF",
+        anchor: "end",
+        align: "start",
+        offset: 10,
+        formatter: function (value, context) {
+          return `R$ ${value}`;
+        },
+        labels: {
+          title: {
+            font: {
+              weight: "bold",
+              size: 16,
+            },
+          },
+        },
       },
     },
   };
 
+  useEffect(() => {
+    // console.log(state);
+  }, []);
+
   return (
     <div className={styles.container}>
-      <Bar options={options} data={chartData} />
+      <Bar options={options} plugins={[ChartDataLabels]} data={state} />
     </div>
   );
 };

@@ -1,10 +1,16 @@
 import {
   subMonths,
   eachMonthOfInterval,
+  eachDayOfInterval,
+  eachYearOfInterval,
   startOfMonth,
   format,
   getMonth,
   getYear,
+  startOfDay,
+  subDays,
+  getDate,
+  subYears,
 } from "date-fns";
 
 import ptBR from "date-fns/locale/pt-BR";
@@ -262,6 +268,33 @@ export const ProfileData = [
   },
 ];
 
+export const getLastThreeYearsObject = () => {
+  const list = [];
+
+  const today = new Date();
+  const threeYearAgo = subYears(today, 3);
+
+  const end = startOfDay(today);
+  const start = startOfDay(threeYearAgo);
+
+  const result = eachYearOfInterval({ start: start, end: end });
+
+  result.forEach((date, index, array) => {
+    if (index === array.length - 1) {
+      // ignorar
+    } else {
+      list.push({
+        currentDate: `${getYear(date)}`,
+        nextDate: `${getYear(array[index + 1])}`,
+        label: `${format(date, "y", { locale: ptBR })}`,
+        stats: null,
+      });
+    }
+  });
+
+  return list;
+};
+
 const getLastSixMonthObject = () => {
   const list = [];
 
@@ -284,7 +317,7 @@ const getLastSixMonthObject = () => {
         nextDate: `${getYear(array[index + 1])}-${
           getMonth(array[index + 1]) + 1 < 10 ? "0" : ""
         }${getMonth(array[index + 1]) + 1}`,
-        month: `${format(date, "MMMM", { locale: ptBR })}`,
+        label: `${format(date, "MMMM", { locale: ptBR })}`,
         stats: null,
       });
     }
@@ -293,15 +326,58 @@ const getLastSixMonthObject = () => {
   return list;
 };
 
-export const getLastSixMonthStatistics = async (type) => {
-  const list = getLastSixMonthObject();
+export const getStatistics = async (intervalType, type) => {
+  const list = mapIntervalOptionToList(intervalType);
 
-  list.map(async (month) => {
-    month.stats = await getStatiticsByDate(
+  list.map(async (element) => {
+    element.stats = await getStatiticsByDate(
       type,
-      month.currentDate,
-      month.nextDate
+      element.currentDate,
+      element.nextDate
     );
   });
   return list;
+};
+
+export const getLastSevenDaysObject = () => {
+  const list = [];
+
+  const today = new Date();
+  const sevenDaysAgo = subDays(today, 7);
+
+  const end = startOfDay(today);
+  const start = startOfDay(sevenDaysAgo);
+
+  const result = eachDayOfInterval({ start: start, end: end });
+
+  result.forEach((date, index, array) => {
+    if (index === array.length - 1) {
+      // ignorar
+    } else {
+      list.push({
+        currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${
+          getMonth(date) + 1
+        }-${getDate(date) < 10 ? "0" : ""}${getDate(date)}`,
+        nextDate: `${getYear(array[index + 1])}-${
+          getMonth(array[index + 1]) + 1 < 10 ? "0" : ""
+        }${getMonth(array[index + 1]) + 1}-${
+          getDate(array[index + 1]) < 10 ? "0" : ""
+        }${getDate(array[index + 1])}`,
+        label: `${format(date, "d", { locale: ptBR })}`,
+        stats: null,
+      });
+    }
+  });
+
+  return list;
+};
+
+const mapIntervalOptionToList = (intervalType) => {
+  if (intervalType === "day") {
+    return getLastSevenDaysObject();
+  } else if (intervalType === "month") {
+    return getLastSixMonthObject();
+  } else if (intervalType === "year") {
+    return getLastThreeYearsObject();
+  }
 };
