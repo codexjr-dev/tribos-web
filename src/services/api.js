@@ -63,7 +63,7 @@ export const reportPost = async (id) => {
   await api
     .post("/report/post", 
     {
-        "idReported": "62dd532dbc5ea46068c1763b"
+        "idReported": id
     })
     .then((resp) => {
       console.log(resp)
@@ -77,7 +77,7 @@ export const removePost = async (id) => {
   await api
     .delete("/report/post", 
     {
-        "idReport": "62dd50a6bc5ea46068c1758f"
+      data: {"idReport": id}
     })
     .then((res) => {
       console.log(res)
@@ -91,7 +91,7 @@ export const reportUser = async (id) => {
   await api
     .post("/report/user", 
     {
-        "idReported": "626324ebba865e7e12cab126"
+        "idReported": id
     })
     .then((resp) => {
       console.log(resp)
@@ -105,7 +105,7 @@ export const removeUser = async (id) => {
   await api
     .delete("/report/user", 
     {
-       "idReport": "62cc6815c54ae99554cd2e5b"
+      data: {"idReport": id}
     })
     .then((res) => {
       console.log(res)
@@ -119,7 +119,7 @@ export const reportTribo = async (id) => {
   await api
     .post("/report/tribo", 
     {
-        "idReported": "62cc6829c54ae99554cd2e61"
+        "idReported": id
     })
     .then((resp) => {
       console.log(resp)
@@ -133,7 +133,7 @@ export const removeTribo = async (id) => {
   await api
     .delete("/report/tribo", 
     {
-        "idReport": "62295255cd7d3237ba7bb8f8"
+      data: {"idReport": id}
     })
     .then((res) => {
       console.log(res)
@@ -147,7 +147,7 @@ export const ignoreReport = async (id) => {
   await api
     .delete("/report/ignore", 
     {
-        data: {"idReport": "62cc6829c54ae99554cd2e61"}
+        data: {"idReport": id}
     })
     .then((res) => {
       console.log(res)

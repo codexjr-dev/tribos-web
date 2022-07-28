@@ -1,7 +1,15 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
+import DefaultProfilePicture  from "../../assets/images/default-profile-pic.svg";
 
-const Profile = ({Icon, Name, User, Time, Complaints, SetValue}) => {
+const Profile = ({Icon, Name, User, Time, SetValue, SetOperation, SetRoute, Route,
+Id, SetId}) => {
+
+    function Action(operation){
+        SetOperation(operation);
+        SetId(Id);
+        SetRoute(Route);
+        SetValue(true); 
+    }
 
     return (
       
@@ -10,7 +18,7 @@ const Profile = ({Icon, Name, User, Time, Complaints, SetValue}) => {
 
             <div className= {styles.mainContent}>
 
-                <img src= {Icon} className = {styles.icon} />
+                <img src= {Icon == null ? DefaultProfilePicture : Icon} className = {styles.icon} />
 
                 <div className= {styles.nameArea}>
                     <span className= {styles.name}> {Name}</span>
@@ -22,12 +30,12 @@ const Profile = ({Icon, Name, User, Time, Complaints, SetValue}) => {
             <div className = {styles.actionsContent}>
             <span className = {styles.time}> {Time} </span>
             <span className = {styles.buttons} id = {styles.reply}
-                onClick = {(e) => SetValue(true)}> 
+                onClick = {(e) => Action("Remover")}> 
                 Remover 
             </span>
          
             <span className = {styles.buttons} id = {styles.ignore}           
-                onClick = {(e) => SetValue(true)} >
+                onClick = {(e) => Action("Ignorar")} >
                 Ignorar
             </span>
 
