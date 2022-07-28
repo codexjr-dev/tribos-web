@@ -17,9 +17,6 @@ export default function MainRoutes() {
       <Route path="/" element={signed ? <Dashboard /> : <Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/detalhes" element={<Details />} />
-      <Route path="/feedback" element={<Feedback />} />
-      <Route path="/errors" element={<Errors />} />
       <Route path="/spam" element={<Spam />} />
       <Route path="/details/:type/:interval" element={<Details />} />
       <Route path="/payment/table" element={<PaymentTable />} />
