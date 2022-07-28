@@ -31,6 +31,23 @@ export const formatInfo = (value) => {
   return output;
 };
 
+export const typeOptions = [
+  { label: "Usuários", value: "users" },
+  { label: "Anúncios", value: "ads" },
+  { label: "Tribos", value: "groups" },
+];
+
+export const intervalOptions = [
+  { label: "Dia", value: "day" },
+  { label: "Mês", value: "month" },
+  { label: "Ano", value: "year" },
+];
+
+export const spamOptions = [
+  { label: "Mais Recentes", value: "time" },
+  { label: "Mais Denunciados", value: "quantity" },
+];
+
 export const mapLabelToValueType = (label) => {
   switch (label) {
     case "users":
@@ -49,3 +66,5 @@ export const mapLabelToValueType = (label) => {
       throw new Error("Valor inválido.");
   }
 };
+
+
