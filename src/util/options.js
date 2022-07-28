@@ -1,7 +1,7 @@
 export const typeOptions = [
   { label: "Usuários", value: "users" },
-  { label: "Anúncios", value: "ads" },
-  { label: "Tribos", value: "groups" },
+  { label: "Empresas", value: "companies" },
+  { label: "Tribos", value: "tribos" },
 ];
 
 export const intervalOptions = [

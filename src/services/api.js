@@ -4,9 +4,16 @@ export const api = axios.create({
   baseURL: "https://tribos-project.herokuapp.com",
 });
 
-// export const getStatisticsByDate = async (type, date) => {
-//   const targetDate = new Date(date);
-//   const today = new Date();
+export const getStatiticsByDate = async (type, beginDate, finalDate) => {
+  let data;
+  await api
+    .get(`/statistics/${type}/${beginDate}${finalDate ? `/${finalDate}` : ""}`)
+    .then((res) => {
+      data = res.data;
+    })
+    .catch((e) => console.log(e));
+  return data;
+};
 
 //   try {
 //     const response = await api.get(
@@ -168,7 +175,3 @@ axios.post('/user', {
 .catch(function (error) {
   console.log(error);
 });
-
-
-
-

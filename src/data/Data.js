@@ -1,3 +1,15 @@
+import {
+  subMonths,
+  eachMonthOfInterval,
+  startOfMonth,
+  format,
+  getMonth,
+  getYear,
+} from "date-fns";
+
+import ptBR from "date-fns/locale/pt-BR";
+import { getStatiticsByDate } from "../services/api";
+
 export const ChartData = [
   {
     id: 1,
@@ -112,47 +124,112 @@ export const priceTable = [
   },
 ];
 
+export const paymentListData = [
+  {
+    id: 1,
+    name: "Codex",
+    value: 245,
+    tax: 49,
+    common: 58.8,
+    master: 137.2,
+  },
+  {
+    id: 2,
+    name: "Gatinhos muitíssimo fofos fofíssimos e talvez malvados",
+    value: 245,
+    tax: 49,
+    common: 58.8,
+    master: 137.2,
+  },
+  {
+    id: 3,
+    name: "Cavaaalo",
+    value: 245,
+    tax: 49,
+    common: 58.8,
+    master: 137.2,
+  },
+  {
+    id: 4,
+    name: "Ai meu deeus",
+    value: 245,
+    tax: 49,
+    common: 58.8,
+    master: 137.2,
+  },
+  {
+    id: 5,
+    name: "Ele gosta",
+    value: 245,
+    tax: 49,
+    common: 58.8,
+    master: 137.2,
+  },
+];
+
+export const generalFinances = [
+  {
+    id: 1,
+    label: "Imposto",
+    value: 550.95,
+  },
+  {
+    id: 2,
+    label: "Cacique",
+    value: 661.14,
+  },
+  {
+    id: 3,
+    label: "Tribo Master",
+    value: 1542.66,
+  },
+];
+
 export const FeedbackData = [
   {
     user: "matheusforlan",
-    feedback: "O sistema não está fazendo login por favor, consertem urgentemente",
-    time: "1h"
+    feedback:
+      "O sistema não está fazendo login por favor, consertem urgentemente",
+    time: "1h",
   },
   {
     user: "lucipa",
     feedback: "Tá muito brabo, mané",
-    time: "1d"
+    time: "1d",
   },
   {
     user: "casimiro",
     feedback: "O silêncio não comete erros.",
-    time: "16h"
+    time: "16h",
   },
   {
     user: "rodrigoFaro",
     feedback: "Dança gatinho dança",
-    time: "1h"
+    time: "1h",
   },
   {
     user: "mr.lorem",
-    feedback: "Lorem ipsum sula mfineinfewmfoe wooceoclolewolec olomcoei inienioo m manurnoaldjaijil",
-    time: "1h"
+    feedback:
+      "Lorem ipsum sula mfineinfewmfoe wooceoclolewolec olomcoei inienioo m manurnoaldjaijil",
+    time: "1h",
   },
 ];
 
 export const ErrorData = [
   {
     user: "matheusforlan",
-    feedback: "O sistema não está fazendo login por favor, consertem urgentemente!!!",
-    image: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
-    time: "1h"
+    feedback:
+      "O sistema não está fazendo login por favor, consertem urgentemente!!!",
+    image:
+      "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    time: "1h",
   },
 
   {
     user: "lucipa",
     feedback: "Não consigo me cadastrar, mané!!!",
     image: "",
-    time: "5d"
+    time: "5d",
   },
 ];
 
@@ -160,10 +237,11 @@ export const PostData = [
   {
     icon: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
     user: "matheusforlan",
-    image: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
+    image:
+      "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
     subtitle: "São João de Caruaru é melhor que o de Campina Grande",
     complaints: 5,
-    time:  "3h"
+    time: "3h",
   },
 ];
 
@@ -173,13 +251,57 @@ export const ProfileData = [
     name: "Matheus Forlán",
     user: "matheusforlan",
     time: "30m",
-    complaints: 8
+    complaints: 8,
   },
   {
     icon: "https://st.depositphotos.com/1224365/2408/i/600/depositphotos_24084437-stock-photo-portrait-of-a-normal-boy.jpg",
     name: "North America Memes",
     user: "NorthAmericaMemes",
     time: "7d",
-    complaints: 85
+    complaints: 85,
   },
 ];
+
+const getLastSixMonthObject = () => {
+  const list = [];
+
+  const today = new Date();
+  const sixMonthsAgo = subMonths(today, 6);
+
+  const end = startOfMonth(today);
+  const start = startOfMonth(sixMonthsAgo);
+
+  const result = eachMonthOfInterval({ start: start, end: end });
+
+  result.forEach((date, index, array) => {
+    if (index === array.length - 1) {
+      // ignorar
+    } else {
+      list.push({
+        currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${
+          getMonth(date) + 1
+        }`,
+        nextDate: `${getYear(array[index + 1])}-${
+          getMonth(array[index + 1]) + 1 < 10 ? "0" : ""
+        }${getMonth(array[index + 1]) + 1}`,
+        month: `${format(date, "MMMM", { locale: ptBR })}`,
+        stats: null,
+      });
+    }
+  });
+
+  return list;
+};
+
+export const getLastSixMonthStatistics = async (type) => {
+  const list = getLastSixMonthObject();
+
+  list.map(async (month) => {
+    month.stats = await getStatiticsByDate(
+      type,
+      month.currentDate,
+      month.nextDate
+    );
+  });
+  return list;
+};
