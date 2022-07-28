@@ -10,9 +10,11 @@ const ReportedProblems = () => {
     <nav className={styles.container}>
       <h3>Problemas Reportados</h3>
       <div className={styles.listContainer}>
-        <NavigateButton name="Spam ou abusos" srcIcon={reportIcon} navigateTo="spam"/>
-        <NavigateButton name="Feedback" srcIcon={messageIcon} navigateTo="feedback"/>
-        <NavigateButton name="Erros do Sistema" srcIcon={errorIcon} navigateTo="error"/>
+        <NavigateButton
+          name="Spam ou abusos"
+          srcIcon={reportIcon}
+          navigateTo="spam"
+        />
       </div>
     </nav>
   );

@@ -15,9 +15,6 @@ const DataChart = ({ data, selected }) => {
     if (result.length > 0) {
       localStorage.setItem("@Tribos:dashboardData", result);
     }
-
-    console.log(result);
-
     return result;
   };
 
@@ -67,8 +64,8 @@ const DataChart = ({ data, selected }) => {
       },
       y: {
         ticks: {
-          autoSkip: true,
-          maxTicksLimit: 8,
+          beginAtZero: true,
+          type: "linear",
           font: {
             size: 16,
             family: "Inter",
@@ -90,6 +87,7 @@ const DataChart = ({ data, selected }) => {
   };
 
   useEffect(() => {
+    getStats();
     setState({
       labels: data.map(
         (monthData) =>
