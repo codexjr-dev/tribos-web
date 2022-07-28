@@ -10,7 +10,7 @@ import Select from "../../components/Select";
 
 import moneyIcon from "../../assets/icons/money-icon.svg";
 
-import { getLastThreeYearsObject, getStatistics } from "../../data/Data";
+import { getStatistics } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
