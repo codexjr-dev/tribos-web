@@ -1,7 +1,16 @@
 import styles from "./styles.module.css";
+import DefaultProfilePicture  from "../../assets/images/default-profile-pic.svg";
 
 
-const Post = ({User, Icon, Image, Time, Subtitle, Complaints }) => {
+const Post = ({User, Icon, Content, Time, Subtitle,  SetValue, ContentType,
+SetOperation, SetId, Id, Route, SetRoute}) => {
+    
+    function Action(operation){
+        SetOperation(operation);
+        SetId(Id);
+        SetRoute(Route);
+        SetValue(true); 
+    }
 
     return(
         
@@ -10,31 +19,39 @@ const Post = ({User, Icon, Image, Time, Subtitle, Complaints }) => {
         <div className= {styles.mainContent}>
 
             <div className= {styles.userArea}>
-                <img src= {Icon} className = {styles.icon} />
+                <img src= {Icon == null ? DefaultProfilePicture : Icon} className = {styles.icon} />
                 <span className= {styles.user}> {User}</span>
             </div>
 
 
             <div className= {styles.photoAndSubtitle}>
-                <img  src = {Image} className = {styles.image} />
+            
+            {ContentType === "image" ? <img  src = {Content} className = {styles.image} />
+            : <video  src = {Content} className = {styles.video} />}         
+                
                 <span className = {styles.subtitle}>     
                 {Subtitle}
                 </span>
 
-            </div>
-
-            
+            </div>         
 
         </div>
 
         <div className = {styles.actionsContent}>
+            
             <span className = {styles.time}> {Time} </span>
+
             <span className = {styles.buttons} id = {styles.reply} 
-            onClick = { () => {
-                window.alert("Abre form pra enviar resposta");
-            } 
-              }> Remover </span>
-            <span className = {styles.buttons} id = {styles.ignore}>Ignorar</span>
+            onClick = {(e) => Action("Remover")}
+            > 
+            Remover 
+            </span>
+
+            <span className = {styles.buttons} id = {styles.ignore}
+            onClick = {(e) => Action("Ignorar")
+            }>
+            Ignorar
+            </span>
         </div>
 
         </div>

@@ -1,14 +1,24 @@
 import styles from "./styles.module.css";
+import DefaultProfilePicture  from "../../assets/images/default-profile-pic.svg";
 
-const Profile = ({Icon, Name, User, Time, Complaints}) => {
+const Profile = ({Icon, Name, User, Time, SetValue, SetOperation, SetRoute, Route,
+Id, SetId}) => {
+
+    function Action(operation){
+        SetOperation(operation);
+        SetId(Id);
+        SetRoute(Route);
+        SetValue(true); 
+    }
+
     return (
-
+      
 
         <div className= {styles.profileContainer}> 
 
             <div className= {styles.mainContent}>
 
-                <img src= {Icon} className = {styles.icon} />
+                <img src= {Icon == null ? DefaultProfilePicture : Icon} className = {styles.icon} />
 
                 <div className= {styles.nameArea}>
                     <span className= {styles.name}> {Name}</span>
@@ -19,12 +29,15 @@ const Profile = ({Icon, Name, User, Time, Complaints}) => {
 
             <div className = {styles.actionsContent}>
             <span className = {styles.time}> {Time} </span>
-            <span className = {styles.buttons} id = {styles.reply} 
-            onClick = { () => {
-                window.alert("Abre form pra enviar resposta");
-            } 
-              }> Remover </span>
-            <span className = {styles.buttons} id = {styles.ignore}>Ignorar</span>
+            <span className = {styles.buttons} id = {styles.reply}
+                onClick = {(e) => Action("Remover")}> 
+                Remover 
+            </span>
+         
+            <span className = {styles.buttons} id = {styles.ignore}           
+                onClick = {(e) => Action("Ignorar")} >
+                Ignorar
+            </span>
 
         </div>
 
