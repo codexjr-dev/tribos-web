@@ -17,7 +17,7 @@
 
 .container .header h3 {
   font-weight: normal;
-  color: var(--dark-light);
+  color: var(--purple);
   font-weight: 700;
 }
 
@@ -29,5 +29,4 @@
 
 .container:hover {
   background-color: var(--light-gray);
-  /* transform: scale(1.1); */
 }

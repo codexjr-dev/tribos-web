@@ -37,7 +37,12 @@ const Details = () => {
       <header>
         <div onClick={() => navigate("/dashboard")}>
           <img src={LeftArrowIcon} alt="Voltar" />
-          <h2> {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(params.interval)}`} </h2>
+          <h2>
+            {" "}
+            {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(
+              params.interval
+            )}`}{" "}
+          </h2>
         </div>
       </header>
       <main>
@@ -49,7 +54,9 @@ const Details = () => {
         </div>
         <div className={styles.detailsContainer}>
           <InfoCard
-            title={`${params.type === "users" ? "Novos" : "Novas"} ${mapLabelToValueType(params.type)}`}
+            title={`${
+              params.type === "users" ? "Novos" : "Novas"
+            } ${mapLabelToValueType(params.type)}`}
             iconSrc={MapIconToLabel(params.type, "gain")}
             data={newStats}
           />
@@ -57,11 +64,6 @@ const Details = () => {
             title={`Total ${mapLabelToValueType(params.type)}`}
             iconSrc={MapIconToLabel(params.type, "total")}
             data={amountStatistics}
-          />
-          <InfoCard
-            title={`${mapLabelToValueType(params.type)} ${params.type === "users" ? "perdidos" : "perdidas"}`}
-            iconSrc={MapIconToLabel(params.type, "lost")}
-            data={0}
           />
         </div>
       </main>
