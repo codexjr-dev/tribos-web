@@ -3,6 +3,7 @@
   flex-direction: column;
   margin: 0 auto;
   width: 90%;
+  padding-bottom: 2rem;
 }
 
 .container header {
@@ -22,7 +23,6 @@
   height: 100%;
   align-items: center;
   width: 100%;
-  margin-top: 2rem;
   flex-direction: row;
 }
 
@@ -60,7 +60,7 @@
   margin-bottom: 1.5rem;
 }
 
-.container .asideContainer .paymentButtonContainer h2{
+.container .asideContainer .paymentButtonContainer h2 {
   font-weight: 700;
   color: var(--purple);
   font-size: 24px;
@@ -71,7 +71,7 @@
   .container main {
     flex-direction: column;
   }
-  
+
   .container .infoContainer .chartContainer {
     width: 80%;
   }
