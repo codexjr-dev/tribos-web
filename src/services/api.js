@@ -19,31 +19,6 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
   return data;
 };
 
-//   try {
-//     const response = await api.get(
-//       `/statistics/${type}/${targetDate.getFullYear()}-${targetDate.getMonth()}/${today.getFullYear()}-${today.getMonth()}`,
-//       {
-//         Authorization: `Basic ${localStorage.getItem("@App:token")}`,
-//       }
-//     );
-//     console.log(response.data);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
-
-// export const findAllReports = async () => {
-//  let data = null
-//  await api.get("/report", {
-//   Authorization: `${localStorage.getItem("@App:token")}`,
-//  }).then((res) => {
-//    data = res.data;
-//    console.log(res.data.token)
-//  }).catch(e => console.log(e));
-
-//   return data;
-// };
-
 export const getAllReports = async () => {
   let data = null;
   await api
