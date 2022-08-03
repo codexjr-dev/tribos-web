@@ -3,8 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import Details from "./pages/details";
 import Login from "./pages/login";
-import Feedback from "./pages/feedback";
-import Errors from "./pages/errors";
 import Spam from "./pages/spam";
 import { PaymentTable } from "./pages/paymentTable";
 import { PaymentDashboard } from "./pages/paymentDashboard";
