@@ -8,8 +8,6 @@ import CompanyTotalIcon from "../assets/icons/total-company-icon.svg";
 import CompanyGainIcon from "../assets/icons/company-gain-icon.svg";
 import CompanyLostIcon from "../assets/icons/company-lost-icon.svg";
 
-
-
 export const getMax = (array) => {
   let max = 0;
   array.forEach((number) => {
@@ -42,18 +40,6 @@ export const formatInfo = (value) => {
   }
   return output;
 };
-
-export const typeOptions = [
-  { label: "Usuários", value: "users" },
-  { label: "Anúncios", value: "ads" },
-  { label: "Tribos", value: "groups" },
-];
-
-export const intervalOptions = [
-  { label: "Dia", value: "day" },
-  { label: "Mês", value: "month" },
-  { label: "Ano", value: "year" },
-];
 
 export const spamOptions = [
   { label: "Mais Recentes", value: "time" },
