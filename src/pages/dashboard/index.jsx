@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import logo from "../../assets/images/logo-pequeno.svg";
+import moneyIcon from "../../assets/icons/money-icon.svg";
 
 import DataChart from "../../components/Chart";
 import ReportedProblems from "../../components/ReportedProblems";
-
-import logo from "../../assets/images/logo-pequeno.svg";
-
-import styles from "./styles.module.css";
 import Select from "../../components/Select";
-
-import moneyIcon from "../../assets/icons/money-icon.svg";
+import { NavigateButton } from "../../components/NavigateButton";
 
 import { getStatistics } from "../../data/Data";
-import { useNavigate } from "react-router-dom";
-
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/aux";
-import { NavigateButton } from "../../components/NavigateButton";
+
+import styles from "./styles.module.css";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 
 import InfoCard from "../../components/InfoCard";
-import { mapLabelToValueType } from "../../util/aux";
-
-import styles from "./styles.module.css";
-import { formatInfo } from "../../util/aux";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import DataChart from "../../components/Chart";
 
 import { getNewStatistics, getStatistics } from "../../data/Data";
 import { MapIconToLabel } from "../../util/aux";
+import { mapLabelToValueType } from "../../util/aux";
+
 import { getAmountStatistics } from "../../services/api";
+
+import styles from "./styles.module.css";
 
 const Details = () => {
   const params = useParams();
