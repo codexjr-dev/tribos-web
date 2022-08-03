@@ -4,7 +4,7 @@
   border-radius: 8px;
   width: 130px;
   padding: 1rem;
-  transition: all ease-out .2s;
+  transition: all ease-out 0.2s;
 }
 
 .container .header {
@@ -22,6 +22,7 @@
 }
 
 .container #mainInfo {
+  display: flex;
   color: var(--purple);
   font-weight: 700;
   font-size: 2rem;
@@ -29,4 +30,21 @@
 
 .container:hover {
   background-color: var(--light-gray);
+}
+
+.loading {
+  width: 40px;
+  animation: spin 1s linear infinite;
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  display: flex;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

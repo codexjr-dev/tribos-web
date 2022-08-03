@@ -339,6 +339,15 @@ export const getStatistics = async (intervalType, type) => {
   return list;
 };
 
+export const getNewStatistics = async (intervalType, type) => {
+  const list = await getStatistics(intervalType, type);
+  const lastDateIndex = list.length - 1;
+  const startDate = list[0].currentDate;
+  const endDate = list[lastDateIndex].nextDate;
+  const result = await getStatiticsByDate(type, startDate, endDate);
+  return result;
+};
+
 export const getLastSevenDaysObject = () => {
   const list = [];
 

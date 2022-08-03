@@ -4,6 +4,10 @@ export const api = axios.create({
   baseURL: "https://tribos-project.herokuapp.com",
 });
 
+api.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "@Tribos:token"
+)}`;
+
 export const getStatiticsByDate = async (type, beginDate, finalDate) => {
   let data;
   await api
@@ -28,14 +32,14 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
 //   }
 // };
 
- // export const findAllReports = async () => {
- //  let data = null
- //  await api.get("/report", {
-  //   Authorization: `${localStorage.getItem("@App:token")}`,
- //  }).then((res) => {
- //    data = res.data;
- //    console.log(res.data.token)
- //  }).catch(e => console.log(e));
+// export const findAllReports = async () => {
+//  let data = null
+//  await api.get("/report", {
+//   Authorization: `${localStorage.getItem("@App:token")}`,
+//  }).then((res) => {
+//    data = res.data;
+//    console.log(res.data.token)
+//  }).catch(e => console.log(e));
 
 //   return data;
 // };
@@ -60,7 +64,7 @@ export const getAmountStatistics = async (type) => {
     .then((res) => {
       data = res.data;
     })
-    .catch(data = null);
+    .catch((data = null));
   return data;
 };
 
@@ -79,110 +83,103 @@ export const getAllReportsByCount = async () => {
 
 export const reportPost = async (id) => {
   await api
-    .post("/report/post", 
-    {
-        "idReported": id
+    .post("/report/post", {
+      idReported: id,
     })
     .then((resp) => {
-      console.log(resp)
+      console.log(resp);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
 export const removePost = async (id) => {
   await api
-    .delete("/report/post", 
-    {
-      data: {"idReport": id}
+    .delete("/report/post", {
+      data: { idReport: id },
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
 export const reportUser = async (id) => {
   await api
-    .post("/report/user", 
-    {
-        "idReported": id
+    .post("/report/user", {
+      idReported: id,
     })
     .then((resp) => {
-      console.log(resp)
+      console.log(resp);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
 export const removeUser = async (id) => {
   await api
-    .delete("/report/user", 
-    {
-      data: {"idReport": id}
+    .delete("/report/user", {
+      data: { idReport: id },
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
 export const reportTribo = async (id) => {
   await api
-    .post("/report/tribo", 
-    {
-        "idReported": id
+    .post("/report/tribo", {
+      idReported: id,
     })
     .then((resp) => {
-      console.log(resp)
+      console.log(resp);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
 export const removeTribo = async (id) => {
   await api
-    .delete("/report/tribo", 
-    {
-      data: {"idReport": id}
+    .delete("/report/tribo", {
+      data: { idReport: id },
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
 export const ignoreReport = async (id) => {
   await api
-    .delete("/report/ignore", 
-    {
-        data: {"idReport": id}
+    .delete("/report/ignore", {
+      data: { idReport: id },
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
-    .catch((ex) => {  
-      console.log(ex)
+    .catch((ex) => {
+      console.log(ex);
     });
 };
 
-
-axios.post('/user', {
-  firstName: 'Fred',
-  lastName: 'Flintstone'
-})
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
+axios
+  .post("/user", {
+    firstName: "Fred",
+    lastName: "Flintstone",
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
