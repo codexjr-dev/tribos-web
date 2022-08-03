@@ -66,7 +66,8 @@ const DataChart = ({ data, selected }) => {
       },
       y: {
         ticks: {
-          stepSize: 1,
+          // autoSkip: true,
+          stepSize: 5,
           beginAtZero: true,
           min: 0,
           type: "linear",
