@@ -30,7 +30,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function loadData() {
-      setStatistics(await getStatistics(selectedInterval, selectedType));
+      await getStatistics(selectedInterval, selectedType)
+        .then((data) => {
+          setStatistics(data);
+        })
+        .catch((err) => {
+          console.log(
+            `Erro ao obter informações de ${mapLabelToValueType(selectedType)}`
+          );
+        });
     }
 
     loadData();
@@ -60,6 +68,7 @@ const Dashboard = () => {
           <DataChart
             data={statistics}
             selected={mapLabelToValueType(selectedType)}
+            interval={selectedInterval}
           />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
