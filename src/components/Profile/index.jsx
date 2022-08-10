@@ -1,5 +1,7 @@
 import styles from "./styles.module.css";
 import DefaultProfilePicture  from "../../assets/images/default-profile-pic.svg";
+import {reportTime} from "../../data/Data.js";
+
 
 const Profile = ({Icon, Name, User, Time, SetValue, SetOperation, SetRoute, Route,
 Id, SetId}) => {
@@ -12,13 +14,12 @@ Id, SetId}) => {
     }
 
     return (
-      
-
+    
         <div className= {styles.profileContainer}> 
 
             <div className= {styles.mainContent}>
 
-                <img src= {Icon == null ? DefaultProfilePicture : Icon} className = {styles.icon} />
+                <img src= {Icon == null ? DefaultProfilePicture : Icon} className = {styles.icon} alt= "Ícone"/>
 
                 <div className= {styles.nameArea}>
                     <span className= {styles.name}> {Name}</span>
@@ -28,7 +29,8 @@ Id, SetId}) => {
             </div>
 
             <div className = {styles.actionsContent}>
-            <span className = {styles.time}> {Time} </span>
+                
+            <span className = {styles.time}> {reportTime(Time)} </span>
             <span className = {styles.buttons} id = {styles.reply}
                 onClick = {(e) => Action("Remover")}> 
                 Remover 
@@ -42,8 +44,6 @@ Id, SetId}) => {
         </div>
 
         </div>
-
-
 
     );
 };

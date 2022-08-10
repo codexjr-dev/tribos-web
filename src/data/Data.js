@@ -11,6 +11,7 @@ import {
   subDays,
   getDate,
   subYears,
+  formatDistanceToNow,
 } from "date-fns";
 
 import ptBR from "date-fns/locale/pt-BR";
@@ -389,4 +390,9 @@ const mapIntervalOptionToList = (intervalType) => {
   } else if (intervalType === "year") {
     return getLastThreeYearsObject();
   }
+};
+
+export const reportTime = (date) => {
+    const result = formatDistanceToNow(new Date(date), {locale: ptBR})
+    return result;
 };
