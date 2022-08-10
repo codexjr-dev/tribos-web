@@ -1,8 +1,7 @@
 import styles from "./styles.module.css";
-import { getAllReports, getAllReportsByCount, reportPost, reportUser, reportTribo, ignoreReport
-    ,removeUser, removePost, removeTribo} from "../../services/api";
+import {  ignoreReport ,removeUser, removePost, removeTribo} from "../../services/api";
 
-const RemoveModal = ({children, SetValue, Operation, Route, Id, }) => {
+const RemoveModal = ({ SetValue, Operation, Route, Id, }) => {
 
     async function Actions (){
         if(Operation === "Ignorar"){

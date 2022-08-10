@@ -68,8 +68,8 @@ export const getAllReportsByCount = async () => {
   let dataByCount = null;
   await api
     .get("/report/count")
-    .then((resp) => {
-      dataByCount = resp.data;
+    .then((res) => {
+      dataByCount = res.data;
     })
     .catch((ex) => {
       dataByCount = null;
@@ -83,8 +83,8 @@ export const reportPost = async (id) => {
     {
         "idReported": id
     })
-    .then((resp) => {
-      console.log(resp)
+    .then((res) => {
+      console.log(res)
     })
     .catch((ex) => {  
       console.log(ex)
@@ -111,8 +111,8 @@ export const reportUser = async (id) => {
     {
         "idReported": id
     })
-    .then((resp) => {
-      console.log(resp)
+    .then((res) => {
+      console.log(res)
     })
     .catch((ex) => {  
       console.log(ex)
@@ -139,8 +139,8 @@ export const reportTribo = async (id) => {
     {
         "idReported": id
     })
-    .then((resp) => {
-      console.log(resp)
+    .then((res) => {
+      console.log(res)
     })
     .catch((ex) => {  
       console.log(ex)
@@ -176,7 +176,7 @@ export const ignoreReport = async (id) => {
 };
 
 
-axios.post('/user', {
+/*axios.post('/user', {
   firstName: 'Fred',
   lastName: 'Flintstone'
 })
@@ -186,3 +186,4 @@ axios.post('/user', {
 .catch(function (error) {
   console.log(error);
 });
+*/
