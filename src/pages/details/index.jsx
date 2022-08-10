@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 
 import InfoCard from "../../components/InfoCard";
-import { getSum, mapLabelToValueType } from "../../util/aux";
+import { mapLabelToValueType } from "../../util/aux";
 
 import styles from "./styles.module.css";
 import { formatInfo } from "../../util/aux";
@@ -11,8 +11,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DataChart from "../../components/Chart";
 
-import { getStatistics } from "../../data/Data";
-import { MapIconToLabel } from "./detailsData";
+import { getNewStatistics, getStatistics } from "../../data/Data";
+import { MapIconToLabel } from "../../util/aux";
 import { getAmountStatistics } from "../../services/api";
 
 const Details = () => {
@@ -27,6 +27,7 @@ const Details = () => {
     async function loadData() {
       setStatistics(await getStatistics(params.interval, params.type));
       setAmount(await getAmountStatistics(params.type));
+      setNewStats(await getNewStatistics(params.interval, params.type));
     }
 
     loadData();
@@ -37,7 +38,11 @@ const Details = () => {
       <header>
         <div onClick={() => navigate("/dashboard")}>
           <img src={LeftArrowIcon} alt="Voltar" />
-          <h2> {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(params.interval)}`} </h2>
+          <h2>
+            {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(
+              params.interval
+            )}`}
+          </h2>
         </div>
       </header>
       <main>
@@ -49,7 +54,9 @@ const Details = () => {
         </div>
         <div className={styles.detailsContainer}>
           <InfoCard
-            title={`${params.type === "users" ? "Novos" : "Novas"} ${mapLabelToValueType(params.type)}`}
+            title={`${
+              params.type === "users" ? "Novos" : "Novas"
+            } ${mapLabelToValueType(params.type)}`}
             iconSrc={MapIconToLabel(params.type, "gain")}
             data={newStats}
           />
@@ -57,11 +64,6 @@ const Details = () => {
             title={`Total ${mapLabelToValueType(params.type)}`}
             iconSrc={MapIconToLabel(params.type, "total")}
             data={amountStatistics}
-          />
-          <InfoCard
-            title={`${mapLabelToValueType(params.type)} ${params.type === "users" ? "perdidos" : "perdidas"}`}
-            iconSrc={MapIconToLabel(params.type, "lost")}
-            data={0}
           />
         </div>
       </main>

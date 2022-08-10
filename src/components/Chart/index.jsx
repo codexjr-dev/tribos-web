@@ -51,7 +51,9 @@ const DataChart = ({ data, selected }) => {
           callback: function (value, _) {
             return window.innerWidth > 1000
               ? this.getLabelForValue(value)
-              : this.getLabelForValue(value).slice(0, 3);
+              : isNaN(this.getLabelForValue(value))
+              ? this.getLabelForValue(value).slice(0, 3)
+              : this.getLabelForValue(value);
           },
           font: {
             size: 16,
@@ -64,7 +66,10 @@ const DataChart = ({ data, selected }) => {
       },
       y: {
         ticks: {
+          // autoSkip: true,
+          stepSize: 5,
           beginAtZero: true,
+          min: 0,
           type: "linear",
           font: {
             size: 16,
