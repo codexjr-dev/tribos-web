@@ -1,3 +1,15 @@
+.modalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 99;
+  background-color: rgba(206, 206, 206, 0.6);
+  height: 100vh;
+  width: 100vw;
+
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -32,7 +44,8 @@
   margin-left: 3rem;
 }
 
-.container header div:hover, .container .buttonsHeader img:hover {
+.container header div:hover,
+.container .buttonsHeader img:hover {
   filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
     brightness(92%) contrast(98%);
   cursor: pointer;
@@ -150,7 +163,6 @@ table thead tr th {
   cursor: pointer;
   outline: 3px solid var(--purple);
 }
-
 
 .tableRow td {
   padding: 1.25rem 0;
