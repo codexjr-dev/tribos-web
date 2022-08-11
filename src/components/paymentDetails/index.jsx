@@ -8,11 +8,20 @@ import { useState } from "react";
 export const PaymentDetails = ({ handleClose, details }) => {
   const [editModeActive, setEditModeActive] = useState(false);
   const [amountPaid, setAmountPaid] = useState(0);
-  const [remainer, setRemainer] = useState(0);
+
   const total = details.common;
+  const remainer = total - amountPaid;
 
   const handleClickEditMode = () => {
     setEditModeActive(!editModeActive);
+  };
+
+  const handleSetPaidAmount = (event) => {
+    if (event.target.value > total || event.target.value < 0) {
+      alert('Valor inválido.')
+    } else {
+      setAmountPaid(event.target.value);
+    }
   };
 
   useEffect(() => {
@@ -50,7 +59,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
         <div className={styles.info}>
           <div id={styles.amount}>
             <h3>Total</h3>
-            <span>R$ {total}</span>
+            <span>R$ {total.toFixed(2)}</span>
           </div>
           <div id={styles.paid}>
             <div id={styles.edit}>
@@ -65,7 +74,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
               R$
               <input
                 type="number"
-                onChange={(e) => setAmountPaid(e.target.value)}
+                onChange={(e) => handleSetPaidAmount(e)}
                 value={amountPaid}
                 disabled={!editModeActive}
                 id={editModeActive ? styles.editActive : ""}
@@ -74,7 +83,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
           </div>
           <div id={styles.remainder}>
             <h3>Restante</h3>
-            <span>R$ {total - amountPaid}</span>
+            <span>R$ {remainer.toFixed(2)}</span>
           </div>
         </div>
       </div>
