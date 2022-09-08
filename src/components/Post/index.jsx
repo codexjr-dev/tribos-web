@@ -26,13 +26,14 @@ SetOperation, SetId, Id, Route, SetRoute}) => {
 
 
             <div className= {styles.photoAndSubtitle}>
-            
+ 
             {ContentType === "image" ? <img  src = {Content} className = {styles.image} alt = "Imagem" />
             : <video  src = {Content} className = {styles.video} />}         
                 
-                <span className = {styles.subtitle}>     
+            <span className = {styles.subtitle}>     
                 {Subtitle}
-                </span>
+            </span>
+               
 
             </div>         
 
