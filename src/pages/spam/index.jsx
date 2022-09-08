@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 const Spam = () => {
 
     /*
+
+
                 <div className={styles.test}>
                 <button onClick={ () => addPost()}> addPost</button>
                 <button onClick={ () => addUser()}> addUser </button>
@@ -114,7 +116,19 @@ const Spam = () => {
 
     async function ignorarReport(){
         await ignoreReport("62df51c507cb64a11fc4fe44");            
-    }     
+    }    
+    
+        const printar = () => {
+        console.log(reports)
+        console.log(reportsByCount)
+        console.log(selectedType)
+        console.log(operation)
+        console.log(id)
+        console.log(route)
+        console.log(reportTime("2022-08-09T16:27:01.567Z"))
+        console.log(loader)
+      
+    }
     */
 
     const [selectedType, setSelectedType] = useState("time"); 
@@ -161,28 +175,11 @@ const Spam = () => {
 
     const navigate = useNavigate();
 
-    const printar = () => {
-        console.log(reports)
-        console.log(reportsByCount)
-        console.log(selectedType)
-        console.log(operation)
-        console.log(id)
-        console.log(route)
-        console.log(reportTime("2022-08-09T16:27:01.567Z"))
-        console.log(loader)
-      
-    }
   
     return(  
-
         
         <div className= {styles.container}>
 
-            <div className={styles.test}>
-
-                <button onClick={ () => printar()}>  printar</button>
-       
-            </div>
                
                <header>
                     { 
