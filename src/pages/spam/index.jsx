@@ -10,6 +10,7 @@ import { getAllReports, getAllReportsByCount, reportPost, reportUser, reportTrib
 import { reportTime} from "../../data/Data.js";
 import { spamOptions, } from "../../util/aux";
 import Select from "../../components/Select";
+import Loading from "../../components/Loading";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -124,6 +125,7 @@ const Spam = () => {
     const [route, setRoute] = useState("");
     const [operation, setOperation] = useState("");
     const [id, setId] = useState("");
+    const [loader, setLoader] = useState(true);
 
     useEffect(() => {  
         verifySelectedType();
@@ -134,16 +136,19 @@ const Spam = () => {
     const getArray = () => {
         getReportsByCount();    
         getReports();
+        
     }
 
     async function getReports(){
         const reportsData = await getAllReports();
-        setReports(reportsData.reports);       
+        setReports(reportsData.reports);
+        setLoader(false);       
     }
 
     async function getReportsByCount(){
         const reportsDataByCount = await getAllReportsByCount();
-        setReportsByCount(reportsDataByCount.reports);       
+        setReportsByCount(reportsDataByCount.reports);
+        setLoader(false);      
     }
 
     function verifySelectedType(){
@@ -155,9 +160,29 @@ const Spam = () => {
     }
 
     const navigate = useNavigate();
+
+    const printar = () => {
+        console.log(reports)
+        console.log(reportsByCount)
+        console.log(selectedType)
+        console.log(operation)
+        console.log(id)
+        console.log(route)
+        console.log(reportTime("2022-08-09T16:27:01.567Z"))
+        console.log(loader)
+      
+    }
   
     return(  
+
+        
         <div className= {styles.container}>
+
+            <div className={styles.test}>
+
+                <button onClick={ () => printar()}>  printar</button>
+       
+            </div>
                
                <header>
                     { 
@@ -192,23 +217,27 @@ const Spam = () => {
                 setValue={setSelectedType}
                 value={selectedType}
             />
+                
 
-                { isMostRecent ?
-                reports.reverse().map((value) => {
-                    if( value.type === "Post"){
-                        return <PostComponent 
-                        User ={value.reported.tribo.username}
-                        Icon = {value.reported.tribo.profilePic.url}
-                        Time = {value.updatedAt}
-                        Content = {value.reported.content[0].url}
-                        Subtitle = {value.reported.text}
-                        ContentType= {value.reported.content[0].type}
-                        SetValue = {setIsModalVisible}
-                        SetOperation = {setOperation}
-                        SetRoute = {setRoute}
-                        Route = {value.type}
-                        Id = {value._id}
-                        SetId = {setId}
+                { loader ? 
+                    <Loading /> 
+                                :               
+                isMostRecent ?
+                    reports.reverse().map((value) => {
+                        if( value.type === "Post"){
+                            return <PostComponent 
+                            User ={value.reported.tribo.username}
+                            Icon = {value.reported.tribo.profilePic.url}
+                            Time = {value.updatedAt}
+                            Content = {value.reported.content[0].url}
+                            Subtitle = {value.reported.text}
+                            ContentType= {value.reported.content[0].type}
+                            SetValue = {setIsModalVisible}
+                            SetOperation = {setOperation}
+                            SetRoute = {setRoute}
+                            Route = {value.type}
+                            Id = {value._id}
+                            SetId = {setId}
                     /> 
                     }
                     else{
@@ -257,8 +286,10 @@ const Spam = () => {
                     /> 
                     }
                 })
-            }    
-        
+                }
+                 
+                
+  
             </div>         
         </div>
     
