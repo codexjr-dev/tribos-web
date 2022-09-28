@@ -396,3 +396,106 @@ export const reportTime = (date) => {
     const result = formatDistanceToNow(new Date(date), {locale: ptBR})
     return result;
 };
+
+export const makePriceTable = (table, type) => {
+  let caciquePrice = type === 'cacique' ? 0.7 : 0.3;
+  let masterPrice = type === 'master' ? 0.7 : 0.3;
+
+  let arrayPriceTable = []
+  Object.entries(table).forEach(([category, value]) => {
+    if (category !== "feed") {
+      arrayPriceTable.push({
+        id: category,
+        price: Number(value).toFixed(2),
+        tax: Number(value * 0.2).toFixed(2),
+        cacique: Number(value * 0.8 * caciquePrice).toFixed(2),
+        master: Number(value * 0.8 * masterPrice).toFixed(2),
+      });
+    } else {
+      arrayPriceTable.push({
+        id: category,
+        price: Number(value).toFixed(2),
+        tax: Number(value * 0.2).toFixed(2),
+        cacique: Number(0).toFixed(2),
+        master: Number(value * 0.8).toFixed(2),
+      });
+    }
+  });
+
+  return  arrayPriceTable;
+}
+
+// export const priceTable = [
+//   {
+//     id: 1,
+//     min: 0,
+//     price: 250,
+//     tax: 50,
+//     common: 60,
+//     master: 140,
+//   },
+//   {
+//     id: 2,
+//     min: 500,
+//     price: 300,
+//     tax: 60,
+//     common: 72,
+//     master: 168,
+//   },
+//   {
+//     id: 3,
+//     min: 1000,
+//     price: 400,
+//     tax: 80,
+//     common: 96,
+//     master: 224,
+//   },
+//   {
+//     id: 4,
+//     min: 2000,
+//     price: 480,
+//     tax: 96,
+//     common: 115.2,
+//     master: 268.8,
+//   },
+//   {
+//     id: 5,
+//     min: 4000,
+//     price: 605,
+//     tax: 121,
+//     common: 145.2,
+//     master: 338.8,
+//   },
+//   {
+//     id: 6,
+//     min: 8000,
+//     price: 690,
+//     tax: 138,
+//     common: 165.6,
+//     master: 386.4,
+//   },
+//   {
+//     id: 7,
+//     min: 16000,
+//     price: 890,
+//     tax: 178,
+//     common: 213.6,
+//     master: 498.4,
+//   },
+//   {
+//     id: 8,
+//     min: 32000,
+//     price: 124,
+//     tax: 249,
+//     common: 298.8,
+//     master: 697.2,
+//   },
+//   {
+//     id: 9,
+//     min: 64000,
+//     price: 185,
+//     tax: 370,
+//     common: 444,
+//     master: 1036,
+//   },
+// ];

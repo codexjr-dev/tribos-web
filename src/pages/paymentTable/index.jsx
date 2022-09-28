@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
-import { priceTable } from "../../data/Data";
+import LoadingIcon from '../../assets/icons/loading-icon.svg';
+
+import { makePriceTable, priceTable } from "../../data/Data";
+import { getPriceTable } from "../../services/api";
 import { formatInfo } from "../../util/aux";
 
 import styles from "./styles.module.css";
@@ -10,12 +13,12 @@ import styles from "./styles.module.css";
 export const PaymentTable = () => {
   const navigate = useNavigate();
 
-  const [isSelected, setIsSelected] = useState(false);
-  const [selectedButton, setSelectedButton] = useState(0);
+  const [typeSelectedButton, setTypeSelectedButton] = useState("cacique");
   const [isEditMode, setIsEditMode] = useState(false);
+  const [priceTable, setPriceTable] = useState([]);
 
-  const handleChangeSelectedButton = (event, actual) => {
-    setSelectedButton(Math.abs(actual - 1));
+  const handleChangeTypeSelectedButton = (target) => {
+    setTypeSelectedButton(target);
   };
 
   const handleClickOnSave = () => {
@@ -28,10 +31,18 @@ export const PaymentTable = () => {
     setIsEditMode(!isEditMode);
   };
 
+  useEffect(() => {
+    async function loadAll() {
+      setPriceTable(makePriceTable(await getPriceTable(), typeSelectedButton));
+    }
+
+    loadAll();
+  }, [typeSelectedButton])
+
   return (
     <div className={styles.container}>
       <header>
-        <div onClick={() => navigate('/payment')}>
+        <div onClick={() => navigate("/payment")}>
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2> Ajustes </h2>
         </div>
@@ -52,17 +63,25 @@ export const PaymentTable = () => {
           </div>
           <div className={styles.buttons}>
             <button
-              id={selectedButton === 0 ? styles.selected : styles.normal}
+              id={
+                typeSelectedButton === "cacique"
+                  ? styles.selected
+                  : styles.normal
+              }
               onClick={(event) => {
-                handleChangeSelectedButton(event, 1);
+                handleChangeTypeSelectedButton("cacique");
               }}
             >
               Venda Cacique
             </button>
             <button
-              id={selectedButton === 1 ? styles.selected : styles.normal}
+              id={
+                typeSelectedButton === "master"
+                  ? styles.selected
+                  : styles.normal
+              }
               onClick={(event) => {
-                handleChangeSelectedButton(event, 0);
+                handleChangeTypeSelectedButton("master");
               }}
             >
               Venda Tribo Master
@@ -78,31 +97,43 @@ export const PaymentTable = () => {
                     Imposto (<b>{`${20}%`}</b>)
                   </th>
                   <th>
-                    Cacique (<b>{`${30}%`}</b>)
+                    Cacique (
+                    <b>{`${typeSelectedButton === "cacique" ? 70 : 30}%`}</b>)
                   </th>
                   <th>
-                    Tribo Master (<b>{`${70}%`}</b>)
+                    Tribo Master (
+                    <b>{`${typeSelectedButton === "master" ? 70 : 30}%`}</b>)
                   </th>
                 </tr>
               </thead>
 
               <tbody>
                 {priceTable.map((object, index) => {
-                  return (
+                  return typeSelectedButton === "cacique" &&
+                    object.id === "feed" ? null : (
                     <tr key={object.id} id={styles.tableRow}>
-                      <td>{`Acima de ${formatInfo(object.min)}`}</td>
+                      {object.id !== "feed" ? (
+                        <td>{`${
+                          object.id.substring(0, 2) === "st"
+                            ? "Abaixo"
+                            : "Acima"
+                        } de ${formatInfo(object.id.substring(2))}`}</td>
+                      ) : (
+                        <td>Feed</td>
+                      )}
                       <td id={styles.price}>
-                        {"R$ "}
+                        <span>R$</span>
                         <input
                           type="number"
                           disabled={isEditMode ? false : true}
-                          value={object.price.toFixed(2)}
+                          value={Number(object.price).toFixed(2)}
+                          onChange={(event) => console.log(event.target.value)}
                           name="price"
                         />
                       </td>
-                      <td>{`R$ ${object.tax.toFixed(2)}`}</td>
-                      <td>{`R$ ${object.common.toFixed(2)}`}</td>
-                      <td>{`R$ ${object.master.toFixed(2)}`}</td>
+                      <td>{`R$ ${object.tax}`}</td>
+                      <td>{`R$ ${object.cacique}`}</td>
+                      <td>{`R$ ${object.master}`}</td>
                     </tr>
                   );
                 })}
