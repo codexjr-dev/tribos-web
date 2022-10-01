@@ -19,6 +19,59 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
   return data;
 };
 
+export const findAllCacique = async () => {
+  let data;
+  await api.get('/adm/announcement/cacique').then((res) => {
+    data = res.data.announcements;
+  }).catch(() => {
+    data = null;
+  })
+
+  return data;
+}
+
+export const findAllMaster = async () => {
+  let data;
+  await api.get('/adm/announcement/master').then((res) => {
+    data = res.data.announcements;
+  }).catch(() => {
+    data = null;
+  })
+
+  return data;
+}
+
+export const findAllFeed = async () => {
+  let data;
+  await api
+    .get("/adm/announcement/feed")
+    .then((res) => {
+      data = res.data.announcements;
+    })
+    .catch(() => {
+      data = null;
+    });
+
+  return data;
+};
+
+export const findTriboById = async (id) => {
+  let data;
+  await api.get(`/tribo/${id}`).then((res) => {
+    data = res.data;
+  }).catch(() => {
+    data = null;
+  })
+
+  return data;
+}
+
+export const payCacique = async (announcementId, value) => {
+  await api.post(`/adm/announcement/${announcementId}`, {
+    amountPaid: value,
+  });
+};
+
 //   try {
 //     const response = await api.get(
 //       `/statistics/${type}/${targetDate.getFullYear()}-${targetDate.getMonth()}/${today.getFullYear()}-${today.getMonth()}`,
