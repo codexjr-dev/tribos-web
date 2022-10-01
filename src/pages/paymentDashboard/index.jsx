@@ -10,10 +10,13 @@ import { useNavigate } from "react-router-dom";
 import { PaymentDetails } from "../../components/paymentDetails";
 import { useState } from "react";
 import { useEffect } from "react";
+import { findAllCacique, findAllMaster, findAllFeed } from "../../services/api";
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
   const [triboDetails, setTriboDetails] = useState(null);
+  const [salesList, setSalesList] = useState([]);
+  const [selectedType, setSelectedType] = useState(1);
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -29,17 +32,24 @@ export const PaymentDashboard = () => {
   };
 
   useEffect(() => {
-    console.log(showDetailsActive);
-  }, [showDetailsActive]);
+    async function loadAll() {
+      selectedType === 1
+        ? setSalesList(await findAllCacique())
+        : setSalesList(await findAllMaster());
+
+      // const finder = await findAllFeed();
+      // console.log(finder);
+    }
+
+    loadAll();
+    console.log(salesList);
+  }, [selectedType]);
 
   return (
     <>
       {showDetailsActive ? (
         <div className={styles.modalContainer}>
-          <PaymentDetails
-            handleClose={close}
-            details={triboDetails}
-          />
+          <PaymentDetails handleClose={close} details={triboDetails} />
         </div>
       ) : null}
       <div className={styles.container}>
@@ -69,7 +79,7 @@ export const PaymentDashboard = () => {
             <div className={styles.tableHeader}>
               <div className={styles.buttons}>
                 <h2>Listagem</h2>
-                <ButtonChain labels={typeLabels} />
+                <ButtonChain labels={typeLabels} selected={setSelectedType} />
               </div>
             </div>
             <div className={styles.tableContainer}>
@@ -84,19 +94,19 @@ export const PaymentDashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {paymentListData.map((element) => {
+                  {salesList.map((element) => {
                     return (
                       <tr
-                        key={element.id}
-                        id={element.id}
-                        className={styles.tableRow}
+                        key={element._id}
+                        id={element._id}
+                        className={element.caciquePaid ? styles.almostPaidRow : styles.normalRow}
                         onClick={() => handleShowDetails(element)}
                       >
-                        <td>{element.name}</td>
-                        <td>{element.value}</td>
-                        <td>{element.tax}</td>
-                        <td>{element.common}</td>
-                        <td>{element.master}</td>
+                        <td>{element.tribo.name}</td>
+                        <td>{`R$ ${Number(element.price).toFixed(2)}`}</td>
+                        <td>{`R$ ${Number(element.price * 0.2).toFixed(2)}`}</td>
+                        <td>{`R$ ${Number(element.caciquePart).toFixed(2)}`}</td>
+                        <td>{`R$ ${Number(element.price * 0.8 - element.caciquePart).toFixed(2)}`}</td>
                       </tr>
                     );
                   })}

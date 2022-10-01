@@ -156,28 +156,33 @@ table thead tr th {
   border-bottom: 2px solid var(--blue-dark);
 }
 
-.tableRow {
+.normalRow {
   border-radius: 8px;
+  background-color: #fff;
 }
-.tableRow:hover {
+
+.normalRow:hover {
   cursor: pointer;
   outline: 3px solid var(--purple);
 }
 
-.tableRow td {
+.almostPaidRow td, .normalRow td {
   padding: 1.25rem 0;
   font-size: 15px;
   color: var(--dark);
-  background-color: #fff;
   text-align: center;
 }
 
-.tableRow td:first-child {
+.almostPaidRow td:first-child, .normalRow td:first-child {
   border-radius: 8px 0 0 8px;
   padding: 16px;
   max-width: 160px;
 }
 
-.tableRow td:last-child {
+.almostPaidRow td:last-child, .normalRow td:last-child {
   border-radius: 0 8px 8px 0;
+}
+
+.almostPaidRow {
+  background-color: #FFAEFB;
 }
