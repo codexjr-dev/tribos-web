@@ -67,10 +67,19 @@ export const findTriboById = async (id) => {
 }
 
 export const payCacique = async (announcementId, value) => {
-  await api.post(`/adm/announcement/${announcementId}`, {
+  await api.put(`/adm/announcement/${announcementId}`, {
     amountPaid: value,
   });
 };
+
+export const findAnnouncementDetails = async (announcementId) => {
+  let data;
+  await api.get(`/announcement/${announcementId}`).then(res => {
+    data = res.data;
+  })
+
+  return data;
+}
 
 //   try {
 //     const response = await api.get(

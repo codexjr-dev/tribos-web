@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 
 import { useState } from "react";
+import { useEffect } from "react";
 
 export const ButtonChain = ({ labels, selected }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -20,7 +21,6 @@ export const ButtonChain = ({ labels, selected }) => {
               label.id === selectedIndex ? styles.selected : styles.normal
             }
             onClick={(e) => {
-              console.log(index);
               return handleSelect(index);
             }}
           >

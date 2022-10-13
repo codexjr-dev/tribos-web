@@ -9,8 +9,8 @@ import Loading from "../Loading";
 import { formatISO } from "date-fns";
 
 export const PaymentDetails = ({ handleClose, details }) => {
-  const [editModeActive, setEditModeActive] = useState(false);
-  const [amountPaid, setAmountPaid] = useState(details.caciquePartPaid);
+  const [editModeActive, setEditModeActive] = useState(Boolean(false));
+  const [amountPaid, setAmountPaid] = useState(Number(details.caciquePartPaid));
   const [triboInfo, setTriboInfo] = useState({});
 
   const handleClickEditMode = () => {
@@ -23,26 +23,29 @@ export const PaymentDetails = ({ handleClose, details }) => {
   };
 
   const handleSetPaidAmount = (event) => {
-    if (event.target.value > details.caciquePart || event.target.value < 0) {
-      alert("Valor inválido.");
-    } else {
-      setAmountPaid(event.target.value);
-    }
+    let input = event.target.value;
+    setAmountPaid(input);
   };
 
   const handlePayCacique = async () => {
-    await payCacique(details._id, amountPaid);
+    if (Number(details.caciquePartPaid) + Number(amountPaid) > details.caciquePart) {
+      alert("Valor é maior do que o necessário.");
+      setAmountPaid(details.caciquePartPaid);
+    } else if (!amountPaid) {
+      setAmountPaid(0);
+    }
+    else {
+      await payCacique(details._id, amountPaid);
+    }
   }
 
   useEffect(() => {
-    console.log(details);
     async function loadAll() {
       setTriboInfo(await findTriboById(details.tribo._id));
     }
 
     loadAll();
-    console.log(triboInfo);
-  }, []);
+  }, [amountPaid, details]);
 
   return (
     <>
@@ -56,14 +59,15 @@ export const PaymentDetails = ({ handleClose, details }) => {
               <img src={CloseIcon} alt="Fechar" onClick={() => handleClose()} />
             </div>
             <span>
+              <span>Tribo: </span>
               <b>{details.tribo.name}</b>
             </span>
             <span>
-              {"Membros: "}
+              <span>Membros: </span>
               <b>{triboInfo.tribo.members.length}</b>
             </span>
             <span>
-              {"Criada em: "}
+              <span>Criada em: </span>
               <b>
                 {formatISO(new Date(triboInfo.tribo.createdAt), {
                   representation: "date",
@@ -102,7 +106,9 @@ export const PaymentDetails = ({ handleClose, details }) => {
                   R$
                   <input
                     type="number"
-                    onChange={(e) => handleSetPaidAmount(e)}
+                    onChange={(e) => {
+                      handleSetPaidAmount(e);
+                    }}
                     value={amountPaid}
                     disabled={!editModeActive}
                     id={editModeActive ? styles.editActive : ""}
@@ -112,7 +118,14 @@ export const PaymentDetails = ({ handleClose, details }) => {
               <div id={styles.remainder}>
                 <h3>Restante</h3>
                 <span>
-                  R$ {Number(details.caciquePart - amountPaid).toFixed(2)}
+                  {editModeActive
+                    ? `R$ ${Number(
+                        details.caciquePart -
+                          (Number(amountPaid) + Number(details.caciquePartPaid))
+                      ).toFixed(2)}`
+                    : `R$ ${Number(details.caciquePart - amountPaid).toFixed(
+                        2
+                      )}`}
                 </span>
               </div>
             </div>
