@@ -15,7 +15,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
 
   const handleClickEditMode = () => {
     if (editModeActive) {
-      handlePayCacique()
+      handlePayCacique();
       setEditModeActive(false);
     } else {
       setEditModeActive(true);
@@ -28,16 +28,18 @@ export const PaymentDetails = ({ handleClose, details }) => {
   };
 
   const handlePayCacique = async () => {
-    if (Number(details.caciquePartPaid) + Number(amountPaid) > details.caciquePart) {
+    if (
+      Number(details.caciquePartPaid) + Number(amountPaid) >
+      details.caciquePart
+    ) {
       alert("Valor é maior do que o necessário.");
       setAmountPaid(details.caciquePartPaid);
     } else if (!amountPaid) {
       setAmountPaid(0);
-    }
-    else {
+    } else {
       await payCacique(details._id, amountPaid);
     }
-  }
+  };
 
   useEffect(() => {
     async function loadAll() {
@@ -45,7 +47,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
     }
 
     loadAll();
-  }, [amountPaid, details]);
+  }, [editModeActive]);
 
   return (
     <>

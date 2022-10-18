@@ -30,7 +30,7 @@ export const PaymentList = ({ type, handleShowDetails }) => {
     }
 
     loadAll();
-  }, [type]);
+  }, [type, handleShowDetails]);
 
   return (
     <div className={styles.tableContainer}>
