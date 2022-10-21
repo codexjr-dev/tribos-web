@@ -12,6 +12,7 @@ import { makePriceTable } from "../../data/Data";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 
 import styles from "./styles.module.css";
+import { toast } from "react-toastify";
 
 export const PaymentTable = () => {
   const { priceChange } = useChangePrice();
@@ -37,10 +38,12 @@ export const PaymentTable = () => {
     });
 
     updatePrices(auxObj);
+    toast.success("Valores alterados com sucesso!");
   };
 
   const handleClickOnEdit = () => {
     setIsEditMode(!isEditMode);
+    toast.info("Modo de edição ATIVADO.");
   };
 
   useEffect(() => {
