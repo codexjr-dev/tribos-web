@@ -19,30 +19,17 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
   return data;
 };
 
-//   try {
-//     const response = await api.get(
-//       `/statistics/${type}/${targetDate.getFullYear()}-${targetDate.getMonth()}/${today.getFullYear()}-${today.getMonth()}`,
-//       {
-//         Authorization: `Basic ${localStorage.getItem("@App:token")}`,
-//       }
-//     );
-//     console.log(response.data);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
+export const getPriceTable = async () => {
+  let data = {};
+  await api.get("/prices").then((res) => {
+    data = res.data;
+  });
+  return data;
+};
 
-// export const findAllReports = async () => {
-//  let data = null
-//  await api.get("/report", {
-//   Authorization: `${localStorage.getItem("@App:token")}`,
-//  }).then((res) => {
-//    data = res.data;
-//    console.log(res.data.token)
-//  }).catch(e => console.log(e));
-
-//   return data;
-// };
+export const updatePrices = async (newPrices) => {
+  await api.put("/prices", newPrices);
+};
 
 export const getAllReports = async () => {
   let data = null;
@@ -87,7 +74,7 @@ export const reportPost = async (id) => {
       idReported: id,
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((ex) => {
       console.log(ex);
@@ -113,7 +100,7 @@ export const reportUser = async (id) => {
       idReported: id,
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((ex) => {
       console.log(ex);
@@ -139,7 +126,7 @@ export const reportTribo = async (id) => {
       idReported: id,
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((ex) => {
       console.log(ex);
@@ -171,15 +158,3 @@ export const ignoreReport = async (id) => {
       console.log(ex);
     });
 };
-
-/*axios.post('/user', {
-  firstName: 'Fred',
-  lastName: 'Flintstone'
-})
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
-*/
