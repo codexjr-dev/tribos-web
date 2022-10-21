@@ -1,7 +1,10 @@
-import styles from "./styles.module.css";
-import { formatInfo } from "../../util/aux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
 import { useChangePrice } from "../../contexts/changePrice";
+
+import { formatInfo } from "../../util/aux";
+
+import styles from "./styles.module.css";
 
 export const PaymentTableRow = ({
   objectKey,
@@ -9,13 +12,8 @@ export const PaymentTableRow = ({
   editMode,
   data,
 }) => {
+  const { handleChangePrice } = useChangePrice();
   const [price, setPrice] = useState(data.price);
-
-  const { priceChange, handleChangePrice } = useChangePrice();
-
-  // useEffect(() => {
-  //   console.log(priceChange);
-  // }, [priceChange]);
 
   const handleChange = (event) => {
     if (event.target.value < 0) {

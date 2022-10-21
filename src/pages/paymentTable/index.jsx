@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
-import LoadingIcon from "../../assets/icons/loading-icon.svg";
-
-import { makePriceTable, priceTable } from "../../data/Data";
-import { getPriceTable, updatePrices } from "../../services/api";
+import { useChangePrice } from "../../contexts/changePrice";
 
 import { PaymentTableRow } from "../../components/PaymentTableRow";
+import Loading from "../../components/Loading";
+
+import { getPriceTable, updatePrices } from "../../services/api";
+
+import { makePriceTable } from "../../data/Data";
+
+import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 
 import styles from "./styles.module.css";
-import { useChangePrice } from "../../contexts/changePrice";
 
 export const PaymentTable = () => {
   const { priceChange } = useChangePrice();
@@ -26,13 +27,11 @@ export const PaymentTable = () => {
   };
 
   const handleClickOnSave = () => {
-    alert("salvando");
     setIsEditMode(!isEditMode);
 
     let auxObj = {};
     Object.entries(priceChange).forEach((entry) => {
       if (entry[1] > 0) {
-        console.log(entry[0]);
         Object.assign(auxObj, { [entry[0]]: entry[1] });
       }
     });
@@ -41,7 +40,6 @@ export const PaymentTable = () => {
   };
 
   const handleClickOnEdit = () => {
-    alert("editando");
     setIsEditMode(!isEditMode);
   };
 
@@ -122,17 +120,21 @@ export const PaymentTable = () => {
               </thead>
 
               <tbody>
-                {priceTable.map((object, index) => {
-                  return (
-                    <PaymentTableRow
-                      key={object.id}
-                      objectKey={object.id}
-                      selectedButton={typeSelectedButton}
-                      editMode={isEditMode}
-                      data={object}
-                    />
-                  );
-                })}
+                {!priceTable ? (
+                  <Loading />
+                ) : (
+                  priceTable.map((object, index) => {
+                    return (
+                      <PaymentTableRow
+                        key={object.id}
+                        objectKey={object.id}
+                        selectedButton={typeSelectedButton}
+                        editMode={isEditMode}
+                        data={object}
+                      />
+                    );
+                  })
+                )}
               </tbody>
             </table>
           </div>

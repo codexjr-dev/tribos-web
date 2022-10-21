@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import { useEffect } from "react";
 import { createContext } from "react";
 
 const ChangePriceContext = createContext({});
@@ -17,10 +16,6 @@ export default function ChangePriceProvider({ children }) {
     bt64000: 0,
     feed: 0,
   });
-
-  useEffect(() => {
-    console.log(priceChange);
-  }, []);
 
   const handleChangePrice = (key, value) => {
     const temp = priceChange;
