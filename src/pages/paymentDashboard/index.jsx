@@ -1,19 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
-import { generalFinances, paymentListData } from "../../data/Data";
+import { generalFinances } from "../../data/Data";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
 
-import { PaymentDetails } from "../../components/paymentDetails";
+import { PaymentDetails } from "../../components/PaymentDetails";
 
 import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
+
+import { PaymentList } from "../../components/PaymentList";
+
 import styles from "./styles.module.css";
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
   const [triboDetails, setTriboDetails] = useState(null);
+  const [selectedType, setSelectedType] = useState(0);
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -27,10 +31,6 @@ export const PaymentDashboard = () => {
       setShowDetailsActive(false);
     }
   };
-
-  useEffect(() => {
-    console.log(showDetailsActive);
-  }, [showDetailsActive]);
 
   return (
     <>
@@ -66,40 +66,13 @@ export const PaymentDashboard = () => {
             <div className={styles.tableHeader}>
               <div className={styles.buttons}>
                 <h2>Listagem</h2>
-                <ButtonChain labels={typeLabels} />
+                <ButtonChain labels={typeLabels} selected={setSelectedType} />
               </div>
             </div>
-            <div className={styles.tableContainer}>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Nome Tribo</th>
-                    <th>Valor total</th>
-                    <th>Imposto</th>
-                    <th>Cacique</th>
-                    <th>Tribo Master</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {paymentListData.map((element) => {
-                    return (
-                      <tr
-                        key={element.id}
-                        id={element.id}
-                        className={styles.tableRow}
-                        onClick={() => handleShowDetails(element)}
-                      >
-                        <td>{element.name}</td>
-                        <td>{element.value}</td>
-                        <td>{element.tax}</td>
-                        <td>{element.common}</td>
-                        <td>{element.master}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+            <PaymentList
+              type={selectedType}
+              handleShowDetails={handleShowDetails}
+            />
           </div>
         </main>
       </div>

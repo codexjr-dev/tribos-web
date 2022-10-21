@@ -19,6 +19,89 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
   return data;
 };
 
+export const findAllCacique = async () => {
+  let data;
+  await api.get('/adm/announcement/cacique').then((res) => {
+    data = res.data.announcements;
+  }).catch(() => {
+    data = null;
+  })
+
+  return data;
+}
+
+export const findAllMaster = async () => {
+  let data;
+  await api.get('/adm/announcement/master').then((res) => {
+    data = res.data.announcements;
+  }).catch(() => {
+    data = null;
+  })
+
+  return data;
+}
+
+export const findAllFeed = async () => {
+  let data;
+  await api
+    .get("/adm/announcement/feed")
+    .then((res) => {
+      data = res.data.announcements;
+    })
+    .catch(() => {
+      data = null;
+    });
+
+  return data;
+};
+
+export const findTriboById = async (id) => {
+  let data;
+  await api.get(`/tribo/${id}`).then((res) => {
+    data = res.data;
+  }).catch(() => {
+    data = null;
+  })
+
+  return data;
+}
+
+export const payCacique = async (announcementId, value) => {
+  await api.put(`/adm/announcement/${announcementId}`, {
+    amountPaid: value,
+  });
+};
+
+export const findAnnouncementDetails = async (announcementId) => {
+  let data;
+  await api.get(`/announcement/${announcementId}`).then(res => {
+    data = res.data;
+  })
+
+  return data;
+}
+
+//   try {
+//     const response = await api.get(
+//       `/statistics/${type}/${targetDate.getFullYear()}-${targetDate.getMonth()}/${today.getFullYear()}-${today.getMonth()}`,
+//       {
+//         Authorization: `Basic ${localStorage.getItem("@App:token")}`,
+//       }
+//     );
+//     console.log(response.data);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+
+// export const findAllReports = async () => {
+//  let data = null
+//  await api.get("/report", {
+//   Authorization: `${localStorage.getItem("@App:token")}`,
+//  }).then((res) => {
+//    data = res.data;
+//    console.log(res.data.token)
+//  }).catch(e => console.log(e));
 export const getPriceTable = async () => {
   let data = {};
   await api.get("/prices").then((res) => {

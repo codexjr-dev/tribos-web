@@ -1,6 +1,7 @@
 .container {
   background-color: var(--light-gray);
   width: 480px;
+  margin: 2rem;
   height: fit-content;
   border-radius: 24px;
   padding: 2.5rem;

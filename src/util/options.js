@@ -28,10 +28,14 @@ export const intervalLabels = [
 export const typeLabels = [
   {
     id: 0,
-    name: "Venda Cacique",
+    name: "Feed",
   },
   {
     id: 1,
+    name: "Venda Cacique",
+  },
+  {
+    id: 2,
     name: "Venda Tribo Master",
   },
 ];
