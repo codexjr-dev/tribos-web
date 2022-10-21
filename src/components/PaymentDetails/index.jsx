@@ -7,6 +7,7 @@ import { useState } from "react";
 import { findTriboById, payCacique } from "../../services/api";
 import Loading from "../Loading";
 import { formatISO } from "date-fns";
+import { toast } from "react-toastify";
 
 export const PaymentDetails = ({ handleClose, details }) => {
   const [editModeActive, setEditModeActive] = useState(Boolean(false));
@@ -19,6 +20,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
       setEditModeActive(false);
     } else {
       setEditModeActive(true);
+      toast.info("Modo de edição ATIVADO.");
     }
   };
 
@@ -32,12 +34,15 @@ export const PaymentDetails = ({ handleClose, details }) => {
       Number(details.caciquePartPaid) + Number(amountPaid) >
       details.caciquePart
     ) {
-      alert("Valor é maior do que o necessário.");
+      toast.error(
+        "Valor é maior que o necessário. Por favor, tente novamente."
+      );
       setAmountPaid(details.caciquePartPaid);
     } else if (!amountPaid) {
       setAmountPaid(0);
     } else {
       await payCacique(details._id, amountPaid);
+      toast.success("Pagamento adicionado com SUCESSO!");
     }
   };
 
