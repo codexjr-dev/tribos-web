@@ -8,8 +8,6 @@ import CompanyTotalIcon from "../assets/icons/total-company-icon.svg";
 import CompanyGainIcon from "../assets/icons/company-gain-icon.svg";
 import CompanyLostIcon from "../assets/icons/company-lost-icon.svg";
 
-
-
 export const getMax = (array) => {
   let max = 0;
   array.forEach((number) => {

@@ -4,13 +4,16 @@ import MainRoutes from "./routes";
 
 import "./App.css";
 import AuthProvider from "./contexts/auth";
+import ChangePriceProvider from "./contexts/changePrice";
 
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <MainRoutes />
-      </Router>
+      <ChangePriceProvider>
+        <Router>
+          <MainRoutes />
+        </Router>
+      </ChangePriceProvider>
     </AuthProvider>
   );
 }
