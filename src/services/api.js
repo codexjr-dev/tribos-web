@@ -25,8 +25,13 @@ export const getPriceTable = async () => {
     data = res.data;
   });
   return data;
-}
+};
 
+export const updatePrices = async (newPrices) => {
+  await api.put("/prices", newPrices).then((res) => {
+    console.log(res.data);
+  });
+};
 
 export const getAllReports = async () => {
   let data = null;
@@ -71,7 +76,7 @@ export const reportPost = async (id) => {
       idReported: id,
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((ex) => {
       console.log(ex);
@@ -97,7 +102,7 @@ export const reportUser = async (id) => {
       idReported: id,
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((ex) => {
       console.log(ex);
@@ -123,7 +128,7 @@ export const reportTribo = async (id) => {
       idReported: id,
     })
     .then((res) => {
-      console.log(res)
+      console.log(res);
     })
     .catch((ex) => {
       console.log(ex);

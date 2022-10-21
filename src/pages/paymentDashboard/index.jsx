@@ -1,15 +1,15 @@
-import styles from "./styles.module.css";
+import { useState, useEffect } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { generalFinances, paymentListData } from "../../data/Data";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
 
+import { PaymentDetails } from "../../components/paymentDetails";
+
 import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
-import { PaymentDetails } from "../../components/paymentDetails";
-import { useState } from "react";
-import { useEffect } from "react";
+import styles from "./styles.module.css";
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
@@ -36,10 +36,7 @@ export const PaymentDashboard = () => {
     <>
       {showDetailsActive ? (
         <div className={styles.modalContainer}>
-          <PaymentDetails
-            handleClose={close}
-            details={triboDetails}
-          />
+          <PaymentDetails handleClose={close} details={triboDetails} />
         </div>
       ) : null}
       <div className={styles.container}>

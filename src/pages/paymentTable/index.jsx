@@ -2,15 +2,19 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
-import LoadingIcon from '../../assets/icons/loading-icon.svg';
+import LoadingIcon from "../../assets/icons/loading-icon.svg";
 
 import { makePriceTable, priceTable } from "../../data/Data";
-import { getPriceTable } from "../../services/api";
-import { formatInfo } from "../../util/aux";
+import { getPriceTable, updatePrices } from "../../services/api";
+
+import { PaymentTableRow } from "../../components/PaymentTableRow";
 
 import styles from "./styles.module.css";
+import { useChangePrice } from "../../contexts/changePrice";
 
 export const PaymentTable = () => {
+  const { priceChange } = useChangePrice();
+
   const navigate = useNavigate();
 
   const [typeSelectedButton, setTypeSelectedButton] = useState("cacique");
@@ -24,6 +28,16 @@ export const PaymentTable = () => {
   const handleClickOnSave = () => {
     alert("salvando");
     setIsEditMode(!isEditMode);
+
+    let auxObj = {};
+    Object.entries(priceChange).forEach((entry) => {
+      if (entry[1] > 0) {
+        console.log(entry[0]);
+        Object.assign(auxObj, { [entry[0]]: entry[1] });
+      }
+    });
+
+    updatePrices(auxObj);
   };
 
   const handleClickOnEdit = () => {
@@ -37,7 +51,7 @@ export const PaymentTable = () => {
     }
 
     loadAll();
-  }, [typeSelectedButton])
+  }, [typeSelectedButton]);
 
   return (
     <div className={styles.container}>
@@ -109,32 +123,14 @@ export const PaymentTable = () => {
 
               <tbody>
                 {priceTable.map((object, index) => {
-                  return typeSelectedButton === "cacique" &&
-                    object.id === "feed" ? null : (
-                    <tr key={object.id} id={styles.tableRow}>
-                      {object.id !== "feed" ? (
-                        <td>{`${
-                          object.id.substring(0, 2) === "st"
-                            ? "Abaixo"
-                            : "Acima"
-                        } de ${formatInfo(object.id.substring(2))}`}</td>
-                      ) : (
-                        <td>Feed</td>
-                      )}
-                      <td id={styles.price}>
-                        <span>R$</span>
-                        <input
-                          type="number"
-                          disabled={isEditMode ? false : true}
-                          value={Number(object.price).toFixed(2)}
-                          onChange={(event) => console.log(event.target.value)}
-                          name="price"
-                        />
-                      </td>
-                      <td>{`R$ ${object.tax}`}</td>
-                      <td>{`R$ ${object.cacique}`}</td>
-                      <td>{`R$ ${object.master}`}</td>
-                    </tr>
+                  return (
+                    <PaymentTableRow
+                      key={object.id}
+                      objectKey={object.id}
+                      selectedButton={typeSelectedButton}
+                      editMode={isEditMode}
+                      data={object}
+                    />
                   );
                 })}
               </tbody>
