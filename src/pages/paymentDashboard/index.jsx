@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { generalFinances } from "../../data/Data";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
 
-import { PaymentDetails } from "../../components/paymentDetails";
+import { PaymentDetails } from "../../components/PaymentDetails";
 
 import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
