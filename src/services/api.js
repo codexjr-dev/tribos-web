@@ -28,9 +28,7 @@ export const getPriceTable = async () => {
 };
 
 export const updatePrices = async (newPrices) => {
-  await api.put("/prices", newPrices).then((res) => {
-    console.log(res.data);
-  });
+  await api.put("/prices", newPrices);
 };
 
 export const getAllReports = async () => {
