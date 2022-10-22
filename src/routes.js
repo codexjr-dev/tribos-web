@@ -7,12 +7,10 @@ import Login from "./pages/login";
 import Spam from "./pages/spam";
 import { PaymentTable } from "./pages/paymentTable";
 import { PaymentDashboard } from "./pages/paymentDashboard";
-import { useAuth } from "./contexts/auth";
-// import { NotAuthorized } from "./pages/notAuthorized";
 import { NotFound } from "./pages/notFound";
 
 export default function MainRoutes() {
-  const { signed } = useAuth();
+  
   
   return (
     <Routes>
