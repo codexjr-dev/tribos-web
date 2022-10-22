@@ -53,14 +53,15 @@ const Login = () => {
           type={showPassword}
           name="password"
           placeholder="Senha"
-          ref={passwordRef}
+          ref={passwordRef}          
         />
 
-        <button className={styles.eyeOffButton} onClick={handleClick}>
+        <button type = "button" className={styles.eyeOffButton} onClick={handleClick}>
           <img
             src={EyeOff}
             alt="Ícone de visualizar a senha"
             className={styles.eyeOff}
+           
           />
         </button>
 
