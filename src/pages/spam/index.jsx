@@ -29,6 +29,7 @@ const Spam = () => {
     }
 
     loadAll();
+    console.log(reports)
   }, [selectedType]);
 
   return (
@@ -65,7 +66,7 @@ const Spam = () => {
           setValue={setSelectedType}
           value={selectedType}
         />
-        {!reports ? (
+        {!reports || reports.length === 0? (
           <Loading />
         ) : (
           reports.map((value) => {
