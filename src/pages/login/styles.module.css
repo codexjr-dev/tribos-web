@@ -1,118 +1,92 @@
-.container {   
-    display: flex; 
+.container {
+    display: flex;
     flex-direction: row;
-    
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
 }
 
-@media (max-width: 1000px){
-    .logo{
+@media (max-width: 1000px) {
+    .logo {
         display: none;
     }
-
-    .loginContainer{
-        align-items: center;
-        justify-content: center;
-        width: 480px;
-        position: relative;
-        display: flex;
-        margin-left: auto;
-        margin-right: 400px;
-        padding-top: 16px;
-        padding-bottom: 16px;       
-    }   
-
 }
 
-@media (max-width: 780px){
-    .logo{
-        display: none;
-    }
-    .loginContainer{
-        align-items: center;
-        justify-content: center;
-        width: 480px;
-        position: relative;
-        display: flex;
-        margin-left: auto;
-        margin-right: 300px;
-        padding-top: 16px;
-        padding-bottom: 16px;      
-    }
-}
-
-.logo{
-    position: relative;
-    left: 20.2rem;
-    top: 9.8rem;
-}
-
-.loginContainer{
-    position: relative;
-    top: 8rem;
-    left: 8rem;
+.loginContainer {
     display: flex;
     flex-direction: column;
-    width: 20rem;
-    height: 18rem;  
-    align-items: center;   
+    width: 300px;
 }
 
-.title{   
+.title {
     font-size: 36px;
     color: var(--dark);
     padding-bottom: 3rem;
     font-style: bold;
     font-family: 'Inter';
-    font-weight: 700;      
+    text-align: center;
+    font-weight: 700;
 }
 
 .userInput,
-.passwordInput{
+.passwordInputContainer {
+    max-width: 100%;
     border-radius: 3.1rem;
     border: 1px solid var(--gray);
-    height: 2rem;
-    margin-bottom: 2rem;
+    height: 2.4rem;
+    margin-bottom: 1rem;
     color: var(--dark);
     padding-left: 1rem;
-    width: 16rem;
     font-family: 'Inter';
     font-weight: 400;
     outline: none;
+    padding-right: 3rem;
+}
+
+.passwordInputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.passwordInputContainer input {
+    border: none;
 }
 
 .passwordInput:focus,
-.userInput:focus{ 
+.userInput:focus {
     border-color: var(--purple);
-    outline: none;   
+    outline: none;
 }
 
-.eyeOff{
+.eyeOff {
     height: 20px;
-    width: 20px;  
+    width: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.eyeOffButton{
+.eyeOffButton {
     width: 5px;
-    height:20px;
-    background-color: #ffffff;
+    height: 20px;
     border: #ffffff;
-    position: relative;
-    bottom: 65px;
-    left: 110px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    margin-right: 0.75rem;
 }
 
-.eyeOffButton:hover{
+.eyeOffButton:hover {
     cursor: pointer;
 }
 
-
 .loginButton {
-    width: 12.5rem;
-    height: 2.5rem;
+    width: 100%;
+    max-width: 100%;
+    height: 2.4rem;
     border-radius: 50px;
     background-color: var(--purple);
     border-color: var(--purple);
@@ -130,5 +104,3 @@
     transition: 0.1s;
     cursor: pointer;
 }
-
-

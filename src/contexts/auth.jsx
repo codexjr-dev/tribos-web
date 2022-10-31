@@ -20,9 +20,6 @@ export default function AuthProvider({ children }) {
         sessionStorage.setItem("@Tribos:user", JSON.stringify(res.data.user));
         sessionStorage.setItem("@Tribos:token", res.data.token);
         data = res.data;
-      })
-      .catch((e) => {
-        alert("Erro!");
       });
 
     return data;
@@ -40,7 +37,6 @@ export default function AuthProvider({ children }) {
       setUser(JSON.parse(storagedUser));
       api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
     }
-    
   }, []);
 
   return (
