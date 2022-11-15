@@ -161,8 +161,8 @@ table thead tr th {
 
 #tableRow #price {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 #tableRow #price input {
@@ -170,7 +170,8 @@ table thead tr th {
   border-radius: 8px;
   border: none;
   outline: none;
-  width: 100px;
+  width: 80px;
+  height: 100%;
   margin-left: 6px;
   color: var(--dark);
   font-size: 14px;
@@ -180,4 +181,21 @@ table thead tr th {
 #tableRow #price input[disabled] {
   background: none;
   padding: 0;
+}
+
+.loading {
+  width: 40px;
+  animation: spin 1s linear infinite;
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  display: flex;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

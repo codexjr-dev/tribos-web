@@ -1,36 +1,42 @@
-.container {
+.select_container {
   display: flex;
   padding: 0.35rem;
+  align-items: center;
 }
-
-.container select {
+ 
+.selectButton > select {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: none;
+  padding: 0.5rem 1.25rem;
   border: none;
-  margin-left: 0.5rem;
   outline: none;
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--dark-light);
-  padding: 0.2rem 0.3rem;
-  transition: all ease-in-out 0.2s;
-}
-
-.container select:hover {
+  background: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--dark);
 }
 
-.container img {
-  width: 36px;
-  height: 36px;
+option {
+  color: var(--dark);
 }
 
-.container select:hover {
+.select_container img {
+  width: 32px;
+  height: 32px;
+}
+
+.select_container select:hover {
   cursor: pointer;
 }
 
-.container #selectIcon {
+.select_container #selectIcon {
   width: 24px;
+}
+
+.select_container .selectButton {
+  border: 1px solid #dedede;
+  display: flex;
+  margin-left: 0.75rem;
+  border-radius: 8px;
+  align-items: center;
 }

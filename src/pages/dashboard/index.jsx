@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import logo from "../../assets/images/logo-pequeno.svg";
-import moneyIcon from "../../assets/icons/money-icon.svg";
 
 import DataChart from "../../components/Chart";
 import ReportedProblems from "../../components/ReportedProblems";
@@ -12,6 +10,9 @@ import { NavigateButton } from "../../components/NavigateButton";
 import { getStatistics } from "../../data/Data";
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/aux";
+
+import logo from "../../assets/images/logo-pequeno.svg";
+import moneyIcon from "../../assets/icons/money-icon.svg";
 
 import styles from "./styles.module.css";
 

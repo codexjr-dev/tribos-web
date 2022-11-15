@@ -1,65 +1,83 @@
 .container {
-    align-items: center;
-    justify-content: center;
-    width: 440px;
-    position: relative;
-    left: 440px;
-    justify-content: center;
-    align-items: center;  
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 16px;
+  padding-bottom: 2.4rem;
 }
 
-.titleArea{
-    padding-top: 0.8rem;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-bottom: 1.6rem;
-    gap: 60px;
+.titleOpacity {
+  opacity: 20%;
 }
 
-.titleAreaOpacity{
-    padding-top: 0.8rem;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    padding-bottom: 1.6rem;
-    gap: 60px;
-    opacity: 20%;
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0 1rem 0;
 }
 
-.returnButton{
-    height: 1.5rem;
-    margin-top: 14px;
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0 1rem 0;
 }
 
-.title{   
-    font-size: 36px;
-    color: var(--dark);
-    font-style: bold;
-    font-family: 'Inter';
-    font-weight: 700;      
+.container header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0 1rem 0 0;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all ease .2s;
 }
 
-.spamArea{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.container header div h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 3rem;
 }
 
-.spamAreaOpacity{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    opacity: 20%;
+.container header div:hover,
+.container .buttonsHeader img:hover {
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg) brightness(92%) contrast(98%);
+  cursor: pointer;
 }
 
-.test{
-    display: flex;
-    flex-direction: column;
+.titleArea {
+  padding-top: 0.8rem;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-bottom: 1.6rem;
+  gap: 60px;
 }
 
+.spamArea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
+.spamAreaOpacity {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  opacity: 20%;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+}
