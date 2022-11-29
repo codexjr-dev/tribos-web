@@ -17,23 +17,20 @@ export default function AuthProvider({ children }) {
         password: password,
       })
       .then((res) => {
-        localStorage.setItem("@Tribos:user", JSON.stringify(res.data.user));
-        localStorage.setItem("@Tribos:token", res.data.token);
+        sessionStorage.setItem("@Tribos:user", JSON.stringify(res.data.user));
+        sessionStorage.setItem("@Tribos:token", res.data.token);
         data = res.data;
-      })
-      .catch((e) => {
-        alert("Erro!");
       });
 
     return data;
   };
 
   useEffect(() => {
-    const storagedUser = localStorage.getItem("@Tribos:user");
-    const storagedToken = localStorage.getItem("@Tribos:token");
-    let data = localStorage.getItem("@Tribos:dashboardData");
+    const storagedUser = sessionStorage.getItem("@Tribos:user");
+    const storagedToken = sessionStorage.getItem("@Tribos:token");
+    let data = sessionStorage.getItem("@Tribos:dashboardData");
     if (!data || data[0] === ",") {
-      localStorage.setItem("@Tribos:dashboardData", [0, 0, 0, 0, 0, 0]);
+      sessionStorage.setItem("@Tribos:dashboardData", [0, 0, 0, 0, 0, 0]);
     }
 
     if (storagedToken && storagedUser) {

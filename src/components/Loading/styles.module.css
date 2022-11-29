@@ -1,0 +1,26 @@
+.loaderContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader{
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+    filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+      brightness(92%) contrast(98%);
+    display: flex;
+}
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+

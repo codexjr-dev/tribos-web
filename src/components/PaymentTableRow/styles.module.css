@@ -1,0 +1,48 @@
+#tableRow {
+    border-radius: 8px;
+}
+
+#tableRow:hover {
+    cursor: pointer;
+    outline: 3px solid var(--purple);
+}
+
+#tableRow td {
+    padding: 1.25rem 0;
+    font-size: 15px;
+    color: var(--dark);
+    background-color: #fff;
+    text-align: center;
+}
+
+#tableRow td:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+#tableRow td:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+#tableRow #price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#tableRow #price input {
+    background-color: var(--gray);
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    width: 80px;
+    height: 100%;
+    margin-left: 6px;
+    color: var(--dark);
+    font-size: 14px;
+    padding: 6px;
+}
+
+#tableRow #price input[disabled] {
+    background: none;
+    padding: 0;
+}

@@ -1,37 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useChangePrice } from "../../contexts/changePrice";
+
+import { PaymentTableRow } from "../../components/PaymentTableRow";
+import Loading from "../../components/Loading";
+
+import { getPriceTable, updatePrices } from "../../services/api";
+
+import { makePriceTable } from "../../data/Data";
 
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
-import { priceTable } from "../../data/Data";
-import { formatInfo } from "../../util/aux";
 
 import styles from "./styles.module.css";
+import { toast } from "react-toastify";
 
 export const PaymentTable = () => {
+  const { priceChange } = useChangePrice();
+
   const navigate = useNavigate();
 
-  const [isSelected, setIsSelected] = useState(false);
-  const [selectedButton, setSelectedButton] = useState(0);
+  const [typeSelectedButton, setTypeSelectedButton] = useState("cacique");
   const [isEditMode, setIsEditMode] = useState(false);
+  const [priceTable, setPriceTable] = useState([]);
 
-  const handleChangeSelectedButton = (event, actual) => {
-    setSelectedButton(Math.abs(actual - 1));
+  const handleChangeTypeSelectedButton = (target) => {
+    setTypeSelectedButton(target);
   };
 
   const handleClickOnSave = () => {
-    alert("salvando");
     setIsEditMode(!isEditMode);
+
+    let auxObj = {};
+    Object.entries(priceChange).forEach((entry) => {
+      if (entry[1] > 0) {
+        Object.assign(auxObj, { [entry[0]]: entry[1] });
+      }
+    });
+
+    updatePrices(auxObj);
+    toast.success("Valores alterados com sucesso!");
   };
 
   const handleClickOnEdit = () => {
-    alert("editando");
     setIsEditMode(!isEditMode);
+    toast.info("Modo de edição ATIVADO.");
   };
+
+  useEffect(() => {
+    async function loadAll() {
+      setPriceTable(makePriceTable(await getPriceTable(), typeSelectedButton));
+    }
+
+    loadAll();
+  }, [typeSelectedButton]);
 
   return (
     <div className={styles.container}>
       <header>
-        <div onClick={() => navigate('/payment')}>
+        <div onClick={() => navigate("/payment")}>
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2> Ajustes </h2>
         </div>
@@ -52,17 +78,25 @@ export const PaymentTable = () => {
           </div>
           <div className={styles.buttons}>
             <button
-              id={selectedButton === 0 ? styles.selected : styles.normal}
+              id={
+                typeSelectedButton === "cacique"
+                  ? styles.selected
+                  : styles.normal
+              }
               onClick={(event) => {
-                handleChangeSelectedButton(event, 1);
+                handleChangeTypeSelectedButton("cacique");
               }}
             >
               Venda Cacique
             </button>
             <button
-              id={selectedButton === 1 ? styles.selected : styles.normal}
+              id={
+                typeSelectedButton === "master"
+                  ? styles.selected
+                  : styles.normal
+              }
               onClick={(event) => {
-                handleChangeSelectedButton(event, 0);
+                handleChangeTypeSelectedButton("master");
               }}
             >
               Venda Tribo Master
@@ -78,34 +112,32 @@ export const PaymentTable = () => {
                     Imposto (<b>{`${20}%`}</b>)
                   </th>
                   <th>
-                    Cacique (<b>{`${30}%`}</b>)
+                    Cacique (
+                    <b>{`${typeSelectedButton === "cacique" ? 70 : 30}%`}</b>)
                   </th>
                   <th>
-                    Tribo Master (<b>{`${70}%`}</b>)
+                    Tribo Master (
+                    <b>{`${typeSelectedButton === "master" ? 70 : 30}%`}</b>)
                   </th>
                 </tr>
               </thead>
 
               <tbody>
-                {priceTable.map((object, index) => {
-                  return (
-                    <tr key={object.id} id={styles.tableRow}>
-                      <td>{`Acima de ${formatInfo(object.min)}`}</td>
-                      <td id={styles.price}>
-                        {"R$ "}
-                        <input
-                          type="number"
-                          disabled={isEditMode ? false : true}
-                          value={object.price.toFixed(2)}
-                          name="price"
-                        />
-                      </td>
-                      <td>{`R$ ${object.tax.toFixed(2)}`}</td>
-                      <td>{`R$ ${object.common.toFixed(2)}`}</td>
-                      <td>{`R$ ${object.master.toFixed(2)}`}</td>
-                    </tr>
-                  );
-                })}
+                {!priceTable ? (
+                  <Loading />
+                ) : (
+                  priceTable.map((object, index) => {
+                    return (
+                      <PaymentTableRow
+                        key={object.id}
+                        objectKey={object.id}
+                        selectedButton={typeSelectedButton}
+                        editMode={isEditMode}
+                        data={object}
+                      />
+                    );
+                  })
+                )}
               </tbody>
             </table>
           </div>
