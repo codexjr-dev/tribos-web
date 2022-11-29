@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { findTriboById, payCacique } from "../../services/api";
 import Loading from "../Loading";
-import { formatISO } from "date-fns";
+import format  from "date-fns/format";
 import { toast } from "react-toastify";
 
 export const PaymentDetails = ({ handleClose, details }) => {
@@ -76,9 +76,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <span>
               <span>Criada em: </span>
               <b>
-                {formatISO(new Date(triboInfo.tribo.createdAt), {
-                  representation: "date",
-                })}
+                {format(new Date(triboInfo.tribo.createdAt), "dd/MM/yyyy")}
               </b>
             </span>
           </div>
