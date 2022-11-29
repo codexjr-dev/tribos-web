@@ -329,8 +329,7 @@ const getLastSixMonthObject = () => {
 
 export const getStatistics = async (intervalType, type) => {
   const list = mapIntervalOptionToList(intervalType);
-
-  list.map(async (element) => {
+  list.map(async (element, index) => {
     element.stats = await getStatiticsByDate(
       type,
       element.currentDate,
@@ -361,9 +360,7 @@ export const getLastSevenDaysObject = () => {
   const result = eachDayOfInterval({ start: start, end: end });
 
   result.forEach((date, index, array) => {
-    if (index === array.length - 1) {
-      // ignorar
-    } else {
+    if (index !== array.length - 1) {
       list.push({
         currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${
           getMonth(date) + 1
@@ -374,7 +371,7 @@ export const getLastSevenDaysObject = () => {
           getDate(array[index + 1]) < 10 ? "0" : ""
         }${getDate(array[index + 1])}`,
         label: `${format(date, "d", { locale: ptBR })}`,
-        stats: null,
+        stats: 0,
       });
     }
   });
@@ -383,25 +380,34 @@ export const getLastSevenDaysObject = () => {
 };
 
 const mapIntervalOptionToList = (intervalType) => {
-  if (intervalType === "day") {
-    return getLastSevenDaysObject();
-  } else if (intervalType === "month") {
-    return getLastSixMonthObject();
-  } else if (intervalType === "year") {
-    return getLastThreeYearsObject();
+  let chosenObject = null;
+  switch (intervalType) {
+    case "day":
+      chosenObject = getLastSevenDaysObject();
+      break;
+    case "month":
+      chosenObject = getLastSixMonthObject();
+      break;
+    case "year":
+      chosenObject = getLastThreeYearsObject();
+      break;
+    default:
+      break;
   }
+
+  return chosenObject;
 };
 
 export const reportTime = (date) => {
-    const result = formatDistanceToNow(new Date(date), {locale: ptBR})
-    return result;
+  const result = formatDistanceToNow(new Date(date), { locale: ptBR });
+  return result;
 };
 
 export const makePriceTable = (table, type) => {
-  let caciquePrice = type === 'cacique' ? 0.7 : 0.3;
-  let masterPrice = type === 'master' ? 0.7 : 0.3;
+  let caciquePrice = type === "cacique" ? 0.7 : 0.3;
+  let masterPrice = type === "master" ? 0.7 : 0.3;
 
-  let arrayPriceTable = []
+  let arrayPriceTable = [];
   Object.entries(table).forEach(([category, value]) => {
     if (category !== "feed") {
       arrayPriceTable.push({
@@ -422,8 +428,8 @@ export const makePriceTable = (table, type) => {
     }
   });
 
-  return  arrayPriceTable;
-}
+  return arrayPriceTable;
+};
 
 // export const priceTable = [
 //   {

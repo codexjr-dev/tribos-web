@@ -1,20 +1,17 @@
 import { Line } from "react-chartjs-2";
+import { useEffect, useState } from "react";
+
 import { Chart as ChartJS } from "chart.js/auto";
 
 import styles from "./styles.module.css";
-import { useEffect, useState } from "react";
 
 const DataChart = ({ data, selected }) => {
   const getStats = () => {
     let result = [];
-    data.forEach((element) => {
-      if (element.stats !== null) {
-        return result.push(element.stats);
-      }
+    data.map((element) => {
+      result.push(element.stats);
     });
-    if (result.length > 0) {
-      localStorage.setItem("@Tribos:dashboardData", result);
-    }
+
     return result;
   };
 
@@ -26,10 +23,7 @@ const DataChart = ({ data, selected }) => {
     datasets: [
       {
         label: `Quantidade de ${selected}`,
-        data:
-          getStats().length > 0
-            ? getStats()
-            : localStorage.getItem("@Tribos:dashboardData").split(","),
+        data: getStats(),
         backgroundColor: ["#9142C5"],
         tension: 0.4,
         fill: false,
@@ -101,10 +95,7 @@ const DataChart = ({ data, selected }) => {
       datasets: [
         {
           label: `Quantidade de ${selected}`,
-          data:
-            getStats().length > 0
-              ? getStats()
-              : localStorage.getItem("@Tribos:dashboardData").split(","),
+          data: getStats(),
           backgroundColor: ["#9142C5"],
           tension: 0.4,
           fill: false,

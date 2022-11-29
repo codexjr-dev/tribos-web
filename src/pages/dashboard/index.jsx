@@ -16,12 +16,12 @@ import { useNavigate } from "react-router-dom";
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/aux";
 import { NavigateButton } from "../../components/NavigateButton";
+import Loading from "../../components/Loading";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState("month");
   const [statistics, setStatistics] = useState([]);
-
   const navigate = useNavigate();
 
   const handleCheckDetails = () => {
@@ -30,9 +30,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function loadData() {
-      setStatistics(await getStatistics(selectedInterval, selectedType));
+      setStatistics(await getStatistics(selectedInterval, selectedType)
+      );
     }
-
     loadData();
   }, [selectedInterval, selectedType]);
 
@@ -57,10 +57,14 @@ const Dashboard = () => {
               value={selectedInterval}
             />
           </div>
-          <DataChart
-            data={statistics}
-            selected={mapLabelToValueType(selectedType)}
-          />
+          {statistics.length > 0 ? (
+            <DataChart
+              data={statistics}
+              selected={mapLabelToValueType(selectedType)}
+            />
+          ) : (
+            <Loading />
+          )}
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
         <nav className={styles.asideContainer}>
