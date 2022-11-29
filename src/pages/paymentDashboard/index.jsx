@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { PaymentList } from "../../components/PaymentList";
 
 import styles from "./styles.module.css";
+import { useEffect } from "react";
+import { findAmountByTypeAndInterval } from "../../services/api";
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
@@ -23,6 +25,14 @@ export const PaymentDashboard = () => {
     setShowDetailsActive(!showDetailsActive);
     setTriboDetails(element);
   };
+
+  useEffect(() => {
+    async function load() {
+      await findAmountByTypeAndInterval(selectedType, "mês");
+    }
+
+    load();
+  }, [selectedType]);
 
   const navigate = useNavigate();
 
