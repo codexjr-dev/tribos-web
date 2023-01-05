@@ -14,9 +14,9 @@
     width: 100%;
     padding: 1rem 1rem;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    flex-direction: row;
+   
+    width: 82%;
 }
 
 video {
