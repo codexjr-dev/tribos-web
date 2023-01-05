@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://tribos-project.herokuapp.com",
+  baseURL: "https://tribos.herokuapp.com",
 });
 
 api.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(

@@ -6,15 +6,19 @@ const RemoveModal = ({ SetValue, Operation, Route, Id, }) => {
     async function Actions (){
         if(Operation === "Ignorar"){
             await ignoreReport(Id);
+            window.location.reload()
         }
         else if (Route === "Post" && Operation === "Remover"){
             await removePost(Id);
+            window.location.reload()
         }
         else if (Route === "User" && Operation === "Remover"){
             await removeUser(Id);
+            window.location.reload()
         }
         else if (Route === "Tribo" && Operation === "Remover"){
             await removeTribo(Id);
+            window.location.reload()
         }
         SetValue(false);
     }
