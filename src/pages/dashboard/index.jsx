@@ -60,11 +60,7 @@ const Dashboard = () => {
             />
             */}
           </div>
-          <DataChart
-            data={statistics}
-            selected={mapLabelToValueType(selectedType)}
-          />
-          <p onClick={handleCheckDetails}>Ver mais...</p>
+          
         </div>
 
       </main>
