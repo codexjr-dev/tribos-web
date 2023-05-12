@@ -51,13 +51,14 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />{}
-  */}
+  
             <Select
               fieldName="interval"
               optionsList={intervalOptions}
               setValue={setSelectedInterval}
               value={selectedInterval}
             />
+            */}
           </div>
           <DataChart
             data={statistics}
