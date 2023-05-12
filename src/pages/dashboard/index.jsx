@@ -66,17 +66,7 @@ const Dashboard = () => {
           />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
-        <nav className={styles.asideContainer}>
-          <div className={styles.paymentButtonContainer}>
-            <h2>Controle Financeiro</h2>
-            <NavigateButton
-              name="Pagamentos"
-              srcIcon={moneyIcon}
-              navigateTo="payment"
-            />
-          </div>
-          <ReportedProblems />
-        </nav>
+
       </main>
     </div>
   );
