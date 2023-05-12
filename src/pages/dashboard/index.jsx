@@ -41,7 +41,7 @@ const Dashboard = () => {
       <header className={styles.logoContainer}>
         <img src={logo} alt="Logo Tribos" />
       </header>
-      
+      {}
     </div>
   );
 };
