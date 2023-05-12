@@ -41,7 +41,42 @@ const Dashboard = () => {
       <header className={styles.logoContainer}>
         <img src={logo} alt="Logo Tribos" />
       </header>
-      {}
+      <main className={styles.infoContainer}>
+        <div className={styles.chartContainer}>
+          <div className={styles.chartSelect}>
+            {/*<Select
+              fieldName="type"
+              optionsList={typeOptions}
+              setValue={setSelectedType}
+              value={selectedType}
+              className={styles.test}
+            />
+  */}
+            <Select
+              fieldName="interval"
+              optionsList={intervalOptions}
+              setValue={setSelectedInterval}
+              value={selectedInterval}
+            />
+          </div>
+          <DataChart
+            data={statistics}
+            selected={mapLabelToValueType(selectedType)}
+          />
+          <p onClick={handleCheckDetails}>Ver mais...</p>
+        </div>
+        <nav className={styles.asideContainer}>
+          <div className={styles.paymentButtonContainer}>
+            <h2>Controle Financeiro</h2>
+            <NavigateButton
+              name="Pagamentos"
+              srcIcon={moneyIcon}
+              navigateTo="payment"
+            />
+          </div>
+          <ReportedProblems />
+        </nav>
+      </main>
     </div>
   );
 };
