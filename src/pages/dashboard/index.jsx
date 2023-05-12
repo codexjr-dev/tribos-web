@@ -50,7 +50,7 @@ const Dashboard = () => {
               setValue={setSelectedType}
               value={selectedType}
               className={styles.test}
-            />
+            />{}
   */}
             <Select
               fieldName="interval"
