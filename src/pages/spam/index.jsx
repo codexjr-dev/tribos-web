@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Spam = () => {
-  const [selectedType, setSelectedType] = useState("time");
+  const [selectedType, setSelectedType] = useState("OLAR");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [reports, setReports] = useState([]);
   const [route, setRoute] = useState("");
@@ -32,7 +32,6 @@ const Spam = () => {
     loadAll();
     console.log(reports)
   }, [selectedType]);
-  
 
   return (
     <div className={styles.container}>
@@ -68,9 +67,8 @@ const Spam = () => {
           setValue={setSelectedType}
           value={selectedType}
         />
-        {!reports || reports.length === 0? (
-          <Loading />
-        ) : (
+
+        {(
           reports.map((value) => {
             if (value.type === "Post") {
               
