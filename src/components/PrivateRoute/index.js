@@ -6,7 +6,7 @@ import { Navigate, Outlet} from "react-router-dom";
 const PrivateRoute = props => {
 
 
-    const isLoged = !!sessionStorage.getItem("@Tribos:token");
+    const isLoged = !!localStorage.getItem("@Tribos:token");
     return isLoged ? <Outlet /> : <Navigate to='/' />;
 };
 
