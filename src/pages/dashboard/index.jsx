@@ -45,13 +45,15 @@ const Dashboard = () => {
         <div className={styles.chartContainer}>
           <div className={styles.chartSelect}>
             <Select
+
               fieldName="type"
               optionsList={typeOptions}
               setValue={setSelectedType}
               value={selectedType}
               className={styles.test}
             />
-  
+
+  }
             <Select
               fieldName="interval"
               optionsList={intervalOptions}

@@ -17,34 +17,34 @@ export default function AuthProvider({ children }) {
         password: password,
       })
       .then((res) => {
-        sessionStorage.setItem("@Tribos:user", JSON.stringify(res.data.user));
-        sessionStorage.setItem("@Tribos:token", res.data.token);
+        localStorage.setItem("@Tribos:user", JSON.stringify(res.data.user));
+        localStorage.setItem("@Tribos:token", res.data.token);
         data = res.data;
       });
 
     return data;
   };
 
-  useEffect(() => {
-    const storagedUser = sessionStorage.getItem("@Tribos:user");
-    const storagedToken = sessionStorage.getItem("@Tribos:token");
-    let data = sessionStorage.getItem("@Tribos:dashboardData");
-    if (!data || data[0] === ",") {
-      sessionStorage.setItem("@Tribos:dashboardData", [0, 0, 0, 0, 0, 0]);
-    }
+    useEffect(() => {
+      const storagedUser = localStorage.getItem("@Tribos:user");
+      const storagedToken = localStorage.getItem("@Tribos:token");
+      let data = localStorage.getItem("@Tribos:dashboardData");
+      if (!data || data[0] === ",") {
+        localStorage.setItem("@Tribos:dashboardData", [0, 0, 0, 0, 0, 0]);
+      }
 
-    if (storagedToken && storagedUser) {
-      setUser(JSON.parse(storagedUser));
-      api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
-    }
-  }, []);
+      if (storagedToken && storagedUser) {
+        setUser(JSON.parse(storagedUser));
+        api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
+      }
+    }, []);
 
-  return (
-    <AuthContext.Provider value={{ signed, user, authenticate }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
+    return (
+      <AuthContext.Provider value={{ signed, user, authenticate }}>
+        {children}
+      </AuthContext.Provider>
+    );
+  }
 
 export function useAuth() {
   const context = useContext(AuthContext);
