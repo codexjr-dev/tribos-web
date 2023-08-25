@@ -4,9 +4,9 @@ import UserLost from "../assets/icons/user-lost-icon.svg";
 import TotalTribosIcon from "../assets/icons/total-group-icon.svg";
 import TribosGainIcon from "../assets/icons/group-gain-icon.svg";
 import TribosLostIcon from "../assets/icons/group-lost-icon.svg";
-import CompanyTotalIcon from "../assets/icons/total-company-icon.svg";
-import CompanyGainIcon from "../assets/icons/company-gain-icon.svg";
-import CompanyLostIcon from "../assets/icons/company-lost-icon.svg";
+import AnnouncementTotalIcon from "../assets/icons/total-announcement-icon.svg";
+import AnnouncementGainIcon from "../assets/icons/announcement-gain-icon.svg";
+import AnnouncementLostIcon from "../assets/icons/announcement-lost-icon.svg";
 
 export const getMax = (array) => {
   let max = 0;
@@ -49,8 +49,8 @@ export const typeOptions = [
 
 export const intervalOptions = [
   { label: "Dia", value: "day" },
+  { label: "Semana", value: "week" },
   { label: "Mês", value: "month" },
-  { label: "Ano", value: "year" },
 ];
 
 export const spamOptions = [
@@ -62,16 +62,16 @@ export const mapLabelToValueType = (label) => {
   switch (label) {
     case "users":
       return "Usuários";
-    case "companies":
-      return "Empresas";
+    case "announcements":
+      return "Anúncios";
     case "tribos":
       return "Tribos";
     case "day":
       return "Dia";
     case "month":
       return "Mês";
-    case "year":
-      return "Ano";
+    case "week":
+      return "Semana";
     default:
       throw new Error("Valor inválido.");
   }
@@ -89,14 +89,14 @@ export const MapIconToLabel = (label, type) => {
       default:
         throw new Error("ícone inválido.");
     }
-  } else if (label === "companies") {
+  } else if (label === "announcements") {
     switch (type) {
       case "gain":
-        return CompanyGainIcon;
+        return AnnouncementGainIcon;
       case "total":
-        return CompanyTotalIcon;
+        return AnnouncementTotalIcon;
       case "lost":
-        return CompanyLostIcon;
+        return AnnouncementLostIcon;
       default:
         throw new Error("ícone inválido.");
     }

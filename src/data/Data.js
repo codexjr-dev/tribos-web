@@ -2,6 +2,9 @@ import {
   subMonths,
   eachMonthOfInterval,
   eachDayOfInterval,
+  subWeeks,
+  startOfWeek,
+  eachWeekOfInterval,
   eachYearOfInterval,
   startOfMonth,
   format,
@@ -273,24 +276,25 @@ export const getLastThreeYearsObject = () => {
   const list = [];
 
   const today = new Date();
-  const threeYearAgo = subYears(today, 3);
+  const threeYearsAgo = subYears(today, 3);
 
   const end = startOfDay(today);
-  const start = startOfDay(threeYearAgo);
+  const start = startOfDay(threeYearsAgo);
 
   const result = eachYearOfInterval({ start: start, end: end });
 
   result.forEach((date, index, array) => {
-    if (index === array.length - 1) {
-      // ignorar
-    } else {
-      list.push({
-        currentDate: `${getYear(date)}`,
-        nextDate: `${getYear(array[index + 1])}`,
-        label: `${format(date, "y", { locale: ptBR })}`,
-        stats: null,
-      });
-    }
+    const nextDateIndex = index + 1;
+
+    // Se for o último elemento, use 'today' como a próxima data.
+    const nextDate = array[nextDateIndex] || today;
+
+    list.push({
+      currentDate: `${getYear(date)}`,
+      nextDate: `${getYear(nextDate)}`,
+      label: `${format(date, "y", { locale: ptBR })}`,
+      stats: null,
+    });
   });
 
   return list;
@@ -308,20 +312,17 @@ const getLastSixMonthObject = () => {
   const result = eachMonthOfInterval({ start: start, end: end });
 
   result.forEach((date, index, array) => {
-    if (index === array.length - 1) {
-      // ignorar
-    } else {
-      list.push({
-        currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${
-          getMonth(date) + 1
-        }`,
-        nextDate: `${getYear(array[index + 1])}-${
-          getMonth(array[index + 1]) + 1 < 10 ? "0" : ""
-        }${getMonth(array[index + 1]) + 1}`,
-        label: `${format(date, "MMMM", { locale: ptBR })}`,
-        stats: null,
-      });
-    }
+    const nextDateIndex = index + 1;
+
+    // Se for o último elemento, use 'today' como a próxima data.
+    const nextDate = array[nextDateIndex] || today;
+
+    list.push({
+      currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${getMonth(date) + 1}`,
+      nextDate: `${getYear(nextDate)}-${getMonth(nextDate) + 1 < 10 ? "0" : ""}${getMonth(nextDate) + 1}`,
+      label: `${format(date, "MMMM", { locale: ptBR })}`,
+      stats: null,
+    });
   });
 
   return list;
@@ -330,15 +331,52 @@ const getLastSixMonthObject = () => {
 export const getStatistics = async (intervalType, type) => {
   const list = mapIntervalOptionToList(intervalType);
 
-  list.map(async (element) => {
+  const promises = list.map(async (element) => {
     element.stats = await getStatiticsByDate(
       type,
       element.currentDate,
       element.nextDate
     );
+    return element;
   });
+
+  const updatedList = await Promise.all(promises);
+
+  return updatedList;
+};
+
+const getLastSixWeeksObject = () => {
+  const list = [];
+
+  const today = new Date();
+  const sixWeeksAgo = subWeeks(today, 6);
+
+  const end = today;
+  const start = sixWeeksAgo;
+
+  const result = eachWeekOfInterval({ start: start, end: end });
+
+  result.forEach((date, index, array) => {
+    const nextDateIndex = index + 1;
+
+    // Se for o último elemento, use 'today' como a próxima data.
+    const nextDate = array[nextDateIndex] || today;
+
+    list.push({
+      currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${getMonth(date) + 1}-${
+        getDate(date) < 10 ? "0" : ""
+      }${getDate(date)}`,
+      nextDate: `${getYear(nextDate)}-${getMonth(nextDate) + 1 < 10 ? "0" : ""}${getMonth(nextDate) + 1}-${
+        getDate(nextDate) < 10 ? "0" : ""
+      }${getDate(nextDate)}`,
+      label: `${format(date, "w", { locale: ptBR })}`,
+      stats: null,
+    });
+  });
+
   return list;
 };
+
 
 export const getNewStatistics = async (intervalType, type) => {
   const list = await getStatistics(intervalType, type);
@@ -361,22 +399,21 @@ export const getLastSevenDaysObject = () => {
   const result = eachDayOfInterval({ start: start, end: end });
 
   result.forEach((date, index, array) => {
-    if (index === array.length - 1) {
-      // ignorar
-    } else {
-      list.push({
-        currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${
-          getMonth(date) + 1
-        }-${getDate(date) < 10 ? "0" : ""}${getDate(date)}`,
-        nextDate: `${getYear(array[index + 1])}-${
-          getMonth(array[index + 1]) + 1 < 10 ? "0" : ""
-        }${getMonth(array[index + 1]) + 1}-${
-          getDate(array[index + 1]) < 10 ? "0" : ""
-        }${getDate(array[index + 1])}`,
-        label: `${format(date, "d", { locale: ptBR })}`,
-        stats: null,
-      });
-    }
+    const nextDateIndex = index + 1;
+
+    // Se for o último elemento, use 'today' como a próxima data.
+    const nextDate = array[nextDateIndex] || today;
+
+    list.push({
+      currentDate: `${getYear(date)}-${getMonth(date) + 1 < 10 ? "0" : ""}${getMonth(date) + 1}-${
+        getDate(date) < 10 ? "0" : ""
+      }${getDate(date)}`,
+      nextDate: `${getYear(nextDate)}-${getMonth(nextDate) + 1 < 10 ? "0" : ""}${getMonth(nextDate) + 1}-${
+        getDate(nextDate) < 10 ? "0" : ""
+      }${getDate(nextDate)}`,
+      label: `${format(date, "d", { locale: ptBR })}`,
+      stats: null,
+    });
   });
 
   return list;
@@ -387,8 +424,8 @@ const mapIntervalOptionToList = (intervalType) => {
     return getLastSevenDaysObject();
   } else if (intervalType === "month") {
     return getLastSixMonthObject();
-  } else if (intervalType === "year") {
-    return getLastThreeYearsObject();
+  } else if (intervalType === "week") {
+    return getLastSixWeeksObject();
   }
 };
 

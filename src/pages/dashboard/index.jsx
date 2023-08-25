@@ -30,11 +30,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function loadData() {
-      setStatistics(await getStatistics(selectedInterval, selectedType));
+      const newStatistics = await getStatistics(selectedInterval, selectedType);
+      console.log("New Statistics:", newStatistics);  // Verificação de dados
+      setStatistics(newStatistics);
     }
 
     loadData();
-  }, [selectedInterval, selectedType]);
+  }, [selectedInterval, selectedType, setStatistics]); 
 
   return (
     <div className={styles.container}>
@@ -44,14 +46,13 @@ const Dashboard = () => {
       <main className={styles.infoContainer}>
         <div className={styles.chartContainer}>
           <div className={styles.chartSelect}>
-            {<Select
+            <Select
               fieldName="type"
               optionsList={typeOptions}
               setValue={setSelectedType}
               value={selectedType}
               className={styles.test}
             />
-  }
             <Select
               fieldName="interval"
               optionsList={intervalOptions}
@@ -60,6 +61,7 @@ const Dashboard = () => {
             />
           </div>
           <DataChart
+            key={selectedType}  // Forçar re-render
             data={statistics}
             selected={mapLabelToValueType(selectedType)}
           />

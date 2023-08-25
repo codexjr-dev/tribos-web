@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import selectIcon from "../../assets/icons/select-icon.svg";
 import userIcon from "../../assets/icons/user-icon.svg";
-import companyIcon from "../../assets/icons/company-icon.svg";
+import announcementIcon from "../../assets/icons/announcement-icon.svg";
 import groupIcon from "../../assets/icons/group-icon.svg";
 import calendarIcon from "../../assets/icons/calendar-icon.svg";
 import mostReported from "../../assets/icons/most-reported.svg";
@@ -17,8 +17,8 @@ const Select = ({ fieldName, optionsList, setValue, value }) => {
         case "users":
           iconSrc = userIcon;
           break;
-        case "companies":
-          iconSrc = companyIcon;
+        case "announcements":
+          iconSrc = announcementIcon;
           break;
         case "tribos":
           iconSrc = groupIcon;

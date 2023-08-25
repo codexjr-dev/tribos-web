@@ -1,13 +1,13 @@
 export const typeOptions = [
   { label: "Usuários", value: "users" },
-  { label: "Empresas", value: "companies" },
+  { label: "Anúncios", value: "announcements" },
   { label: "Tribos", value: "tribos" },
 ];
 
 export const intervalOptions = [
   { label: "Dia", value: "day" },
   { label: "Mês", value: "month" },
-  { label: "Ano", value: "year" },
+  { label: "Semana", value: "week" },
 ];
 
 export const intervalLabels = [
@@ -21,7 +21,7 @@ export const intervalLabels = [
   },
   {
     id: 2,
-    name: "Ano",
+    name: "Semana",
   },
 ];
 
