@@ -1,0 +1,201 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  /* max-height: 85vh; */
+}
+
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0 3rem 0;
+}
+
+.container header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0 1rem 0 0;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.container header div h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 3rem;
+}
+
+.container header div:hover {
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  cursor: pointer;
+}
+
+.container main {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.mainContainer {
+  width: 75%;
+}
+
+@media screen and (max-width: 1100px) {
+  .mainContainer {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .mainContainer {
+    width: 95%;
+  }
+}
+
+.container main .headerInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerInfo h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.headerInfo span {
+  font-size: 18px;
+  transition: all ease-in-out 0.2s;
+}
+
+.headerInfo span:hover {
+  cursor: pointer;
+  color: var(--purple);
+}
+
+.container main .buttons {
+  margin: 2rem 0 2rem 0;
+}
+
+.buttons button {
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+  background: none;
+  outline: none;
+  border: 2px solid var(--purple);
+  font-size: 16px;
+}
+
+.buttons button:first-child {
+  margin-right: 1.5rem;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+}
+
+.buttons #normal {
+  border: 2px solid var(--purple);
+  color: var(--purple);
+}
+
+.buttons #selected {
+  transition: background-color ease-in-out 0.2s;
+  color: var(--light-gray);
+  background-color: var(--purple);
+  font-weight: 700;
+}
+
+.container main .tableContainer {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  background-color: #e0e0e0;
+  padding: 1rem 2rem;
+  border-radius: 24px;
+}
+
+.tableContainer table {
+  flex: 1;
+  border-collapse: separate;
+  border-spacing: 0 0.75em;
+}
+
+table thead tr th {
+  padding: 1rem 0;
+  color: var(--blue-dark);
+  text-align: center;
+}
+
+#tableRow {
+  border-radius: 8px;
+}
+#tableRow:hover {
+  cursor: pointer;
+  outline: 3px solid var(--purple);
+}
+
+#tableRow td {
+  padding: 1.25rem 0;
+  font-size: 15px;
+  color: var(--dark);
+  background-color: #fff;
+  text-align: center;
+}
+
+#tableRow td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+#tableRow td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+#tableRow #price {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#tableRow #price input {
+  background-color: var(--gray);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 80px;
+  height: 100%;
+  margin-left: 6px;
+  color: var(--dark);
+  font-size: 14px;
+  padding: 6px;
+}
+
+#tableRow #price input[disabled] {
+  background: none;
+  padding: 0;
+}
+
+.loading {
+  width: 40px;
+  animation: spin 1s linear infinite;
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  display: flex;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

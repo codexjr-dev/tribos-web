@@ -1,0 +1,70 @@
+.box{
+    width: 440px;
+    height: 200px;
+    background-color: var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    position: fixed;
+    top: 250px;
+    z-index: 10;
+}
+
+.title{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 120%;
+    color: var(--dark-light);
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+}
+
+.yesButton {
+    width: 7rem;
+    border-radius: 50px;
+    background-color: var(--purple);
+    border-color: var(--purple);
+    border: 1px solid var(--gray);
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0px 2px 8px 2px rgba(126, 0, 207, 0.25);
+    font-family: 'Inter';
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;   
+}
+
+.yesButton:hover {
+    background-color: var(--purple-light);
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.noButton {
+    width: 7rem;
+    border-radius: 50px;
+    background-color: var(--light-gray);
+    border-color: var(--light-gray);
+    border: 1px solid var(--gray);
+    color: var(--dark);
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0px 2px 8px 2px rgba(126, 0, 207, 0.25);
+    font-family: 'Inter';
+    font-weight: 700;
+}
+
+.noButton:hover {
+    background-color: var(--gray);
+    transition: 0.1s;
+    cursor: pointer;
+}

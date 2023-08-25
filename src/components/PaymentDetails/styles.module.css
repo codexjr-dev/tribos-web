@@ -1,0 +1,152 @@
+.container {
+  background-color: var(--light-gray);
+  width: 480px;
+  margin: 2rem;
+  height: fit-content;
+  border-radius: 24px;
+  padding: 2.5rem;
+  color: var(--purple);
+  box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07);
+}
+
+/* Informações Gerais */
+
+.generalInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid var(--purple-dark);
+  padding-bottom: 1.5rem;
+}
+
+.paymentInfo h2,
+.values h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--purple-dark);
+  margin-bottom: 1rem;
+}
+
+.generalInfo .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.generalInfo .header h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--purple-dark);
+}
+
+.generalInfo .header img:hover {
+  cursor: pointer;
+  filter: invert(64%) sepia(93%) saturate(7191%) hue-rotate(263deg)
+    brightness(91%) contrast(92%);
+}
+
+.generalInfo span {
+  font-size: 1.1rem;
+}
+
+.generalInfo span b {
+  font-weight: 700;
+  color: var(--purple-dark);
+}
+
+.generalInfo span:not(:last-child) {
+  margin-bottom: 0.4rem;
+}
+
+/* Informações de pagamento */
+
+.paymentInfo {
+  margin-bottom: 1.5rem;
+  border-bottom: 3px solid var(--purple-dark);
+  padding-bottom: 1.5rem;
+}
+
+.paymentInfo #owner {
+  margin-bottom: 1rem;
+}
+
+.paymentInfo #owner h3,
+#key h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.paymentInfo #owner span,
+#key span {
+  font-size: 1rem;
+}
+
+/* Informações de valores */
+
+.values .info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.values #edit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.values #edit img {
+  width: 20px;
+}
+
+.values #edit img:hover {
+  cursor: pointer;
+}
+
+.values .info #amount h3,
+#edit,
+#remainder h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.values .info #edit h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.values .info #amount span,
+#remainder span {
+  font-size: 1.15rem;
+}
+
+.values .info #paid input {
+  border: none;
+  width: 80px;
+  height: 24px;
+  font-size: 1.1rem;
+  color: var(--purple-dark);
+  margin-left: 0.65rem;
+}
+
+.values .info #paid #editActive {
+    background-color: #dedede;
+    border-radius: 8px;
+    padding: 0.2em;
+    outline: none;
+}
+
+.values .info #paid span {
+    font-size: 1.2rem;
+}
+
+.container span:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,91 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+  padding-bottom: 2rem;
+}
+
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1.5rem 0 2rem 0;
+}
+
+.container header img {
+  width: 112px;
+}
+
+.container main {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+}
+
+.container .infoContainer .chartContainer {
+  width: 65%;
+}
+
+.container .infoContainer .chartContainer .chartSelect {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.container .infoContainer .chartContainer p {
+  margin: 1rem 0 0 4rem;
+  font-weight: 700;
+  color: var(--purple-light);
+  transition: all ease-in-out 0.15s;
+}
+
+.container .infoContainer .chartContainer p:hover {
+  color: var(--purple);
+  cursor: pointer;
+}
+
+.container .asideContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 3.5rem;
+}
+
+.container .asideContainer .paymentButtonContainer {
+  margin-bottom: 1.5rem;
+}
+
+.container .asideContainer .paymentButtonContainer h2 {
+  font-weight: 700;
+  color: var(--purple);
+  font-size: 24px;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1000px) {
+  .container main {
+    flex-direction: column;
+  }
+
+  .container .infoContainer .chartContainer {
+    width: 80%;
+  }
+
+  main {
+    flex-direction: column;
+    margin: 1.5rem 0;
+  }
+
+  .asideContainer {
+    margin-top: 2.5rem;
+  }
+}
+
+.test{
+  border: 2px solid red;
+}

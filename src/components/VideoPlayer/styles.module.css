@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+.controls {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+   
+    width: 82%;
+}
+
+video {
+    width: 100%;
+    max-height: 480px;
+}
+
+.controls input {
+    flex: 1;
+    margin: 0 1rem;
+    color: var(--purple-dark)
+}
+
+.controls button {
+    margin: 0 !important;
+    border: none !important;
+}
+
+.controls button img {
+    width: 24px;
+    filter: invert(8%) sepia(75%) saturate(6417%) hue-rotate(228deg) brightness(104%) contrast(97%);
+    cursor: pointer;
+}
+
+select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: inherit;
+    line-height: inherit;
+    z-index: 1;
+    outline: none;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.select {
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    position: relative;
+    min-width: 15ch;
+    max-width: 30ch;
+
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+
+    background-color: #fff;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+
+select:focus+.focus {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid var(--select-focus);
+    border-radius: inherit;
+}

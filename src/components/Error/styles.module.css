@@ -1,0 +1,66 @@
+.mainContent{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+#user{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--dark);    
+}
+
+.message{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: var(--dark-light);
+}
+
+.actionsContent{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem; 
+}
+
+.buttons{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 150%;
+    opacity: 0.5;  
+}
+#reply{
+    color: var(--blue-light);      
+}
+
+.buttons:hover{
+    cursor: pointer;
+}
+
+#ignore{
+    color: var(--purple-light);
+}
+
+.time{
+    opacity: 0.6;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--dark);
+}
+
+.image{
+    width: 440px;
+    height: 300px;
+}

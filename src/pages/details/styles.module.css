@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+  padding: 1.5rem 0;
+  height: 90vh;
+}
+
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0 0rem 0;
+}
+
+.container header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0 1rem 0 0;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all ease-in-out 0.15s;
+}
+
+.container header {
+  transition: all ease 0.2s;
+}
+
+.container header:hover {
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  cursor: pointer;
+}
+
+.container header h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.container header img {
+  background-color: green1;
+  width: 40px;
+  margin-right: 2rem;
+}
+
+.container main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.container main .chartContainer {
+  width: 65%;
+  margin-bottom: 1.5rem;
+}
+
+.container .detailsContainer {
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@media (max-width: 1200px) {
+  .container main .chartContainer {
+    width: 90%;
+  }
+
+  .container .detailsContainer {
+    width: 90%;
+  }
+}
