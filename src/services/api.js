@@ -30,6 +30,12 @@ export const findAllCacique = async () => {
   return data;
 }
 
+ export const globalMessage = async (message) => {
+    await api.post('/personal/global/not', {
+      message,
+    });
+ }
+
 export const findAllMaster = async () => {
   let data;
   await api.get('/adm/announcement/master').then((res) => {

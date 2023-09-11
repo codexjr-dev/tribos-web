@@ -16,11 +16,25 @@ import { useNavigate } from "react-router-dom";
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/aux";
 import { NavigateButton } from "../../components/NavigateButton";
+import { globalMessage } from "../../services/api";
+import { set } from "date-fns";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState("month");
   const [statistics, setStatistics] = useState([]);
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    globalMessage(value);
+    setValue('');
+};
+
+
 
   const navigate = useNavigate();
 
@@ -77,6 +91,16 @@ const Dashboard = () => {
             />
           </div>
           <ReportedProblems />
+          <input
+      type="text"
+      value={value}
+      onChange={handleChange}
+      placeholder="Mensagem global"
+
+      style = {{marginBottom:20, borderRadius:10}}
+    />
+                <button onClick={handleSubmit}>Enviar</button>
+
         </nav>
       </main>
     </div>
