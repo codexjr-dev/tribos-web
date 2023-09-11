@@ -30,6 +30,7 @@ const Dashboard = () => {
   };
 
   const handleSubmit = () => {
+    if (value === '') return;
     globalMessage(value);
     setValue('');
 };
