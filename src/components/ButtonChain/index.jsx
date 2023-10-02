@@ -8,8 +8,9 @@ export const ButtonChain = ({ labels, selected }) => {
 
   const handleSelect = (currentIndex) => {
     setSelectedIndex(currentIndex);
-    selected(selectedIndex);
-  }
+    selected(currentIndex);
+}
+
 
   return (
     <div className={styles.container}>

@@ -48,11 +48,13 @@ export const PaymentTable = () => {
 
   useEffect(() => {
     async function loadAll() {
-      setPriceTable(makePriceTable(await getPriceTable(), typeSelectedButton));
+      const table = await getPriceTable();
+      setPriceTable(makePriceTable(table, typeSelectedButton));
     }
 
     loadAll();
   }, [typeSelectedButton]);
+
 
   return (
     <div className={styles.container}>

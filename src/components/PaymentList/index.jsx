@@ -10,27 +10,26 @@ export const PaymentList = ({ type, handleShowDetails }) => {
 
   useEffect(() => {
     async function loadAll() {
+      setSalesList(null);  // Adicione esta linha
+
       switch (type) {
         case 0:
-          // setSalesList(await findAllFeed());
-          setSalesList(await findAllCacique());
+          setSalesList(await findAllFeed());
           break;
-
         case 1:
           setSalesList(await findAllCacique());
           break;
-
         case 2:
           setSalesList(await findAllMaster());
           break;
-
         default:
           break;
       }
     }
 
     loadAll();
-  }, [type, handleShowDetails]);
+}, [type, handleShowDetails]);
+
 
   return (
     <div className={styles.tableContainer}>
