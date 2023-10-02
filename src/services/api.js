@@ -20,15 +20,14 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
 };
 
 export const findAllCacique = async () => {
-  let data;
-  await api.get('/adm/announcement/cacique').then((res) => {
-    data = res.data.announcements;
-  }).catch(() => {
-    data = null;
-  })
-
-  return data;
+  try {
+    const res = await api.get('/adm/announcement/cacique');
+    return res.data.announcements;
+  } catch (error) {
+    return null;
+  }
 }
+
 
  export const globalMessage = async (message) => {
     await api.post('/personal/global/not', {
