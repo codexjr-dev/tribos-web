@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { useChangePrice } from "../../contexts/changePrice";
 
-import { formatInfo } from "../../util/aux";
+import { formatInfo } from "../../util/utils";
 
 import styles from "./styles.module.css";
 

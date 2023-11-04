@@ -5,7 +5,7 @@ import { useState } from "react";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { Bar } from "react-chartjs-2";
-import { getSum } from "../../util/aux";
+import { getSum } from "../../util/utils";
 import { useEffect } from "react";
 
 export const StackedChart = ({ data }) => {

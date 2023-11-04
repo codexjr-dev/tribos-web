@@ -3,16 +3,16 @@ import { useEffect, useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 
 import InfoCard from "../../components/InfoCard";
-import { mapLabelToValueType } from "../../util/aux";
+import { mapLabelToValueType } from "../../util/utils";
 
 import styles from "./styles.module.css";
-import { formatInfo } from "../../util/aux";
+import { formatInfo } from "../../util/utils";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DataChart from "../../components/Chart";
 
 import { getNewStatistics, getStatistics } from "../../data/Data";
-import { MapIconToLabel } from "../../util/aux";
+import { MapIconToLabel } from "../../util/utils";
 import { getAmountStatistics } from "../../services/api";
 
 const Details = () => {
