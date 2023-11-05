@@ -52,7 +52,9 @@ export const PaymentDetails = ({ handleClose, details }) => {
     }
 
     loadAll();
-  }, [editModeActive]);
+  }, [editModeActive, details.tribo._id]);
+
+  console.log({ details });
 
   return (
     <>
@@ -88,9 +90,13 @@ export const PaymentDetails = ({ handleClose, details }) => {
               <h3>Proprietário</h3>
               <span>Matheus Forlán Andrade</span>
             </div>
-            <div id={styles.key}>
+            <div id={styles.owner}>
               <h3>Chave PIX</h3>
               <span>{details.caciquePix}</span>
+            </div>
+            <div id={styles.key}>
+              <h3>Banco do PIX</h3>
+              <span>{details.caciquePixBanco}</span>
             </div>
           </div>
           <div className={styles.values}>
