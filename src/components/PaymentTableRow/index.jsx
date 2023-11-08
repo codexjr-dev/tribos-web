@@ -14,7 +14,7 @@ export const PaymentTableRow = ({
 }) => {
   const { handleChangePrice } = useChangePrice();
   const [price, setPrice] = useState(data.price);
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(data.pago)
   
   const handleChange = (event) => {
     if (event.target.value < 0) {
@@ -24,13 +24,11 @@ export const PaymentTableRow = ({
     handleChangePrice(objectKey, event.target.value);
   };
 
-  const handleCheckbox = () => {
+  /*const handleCheckbox = () => {
     setChecked(!checked)
-    var checkbox = document.getElementById(objectKey)
-    var tr = checkbox.parentElement.parentElement
+  }*/
 
-    checkbox.checked ? tr.style.backgroundColor = "#5BCB5F" : tr.style.backgroundColor = "white"
-  }
+  // var activeStyle = checked ? {backgroundColor: "#5BCB5F"} : { backgroundColor: "white" }
 
 
   return (
@@ -40,8 +38,8 @@ export const PaymentTableRow = ({
           {data.id !== "feed" ? (
             <td>
               {
-                editMode && 
-                <input id={objectKey} type="checkbox" onChange={handleCheckbox} checked={checked} style={{marginRight: "10px"}} />
+                //editMode && 
+                //<input id={objectKey} type="checkbox" onChange={handleCheckbox} checked={checked} style={{marginRight: "10px"}} />
               }
               {`${
               data.id.substring(0, 2) === "st" ? "Abaixo" : "Acima"
@@ -53,7 +51,7 @@ export const PaymentTableRow = ({
             <span>R$</span>
             <input
               type="number"
-              disabled={true}
+              disabled={!editMode}
               value={price}
               onChange={(event) => handleChange(event)}
               name="price"
