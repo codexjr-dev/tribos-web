@@ -127,9 +127,18 @@
   font-size: 1.15rem;
 }
 
-.values .info #paid input {
+/*.values .info #paid input {
   border: none;
   width: 80px;
+  height: 24px;
+  font-size: 1.1rem;
+  color: var(--purple-dark);
+  margin-left: 0.65rem;
+}*/
+
+.values .info #paid input {
+  border: none;
+  width: 30px;
   height: 24px;
   font-size: 1.1rem;
   color: var(--purple-dark);

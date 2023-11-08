@@ -4,7 +4,7 @@ import EditIcon from "../../assets/icons/edit-icon.svg";
 import SaveIcon from "../../assets/icons/save-icon.svg";
 import { useEffect } from "react";
 import { useState } from "react";
-import { findTriboById, payCacique } from "../../services/api";
+import { findTriboById, payCacique, updateCaciquePayment } from "../../services/api";
 import Loading from "../Loading";
 import { formatISO } from "date-fns";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
   const [editModeActive, setEditModeActive] = useState(Boolean(false));
   const [amountPaid, setAmountPaid] = useState(Number(details.caciquePartPaid));
   const [triboInfo, setTriboInfo] = useState({});
+  const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid)
 
   const handleClickEditMode = () => {
     if (editModeActive) {
@@ -23,6 +24,13 @@ export const PaymentDetails = ({ handleClose, details }) => {
       toast.info("Modo de edição ATIVADO.");
     }
   };
+
+
+  const handleCheckbox = async () =>  {
+    setCaciquePaid(!caciquePaid)
+    console.log(!caciquePaid)
+    await updateCaciquePayment(details._id)
+  }
 
   const handleSetPaidAmount = (event) => {
     let input = event.target.value;
@@ -41,7 +49,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
     } else if (!amountPaid) {
       setAmountPaid(0);
     } else {
-      await payCacique(details._id, amountPaid);
+      await payCacique(details._id, details.caciquePart);
       toast.success("Pagamento adicionado com SUCESSO!");
     }
   };
@@ -109,26 +117,23 @@ export const PaymentDetails = ({ handleClose, details }) => {
               <div id={styles.paid}>
                 <div id={styles.edit}>
                   <h3>Pago</h3>
-                  <img
+                  {/*<img
                     src={editModeActive ? SaveIcon : EditIcon}
                     alt="Editar"
                     onClick={() => handleClickEditMode()}
-                  />
+              />*/}
                 </div>
                 <span>
-                  R$
                   <input
-                    type="number"
-                    onChange={(e) => {
-                      handleSetPaidAmount(e);
-                    }}
+                    type="checkbox"
+                    onChange={handleCheckbox}
                     value={amountPaid}
-                    disabled={!editModeActive}
+                    checked={caciquePaid}
                     id={editModeActive ? styles.editActive : ""}
                   />
                 </span>
               </div>
-              <div id={styles.remainder}>
+              { /*<div id={styles.remainder}>
                 <h3>Restante</h3>
                 <span>
                   {editModeActive
@@ -140,7 +145,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
                         2
                       )}`}
                 </span>
-              </div>
+                    </div> */}
             </div>
           </div>
         </div>
