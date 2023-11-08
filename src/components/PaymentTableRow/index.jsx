@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useState } from "react";
 
 import { useChangePrice } from "../../contexts/changePrice";
@@ -15,7 +14,8 @@ export const PaymentTableRow = ({
 }) => {
   const { handleChangePrice } = useChangePrice();
   const [price, setPrice] = useState(data.price);
-
+  const [checked, setChecked] = useState(false)
+  
   const handleChange = (event) => {
     if (event.target.value < 0) {
       event.target.value = 0;
@@ -24,12 +24,26 @@ export const PaymentTableRow = ({
     handleChangePrice(objectKey, event.target.value);
   };
 
+  const handleCheckbox = () => {
+    setChecked(!checked)
+    var checkbox = document.getElementById(objectKey)
+    var tr = checkbox.parentElement.parentElement
+
+    checkbox.checked ? tr.style.backgroundColor = "#5BCB5F" : tr.style.backgroundColor = "white"
+  }
+
+
   return (
     <>
       {selectedButton === "cacique" && data.id === "feed" ? null : (
         <tr id={styles.tableRow}>
           {data.id !== "feed" ? (
-            <td>{`${
+            <td>
+              {
+                editMode && 
+                <input id={objectKey} type="checkbox" onChange={handleCheckbox} checked={checked} style={{marginRight: "10px"}} />
+              }
+              {`${
               data.id.substring(0, 2) === "st" ? "Abaixo" : "Acima"
             } de ${formatInfo(data.id.substring(2))}`}</td>
           ) : (
@@ -39,7 +53,7 @@ export const PaymentTableRow = ({
             <span>R$</span>
             <input
               type="number"
-              disabled={!editMode}
+              disabled={true}
               value={price}
               onChange={(event) => handleChange(event)}
               name="price"

@@ -1,5 +1,6 @@
 #tableRow {
     border-radius: 8px;
+    background-color: white
 }
 
 #tableRow:hover {
@@ -11,7 +12,6 @@
     padding: 1.25rem 0;
     font-size: 15px;
     color: var(--dark);
-    background-color: #fff;
     text-align: center;
 }
 
