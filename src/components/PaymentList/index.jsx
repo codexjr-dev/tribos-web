@@ -58,7 +58,7 @@ export const PaymentList = ({ type, handleShowDetails }) => {
                       ? styles.almostPaidRow
                       : styles.normalRow
                   }
-                  style={element.paid ? { backgroundColor: "#5BCB5F"} : { backgroundColor: "white" }}
+                  style={element.caciquePaid ? { backgroundColor: "#5BCB5F"} : { backgroundColor: "white" }}
                   onClick={() =>
                     type === 0 ? null : handleShowDetails(element)
                   }

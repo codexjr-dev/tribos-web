@@ -77,6 +77,10 @@ export const payCacique = async (announcementId, value) => {
   });
 };
 
+export const updateCaciquePayment = async (announcementId) => {
+  await api.put(`/adm/announcement/caciquePayment/${announcementId}`);
+};
+
 export const findAnnouncementDetails = async (announcementId) => {
   let data;
   await api.get(`/announcement/${announcementId}`).then(res => {
