@@ -14,7 +14,7 @@ import { getStatistics } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
-import { mapLabelToValueType } from "../../util/aux";
+import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
 import { globalMessage } from "../../services/api";
 import { set } from "date-fns";

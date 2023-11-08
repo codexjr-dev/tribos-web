@@ -5,7 +5,7 @@ import PostComponent from "../../components/Post";
 import ProfileComponent from "../../components/Profile";
 import RemoveModalComponent from "../../components/RemoveModal";
 import { getAllReports, getAllReportsByCount } from "../../services/api";
-import { spamOptions } from "../../util/aux";
+import { spamOptions } from "../../util/utils";
 import Select from "../../components/Select";
 import Loading from "../../components/Loading";
 import { useEffect } from "react";

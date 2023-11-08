@@ -31,6 +31,7 @@ export const PaymentList = ({ type, handleShowDetails }) => {
 }, [type, handleShowDetails]);
 
 
+
   return (
     <div className={styles.tableContainer}>
       {!salesList ? (
@@ -57,6 +58,7 @@ export const PaymentList = ({ type, handleShowDetails }) => {
                       ? styles.almostPaidRow
                       : styles.normalRow
                   }
+                  style={element.caciquePaid ? { backgroundColor: "#5BCB5F"} : { backgroundColor: "white" }}
                   onClick={() =>
                     type === 0 ? null : handleShowDetails(element)
                   }
