@@ -1,0 +1,40 @@
+.container-tribos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 200px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.container {
+  display: inline;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 75%;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.buttonStyle {
+  width: "100%", backGroundColor --pink-dark;
+}
+
+:root {
+  --blue-dark: #3911ad;
+  --blue: #562bd3;
+  --blue-light: #7247ed;
+  --pink-dark: #8f1479;
+  --pink: #b6229c;
+  --pink-light: #cc33b1;
+  --purple-dark: #6c1aa1;
+  --purple: #8127bb;
+  --purple-light: #9f3ae0;
+  --gray: #cecece;
+  --light-gray: #f9f9f9;
+  --dark-light: #242424;
+  --dark: #262626;
+}

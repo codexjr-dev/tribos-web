@@ -8,20 +8,22 @@ import Spam from "./pages/spam";
 import { PaymentTable } from "./pages/paymentTable";
 import { PaymentDashboard } from "./pages/paymentDashboard";
 import { NotFound } from "./pages/notFound";
+import { TribosHome } from "./pages/tribosHome";
+import { TribosProfile } from "./pages/tribosProfile";
 
 export default function MainRoutes() {
-  
-  
   return (
     <Routes>
       <Route path="*" element={<NotFound />} />
-      <Route path="/" element={ <Login />} />
-      <Route element ={<PrivateRoute />} >
+      <Route path="/" element={<Login />} />
+      <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/spam" element={<Spam />} />
         <Route path="/details/:type/:interval" element={<Details />} />
         <Route path="/payment/table" element={<PaymentTable />} />
         <Route path="/payment" element={<PaymentDashboard />} />
+        <Route path="/tribos" element={<TribosHome />} />
+        <Route path="/tribos/Profile" element={<TribosProfile />} />
       </Route>
     </Routes>
   );
