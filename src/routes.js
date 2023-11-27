@@ -10,6 +10,7 @@ import { PaymentDashboard } from "./pages/paymentDashboard";
 import { NotFound } from "./pages/notFound";
 import { TribosHome } from "./pages/tribosHome";
 import { TribosProfile } from "./pages/tribosProfile";
+import { TribosBusca } from "./pages/tribosBusca";
 
 export default function MainRoutes() {
   return (
@@ -24,6 +25,7 @@ export default function MainRoutes() {
         <Route path="/payment" element={<PaymentDashboard />} />
         <Route path="/tribos" element={<TribosHome />} />
         <Route path="/tribos/Profile" element={<TribosProfile />} />
+        <Route path="/tribos/Busca" element={<TribosBusca />} />
       </Route>
     </Routes>
   );

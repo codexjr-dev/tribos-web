@@ -3,6 +3,7 @@ import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import logo from "../../assets/images/logo-pequeno.svg";
+import { useState, useEffect } from "react";
 
 const triboInfoContainer = {
   alignItems: "center",
@@ -58,7 +59,7 @@ export const TribosHome = () => {
           </div>
         </main>
         <div style={buttonStyle}>
-          <button>Avançar</button>
+          <button onClick={() => navigate("/tribos/busca")}>Buscar</button>
         </div>
       </div>
     </body>

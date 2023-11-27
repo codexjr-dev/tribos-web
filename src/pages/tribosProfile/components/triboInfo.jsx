@@ -15,7 +15,7 @@ export const TriboInfo = ({
   return (
     <div>
       <img src={photoUrl} alt="Imagem da tribo" />
-      <span style={{ fontWeight: "bold", padding: 80 }}>{username}</span>
+      <span style={{ fontWeight: "bold", padding: "24px" }}>{username}</span>
       <button>{seguirTribo}</button>
       <p style={{ fontWeight: "bold" }}>{title}</p>
       <p>{descricao}</p>

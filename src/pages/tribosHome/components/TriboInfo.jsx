@@ -13,7 +13,12 @@ export const TriboInfo = ({ photoUrl, title, username, privateTribo }) => {
   return (
     <div style={triboInfoContainer}>
       <img src={photoUrl} alt="Imagem da tribo" />
-      <span style={{ fontWeight: "bold" }}>{title}</span>
+      <span
+        style={{ fontWeight: "bold" }}
+        onClick={() => navigate("/tribos/profile")}
+      >
+        {title}
+      </span>
       <span style={{ fontWeight: "bold" }}>{username}</span>
       <button onClick={() => navigate("/tribos/profile")}>ver perfil</button>
     </div>
