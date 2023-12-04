@@ -3,6 +3,7 @@ import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import logo from "../../assets/images/logo-pequeno.svg";
+import { api, privatePosts, getTriboById } from "../../services/api";
 import { useState, useEffect } from "react";
 
 const triboInfoContainer = {
@@ -40,28 +41,54 @@ const buttonStyle = {
 export const TribosHome = () => {
   const navigate = useNavigate();
 
+  const [posts, setPosts] = useState([]);
+  const [tribos, setTribos] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const postsData = await privatePosts();
+      setPosts(postsData);
+
+      const tempTribos = [];
+      for (const post of postsData) {
+        const tribo = await getTriboById(post.tribo._id);
+        tempTribos.push(tribo);
+      }
+      setTribos(tempTribos);
+    }
+
+    fetchData();
+  }, []);
+
   return (
-    <body>
+    <div>
       <div style={triboInfo2}>
         <header style={tribosTittle}>
           <div onClick={() => navigate("/dashboard")}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <spam> Tribos </spam>
+            <span> Tribos </span>
             <img src={logo} alt="Logo Tribos" />
           </div>
         </header>
         <main>
           <div style={triboInfoContainer}>
-            <TriboInfo title="Codex Jr" username="codexjr" />
-            <TriboInfo title="Codex Jr" username="codexjr" />
-            <TriboInfo title="Codex Jr" username="codexjr" />
-            <TriboInfo title="Codex Jr" username="codexjr" />
+            {tribos.slice(0, 4).map((tribo) => {
+              return (
+                <TriboInfo
+                  key={tribo.tribo._id}
+                  triboId={tribo.tribo._id}
+                  photoUrl={tribo.tribo.profilePic.url}
+                  title={tribo.tribo.name}
+                  username={tribo.tribo.username}
+                />
+              );
+            })}
           </div>
         </main>
         <div style={buttonStyle}>
           <button onClick={() => navigate("/tribos/busca")}>Buscar</button>
         </div>
       </div>
-    </body>
+    </div>
   );
 };

@@ -1,10 +1,10 @@
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
-import { useNavigate } from "react-router-dom";
-import styles from "./styles.module.css";
+import { useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/images/logo-pequeno.svg";
 import { ProfileInfo } from "./components/profileInfo";
 import { TriboInfo } from "./components/triboInfo";
-import { InfoProfile } from "./components/infoProfile";
+import { api, privatePosts, getTriboById } from "../../services/api";
+import { useEffect, useState } from "react";
 
 const triboInfo2 = {
   display: "flex",
@@ -40,36 +40,69 @@ const infoProfileContainer = {
 
 export const TribosProfile = () => {
   const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
+  const [tribo, setTribo] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { triboId } = useParams();
+
+  useEffect(() => {
+    async function loadPosts() {
+      const allPosts = await privatePosts();
+      const postsFromTribo = allPosts.filter(
+        (post) => post.tribo._id === triboId
+      );
+      setPosts(postsFromTribo);
+      console.log(posts);
+    }
+
+    async function loadTribos() {
+      const tribo = await getTriboById(triboId);
+      setTribo(tribo);
+
+      setIsLoading(false);
+    }
+
+    async function fetchData() {
+      await loadPosts();
+      await loadTribos();
+    }
+
+    fetchData();
+  }, [triboId]);
+
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  }
 
   return (
-    <body>
+    <div>
       <div style={triboInfo2}>
         <header style={tribosTittle}>
           <div onClick={() => navigate("/tribos")}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <spam> codexjr </spam>
+            <span> {tribo.tribo.username} </span>
             <img src={logo} alt="Logo Tribos" />
           </div>
         </header>
         <div>
           <TriboInfo
-            title="Codex jr."
-            username="codexjr"
-            descricao="descricao da tribo"
-            seguirTribo={"seguir"}
+            photoUrl={tribo.tribo.profilePic.url}
+            title={tribo.tribo.name}
+            username={tribo.tribo.username}
           />
         </div>
-        <div style={infoProfileContainer}>
-          <InfoProfile numero={8} descricao="Publicações" />
-          <InfoProfile numero={24} descricao="Membros" />
-          <InfoProfile numero={2} descricao="Apoiadores" />
-        </div>
         <div style={triboPostContainer}>
-          <ProfileInfo url="" />
-          <ProfileInfo url="" />
-          <ProfileInfo url="" />
+          {posts.map((post) => {
+            return (
+              <ProfileInfo
+                key={tribo.tribo._id}
+                tribosId={tribo.tribo._id}
+                photoUrl={post.content.url}
+              />
+            );
+          })}
         </div>
       </div>
-    </body>
+    </div>
   );
 };

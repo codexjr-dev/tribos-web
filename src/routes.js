@@ -11,6 +11,7 @@ import { NotFound } from "./pages/notFound";
 import { TribosHome } from "./pages/tribosHome";
 import { TribosProfile } from "./pages/tribosProfile";
 import { TribosBusca } from "./pages/tribosBusca";
+import { TribosPost } from "./pages/tribosPost";
 
 export default function MainRoutes() {
   return (
@@ -24,8 +25,9 @@ export default function MainRoutes() {
         <Route path="/payment/table" element={<PaymentTable />} />
         <Route path="/payment" element={<PaymentDashboard />} />
         <Route path="/tribos" element={<TribosHome />} />
-        <Route path="/tribos/Profile" element={<TribosProfile />} />
+        <Route path="/tribos/Profile/:triboId" element={<TribosProfile />} />
         <Route path="/tribos/Busca" element={<TribosBusca />} />
+        <Route path="/tribos/Post/:triboId" element={<TribosPost />} />
       </Route>
     </Routes>
   );

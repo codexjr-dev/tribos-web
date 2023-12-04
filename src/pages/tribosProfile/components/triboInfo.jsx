@@ -1,10 +1,4 @@
-export const TriboInfo = ({
-  photoUrl,
-  title,
-  username,
-  seguirTribo,
-  descricao,
-}) => {
+export const TriboInfo = ({ photoUrl, title, username }) => {
   const triboInfoContainer = {
     display: "flex",
     alignItems: "center",
@@ -12,13 +6,17 @@ export const TriboInfo = ({
     flexDirection: "column",
   };
 
+  const imageStyle = {
+    borderRadius: "50%",
+    width: "62px",
+    height: "62px",
+  };
+
   return (
     <div>
-      <img src={photoUrl} alt="Imagem da tribo" />
+      <img src={photoUrl} alt="Imagem da tribo" style={imageStyle} />
       <span style={{ fontWeight: "bold", padding: "24px" }}>{username}</span>
-      <button>{seguirTribo}</button>
       <p style={{ fontWeight: "bold" }}>{title}</p>
-      <p>{descricao}</p>
     </div>
   );
 };
