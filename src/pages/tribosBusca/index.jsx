@@ -24,7 +24,6 @@ export const TribosBusca = () => {
   const [busca, setBusca] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [tribosFiltradas, setTribosFiltradas] = useState([]);
-
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -44,23 +43,22 @@ export const TribosBusca = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    setTribosFiltradas(tribos.map((tribo) => tribo.tribo.username));
-  }, [tribos]);
-
-  useEffect(() => {
+  function handleInputChange(newInput) {
+    setBusca(newInput);
     setTribosFiltradas(
-      tribosFiltradas.filter((username) =>
-        username.toLowerCase().includes(busca.toLowerCase())
-      )
+      tribos
+        .filter((tribo) =>
+          tribo.tribo.username.toLowerCase().includes(newInput.toLowerCase())
+        )
+        .map((tribo) => tribo.tribo.username)
     );
-  }, [busca]);
+  }
 
   if (isLoading) {
     return <div>Carregando...</div>;
   }
 
-  console.log(tribosFiltradas);
+  console.log([tribosFiltradas]);
 
   return (
     <div>
@@ -76,11 +74,26 @@ export const TribosBusca = () => {
           <input
             type="text"
             value={busca}
-            onChange={(ev) => setBusca(ev.target.value)}
+            onChange={(ev) => handleInputChange(ev.target.value)}
+            style={{
+              borderRadius: "10px",
+              borderColor: "#8127bb",
+              width: "300px",
+              height: "35px",
+            }}
           />
-          <ul onClick={() => navigate("/tribos/profile")}>
+          <ul>
             {tribosFiltradas.map((username) => (
-              <li key={username}>{username}</li>
+              <li
+                onClick={() => {
+                  const tribo = tribos.find(
+                    (t) => t.tribo.username === username
+                  );
+                  navigate(`/tribos/profile/${tribo.tribo._id}`);
+                }}
+              >
+                {username}
+              </li>
             ))}
           </ul>
         </div>

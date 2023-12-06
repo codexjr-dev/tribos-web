@@ -1,27 +1,32 @@
 import { useNavigate } from "react-router-dom";
 
-export const ProfileInfo = ({ tribosId, photoUrl }) => {
+export const ProfileInfo = ({ triboId, mediaType, postId, photoUrl }) => {
   const navigate = useNavigate();
 
   const postInfoContainer = {
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
     display: "grid",
-    rowGap: "20px",
-    columnGap: "20px",
-    gridTemplateColumns: "repeat(3, 2fr)",
-    gridTemplateRows: "repeat(3, 2fr)",
-    overflow: "auto",
+    placeItems: "center",
+    height: "30vh",
+    width: "30vh",
+    overflow: "hidden",
+  };
+
+  const imageStyle = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   };
 
   return (
-    <div style={postInfoContainer}>
-      <img
-        onClick={() => navigate(`/tribos/post/${tribosId}`)}
-        src={photoUrl}
-        alt="post da tribo"
-      />
+    <div
+      style={postInfoContainer}
+      onClick={() => navigate(`/tribos/post/${triboId}/${postId}`)}
+    >
+      {mediaType === "image" ? (
+        <img src={photoUrl} alt="post da tribo" style={imageStyle} />
+      ) : mediaType === "video" ? (
+        <video src={photoUrl} style={imageStyle} controls />
+      ) : null}
     </div>
   );
 };

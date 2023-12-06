@@ -1,7 +1,9 @@
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/images/logo-pequeno.svg";
 import { PostInfo } from "./components/postInfo";
+import { privatePosts } from "../../services/api";
+import { useState, useEffect } from "react";
 
 const triboInfo2 = {
   display: "flex",
@@ -15,11 +17,30 @@ const triboInfo2 = {
 export const TribosPost = () => {
   const navigate = useNavigate();
 
+  const { triboId } = useParams();
+  const { postId } = useParams();
+  const [posts, setPost] = useState([]);
+
+  console.log(postId);
+
+  useEffect(() => {
+    async function fetchPost() {
+      const fetchedPost = await privatePosts();
+      setPost(fetchedPost);
+    }
+
+    fetchPost();
+  }, [postId]);
+
+  if (!posts) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <div>
       <div style={triboInfo2}>
         <header>
-          <div onClick={() => navigate("/tribos")}>
+          <div onClick={() => navigate(`/tribos/profile/${triboId}`)}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <span> Tribos </span>
             <img src={logo} alt="Logo Tribos" />
@@ -27,7 +48,13 @@ export const TribosPost = () => {
         </header>
       </div>
       <div>
-        <PostInfo />
+        {posts.map((post) => {
+          const id = post._id;
+          if (id === postId) {
+            return <PostInfo photoUrl={post.content[0].url} />;
+          }
+          return null;
+        })}
       </div>
     </div>
   );

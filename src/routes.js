@@ -27,7 +27,7 @@ export default function MainRoutes() {
         <Route path="/tribos" element={<TribosHome />} />
         <Route path="/tribos/Profile/:triboId" element={<TribosProfile />} />
         <Route path="/tribos/Busca" element={<TribosBusca />} />
-        <Route path="/tribos/Post/:triboId" element={<TribosPost />} />
+        <Route path="/tribos/Post/:triboId/:postId" element={<TribosPost />} />
       </Route>
     </Routes>
   );

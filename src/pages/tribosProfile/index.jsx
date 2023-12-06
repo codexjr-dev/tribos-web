@@ -10,24 +10,35 @@ const triboInfo2 = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "90vh",
+  height: "100vh",
   flexDirection: "column",
+  position: "relative",
+  top: "60px",
 };
 
 const tribosTittle = {
-  fontWeight: "bold",
+  display: "flex",
   flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  fontWeight: "bold",
+  top: 0,
+  width: "100%",
+  height: "50px",
+  paddingBottom: "20px",
 };
 
 const triboPostContainer = {
   flexDirection: "column",
   display: "grid",
+  alignItems: "center",
+  justifyContent: "center",
   rowGap: "20px",
   columnGap: "20px",
   gridTemplateColumns: "repeat(3, 1fr)",
   gridTemplateRows: "repeat(2, 1fr)",
   position: "relative",
-  top: "90px",
+  paddingbottom: "20px",
 };
 
 const infoProfileContainer = {
@@ -35,7 +46,7 @@ const infoProfileContainer = {
   display: "grid",
   rowGap: "20px",
   columnGap: "20px",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(4, 1fr)",
 };
 
 export const TribosProfile = () => {
@@ -51,20 +62,22 @@ export const TribosProfile = () => {
       const postsFromTribo = allPosts.filter(
         (post) => post.tribo._id === triboId
       );
+
       setPosts(postsFromTribo);
-      console.log(posts);
+
+      return Promise.resolve();
     }
 
     async function loadTribos() {
       const tribo = await getTriboById(triboId);
       setTribo(tribo);
-
-      setIsLoading(false);
+      console.log(posts);
+      return Promise.resolve();
     }
 
     async function fetchData() {
-      await loadPosts();
-      await loadTribos();
+      await Promise.all([loadPosts(), loadTribos()]);
+      setIsLoading(false);
     }
 
     fetchData();
@@ -92,12 +105,14 @@ export const TribosProfile = () => {
           />
         </div>
         <div style={triboPostContainer}>
-          {posts.map((post) => {
+          {posts.map((post, index) => {
             return (
               <ProfileInfo
-                key={tribo.tribo._id}
-                tribosId={tribo.tribo._id}
-                photoUrl={post.content.url}
+                key={post.content[0].key}
+                triboId={post.tribo._id}
+                mediaType={post.content[0].type}
+                postId={post._id}
+                photoUrl={post.content[0].url}
               />
             );
           })}
