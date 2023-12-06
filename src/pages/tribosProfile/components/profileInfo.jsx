@@ -25,7 +25,7 @@ export const ProfileInfo = ({ triboId, mediaType, postId, photoUrl }) => {
       {mediaType === "image" ? (
         <img src={photoUrl} alt="post da tribo" style={imageStyle} />
       ) : mediaType === "video" ? (
-        <video src={photoUrl} style={imageStyle} controls />
+        <video src={photoUrl} style={imageStyle} controls muted />
       ) : null}
     </div>
   );

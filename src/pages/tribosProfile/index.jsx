@@ -25,7 +25,6 @@ const tribosTittle = {
   top: 0,
   width: "100%",
   height: "50px",
-  paddingBottom: "20px",
 };
 
 const triboPostContainer = {
@@ -36,17 +35,11 @@ const triboPostContainer = {
   rowGap: "20px",
   columnGap: "20px",
   gridTemplateColumns: "repeat(3, 1fr)",
-  gridTemplateRows: "repeat(2, 1fr)",
+  gridTemplateRows: "repeat(10, 1fr)",
   position: "relative",
   paddingbottom: "20px",
-};
-
-const infoProfileContainer = {
-  flexDirection: "column",
-  display: "grid",
-  rowGap: "20px",
-  columnGap: "20px",
-  gridTemplateColumns: "repeat(4, 1fr)",
+  marginTop: "20px",
+  overflow: "auto",
 };
 
 export const TribosProfile = () => {
@@ -90,8 +83,8 @@ export const TribosProfile = () => {
   return (
     <div>
       <div style={triboInfo2}>
-        <header style={tribosTittle}>
-          <div onClick={() => navigate("/tribos")}>
+        <header>
+          <div onClick={() => navigate("/tribos")} style={tribosTittle}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <span> {tribo.tribo.username} </span>
             <img src={logo} alt="Logo Tribos" />
