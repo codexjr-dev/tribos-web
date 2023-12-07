@@ -1,40 +1,31 @@
-.container-tribos {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.item {
-  width: 200px;
-  margin: 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.container {
-  display: inline;
+.triboInfoContainer {
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  margin: 0 auto;
-  width: 75%;
-  padding: 1.5rem 0;
-  margin-bottom: 2rem;
+  display: grid;
+  row-gap: 20px;
+  column-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.triboInfo2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  flex-direction: column;
+}
+
+.tribosTittle {
+  font-weight: bold;
+  height: 10vh;
+  flex-direction: row;
 }
 
 .buttonStyle {
-  width: "100%", backGroundColor --pink-dark;
-}
-
-:root {
-  --blue-dark: #3911ad;
-  --blue: #562bd3;
-  --blue-light: #7247ed;
-  --pink-dark: #8f1479;
-  --pink: #b6229c;
-  --pink-light: #cc33b1;
-  --purple-dark: #6c1aa1;
-  --purple: #8127bb;
-  --purple-light: #9f3ae0;
-  --gray: #cecece;
-  --light-gray: #f9f9f9;
-  --dark-light: #242424;
-  --dark: #262626;
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 50px;
 }

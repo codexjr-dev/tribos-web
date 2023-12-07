@@ -2,21 +2,13 @@ import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo-pequeno.svg";
 import { useState, useEffect } from "react";
-import { api, privatePosts, getTriboById } from "../../services/api";
-
-const triboInfo2 = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "90vh",
-  flexDirection: "column",
-};
-
-const tribosTittle = {
-  fontWeight: "bold",
-  height: "20vh",
-  flexDirection: "row",
-};
+import {
+  api,
+  privatePosts,
+  getTriboById,
+  getPrivateTribos,
+} from "../../services/api";
+import styles from "./styles.module.css";
 
 export const TribosBusca = () => {
   const [tribos, setTribos] = useState([]);
@@ -31,12 +23,9 @@ export const TribosBusca = () => {
       const postsData = await privatePosts();
       setPosts(postsData);
 
-      const tempTribos = [];
-      for (const post of postsData) {
-        const tribo = await getTriboById(post.tribo._id);
-        tempTribos.push(tribo);
-      }
-      setTribos(tempTribos);
+      const tribos = await getPrivateTribos();
+
+      setTribos(tribos.tribos);
       setIsLoading(false);
     }
 
@@ -45,29 +34,30 @@ export const TribosBusca = () => {
 
   function handleInputChange(newInput) {
     setBusca(newInput);
-    setTribosFiltradas(
-      tribos
-        .filter((tribo) =>
-          tribo.tribo.username.toLowerCase().includes(newInput.toLowerCase())
-        )
-        .map((tribo) => tribo.tribo.username)
-    );
+    if (newInput === "") {
+      setTribosFiltradas(tribos.map((tribo) => tribo.username.toLowerCase()));
+    } else {
+      setTribosFiltradas(
+        tribos
+          .filter((tribo) =>
+            tribo.username.toLowerCase().includes(newInput.toLowerCase())
+          )
+          .map((tribo) => tribo.username)
+      );
+    }
   }
 
   if (isLoading) {
     return <div>Carregando...</div>;
   }
 
-  console.log([tribosFiltradas]);
-
   return (
     <div>
-      <div style={triboInfo2}>
-        <header style={tribosTittle}>
+      <div className={styles.triboInfo2}>
+        <header className={styles.tribosTittle}>
           <div onClick={() => navigate("/tribos")}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <span> Buscar tribos </span>
-            <img src={logo} alt="Logo Tribos" />
           </div>
         </header>
         <div>
@@ -86,10 +76,8 @@ export const TribosBusca = () => {
             {tribosFiltradas.map((username) => (
               <li
                 onClick={() => {
-                  const tribo = tribos.find(
-                    (t) => t.tribo.username === username
-                  );
-                  navigate(`/tribos/profile/${tribo.tribo._id}`);
+                  const tribo = tribos.find((t) => t.username === username);
+                  navigate(`/tribos/profile/${tribo._id}`);
                 }}
               >
                 {username}

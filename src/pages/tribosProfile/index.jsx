@@ -5,42 +5,7 @@ import { ProfileInfo } from "./components/profileInfo";
 import { TriboInfo } from "./components/triboInfo";
 import { api, privatePosts, getTriboById } from "../../services/api";
 import { useEffect, useState } from "react";
-
-const triboInfo2 = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "100vh",
-  flexDirection: "column",
-  position: "relative",
-  top: "60px",
-};
-
-const tribosTittle = {
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-  fontWeight: "bold",
-  top: 0,
-  width: "100%",
-  height: "50px",
-};
-
-const triboPostContainer = {
-  flexDirection: "column",
-  display: "grid",
-  alignItems: "center",
-  justifyContent: "center",
-  rowGap: "20px",
-  columnGap: "20px",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridTemplateRows: "repeat(10, 1fr)",
-  position: "relative",
-  paddingbottom: "20px",
-  marginTop: "20px",
-  overflow: "auto",
-};
+import styles from "./styles.module.css";
 
 export const TribosProfile = () => {
   const navigate = useNavigate();
@@ -64,7 +29,6 @@ export const TribosProfile = () => {
     async function loadTribos() {
       const tribo = await getTriboById(triboId);
       setTribo(tribo);
-      console.log(posts);
       return Promise.resolve();
     }
 
@@ -82,12 +46,14 @@ export const TribosProfile = () => {
 
   return (
     <div>
-      <div style={triboInfo2}>
+      <div className={styles.triboInfo2}>
         <header>
-          <div onClick={() => navigate("/tribos")} style={tribosTittle}>
+          <div
+            onClick={() => navigate("/tribos")}
+            className={styles.tribosTittle}
+          >
             <img src={LeftArrowIcon} alt="Voltar" />
             <span> {tribo.tribo.username} </span>
-            <img src={logo} alt="Logo Tribos" />
           </div>
         </header>
         <div>
@@ -97,7 +63,7 @@ export const TribosProfile = () => {
             username={tribo.tribo.username}
           />
         </div>
-        <div style={triboPostContainer}>
+        <div className={styles.triboPostContainer}>
           {posts.map((post, index) => {
             return (
               <ProfileInfo

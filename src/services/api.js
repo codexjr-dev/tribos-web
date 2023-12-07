@@ -275,3 +275,13 @@ export const getTriboById = async (id) => {
     return null;
   }
 };
+
+export const getPrivateTribos = async () => {
+  try {
+    const res = await api.get("/private/tribos");
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

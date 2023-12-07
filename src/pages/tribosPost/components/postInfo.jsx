@@ -1,4 +1,4 @@
-export const PostInfo = ({ photoUrl }) => {
+export const PostInfo = ({ photoUrl, text }) => {
   const postInfo2 = {
     display: "flex",
     alignItems: "center",
@@ -12,10 +12,11 @@ export const PostInfo = ({ photoUrl }) => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
   };
 
   const mStylePhoto = {
-    width: "40%",
+    width: "35%",
     height: "auto",
     display: "flex",
     alignItems: "center",
@@ -23,11 +24,15 @@ export const PostInfo = ({ photoUrl }) => {
   };
 
   const mStyleVideo = {
-    width: "40%",
+    width: "35%",
     height: "auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  };
+
+  const styleText = {
+    width: "35%",
   };
 
   console.log(photoUrl);
@@ -46,10 +51,12 @@ export const PostInfo = ({ photoUrl }) => {
       {isImage ? (
         <div style={mediaStyle}>
           <img src={photoUrl} alt="post da tribo" style={mStylePhoto} />
+          <p style={styleText}>{text}</p>
         </div>
       ) : isVideo ? (
         <div style={mediaStyle}>
           <video src={photoUrl} controls style={mStyleVideo} />
+          <p style={styleText}>{text}</p>
         </div>
       ) : null}
     </div>

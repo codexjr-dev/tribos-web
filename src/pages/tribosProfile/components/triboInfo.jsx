@@ -1,15 +1,12 @@
 export const TriboInfo = ({ photoUrl, title, username }) => {
   const triboInfoContainer = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+    width: "92px",
   };
 
   const imageStyle = {
     borderRadius: "50%",
-    width: "62px",
-    height: "62px",
+    width: "52px",
+    height: "52px",
   };
 
   return (
