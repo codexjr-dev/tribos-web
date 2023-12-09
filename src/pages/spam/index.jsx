@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Spam = () => {
-  const [selectedType, setSelectedType] = useState("OLAR");
+  const [selectedType, setSelectedType] = useState("time");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [reports, setReports] = useState([]);
   const [route, setRoute] = useState("");
@@ -195,7 +195,7 @@ const Spam = () => {
                   />
                 )
               } 
-            } else if (value.type === 'User') {
+            } else if (value.type === 'User' || value.type == 'Tribo') {
               return (
                 <ProfileComponent
                   key={value._id}
@@ -226,8 +226,10 @@ const Spam = () => {
                 Route={value.type}
                 Id={value._id}
                 SetId={setId}
-                Length = {value.reported.content.length}
+                Length = {1}
               />
+            } else {
+              return <p style={{color: "red"}}>?</p>
             }
           })
         )}
