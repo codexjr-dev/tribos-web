@@ -165,10 +165,11 @@ export const getAllReportsByCount = async () => {
   return dataByCount;
 };
 
-export const reportPost = async (id) => {
+export const reportPost = async (id, reasonIndex, res) => {
   await api
     .post("/report/post", {
       idReported: id,
+      reasonIndex: reasonIndex,
     })
     .then((res) => {
       console.log(res);

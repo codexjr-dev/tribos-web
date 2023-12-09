@@ -12,7 +12,7 @@ const MotivoDenuncia = [
 ];
 
 export const ReportModal = ({ idPost, onDenunciation, onClose }) => {
-  const [motivoSelecionado, setMotivoSelecionado] = useState("");
+  const [motivoSelecionado, setMotivoSelecionado] = useState();
 
   const handleMotivoSelecionadoChange = (e) => {
     setMotivoSelecionado(e.target.value);
@@ -23,10 +23,11 @@ export const ReportModal = ({ idPost, onDenunciation, onClose }) => {
   };
 
   const handleDenunciation = async () => {
-    await reportPost(idPost);
+    await reportPost(idPost, motivoSelecionado);
     onDenunciation(motivoSelecionado);
   };
 
+  console.log(idPost, motivoSelecionado);
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
@@ -38,8 +39,8 @@ export const ReportModal = ({ idPost, onDenunciation, onClose }) => {
           value={motivoSelecionado}
           onChange={handleMotivoSelecionadoChange}
         >
-          {MotivoDenuncia.map((motivo) => (
-            <option key={motivo} value={motivo}>
+          {MotivoDenuncia.map((motivo, index) => (
+            <option key={motivo} value={index}>
               {motivo}
             </option>
           ))}
