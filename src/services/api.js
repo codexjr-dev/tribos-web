@@ -285,3 +285,13 @@ export const getPrivateTribos = async () => {
     return null;
   }
 };
+
+export const findPostComments = async (idPost) => {
+  try {
+    const res = await api.get(`/comment/post/${idPost}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

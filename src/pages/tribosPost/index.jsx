@@ -1,10 +1,11 @@
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import { useNavigate, useParams } from "react-router-dom";
 import { PostInfo } from "./components/postInfo";
-import { privatePosts } from "../../services/api";
+import { privatePosts, findPostComments, reportPost } from "../../services/api";
 import { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { TriboInfo } from "./components/triboInfo";
+import { TriboComments } from "./components/triboComments";
 
 export const TribosPost = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export const TribosPost = () => {
   const { triboId } = useParams();
   const { postId } = useParams();
   const [posts, setPost] = useState([]);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     async function fetchPost() {
@@ -22,47 +24,57 @@ export const TribosPost = () => {
     fetchPost();
   }, [postId]);
 
+  useEffect(() => {
+    async function fetchComments() {
+      const fetchComments = await findPostComments(postId);
+      setComments(fetchComments.comments);
+    }
+
+    fetchComments();
+  }, []);
+
+  console.log(comments);
+
   if (!posts) {
     return <div>Carregando...</div>;
   }
 
-  console.log(posts);
-
   return (
     <div>
-      <div className={styles.triboInfo2}>
+      <div className={styles.triboInfoContainer}>
         <header>
           <div onClick={() => navigate(`/tribos/profile/${triboId}`)}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <span> Tribos </span>
+            <span style={{ fontWeight: "bold" }}> Tribos </span>
           </div>
         </header>
       </div>
       <div>
-        <div>
-          {posts.map((post) => {
-            const id = post._id;
-            if (id === postId) {
-              return (
+        {posts.map((post) => {
+          const id = post._id;
+          if (id === postId) {
+            return (
+              <div key={id}>
                 <TriboInfo
                   photoUrl={post.tribo.profilePic.url}
                   username={post.tribo.username}
+                  idPost={postId}
                 />
-              );
-            }
-            return null;
-          })}
-        </div>
-        <div>
-          {posts.map((post) => {
-            const id = post._id;
-            if (id === postId) {
-              return (
                 <PostInfo photoUrl={post.content[0].url} text={post.text} />
-              );
-            }
-            return null;
-          })}
+              </div>
+            );
+          }
+          return null;
+        })}
+        <div className={styles.commentsContainer}>
+          {comments.map((comment, index) => (
+            <TriboComments
+              key={index}
+              photoUrl={comment.commenter.profilePic.url}
+              username={comment.commenter.username}
+              comment={comment.text}
+            />
+          ))}
         </div>
       </div>
     </div>

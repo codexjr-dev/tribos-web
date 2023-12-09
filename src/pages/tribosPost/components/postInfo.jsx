@@ -16,7 +16,7 @@ export const PostInfo = ({ photoUrl, text }) => {
   };
 
   const mStylePhoto = {
-    width: "35%",
+    width: "45%",
     height: "auto",
     display: "flex",
     alignItems: "center",
@@ -24,7 +24,7 @@ export const PostInfo = ({ photoUrl, text }) => {
   };
 
   const mStyleVideo = {
-    width: "35%",
+    width: "45%",
     height: "auto",
     display: "flex",
     alignItems: "center",
@@ -32,7 +32,7 @@ export const PostInfo = ({ photoUrl, text }) => {
   };
 
   const styleText = {
-    width: "35%",
+    width: "45%",
   };
 
   console.log(photoUrl);
