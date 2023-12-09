@@ -71,30 +71,21 @@ const Spam = () => {
         {(
           reports.map((value) => {
             if (value.type === "Post") {
+              console.log(value);
               return (
                 <PostComponent
                   key={value._id}
                   User={value.reported.tribo.username}
                   Icon={value.reported.tribo.profilePic.url}
                   Time={value.updatedAt}
-                  Content0={value.reported.content[0]?.url}
-                  Content1={value.reported.content[1]?.url}
-                  Content2={value.reported.content[2]?.url}
-                  Content3={value.reported.content[3]?.url}
-                  Content4={value.reported.content[4]?.url}                   
+                  Content={value.reported.content}
                   Subtitle={value.reported.text}
-                  ContentType0={value.reported.content[0]?.type}
-                  ContentType1={value.reported.content[1]?.type}
-                  ContentType2={value.reported.content[2]?.type}
-                  ContentType3={value.reported.content[3]?.type}
-                  ContentType4={value.reported.content[4]?.type}
                   SetValue={setIsModalVisible}
                   SetOperation={setOperation}
                   SetRoute={setRoute}
                   Route={value.type}
                   Id={value._id}
                   SetId={setId}
-                  Length = {value.reported.content.length}
                 />
               )
             } else if (value.type === 'User' || value.type == 'Tribo') {
@@ -119,16 +110,14 @@ const Spam = () => {
                 User={value.reported.tribo.username}
                 Icon={value.reported.tribo.profilePic.url}
                 Time={value.updatedAt}
-                Content0={value.reported.content.url}
+                Content={[value.reported.content]}
                 Subtitle={value.reported.description}
-                ContentType0={value.reported.content.type}
                 SetValue={setIsModalVisible}
                 SetOperation={setOperation}
                 SetRoute={setRoute}
                 Route={value.type}
                 Id={value._id}
                 SetId={setId}
-                Length = {1}
               />
             } else {
               return <p style={{color: "red"}}>?</p>
