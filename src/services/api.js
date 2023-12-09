@@ -238,6 +238,19 @@ export const removeTribo = async (id) => {
     });
 };
 
+export const removeAnnouncement = async (id) => {
+  await api
+    .delete("/report/announcement", {
+      data: { idReport: id },
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((ex) => {
+      console.log(ex);
+    });
+};
+
 export const ignoreReport = async (id) => {
   await api
     .delete("/report/ignore", {

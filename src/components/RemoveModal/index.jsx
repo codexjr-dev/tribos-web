@@ -1,5 +1,5 @@
 import styles from "./styles.module.css";
-import {  ignoreReport ,removeUser, removePost, removeTribo} from "../../services/api";
+import { ignoreReport ,removeUser, removePost, removeTribo, removeAnnouncement } from "../../services/api";
 
 const RemoveModal = ({ SetValue, Operation, Route, Id, }) => {
 
@@ -18,6 +18,10 @@ const RemoveModal = ({ SetValue, Operation, Route, Id, }) => {
         }
         else if (Route === "Tribo" && Operation === "Remover"){
             await removeTribo(Id);
+            window.location.reload()
+        }
+        else if (Route === "Announcement" && Operation === "Remover"){
+            await removeAnnouncement(Id);
             window.location.reload()
         }
         SetValue(false);
