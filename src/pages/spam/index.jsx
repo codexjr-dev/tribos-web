@@ -43,7 +43,6 @@ const Spam = () => {
     }
 
     loadAll();
-    console.log(reports)
   }, [selectedType]);
 
   return (
@@ -134,7 +133,10 @@ const Spam = () => {
                 Id={value._id}
                 SetId={setId}
                 isAd={true}
-                extraFooter={<ReportReasons reports={value.reports} />}
+                extraFooter={<>
+                  {value.reported.link && <span><b>Link:</b> <a href={value.reported.link}>{value.reported.link}</a></span>}
+                  <ReportReasons reports={value.reports} />
+                </>}
               />
             } else {
               return <p style={{color: "red"}}>?</p>
