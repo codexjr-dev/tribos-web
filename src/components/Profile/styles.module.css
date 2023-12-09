@@ -9,10 +9,6 @@
     border-radius: 8px;
 }
 
-.profileContainer:hover {
-    cursor: alias;
-}
-
 .mainContent{
     position: relative;
     display: flex;
