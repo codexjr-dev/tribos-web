@@ -20,6 +20,8 @@ const Post = ({
   Id,
   Route,
   SetRoute,
+  extraFooter,
+  isAd,
 }) => {
   function Action(operation) {
     SetOperation(operation);
@@ -39,6 +41,7 @@ const Post = ({
             alt="Ícone"
           />
           <span className={styles.user}> {User}</span>
+          {isAd && <span className={styles.sponsoredText}><b>Patrocinado</b></span>}
         </div>
         <Carousel controls={Content.length > 1} indicators={Content.length > 1}>
           {Content.map((value, i) => {
@@ -60,6 +63,8 @@ const Post = ({
             {`${Subtitle}`}
           </span>
         ) : null}
+
+        {extraFooter ? extraFooter : <></>}
       </div>
 
       <div className={styles.actionsContent}>

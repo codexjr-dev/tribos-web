@@ -27,6 +27,7 @@
     border: 1px solid #F9F9F9;
     box-sizing: border-box;
     border-radius: 100%;
+    object-fit: cover;
 }
 
 .user {
@@ -64,6 +65,10 @@
 }
 
 #ignore {
+    color: var(--purple-light);
+}
+
+.sponsoredText {
     color: var(--purple-light);
 }
 

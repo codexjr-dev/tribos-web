@@ -11,6 +11,19 @@ import Loading from "../../components/Loading";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+function ReportReasons({ reports }) {
+  return <div>
+    <span><b>Motivos:</b></span>
+    <ul style={{listStyle: "inside"}}>
+      {
+        reports.map((value, i) => (
+          <li key={i}>{value.reason}</li>
+        ))
+      }
+    </ul>
+  </div>;
+}
+
 const Spam = () => {
   const [selectedType, setSelectedType] = useState("time");
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -86,6 +99,7 @@ const Spam = () => {
                   Route={value.type}
                   Id={value._id}
                   SetId={setId}
+                  extraFooter={<ReportReasons reports={value.reports} />}
                 />
               )
             } else if (value.type === 'User' || value.type == 'Tribo') {
@@ -102,6 +116,7 @@ const Spam = () => {
                   Route={value.type}
                   Id={value._id}
                   SetId={setId}
+                  extraFooter={<ReportReasons reports={value.reports} />}
                 />
               );
             } else if (value.type === 'Announcement') {
@@ -118,6 +133,8 @@ const Spam = () => {
                 Route={value.type}
                 Id={value._id}
                 SetId={setId}
+                isAd={true}
+                extraFooter={<ReportReasons reports={value.reports} />}
               />
             } else {
               return <p style={{color: "red"}}>?</p>
