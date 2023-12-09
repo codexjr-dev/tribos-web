@@ -195,11 +195,7 @@ const Spam = () => {
                   />
                 )
               } 
- 
-              
-              ;
-            } else {
-              console.log(value)
+            } else if (value.type === 'User') {
               return (
                 <ProfileComponent
                   key={value._id}
@@ -215,6 +211,23 @@ const Spam = () => {
                   SetId={setId}
                 />
               );
+            } else if (value.type === 'Announcement') {
+              return <PostComponent
+                key={value._id}
+                User={value.reported.tribo.username}
+                Icon={value.reported.tribo.profilePic.url}
+                Time={value.updatedAt}
+                Content0={value.reported.content.url}
+                Subtitle={value.reported.text}
+                ContentType0={value.reported.content.type}
+                SetValue={setIsModalVisible}
+                SetOperation={setOperation}
+                SetRoute={setRoute}
+                Route={value.type}
+                Id={value._id}
+                SetId={setId}
+                Length = {value.reported.content.length}
+              />
             }
           })
         )}
