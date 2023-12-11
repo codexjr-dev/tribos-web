@@ -13,6 +13,7 @@ const Profile = ({
   Route,
   Id,
   SetId,
+  extraFooter,
 }) => {
   function Action(operation) {
     SetOperation(operation);
@@ -35,6 +36,8 @@ const Profile = ({
           <span className={styles.user}> {User} </span>
         </div>
       </div>
+
+      {extraFooter ? extraFooter : <></>}
 
       <div className={styles.actionsContent}>
         <span className={styles.time}> {`Há ${reportTime(Time)}`} </span>

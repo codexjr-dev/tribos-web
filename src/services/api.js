@@ -21,30 +21,32 @@ export const getStatiticsByDate = async (type, beginDate, finalDate) => {
 
 export const findAllCacique = async () => {
   try {
-    const res = await api.get('/adm/announcement/cacique');
+    const res = await api.get("/adm/announcement/cacique");
     return res.data.announcements;
   } catch (error) {
     return null;
   }
-}
+};
 
-
- export const globalMessage = async (message) => {
-    await api.post('/personal/global/not', {
-      message,
-    });
- }
+export const globalMessage = async (message) => {
+  await api.post("/personal/global/not", {
+    message,
+  });
+};
 
 export const findAllMaster = async () => {
   let data;
-  await api.get('/adm/announcement/master').then((res) => {
-    data = res.data.announcements;
-  }).catch(() => {
-    data = null;
-  })
+  await api
+    .get("/adm/announcement/master")
+    .then((res) => {
+      data = res.data.announcements;
+    })
+    .catch(() => {
+      data = null;
+    });
 
   return data;
-}
+};
 
 export const findAllFeed = async () => {
   let data;
@@ -62,14 +64,17 @@ export const findAllFeed = async () => {
 
 export const findTriboById = async (id) => {
   let data;
-  await api.get(`/tribo/${id}`).then((res) => {
-    data = res.data;
-  }).catch(() => {
-    data = null;
-  })
+  await api
+    .get(`/tribo/${id}`)
+    .then((res) => {
+      data = res.data;
+    })
+    .catch(() => {
+      data = null;
+    });
 
   return data;
-}
+};
 
 export const payCacique = async (announcementId, value) => {
   await api.put(`/adm/announcement/${announcementId}`, {
@@ -83,12 +88,12 @@ export const updateCaciquePayment = async (announcementId) => {
 
 export const findAnnouncementDetails = async (announcementId) => {
   let data;
-  await api.get(`/announcement/${announcementId}`).then(res => {
+  await api.get(`/announcement/${announcementId}`).then((res) => {
     data = res.data;
-  })
+  });
 
   return data;
-}
+};
 
 //   try {
 //     const response = await api.get(
@@ -160,10 +165,11 @@ export const getAllReportsByCount = async () => {
   return dataByCount;
 };
 
-export const reportPost = async (id) => {
+export const reportPost = async (id, reasonIndex, res) => {
   await api
     .post("/report/post", {
       idReported: id,
+      reasonIndex: reasonIndex,
     })
     .then((res) => {
       console.log(res);
@@ -238,6 +244,19 @@ export const removeTribo = async (id) => {
     });
 };
 
+export const removeAnnouncement = async (id) => {
+  await api
+    .delete("/report/announcement", {
+      data: { idReport: id },
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((ex) => {
+      console.log(ex);
+    });
+};
+
 export const ignoreReport = async (id) => {
   await api
     .delete("/report/ignore", {
@@ -249,4 +268,44 @@ export const ignoreReport = async (id) => {
     .catch((ex) => {
       console.log(ex);
     });
+};
+
+export const privatePosts = async () => {
+  try {
+    const res = await api.get("/private/posts");
+    return res.data.posts;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getTriboById = async (id) => {
+  try {
+    const res = await api.get(`/tribo/${id}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getPrivateTribos = async () => {
+  try {
+    const res = await api.get("/private/tribos");
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const findPostComments = async (idPost) => {
+  try {
+    const res = await api.get(`/comment/post/${idPost}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
