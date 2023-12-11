@@ -1,0 +1,36 @@
+.triboPostContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
+}
+
+.triboInfoContainer {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.commentsContainer {
+  display: flex;
+  width: 71%;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
