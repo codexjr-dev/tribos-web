@@ -50,7 +50,7 @@ export const ButtonChain = ({ labels, selected, calendar }) => {
               }
               }>
             </Flatpickr>
-            {!datas[1] &&
+            {datas.length > 0 && !datas[1] &&
               <span>Preencha a data corretamente</span>
             }
           </div>
