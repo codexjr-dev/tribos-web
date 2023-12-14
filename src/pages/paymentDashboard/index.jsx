@@ -33,24 +33,28 @@ export const PaymentDashboard = () => {
     }
   };
 
-  const getFinances = async () => {
-    setFinanceChart(null);
+  const getOptionDates = () => {
     let option = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
     var datas = mapIntervalOptionToList(option)
     var startDate = datas[0].currentDate
     var endDate = datas[datas.length - 1].nextDate
-    var data = await api.getGeneralFinancesByDate([startDate, endDate]);
-    setFinanceChart(data)
+    return [startDate, endDate]
   }
 
 
   useEffect(() => {
-    if (selectedInterval < intervalLabels.length) getFinances() 
+    searchFinanceByDate()
   },[selectedInterval])
 
   const searchFinanceByDate = async (datas) => {
     setFinanceChart(null);
-    var data = await api.getGeneralFinancesByDate(datas)
+    
+    if(!datas && (selectedInterval < intervalLabels.length)){
+        var datas = getOptionDates()
+        var data = await api.getGeneralFinancesByDate(datas)
+    }else{
+      var data = await api.getGeneralFinancesByDate(datas)
+    }
     setFinanceChart(data);
   }
 
