@@ -1,15 +1,44 @@
+import { set } from "date-fns";
 import styles from "./styles.module.css";
 
 import { useState } from "react";
-import { useEffect } from "react";
 
-export const ButtonChain = ({ labels, selected }) => {
+export const ButtonChain = ({ labels, selected, searchDates}) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [alertMsg, setAlertMsg] = useState(false);
+  const [dates, setDates] = useState(null)
+
 
   const handleSelect = (currentIndex) => {
     setSelectedIndex(currentIndex);
     selected(currentIndex);
-}
+  }
+
+  const convertDateFormat = (dateString) => {
+    const [day, month, year] = dateString.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleDate = (text) => {
+    const regex = /\d{2}\/\d{2}\/\d{4}-\d{2}\/\d{2}\/\d{4}/;
+    if(!regex.test(text)){
+      setAlertMsg(true);
+      setDates(null);
+    }else{
+      const splitted = text.split("-")
+      let data1 = new Date(convertDateFormat(splitted[0]));
+      let data2 = new Date(convertDateFormat(splitted[1]));
+      setDates([data1, data2]);
+      setAlertMsg(false);
+    }
+  }
+
+  const handleSearch = () => {
+    if(dates) {
+      //chamada da api
+    }
+
+  }
 
 
   return (
@@ -29,6 +58,25 @@ export const ButtonChain = ({ labels, selected }) => {
           </button>
         );
       })}
+      {
+        searchDates &&
+        <div className={styles.wrapperCalendar}>
+          <div className={styles.containerInput}>
+            <input className={styles.inputCalendar} onChange={(e) => handleDate(e.target.value)}>
+            </input>
+            <button  
+              key={labels.length}
+              className={
+                (labels.length) === selectedIndex ? styles.selected : styles.normal
+              }
+              onClick={(e) => {
+                handleSearch()
+                return handleSelect(labels.length);
+              }}>BUSCAR</button>
+          </div>
+          <span className={styles.spanAdvice} style={alertMsg ? {color: "red"} : {}}> Insira a data separada por "-". <br />Exemplo: "24/03/2000-20/11/2024"</span>
+        </div>
+      }
     </div>
   );
 };

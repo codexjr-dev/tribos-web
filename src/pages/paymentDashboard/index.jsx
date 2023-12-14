@@ -52,7 +52,7 @@ export const PaymentDashboard = () => {
             alt="Ajustar"
             onClick={() => navigate("/payment/table")}
           />
-          <ButtonChain labels={intervalLabels} />
+          <ButtonChain labels={intervalLabels} searchDates/>
         </div>
         <main>
           <div className={styles.generalInfo}>
