@@ -1,12 +1,11 @@
 import styles from "./styles.module.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { Bar } from "react-chartjs-2";
 import { getSum } from "../../util/utils";
-import { useEffect } from "react";
 
 export const StackedChart = ({ data }) => {
   const [state, setState] = useState({
@@ -104,10 +103,6 @@ export const StackedChart = ({ data }) => {
       },
     },
   };
-
-  useEffect(() => {
-
-  }, []);
 
   return (
     <div className={styles.container}>

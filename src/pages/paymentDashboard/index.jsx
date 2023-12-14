@@ -36,7 +36,6 @@ export const PaymentDashboard = () => {
   const getFinances = async () => {
     setFinanceChart(null);
     let option = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
-
     var datas = mapIntervalOptionToList(option)
     var startDate = datas[0].currentDate
     var endDate = datas[datas.length - 1].nextDate
@@ -46,7 +45,7 @@ export const PaymentDashboard = () => {
 
 
   useEffect(() => {
-      getFinances()
+    if (selectedInterval < intervalLabels.length) getFinances() 
   },[selectedInterval])
 
   const searchFinanceByDate = async (datas) => {
