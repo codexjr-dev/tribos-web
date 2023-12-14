@@ -250,3 +250,16 @@ export const ignoreReport = async (id) => {
       console.log(ex);
     });
 };
+
+export const getGeneralFinances = async () => {
+  let data = null;
+  await api
+    .get("/statistics/generalFinances/")
+    .then((res) => {
+      data = res.data
+    })
+    .catch((ex) => {
+      data = null;
+    });
+  return data;
+}

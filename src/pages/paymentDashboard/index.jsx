@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { generalFinances } from "../../data/Data";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
+import * as api from "../../services/api";
+import Loading from "../../components/Loading";
 
 import { PaymentDetails } from "../../components/PaymentDetails";
 
@@ -18,6 +20,7 @@ export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
   const [triboDetails, setTriboDetails] = useState(null);
   const [selectedType, setSelectedType] = useState(0);
+  const [financeChart, setFinanceChart] = useState(null);
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -31,6 +34,15 @@ export const PaymentDashboard = () => {
       setShowDetailsActive(false);
     }
   };
+
+  useEffect( async () => {
+    var data = await api.getGeneralFinances();
+    setFinanceChart(data)
+  },[])
+
+  const searchFinanceByDate = (datas) => {
+    
+  }
 
   return (
     <>
@@ -56,11 +68,18 @@ export const PaymentDashboard = () => {
         </div>
         <main>
           <div className={styles.generalInfo}>
-            <h2>Visão Geral</h2>
-            <p id={styles.amount}>R$ 2754.75</p>
-            <div className={styles.chart}>
-              <StackedChart data={generalFinances} />
-            </div>
+            {
+              !financeChart ? 
+                <Loading />
+              :
+              <>
+                <h2>Visão Geral</h2>
+                <p id={styles.amount}>R$ {financeChart.total}</p>
+                <div className={styles.chart}>
+                  <StackedChart data={financeChart.finances} />
+                </div>
+              </>
+            }
           </div>
           <div className={styles.paymentList}>
             <div className={styles.tableHeader}>
