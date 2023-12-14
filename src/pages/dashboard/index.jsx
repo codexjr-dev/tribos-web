@@ -17,6 +17,8 @@ import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
 import { globalMessage } from "../../services/api";
+import { ButtonChain } from "../../components/ButtonChain"
+import { intervalLabels } from "../../util/options";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
@@ -67,12 +69,7 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <Select
-              fieldName="interval"
-              optionsList={intervalOptions}
-              setValue={setSelectedInterval}
-              value={selectedInterval}
-            />
+            <ButtonChain labels={intervalLabels} searchDates></ButtonChain>
           </div>
           <DataChart
             key={selectedType}  // Forçar re-render
