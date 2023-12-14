@@ -1,12 +1,9 @@
 .triboInfoContainer {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  display: grid;
-  row-gap: 20px;
-  column-gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  overflow: auto;
 }
 
 .triboInfo2 {

@@ -1,20 +1,22 @@
 import { useNavigate } from "react-router-dom";
 
-export const TriboInfo = ({ triboId, photoUrl, title, username }) => {
+export const TriboInfo = ({ triboId, photoUrl, username }) => {
   const triboInfoContainer = {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    overflow: "auto",
+    padding: "5px",
   };
 
   const fotoRedonda = {
-    width: "62px",
-    height: "62px",
+    width: "40px",
+    height: "40px",
     borderRadius: "100%",
   };
 
-  console.log(photoUrl, title, username);
+  console.log(photoUrl, username);
 
   const navigate = useNavigate();
   console.log(triboId);
@@ -23,12 +25,11 @@ export const TriboInfo = ({ triboId, photoUrl, title, username }) => {
     <div style={triboInfoContainer}>
       <img style={fotoRedonda} src={photoUrl} alt="Imagem da tribo" />
       <span
-        style={{ fontWeight: "bold" }}
+        style={{ fontWeight: "bold", paddingRight: "5px" }}
         onClick={() => navigate(`/tribos/profile/${triboId}`)}
       >
-        {title}
+        {username}
       </span>
-      <span style={{ fontWeight: "bold" }}>{username}</span>
       <button onClick={() => navigate(`/tribos/profile/${triboId}`)}>
         ver perfil
       </button>
