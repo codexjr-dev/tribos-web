@@ -47,15 +47,18 @@ export const PaymentDashboard = () => {
   },[selectedInterval])
 
   const searchFinanceByDate = async (datas) => {
-    setFinanceChart(null);
-    
-    if(!datas && (selectedInterval < intervalLabels.length)){
+    if(!datas){
+      if(selectedInterval < intervalLabels.length) {
+        setFinanceChart(null);
         var datas = getOptionDates()
         var data = await api.getGeneralFinancesByDate(datas)
+        setFinanceChart(data);
+      }
     }else{
+      setFinanceChart(null);
       var data = await api.getGeneralFinancesByDate(datas)
+      setFinanceChart(data);
     }
-    setFinanceChart(data);
   }
 
   return (
