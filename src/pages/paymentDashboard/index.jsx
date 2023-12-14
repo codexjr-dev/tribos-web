@@ -37,9 +37,9 @@ export const PaymentDashboard = () => {
   },[])
 
   const searchFinanceByDate = async (datas) => {
-    console.log(datas)
-    //var data = await api.getGeneralFinancesByDate(datas)
-    //setFinanceChart(data)
+    setFinanceChart(null);
+    var data = await api.getGeneralFinancesByDate(datas)
+    setFinanceChart(data);
   }
 
   return (

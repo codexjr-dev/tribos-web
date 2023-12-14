@@ -267,7 +267,7 @@ export const getGeneralFinances = async () => {
 export const getGeneralFinancesByDate = async (datas) => {
   let data = null;
   await api
-    .get("/statistics/generalFinances/", {
+    .get("/statistics/generalFinancesByDate/", {
       params: {
         startDate: datas[0],
         endDate: datas[1]
