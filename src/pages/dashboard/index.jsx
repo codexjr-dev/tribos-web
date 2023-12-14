@@ -17,7 +17,6 @@ import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
 import { globalMessage } from "../../services/api";
-import { set } from "date-fns";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");

@@ -31,9 +31,14 @@ export const PaymentDashboard = () => {
     }
   };
 
-  useEffect( async () => {
+  const getFinances = async () => {
     var data = await api.getGeneralFinances();
     setFinanceChart(data)
+  }
+
+
+  useEffect(() => {
+      getFinances()
   },[])
 
   const searchFinanceByDate = async (datas) => {
