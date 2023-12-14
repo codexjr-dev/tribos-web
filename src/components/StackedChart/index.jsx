@@ -90,7 +90,8 @@ export const StackedChart = ({ data }) => {
         align: "start",
         offset: 10,
         formatter: function (value, context) {
-          return `R$ ${value}`;
+          if(value == 0) return ""
+          else return `R$ ${value}`;
         },
         labels: {
           title: {
@@ -105,7 +106,7 @@ export const StackedChart = ({ data }) => {
   };
 
   useEffect(() => {
-    // console.log(state);
+
   }, []);
 
   return (

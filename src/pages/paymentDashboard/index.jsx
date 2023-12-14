@@ -11,12 +11,14 @@ import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
 import { PaymentList } from "../../components/PaymentList";
 import styles from "./styles.module.css";
+import { mapIntervalOptionToList } from "../../data/Data"
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
   const [triboDetails, setTriboDetails] = useState(null);
   const [selectedType, setSelectedType] = useState(0);
   const [financeChart, setFinanceChart] = useState(null);
+  const [selectedInterval, setSelectedInterval] = useState(0);
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -32,14 +34,20 @@ export const PaymentDashboard = () => {
   };
 
   const getFinances = async () => {
-    var data = await api.getGeneralFinances();
+    setFinanceChart(null);
+    let option = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
+
+    var datas = mapIntervalOptionToList(option)
+    var startDate = datas[0].currentDate
+    var endDate = datas[datas.length - 1].nextDate
+    var data = await api.getGeneralFinancesByDate([startDate, endDate]);
     setFinanceChart(data)
   }
 
 
   useEffect(() => {
       getFinances()
-  },[])
+  },[selectedInterval])
 
   const searchFinanceByDate = async (datas) => {
     setFinanceChart(null);
@@ -67,7 +75,7 @@ export const PaymentDashboard = () => {
             alt="Ajustar"
             onClick={() => navigate("/payment/table")}
           />
-          <ButtonChain labels={intervalLabels} searchDates searchFinanceByDate={searchFinanceByDate}/>
+          <ButtonChain labels={intervalLabels} searchDates searchFinanceByDate={searchFinanceByDate} selected={setSelectedInterval}/>
         </div>
         <main>
           <div className={styles.generalInfo}>

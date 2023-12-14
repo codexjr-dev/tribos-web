@@ -419,7 +419,7 @@ export const getLastSevenDaysObject = () => {
   return list;
 };
 
-const mapIntervalOptionToList = (intervalType) => {
+export const mapIntervalOptionToList = (intervalType) => {
   if (intervalType === "day") {
     return getLastSevenDaysObject();
   } else if (intervalType === "month") {
