@@ -263,3 +263,21 @@ export const getGeneralFinances = async () => {
     });
   return data;
 }
+
+export const getGeneralFinancesByDate = async (datas) => {
+  let data = null;
+  await api
+    .get("/statistics/generalFinances/", {
+      params: {
+        startDate: datas[0],
+        endDate: datas[1]
+      }
+    })
+    .then((res) => {
+      data = res.data
+    })
+    .catch((ex) => {
+      data = null;
+    });
+  return data;
+}

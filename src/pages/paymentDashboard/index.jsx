@@ -6,14 +6,10 @@ import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
 import * as api from "../../services/api";
 import Loading from "../../components/Loading";
-
 import { PaymentDetails } from "../../components/PaymentDetails";
-
 import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
-
 import { PaymentList } from "../../components/PaymentList";
-
 import styles from "./styles.module.css";
 
 export const PaymentDashboard = () => {
@@ -40,8 +36,10 @@ export const PaymentDashboard = () => {
     setFinanceChart(data)
   },[])
 
-  const searchFinanceByDate = (datas) => {
-    
+  const searchFinanceByDate = async (datas) => {
+    console.log(datas)
+    //var data = await api.getGeneralFinancesByDate(datas)
+    //setFinanceChart(data)
   }
 
   return (
@@ -64,7 +62,7 @@ export const PaymentDashboard = () => {
             alt="Ajustar"
             onClick={() => navigate("/payment/table")}
           />
-          <ButtonChain labels={intervalLabels} searchDates/>
+          <ButtonChain labels={intervalLabels} searchDates searchFinanceByDate={searchFinanceByDate}/>
         </div>
         <main>
           <div className={styles.generalInfo}>

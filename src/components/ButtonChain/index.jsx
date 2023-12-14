@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 import { useState } from "react";
 
-export const ButtonChain = ({ labels, selected, searchDates }) => {
+export const ButtonChain = ({ labels, selected, searchDates, searchFinanceByDate }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [alertMsg, setAlertMsg] = useState(false);
   const [dates, setDates] = useState(null);
@@ -35,7 +35,7 @@ export const ButtonChain = ({ labels, selected, searchDates }) => {
 
   const handleSearch = () => {
     if(dates) {
-      //chamada da api
+      searchFinanceByDate(dates);
     }
 
   }
