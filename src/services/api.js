@@ -270,7 +270,6 @@ export const ignoreReport = async (id) => {
     });
 };
 
-<<<<<<< HEAD
 export const getGeneralFinances = async () => {
   let data = null;
   await api
@@ -301,7 +300,6 @@ export const getGeneralFinancesByDate = async (datas) => {
     });
   return data;
 }
-=======
 export const privatePosts = async () => {
   try {
     const res = await api.get("/private/posts");
@@ -341,4 +339,3 @@ export const findPostComments = async (idPost) => {
     return null;
   }
 };
->>>>>>> develop
