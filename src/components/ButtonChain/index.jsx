@@ -1,5 +1,6 @@
 import { set } from "date-fns";
 import styles from "./styles.module.css";
+import loadingReq from "../../assets/icons/button-loading.svg"
 
 import { useState } from "react";
 
@@ -7,6 +8,7 @@ export const ButtonChain = ({ labels, selected, searchDates, searchFinanceByDate
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [alertMsg, setAlertMsg] = useState(false);
   const [dates, setDates] = useState(null);
+  const [loading, setLoading] = useState(false);
 
 
   const handleSelect = (currentIndex) => {
@@ -33,9 +35,11 @@ export const ButtonChain = ({ labels, selected, searchDates, searchFinanceByDate
     }
   }
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if(dates) {
-      searchFinanceByDate(dates);
+      setLoading(true);
+      await searchFinanceByDate(dates);
+      setLoading(false);
     }else{
       setAlertMsg(true)
     }
@@ -68,13 +72,20 @@ export const ButtonChain = ({ labels, selected, searchDates, searchFinanceByDate
             </input>
             <button  
               key={labels.length}
+              disabled={loading}
               className={
                 (labels.length) === selectedIndex ? styles.selected : styles.normal
               }
               onClick={(e) => {
                 handleSearch()
                 return handleSelect(labels.length);
-              }}>BUSCAR</button>
+              }}>
+                {loading ?
+                  <img src={loadingReq} style={{width: 15}}></img>
+                  :
+                  <span>BUSCAR</span>
+                }
+              </button>
           </div>
           <span className={styles.spanAdvice} style={alertMsg ? {color: "red"} : {}}> Insira a data separada por "-". <br />Exemplo: "24/03/2000-20/11/2024"</span>
         </div>

@@ -10,7 +10,7 @@ import Select from "../../components/Select";
 
 import moneyIcon from "../../assets/icons/money-icon.svg";
 
-import { getStatistics } from "../../data/Data";
+import { getStatistics, getStatisticsByDateRange } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
@@ -36,24 +36,32 @@ const Dashboard = () => {
     setValue('');
 };
 
-
+  const intervalToCalendarWord = (interval) => (interval === 0) ? "day" : (interval === 1) ? "month" : "week";
 
   const navigate = useNavigate();
 
   const handleCheckDetails = () => {
-    navigate(`/details/${selectedType}/${selectedInterval}`);
+    let selected = intervalToCalendarWord(selectedInterval);
+
+    navigate(`/details/${selectedType}/${selected}`);
   };
+
+  const loadDateRange = async (dates) => {  
+    const newStatistics = await getStatisticsByDateRange(selectedType, dates);
+    setStatistics(newStatistics);
+  }
 
   useEffect(() => {
     async function loadData() {
-      let selected = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
+      if(!(selectedInterval < intervalLabels.length)) return;
+      let selected = intervalToCalendarWord(selectedInterval);
       const newStatistics = await getStatistics(selected, selectedType);
       console.log("New Statistics:", newStatistics);  // Verificação de dados
       setStatistics(newStatistics);
     }
 
     loadData();
-  }, [selectedInterval, selectedType, setStatistics]); 
+  }, [selectedInterval, selectedType, setStatistics]);
 
   return (
     <div className={styles.container}>
@@ -70,7 +78,7 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval}></ButtonChain>
+            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={loadDateRange}></ButtonChain>
           </div>
           <DataChart
             key={selectedType}  // Forçar re-render
