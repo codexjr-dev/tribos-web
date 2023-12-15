@@ -24,19 +24,20 @@ const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [statistics, setStatistics] = useState([]);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   const handleSubmit = () => {
-    if (value === '') return;
+    if (value === "") return;
     globalMessage(value);
     setValue('');
-};
+  };
 
   const intervalToCalendarWord = (interval) => (interval === 0) ? "day" : (interval === 1) ? "month" : "week";
+   
 
   const navigate = useNavigate();
 
@@ -56,7 +57,6 @@ const Dashboard = () => {
       if(!(selectedInterval < intervalLabels.length)) return;
       let selected = intervalToCalendarWord(selectedInterval);
       const newStatistics = await getStatistics(selected, selectedType);
-      console.log("New Statistics:", newStatistics);  // Verificação de dados
       setStatistics(newStatistics);
     }
 
@@ -81,13 +81,17 @@ const Dashboard = () => {
             <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={loadDateRange}></ButtonChain>
           </div>
           <DataChart
-            key={selectedType}  // Forçar re-render
+            key={selectedType} // Forçar re-render
             data={statistics}
             selected={mapLabelToValueType(selectedType)}
           />
           <p onClick={handleCheckDetails}>Ver mais...</p>
         </div>
         <nav className={styles.asideContainer}>
+          <div className={styles.paymentButtonContainer}>
+            <h2>Tribos</h2>
+            <NavigateButton name="Tribos" srcIcon={logo} navigateTo="tribos" />
+          </div>
           <div className={styles.paymentButtonContainer}>
             <h2>Controle Financeiro</h2>
             <NavigateButton
@@ -98,15 +102,13 @@ const Dashboard = () => {
           </div>
           <ReportedProblems />
           <input
-      type="text"
-      value={value}
-      onChange={handleChange}
-      placeholder="Mensagem global"
-
-      style = {{marginBottom:20, borderRadius:10}}
-    />
-                <button onClick={handleSubmit}>Enviar</button>
-
+            type="text"
+            value={value}
+            onChange={handleChange}
+            placeholder="Mensagem global"
+            style={{ marginBottom: 20, borderRadius: 10 }}
+          />
+          <button onClick={handleSubmit}>Enviar</button>
         </nav>
       </main>
     </div>

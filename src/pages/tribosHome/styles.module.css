@@ -1,0 +1,31 @@
+.triboInfoContainer {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: grid;
+  row-gap: 20px;
+  column-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.triboInfo2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  flex-direction: column;
+}
+
+.tribosTittle {
+  font-weight: bold;
+  height: 10vh;
+  flex-direction: row;
+}
+
+.buttonStyle {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 50px;
+}

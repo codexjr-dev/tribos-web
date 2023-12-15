@@ -11,8 +11,21 @@ import Loading from "../../components/Loading";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+function ReportReasons({ reports }) {
+  return <div>
+    <span><b>Motivos:</b></span>
+    <ul style={{listStyle: "inside"}}>
+      {
+        reports.map((value, i) => (
+          <li key={i}>{value.reason}</li>
+        ))
+      }
+    </ul>
+  </div>;
+}
+
 const Spam = () => {
-  const [selectedType, setSelectedType] = useState("OLAR");
+  const [selectedType, setSelectedType] = useState("time");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [reports, setReports] = useState([]);
   const [route, setRoute] = useState("");
@@ -30,7 +43,6 @@ const Spam = () => {
     }
 
     loadAll();
-    console.log(reports)
   }, [selectedType]);
 
   return (
@@ -71,135 +83,25 @@ const Spam = () => {
         {(
           reports.map((value) => {
             if (value.type === "Post") {
-              
-              console.log(value)
-              console.log(value.reported.content.length)
-
-              if (value.reported.content.length === 1){
-                return (
-                  <PostComponent
-                    key={value._id}
-                    User={value.reported.tribo.username}
-                    Icon={value.reported.tribo.profilePic.url}
-                    Time={value.updatedAt}
-                    Content0={value.reported.content[0].url}
-                    Subtitle={value.reported.text}
-                    ContentType0={value.reported.content[0].type}
-                    SetValue={setIsModalVisible}
-                    SetOperation={setOperation}
-                    SetRoute={setRoute}
-                    Route={value.type}
-                    Id={value._id}
-                    SetId={setId}
-                    Length = {value.reported.content.length}
-                  />
-                )
-              } else if (value.reported.content.length === 2){
-                return (
-                  <PostComponent
-                    key={value._id}
-                    User={value.reported.tribo.username}
-                    Icon={value.reported.tribo.profilePic.url}
-                    Time={value.updatedAt}
-                    Content0={value.reported.content[0].url}
-                    Content1={value.reported.content[1].url}
-                    Subtitle={value.reported.text}
-                    ContentType0={value.reported.content[0].type}
-                    ContentType1={value.reported.content[1].type}
-                    SetValue={setIsModalVisible}
-                    SetOperation={setOperation}
-                    SetRoute={setRoute}
-                    Route={value.type}
-                    Id={value._id}
-                    SetId={setId}
-                    Length = {value.reported.content.length}
-                  />
-                )
-              } 
-
-              else if (value.reported.content.length === 3){
-                return (
-                  <PostComponent
-                    key={value._id}
-                    User={value.reported.tribo.username}
-                    Icon={value.reported.tribo.profilePic.url}
-                    Time={value.updatedAt}
-                    Content0={value.reported.content[0].url}
-                    Content1={value.reported.content[1].url}
-                    Content2={value.reported.content[2].url}
-                    Subtitle={value.reported.text}
-                    ContentType0={value.reported.content[0].type}
-                    ContentType1={value.reported.content[1].type}
-                    ContentType2={value.reported.content[2].type}
-                    SetValue={setIsModalVisible}
-                    SetOperation={setOperation}
-                    SetRoute={setRoute}
-                    Route={value.type}
-                    Id={value._id}
-                    SetId={setId}
-                    Length = {value.reported.content.length}
-                  />
-                )
-              } 
-              else if (value.reported.content.length === 4){
-                return (
-                  <PostComponent
-                    key={value._id}
-                    User={value.reported.tribo.username}
-                    Icon={value.reported.tribo.profilePic.url}
-                    Time={value.updatedAt}
-                    Content0={value.reported.content[0].url}
-                    Content1={value.reported.content[1].url}
-                    Content2={value.reported.content[2].url}
-                    Content3={value.reported.content[3].url}
-                    Subtitle={value.reported.text}
-                    ContentType0={value.reported.content[0].type}
-                    ContentType1={value.reported.content[1].type}
-                    ContentType2={value.reported.content[2].type}
-                    ContentType3={value.reported.content[3].type}
-                    SetValue={setIsModalVisible}
-                    SetOperation={setOperation}
-                    SetRoute={setRoute}
-                    Route={value.type}
-                    Id={value._id}
-                    SetId={setId}
-                    Length = {value.reported.content.length}
-                  />
-                )
-              } 
-              else if (value.reported.content.length === 5){
-                return (
-                  <PostComponent
-                    key={value._id}
-                    User={value.reported.tribo.username}
-                    Icon={value.reported.tribo.profilePic.url}
-                    Time={value.updatedAt}
-                    Content0={value.reported.content[0].url}
-                    Content1={value.reported.content[1].url}
-                    Content2={value.reported.content[2].url}
-                    Content3={value.reported.content[3].url}
-                    Content4={value.reported.content[4].url}                   
-                    Subtitle={value.reported.text}
-                    ContentType0={value.reported.content[0].type}
-                    ContentType1={value.reported.content[1].type}
-                    ContentType2={value.reported.content[2].type}
-                    ContentType3={value.reported.content[3].type}
-                    ContentType4={value.reported.content[4].type}
-                    SetValue={setIsModalVisible}
-                    SetOperation={setOperation}
-                    SetRoute={setRoute}
-                    Route={value.type}
-                    Id={value._id}
-                    SetId={setId}
-                    Length = {value.reported.content.length}
-                  />
-                )
-              } 
- 
-              
-              ;
-            } else {
-              console.log(value)
+              console.log(value);
+              return (
+                <PostComponent
+                  key={value._id}
+                  User={value.reported.tribo.username}
+                  Icon={value.reported.tribo.profilePic.url}
+                  Time={value.updatedAt}
+                  Content={value.reported.content}
+                  Subtitle={value.reported.text}
+                  SetValue={setIsModalVisible}
+                  SetOperation={setOperation}
+                  SetRoute={setRoute}
+                  Route={value.type}
+                  Id={value._id}
+                  SetId={setId}
+                  extraFooter={<ReportReasons reports={value.reports} />}
+                />
+              )
+            } else if (value.type === 'User' || value.type == 'Tribo') {
               return (
                 <ProfileComponent
                   key={value._id}
@@ -213,8 +115,31 @@ const Spam = () => {
                   Route={value.type}
                   Id={value._id}
                   SetId={setId}
+                  extraFooter={<ReportReasons reports={value.reports} />}
                 />
               );
+            } else if (value.type === 'Announcement') {
+              return <PostComponent
+                key={value._id}
+                User={value.reported.tribo.username}
+                Icon={value.reported.tribo.profilePic.url}
+                Time={value.updatedAt}
+                Content={[value.reported.content]}
+                Subtitle={value.reported.description}
+                SetValue={setIsModalVisible}
+                SetOperation={setOperation}
+                SetRoute={setRoute}
+                Route={value.type}
+                Id={value._id}
+                SetId={setId}
+                isAd={true}
+                extraFooter={<>
+                  {value.reported.link && <span><b>Link:</b> <a href={value.reported.link}>{value.reported.link}</a></span>}
+                  <ReportReasons reports={value.reports} />
+                </>}
+              />
+            } else {
+              return <p style={{color: "red"}}>?</p>
             }
           })
         )}
