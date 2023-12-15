@@ -25,6 +25,7 @@ const Dashboard = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [statistics, setStatistics] = useState([]);
   const [value, setValue] = useState("");
+  const [dates, setDates] = useState([])
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -47,17 +48,16 @@ const Dashboard = () => {
     navigate(`/details/${selectedType}/${selected}`);
   };
 
-  const loadDateRange = async (dates) => {  
-    const newStatistics = await getStatisticsByDateRange(selectedType, dates);
-    setStatistics(newStatistics);
-  }
-
   useEffect(() => {
     async function loadData() {
-      if(!(selectedInterval < intervalLabels.length)) return;
-      let selected = intervalToCalendarWord(selectedInterval);
-      const newStatistics = await getStatistics(selected, selectedType);
-      setStatistics(newStatistics);
+      if(!(selectedInterval < intervalLabels.length)){
+        const newStatistics = await getStatisticsByDateRange(selectedType, dates);
+        setStatistics(newStatistics);
+      }else{
+        let selected = intervalToCalendarWord(selectedInterval);
+        const newStatistics = await getStatistics(selected, selectedType);
+        setStatistics(newStatistics);
+      }
     }
 
     loadData();
@@ -78,7 +78,7 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={loadDateRange}></ButtonChain>
+            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={setDates}></ButtonChain>
           </div>
           <DataChart
             key={selectedType} // Forçar re-render
