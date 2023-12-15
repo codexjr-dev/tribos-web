@@ -22,7 +22,7 @@ import { intervalLabels } from "../../util/options";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
-  const [selectedInterval, setSelectedInterval] = useState("month");
+  const [selectedInterval, setSelectedInterval] = useState(0);
   const [statistics, setStatistics] = useState([]);
   const [value, setValue] = useState('');
 
@@ -46,7 +46,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function loadData() {
-      const newStatistics = await getStatistics(selectedInterval, selectedType);
+      let selected = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
+      const newStatistics = await getStatistics(selected, selectedType);
       console.log("New Statistics:", newStatistics);  // Verificação de dados
       setStatistics(newStatistics);
     }
@@ -69,7 +70,7 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain labels={intervalLabels} searchDates></ButtonChain>
+            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval}></ButtonChain>
           </div>
           <DataChart
             key={selectedType}  // Forçar re-render
