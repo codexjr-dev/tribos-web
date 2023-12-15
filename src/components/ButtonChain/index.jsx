@@ -81,7 +81,7 @@ export const ButtonChain = ({ labels, selected, searchDates, searchFinanceByDate
                 return handleSelect(labels.length);
               }}>
                 {loading ?
-                  <img src={loadingReq} style={{width: 15}}></img>
+                  <img src={loadingReq}></img>
                   :
                   <span>BUSCAR</span>
                 }
