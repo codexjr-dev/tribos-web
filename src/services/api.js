@@ -270,6 +270,36 @@ export const ignoreReport = async (id) => {
     });
 };
 
+export const getGeneralFinances = async () => {
+  let data = null;
+  await api
+    .get("/statistics/generalFinances/")
+    .then((res) => {
+      data = res.data
+    })
+    .catch((ex) => {
+      data = null;
+    });
+  return data;
+}
+
+export const getGeneralFinancesByDate = async (datas) => {
+  let data = null;
+  await api
+    .get("/statistics/generalFinancesByDate/", {
+      params: {
+        startDate: datas[0],
+        endDate: datas[1]
+      }
+    })
+    .then((res) => {
+      data = res.data
+    })
+    .catch((ex) => {
+      data = null;
+    });
+  return data;
+}
 export const privatePosts = async () => {
   try {
     const res = await api.get("/private/posts");
