@@ -38,7 +38,7 @@ export const TribosHome = () => {
         </header>
         <main>
           <div className={styles.triboInfoContainer}>
-            {tribos.slice(0, 4).map((tribo) => {
+            {tribos.map((tribo) => {
               return (
                 <TriboInfo
                   key={tribo._id}
