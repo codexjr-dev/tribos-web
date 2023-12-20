@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { generalFinances } from "../../data/Data";
 import { ButtonChain } from "../../components/ButtonChain";
 import { StackedChart } from "../../components/StackedChart";
-
+import * as api from "../../services/api";
+import Loading from "../../components/Loading";
 import { PaymentDetails } from "../../components/PaymentDetails";
-
 import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
-
 import { PaymentList } from "../../components/PaymentList";
-
 import styles from "./styles.module.css";
+import { mapIntervalOptionToList } from "../../data/Data"
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
   const [triboDetails, setTriboDetails] = useState(null);
   const [selectedType, setSelectedType] = useState(0);
+  const [financeChart, setFinanceChart] = useState(null);
+  const [selectedInterval, setSelectedInterval] = useState(0);
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -31,6 +32,34 @@ export const PaymentDashboard = () => {
       setShowDetailsActive(false);
     }
   };
+
+  const getOptionDates = () => {
+    let option = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
+    var datas = mapIntervalOptionToList(option)
+    var startDate = datas[0].currentDate
+    var endDate = datas[datas.length - 1].nextDate
+    return [startDate, endDate]
+  }
+
+
+  useEffect(() => {
+    searchFinanceByDate()
+  },[selectedInterval])
+
+  const searchFinanceByDate = async (datas) => {
+    if(!datas){
+      if(selectedInterval < intervalLabels.length) {
+        setFinanceChart(null);
+        var datas = getOptionDates()
+        var data = await api.getGeneralFinancesByDate(datas)
+        setFinanceChart(data);
+      }
+    }else{
+      setFinanceChart(null);
+      var data = await api.getGeneralFinancesByDate(datas)
+      setFinanceChart(data);
+    }
+  }
 
   return (
     <>
@@ -52,15 +81,22 @@ export const PaymentDashboard = () => {
             alt="Ajustar"
             onClick={() => navigate("/payment/table")}
           />
-          <ButtonChain labels={intervalLabels} />
+          <ButtonChain labels={intervalLabels} searchDates searchFinanceByDate={searchFinanceByDate} selected={setSelectedInterval}/>
         </div>
         <main>
           <div className={styles.generalInfo}>
-            <h2>Visão Geral</h2>
-            <p id={styles.amount}>R$ 2754.75</p>
-            <div className={styles.chart}>
-              <StackedChart data={generalFinances} />
-            </div>
+            {
+              !financeChart ? 
+                <Loading />
+              :
+              <>
+                <h2>Visão Geral</h2>
+                <p id={styles.amount}>R$ {financeChart.total}</p>
+                <div className={styles.chart}>
+                  <StackedChart data={financeChart.finances} />
+                </div>
+              </>
+            }
           </div>
           <div className={styles.paymentList}>
             <div className={styles.tableHeader}>

@@ -345,6 +345,23 @@ export const getStatistics = async (intervalType, type) => {
   return updatedList;
 };
 
+export const getStatisticsByDateRange = async (type, dates) => {
+  var list = getMonthsBetweenDates(dates[0], dates[1]);
+
+  const promises = list.map(async (element) => {
+    element.stats = await getStatiticsByDate(
+      type,
+      element.currentDate,
+      element.nextDate
+    );
+    return element;
+  });
+
+  const updatedList = await Promise.all(promises);
+
+  return updatedList;
+};
+
 const getLastSixWeeksObject = () => {
   const list = [];
 
@@ -419,7 +436,7 @@ export const getLastSevenDaysObject = () => {
   return list;
 };
 
-const mapIntervalOptionToList = (intervalType) => {
+export const mapIntervalOptionToList = (intervalType) => {
   if (intervalType === "day") {
     return getLastSevenDaysObject();
   } else if (intervalType === "month") {
@@ -460,6 +477,46 @@ export const makePriceTable = (table, type) => {
   });
 
   return  arrayPriceTable;
+}
+
+export function getMonthsBetweenDates(startDate, endDate) {
+  const months = [];
+  let currentDate = new Date(startDate);
+  
+  while (currentDate <= endDate) {
+    const nextDate = new Date(currentDate);
+    nextDate.setMonth(nextDate.getMonth() + 1); // Avança para o próximo mês
+
+    const monthObj = {
+      currentDate: formatDate(currentDate),
+      label: getMonthLabel(currentDate),
+      nextDate: formatDate(nextDate),
+      stats: 0
+    };
+
+    months.push(monthObj);
+
+    currentDate.setMonth(currentDate.getMonth() + 1); // Avança para o próximo mês
+  }
+
+  return months;
+}
+
+// Função auxiliar para formatar a data no formato "YYYY-MM-DD"
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Função auxiliar para obter o rótulo do mês
+function getMonthLabel(date) {
+  const monthNames = [
+    "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+  ];
+  return monthNames[date.getMonth()];
 }
 
 // export const priceTable = [

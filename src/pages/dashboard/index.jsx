@@ -10,20 +10,22 @@ import Select from "../../components/Select";
 
 import moneyIcon from "../../assets/icons/money-icon.svg";
 
-import { getStatistics } from "../../data/Data";
+import { getStatistics, getStatisticsByDateRange } from "../../data/Data";
 import { useNavigate } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
 import { globalMessage } from "../../services/api";
-import { set } from "date-fns";
+import { ButtonChain } from "../../components/ButtonChain"
+import { intervalLabels } from "../../util/options";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
-  const [selectedInterval, setSelectedInterval] = useState("month");
+  const [selectedInterval, setSelectedInterval] = useState(0);
   const [statistics, setStatistics] = useState([]);
   const [value, setValue] = useState("");
+  const [dates, setDates] = useState([])
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -32,20 +34,32 @@ const Dashboard = () => {
   const handleSubmit = () => {
     if (value === "") return;
     globalMessage(value);
-    setValue("");
+    setValue('');
   };
+
+  const intervalToCalendarWord = (interval) => (interval === 0) ? "day" : (interval === 1) ? "month" : "week";
+   
 
   const navigate = useNavigate();
 
   const handleCheckDetails = () => {
-    navigate(`/details/${selectedType}/${selectedInterval}`);
+    let selected = intervalToCalendarWord(selectedInterval);
+
+    navigate(`/details/${selectedType}/${selected}`);
   };
+
+  const searchBetweenDates = async (dates) => {
+    const newStatistics = await getStatisticsByDateRange(selectedType, dates);
+    setStatistics(newStatistics);
+  }
 
   useEffect(() => {
     async function loadData() {
-      const newStatistics = await getStatistics(selectedInterval, selectedType);
-      console.log("New Statistics:", newStatistics); // Verificação de dados
-      setStatistics(newStatistics);
+      if((selectedInterval < intervalLabels.length)){
+        let selected = intervalToCalendarWord(selectedInterval);
+        const newStatistics = await getStatistics(selected, selectedType);
+        setStatistics(newStatistics);
+      }
     }
 
     loadData();
@@ -66,12 +80,7 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <Select
-              fieldName="interval"
-              optionsList={intervalOptions}
-              setValue={setSelectedInterval}
-              value={selectedInterval}
-            />
+            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={searchBetweenDates}></ButtonChain>
           </div>
           <DataChart
             key={selectedType} // Forçar re-render
