@@ -44,7 +44,6 @@ export const TribosHome = () => {
                   key={tribo._id}
                   triboId={tribo._id}
                   photoUrl={tribo.profilePic.url}
-                  title={tribo.name}
                   username={tribo.username}
                 />
               );
