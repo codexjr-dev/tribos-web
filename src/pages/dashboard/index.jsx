@@ -48,12 +48,14 @@ const Dashboard = () => {
     navigate(`/details/${selectedType}/${selected}`);
   };
 
+  const searchBetweenDates = async (dates) => {
+    const newStatistics = await getStatisticsByDateRange(selectedType, dates);
+    setStatistics(newStatistics);
+  }
+
   useEffect(() => {
     async function loadData() {
-      if(!(selectedInterval < intervalLabels.length)){
-        const newStatistics = await getStatisticsByDateRange(selectedType, dates);
-        setStatistics(newStatistics);
-      }else{
+      if((selectedInterval < intervalLabels.length)){
         let selected = intervalToCalendarWord(selectedInterval);
         const newStatistics = await getStatistics(selected, selectedType);
         setStatistics(newStatistics);
@@ -78,7 +80,7 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={setDates}></ButtonChain>
+            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={searchBetweenDates}></ButtonChain>
           </div>
           <DataChart
             key={selectedType} // Forçar re-render

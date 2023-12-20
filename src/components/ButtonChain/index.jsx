@@ -37,7 +37,9 @@ export const ButtonChain = ({ labels, selected, searchDates, searchFinanceByDate
 
   const handleSearch = async () => {
     if(dates) {
-      searchFinanceByDate(dates);
+      setLoading(true)
+      await searchFinanceByDate(dates);
+      setLoading(false)
     }else{
       setAlertMsg(true)
     }
