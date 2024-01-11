@@ -33,8 +33,6 @@ export const TribosPost = () => {
     fetchComments();
   }, []);
 
-  console.log(comments);
-
   if (!posts) {
     return <div>Carregando...</div>;
   }
