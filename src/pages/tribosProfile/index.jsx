@@ -16,7 +16,7 @@ export const TribosProfile = () => {
 
   useEffect(() => {
     async function loadPosts() {
-      const allPosts = await privatePosts();
+      const allPosts = await privatePosts(triboId);
       const postsFromTribo = allPosts.filter(
         (post) => post.tribo._id === triboId
       );
