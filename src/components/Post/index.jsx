@@ -30,6 +30,8 @@ const Post = ({
     SetValue(true);
   }
 
+  const [IsVideoPlaying, setIsVideoPlaying] = useState(false);
+
   return (
     <div className={styles.postContainer}>
       <div className={styles.mainContent}>          
@@ -45,14 +47,19 @@ const Post = ({
             <b>Patrocinado</b>
           </span>}
         </div>
-        <Carousel controls={Content.length > 1} indicators={Content.length > 1}>
+        <Carousel controls={Content.length > 1} interval={IsVideoPlaying ? null : 2500} indicators={IsVideoPlaying ? null : Content.length > 1} >
           {Content.map((value, i) => {
+            const isCurrentVideo = value.type !== "image";
+
             return <Carousel.Item key={i}>      
               <div className={styles.photoAndSubtitle}>
                 {value.type === "image" ? (
                   <img src={value.url} className={styles.image} alt="Imagem" />
                 ) : (
-                  <VideoPlayer source={value.url} />
+                <div className={styles.videoWrapper}>
+                  <video src={value.url} controls onPlay={() => setIsVideoPlaying(true)} onPause={() => setIsVideoPlaying(false)} className={styles.video}/>
+                </div>
+                  //<VideoPlayer source={value.url} />
                 )}
               </div>
             </Carousel.Item>
