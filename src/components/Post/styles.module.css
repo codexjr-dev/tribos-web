@@ -106,3 +106,21 @@
     border-radius: 4px !important;
 }
 
+.videoWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: rgb(166, 184, 202);
+    border-radius: 4px !important;
+}
+
+.video {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 80%;
+    z-index: 1; /* Defina o valor do z-index conforme necessário */
+}
