@@ -28,7 +28,6 @@ export const PaymentDetails = ({ handleClose, details }) => {
 
   const handleCheckbox = async () =>  {
     setCaciquePaid(!caciquePaid)
-    console.log(!caciquePaid)
     await updateCaciquePayment(details._id)
   }
 
@@ -96,11 +95,16 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <h2>Informações de Pagamento</h2>
             <div id={styles.owner}>
               <h3>Proprietário</h3>
-              <span>Matheus Forlán Andrade</span>
+              <span>{details.user.name}</span>
             </div>
-            <div id={styles.owner}>
-              <h3>Chave PIX</h3>
-              <span>{details.caciquePix}</span>
+            <div className={styles.ownerWrapper}>
+              <div id={styles.owner}>
+                <h3>Chave PIX</h3>
+                <span>{details.caciquePix}</span>
+              </div>
+              <div className={styles.cobrarWrapper}>
+                <button className={styles.cobrarCheckbox} type="checkbox">Cobrar Usuario</button>
+              </div>
             </div>
             <div id={styles.key}>
               <h3>Banco do PIX</h3>
