@@ -8,12 +8,14 @@ import { findTriboById, payCacique, updateCaciquePayment } from "../../services/
 import Loading from "../Loading";
 import { formatISO } from "date-fns";
 import { toast } from "react-toastify";
+import { chargePayment } from "../../services/api"
 
 export const PaymentDetails = ({ handleClose, details }) => {
   const [editModeActive, setEditModeActive] = useState(Boolean(false));
   const [amountPaid, setAmountPaid] = useState(Number(details.caciquePartPaid));
   const [triboInfo, setTriboInfo] = useState({});
-  const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid)
+  const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid);
+  const [showChargeMsg, setShowChargeMsg] = useState(false);
 
   const handleClickEditMode = () => {
     if (editModeActive) {
@@ -35,6 +37,17 @@ export const PaymentDetails = ({ handleClose, details }) => {
     let input = event.target.value;
     setAmountPaid(input);
   };
+
+  const sendChargeNotification = async () => {
+    const res = await chargePayment(details);
+    
+    if (res) {
+      setShowChargeMsg(true)
+      setTimeout(() => {
+        setShowChargeMsg(false);
+      }, 2000);
+    }
+  }
 
   const handlePayCacique = async () => {
     if (
@@ -61,7 +74,6 @@ export const PaymentDetails = ({ handleClose, details }) => {
     loadAll();
   }, [editModeActive, details.tribo._id]);
 
-  console.log({ details });
 
   return (
     <>
@@ -103,7 +115,8 @@ export const PaymentDetails = ({ handleClose, details }) => {
                 <span>{details.caciquePix}</span>
               </div>
               <div className={styles.cobrarWrapper}>
-                <button className={styles.cobrarCheckbox} type="checkbox">Cobrar Usuario</button>
+                <button className={styles.cobrarCheckbox} onClick={sendChargeNotification}>Cobrar Usuario</button>
+                {showChargeMsg && <span style={{fontSize: "12px"}}>Cobrança enviada</span> }
               </div>
             </div>
             <div id={styles.key}>
