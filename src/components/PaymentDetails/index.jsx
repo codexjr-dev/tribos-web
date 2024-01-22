@@ -114,10 +114,13 @@ export const PaymentDetails = ({ handleClose, details }) => {
                 <h3>Chave PIX</h3>
                 <span>{details.caciquePix}</span>
               </div>
-              <div className={styles.cobrarWrapper}>
-                <button className={styles.cobrarCheckbox} onClick={sendChargeNotification}>Cobrar Usuario</button>
-                {showChargeMsg && <span style={{fontSize: "12px"}}>Cobrança enviada</span> }
-              </div>
+              {
+                !details.caciquePaid && details.caciquePix == "Não adicionou Pix" &&
+                  <div className={styles.cobrarWrapper}>
+                    <button className={styles.cobrarCheckbox} onClick={sendChargeNotification}>Cobrar Usuario</button>
+                    {showChargeMsg && <span style={{fontSize: "12px"}}>Cobrança enviada</span> }
+                  </div>
+              }
             </div>
             <div id={styles.key}>
               <h3>Banco do PIX</h3>
