@@ -25,8 +25,6 @@ export const TribosHome = () => {
     fetchData();
   }, []);
 
-  console.log(tribos);
-
   return (
     <div>
       <div className={styles.triboInfo2}>

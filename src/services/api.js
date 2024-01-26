@@ -152,6 +152,17 @@ export const getAmountStatistics = async (type) => {
   return data;
 };
 
+export const getCountByMonth = async (type) => {
+  let data;
+  await api
+    .get(`/statistics/details/${type}`)
+    .then((res) => {
+      data = res.data;
+    })
+    .catch((data = null));
+  return data;
+};
+
 export const getAllReportsByCount = async () => {
   let dataByCount = null;
   await api
@@ -275,13 +286,13 @@ export const getGeneralFinances = async () => {
   await api
     .get("/statistics/generalFinances/")
     .then((res) => {
-      data = res.data
+      data = res.data;
     })
     .catch((ex) => {
       data = null;
     });
   return data;
-}
+};
 
 export const getGeneralFinancesByDate = async (datas) => {
   let data = null;
@@ -289,20 +300,21 @@ export const getGeneralFinancesByDate = async (datas) => {
     .get("/statistics/generalFinancesByDate/", {
       params: {
         startDate: datas[0],
-        endDate: datas[1]
-      }
+        endDate: datas[1],
+      },
     })
     .then((res) => {
-      data = res.data
+      data = res.data;
     })
     .catch((ex) => {
       data = null;
     });
   return data;
-}
-export const privatePosts = async () => {
+};
+
+export const privatePosts = async (TriboId) => {
   try {
-    const res = await api.get("/private/posts");
+    const res = await api.get(`private/posts?triboId=${TriboId}`);
     return res.data.posts;
   } catch (error) {
     console.log(error);

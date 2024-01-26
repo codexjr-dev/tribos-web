@@ -17,7 +17,7 @@ export const TribosPost = () => {
 
   useEffect(() => {
     async function fetchPost() {
-      const fetchedPost = await privatePosts();
+      const fetchedPost = await privatePosts(triboId);
       setPost(fetchedPost);
     }
 
@@ -32,8 +32,6 @@ export const TribosPost = () => {
 
     fetchComments();
   }, []);
-
-  console.log(comments);
 
   if (!posts) {
     return <div>Carregando...</div>;

@@ -1,4 +1,4 @@
-import LoadingIcon from '../../assets/icons/loading-icon.svg';
+import LoadingIcon from "../../assets/icons/loading-icon.svg";
 
 import styles from "./styles.module.css";
 
@@ -10,9 +10,11 @@ const InfoCard = ({ title, iconSrc, data }) => {
         <img src={iconSrc} alt={title} />
       </div>
       <p id={styles.mainInfo}>
-        {
-          data ? data : <img src={LoadingIcon} className={styles.loading} alt="Carregando" /> 
-        }
+        {data || data == 0 ? (
+          data
+        ) : (
+          <img src={LoadingIcon} className={styles.loading} alt="Carregando" />
+        )}
       </p>
     </div>
   );
