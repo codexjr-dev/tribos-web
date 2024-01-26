@@ -159,3 +159,23 @@
 .container span:hover {
   cursor: pointer;
 }
+
+
+.ownerWrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+.cobrarWrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+}
+
+.cobrarWrapper button:hover{
+  cursor: pointer;
+  background-color: blueviolet;
+  color: white;
+}
+

@@ -8,12 +8,14 @@ import { findTriboById, payCacique, updateCaciquePayment } from "../../services/
 import Loading from "../Loading";
 import { formatISO } from "date-fns";
 import { toast } from "react-toastify";
+import { chargePayment } from "../../services/api"
 
 export const PaymentDetails = ({ handleClose, details }) => {
   const [editModeActive, setEditModeActive] = useState(Boolean(false));
   const [amountPaid, setAmountPaid] = useState(Number(details.caciquePartPaid));
   const [triboInfo, setTriboInfo] = useState({});
-  const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid)
+  const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid);
+  const [showChargeMsg, setShowChargeMsg] = useState(false);
 
   const handleClickEditMode = () => {
     if (editModeActive) {
@@ -28,7 +30,6 @@ export const PaymentDetails = ({ handleClose, details }) => {
 
   const handleCheckbox = async () =>  {
     setCaciquePaid(!caciquePaid)
-    console.log(!caciquePaid)
     await updateCaciquePayment(details._id)
   }
 
@@ -36,6 +37,17 @@ export const PaymentDetails = ({ handleClose, details }) => {
     let input = event.target.value;
     setAmountPaid(input);
   };
+
+  const sendChargeNotification = async () => {
+    const res = await chargePayment(details);
+    
+    if (res) {
+      setShowChargeMsg(true)
+      setTimeout(() => {
+        setShowChargeMsg(false);
+      }, 2000);
+    }
+  }
 
   const handlePayCacique = async () => {
     if (
@@ -62,7 +74,6 @@ export const PaymentDetails = ({ handleClose, details }) => {
     loadAll();
   }, [editModeActive, details.tribo._id]);
 
-  console.log({ details });
 
   return (
     <>
@@ -96,11 +107,20 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <h2>Informações de Pagamento</h2>
             <div id={styles.owner}>
               <h3>Proprietário</h3>
-              <span>Matheus Forlán Andrade</span>
+              <span>{details.user.name}</span>
             </div>
-            <div id={styles.owner}>
-              <h3>Chave PIX</h3>
-              <span>{details.caciquePix}</span>
+            <div className={styles.ownerWrapper}>
+              <div id={styles.owner}>
+                <h3>Chave PIX</h3>
+                <span>{details.caciquePix}</span>
+              </div>
+              {
+                !details.caciquePaid && details.caciquePix == "Não adicionou Pix" &&
+                  <div className={styles.cobrarWrapper}>
+                    <button className={styles.cobrarCheckbox} onClick={sendChargeNotification}>Cobrar Usuario</button>
+                    {showChargeMsg && <span style={{fontSize: "12px"}}>Cobrança enviada</span> }
+                  </div>
+              }
             </div>
             <div id={styles.key}>
               <h3>Banco do PIX</h3>

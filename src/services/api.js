@@ -339,3 +339,14 @@ export const findPostComments = async (idPost) => {
     return null;
   }
 };
+
+export const chargePayment = async (ann) => {
+  try{
+    const res  = await api.post(`/annoucement/chargePayment`, {
+      announcement: ann
+    })
+    return res.data
+  }catch (e) {
+    return null;
+  }
+}
