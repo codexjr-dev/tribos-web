@@ -14,9 +14,9 @@ function UserCard( { user } ) {
 
    const popoverContent = 
      ( <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
-                <PopoverClose style={{border: "none"}}><span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span></PopoverClose>
+                <PopoverClose style={{border: "none", marginLeft: "-15px"}}><span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span></PopoverClose>
     
-                <PopoverClose  style={{border: "none"}}><DialogModal Trigger={"Enviar mensagem"} user={user}/></PopoverClose>
+                <DialogModal Trigger={"Enviar mensagem"} user={user}/>
        </div> 
     )
 
