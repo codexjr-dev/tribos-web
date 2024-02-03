@@ -2,9 +2,9 @@ import React from 'react'
 import styles from "./styles.module.css"
 import defaultProfilePic from  "../../assets/images/default-profile-pic.svg"
 import { MoreVertical } from 'lucide-react';
-import Dialog from '../Dialog';
 import PopoverAction from '../Popover';
 import DialogModal from '../Dialog';
+import { PopoverClose } from '@radix-ui/react-popover';
 
 function UserCard( { user } ) {
 
@@ -14,9 +14,8 @@ function UserCard( { user } ) {
 
    const popoverContent = 
      ( <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
-                <span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span>
+                <PopoverClose style={{border: "none", marginLeft:  "-15px"}}><span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span></PopoverClose>
     
-
                 <DialogModal Trigger={"Enviar mensagem"} />
        </div> 
     )
