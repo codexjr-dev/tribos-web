@@ -12,6 +12,7 @@ import { TribosHome } from "./pages/tribosHome";
 import { TribosProfile } from "./pages/tribosProfile";
 import { TribosBusca } from "./pages/tribosBusca";
 import { TribosPost } from "./pages/tribosPost";
+import ManageUsers from "./pages/manageUsers";
 
 export default function MainRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function MainRoutes() {
       <Route path="/" element={<Login />} />
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/manageUsers" element={<ManageUsers /> } />
         <Route path="/spam" element={<Spam />} />
         <Route path="/details/:type/:interval" element={<Details />} />
         <Route path="/payment/table" element={<PaymentTable />} />

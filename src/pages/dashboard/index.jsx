@@ -103,14 +103,7 @@ const Dashboard = () => {
             />
           </div>
           <ReportedProblems />
-          <input
-            type="text"
-            value={value}
-            onChange={handleChange}
-            placeholder="Mensagem global"
-            style={{ marginBottom: 20, borderRadius: 10 }}
-          />
-          <button onClick={handleSubmit}>Enviar</button>
+          <ReportedProblems navigateTo={"manageUsers"} title={"Gerenciar Usúarios"} navigateName={"Banir e enviar mensagens"}/>
         </nav>
       </main>
     </div>
