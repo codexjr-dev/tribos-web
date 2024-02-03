@@ -5,37 +5,50 @@ import { useNavigate } from "react-router-dom";
 import UserCard from '../../components/UserCard';
 import { getAllUsers } from '../../services/api';
 import { set } from 'date-fns';
+import { globalMessage } from '../../services/api';
 
 function ManageUsers() {
 
     const navigate = useNavigate();
 
-    const [globalMsg, setGlobalMsg] = useState();
+    const [globalMsg, setGlobalMsg] = useState("");
     const [searchUser, setSearchUser] = useState("");
     const [usersList, setUsersList] = useState([]);
-
-    useEffect( async () => {
+    const [inputMsg, setInputMsg] = useState(null);
+    
+    async function fetchUsers() {
         const { data: users } = await getAllUsers();
         setUsersList(users.personals);
-    }, [])
-
+    }
+    
+    
     const sendGlobalMsg = () => {
-
+        if (globalMsg === ""){
+            setInputMsg("Preencha o campo");
+        }else{
+            globalMessage(globalMsg);
+            setGlobalMsg('');
+            setInputMsg("Mensagem enviada a todos os usúarios!");
+            setTimeout(() => {
+                setInputMsg(null);
+            },[2000])
+        }
     }
 
     const filterUsers = (user) => {
         const searchText = searchUser.toLowerCase();
-
-
         return (
             user.name?.toLowerCase().startsWith(searchText) ||
             user.username?.toLowerCase().startsWith(searchText) ||
             user.phone?.toLowerCase().startsWith(searchText)
-        );
-    };
-
+            );
+        };
+        
     const usersListFiltered = usersList.filter((item) => filterUsers(item))
-
+        
+    useEffect(() => {
+        fetchUsers()
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -48,8 +61,8 @@ function ManageUsers() {
             <div className={styles.globalMsgContainer}>
                 <label>Mensagem Global</label>
                 <div className={styles.inputWrapper}>
-                    <textarea className={styles.inputCalendar} onChange={(e) => setGlobalMsg(e.target.value)}></textarea>
-                    <span>Preencha o campo</span>
+                    <textarea className={styles.inputCalendar} value={globalMsg} onChange={(e) => setGlobalMsg(e.target.value)}></textarea>
+                    {inputMsg && <span style={inputMsg !== "Preencha o campo" ? {color: "green"} :  {color: "red"} }>{inputMsg}</span>}
                 </div>
                 <button onClick={sendGlobalMsg} style={{height: "23px"}}>Enviar</button>
             </div>
