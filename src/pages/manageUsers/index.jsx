@@ -28,7 +28,7 @@ function ManageUsers() {
                     <textarea className={styles.inputCalendar} onChange={(e) => setGlobalMsg(e.target.value)}></textarea>
                     <span>Preencha o campo</span>
                 </div>
-                <button onClick={sendGlobalMsg}>Enviar</button>
+                <button onClick={sendGlobalMsg} style={{height: "23px"}}>Enviar</button>
             </div>
             <div style={{marginTop:  "40px"}}>
                 <hr style={{border: "1px solid black"}}/>
@@ -37,10 +37,10 @@ function ManageUsers() {
                 <div className={styles.globalMsgContainer}>
                     <label>Pesquisar usúario</label>
                     <div className={styles.inputWrapper}>
-                        <input className={styles.inputCalendar} style={{height: "40px"}} onChange={(e) => setGlobalMsg(e.target.value)}></input>
+                        <input className={styles.inputCalendar} style={{height: "20px"}} onChange={(e) => setGlobalMsg(e.target.value)}></input>
                         <span>Preencha o campo</span>
                     </div>
-                    <button onClick={sendGlobalMsg} style={{height: "43px"}} >Buscar</button>
+                    <button onClick={sendGlobalMsg} style={{height: "23px"}} >Buscar</button>
                 </div>
                 <div className={styles.cardContainer}>
                     <UserCard />

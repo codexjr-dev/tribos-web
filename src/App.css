@@ -86,3 +86,14 @@ abbr,
 acronym {
   border: 0;
 }
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 24px;
+  background: none;
+  outline: none;
+  border: 2px solid var(--purple);
+  font-size: 16px;
+  color: var(--purple);
+  transition: background-color ease-in-out 0.2s;
+}
