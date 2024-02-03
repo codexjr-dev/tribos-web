@@ -12,16 +12,18 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ReportReasons({ reports }) {
-  return <div>
-    <span><b>Motivos:</b></span>
-    <ul style={{listStyle: "inside"}}>
-      {
-        reports.map((value, i) => (
+  return (
+    <div>
+      <span>
+        <b>Motivos:</b>
+      </span>
+      <ul style={{ listStyle: "inside" }}>
+        {reports.map((value, i) => (
           <li key={i}>{value.reason}</li>
-        ))
-      }
-    </ul>
-  </div>;
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 const Spam = () => {
@@ -31,7 +33,6 @@ const Spam = () => {
   const [route, setRoute] = useState("");
   const [operation, setOperation] = useState("");
   const [id, setId] = useState("");
-
 
   const navigate = useNavigate();
 
@@ -47,14 +48,14 @@ const Spam = () => {
 
   return (
     <div className={styles.container}>
-      <header style={{marginBottom: '3rem'}}>
+      <header style={{ marginBottom: "3rem" }}>
         {isModalVisible ? (
           <div className={styles.titleOpacity}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Spam ou Abusos </h2>
           </div>
         ) : (
-          <div onClick={() => navigate("/dashboard")}>
+          <div onClick={() => navigate("/dashboard/day")}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Spam ou Abusos </h2>
           </div>
@@ -80,46 +81,46 @@ const Spam = () => {
           value={selectedType}
         />
 
-        {(
-          reports.map((value) => {
-            if (value.type === "Post") {
-              console.log(value);
-              return (
-                <PostComponent
-                  key={value._id}
-                  User={value.reported.tribo.username}
-                  Icon={value.reported.tribo.profilePic.url}
-                  Time={value.updatedAt}
-                  Content={value.reported.content}
-                  Subtitle={value.reported.text}
-                  SetValue={setIsModalVisible}
-                  SetOperation={setOperation}
-                  SetRoute={setRoute}
-                  Route={value.type}
-                  Id={value._id}
-                  SetId={setId}
-                  extraFooter={<ReportReasons reports={value.reports} />}
-                />
-              )
-            } else if (value.type === 'User' || value.type == 'Tribo') {
-              return (
-                <ProfileComponent
-                  key={value._id}
-                  User={value.reported.username}
-                  Icon={value.reported.profilePic.url}
-                  Time={value.updatedAt}
-                  Name={value.reported.name}
-                  SetValue={setIsModalVisible}
-                  SetOperation={setOperation}
-                  SetRoute={setRoute}
-                  Route={value.type}
-                  Id={value._id}
-                  SetId={setId}
-                  extraFooter={<ReportReasons reports={value.reports} />}
-                />
-              );
-            } else if (value.type === 'Announcement') {
-              return <PostComponent
+        {reports.map((value) => {
+          if (value.type === "Post") {
+            console.log(value);
+            return (
+              <PostComponent
+                key={value._id}
+                User={value.reported.tribo.username}
+                Icon={value.reported.tribo.profilePic.url}
+                Time={value.updatedAt}
+                Content={value.reported.content}
+                Subtitle={value.reported.text}
+                SetValue={setIsModalVisible}
+                SetOperation={setOperation}
+                SetRoute={setRoute}
+                Route={value.type}
+                Id={value._id}
+                SetId={setId}
+                extraFooter={<ReportReasons reports={value.reports} />}
+              />
+            );
+          } else if (value.type === "User" || value.type == "Tribo") {
+            return (
+              <ProfileComponent
+                key={value._id}
+                User={value.reported.username}
+                Icon={value.reported.profilePic.url}
+                Time={value.updatedAt}
+                Name={value.reported.name}
+                SetValue={setIsModalVisible}
+                SetOperation={setOperation}
+                SetRoute={setRoute}
+                Route={value.type}
+                Id={value._id}
+                SetId={setId}
+                extraFooter={<ReportReasons reports={value.reports} />}
+              />
+            );
+          } else if (value.type === "Announcement") {
+            return (
+              <PostComponent
                 key={value._id}
                 User={value.reported.tribo.username}
                 Icon={value.reported.tribo.profilePic.url}
@@ -133,16 +134,23 @@ const Spam = () => {
                 Id={value._id}
                 SetId={setId}
                 isAd={true}
-                extraFooter={<>
-                  {value.reported.link && <span><b>Link:</b> <a href={value.reported.link}>{value.reported.link}</a></span>}
-                  <ReportReasons reports={value.reports} />
-                </>}
+                extraFooter={
+                  <>
+                    {value.reported.link && (
+                      <span>
+                        <b>Link:</b>{" "}
+                        <a href={value.reported.link}>{value.reported.link}</a>
+                      </span>
+                    )}
+                    <ReportReasons reports={value.reports} />
+                  </>
+                }
               />
-            } else {
-              return <p style={{color: "red"}}>?</p>
-            }
-          })
-        )}
+            );
+          } else {
+            return <p style={{ color: "red" }}>?</p>;
+          }
+        })}
       </div>
     </div>
   );

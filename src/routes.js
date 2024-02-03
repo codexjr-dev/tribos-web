@@ -19,7 +19,7 @@ export default function MainRoutes() {
       <Route path="*" element={<NotFound />} />
       <Route path="/" element={<Login />} />
       <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:interval" element={<Dashboard />} />
         <Route path="/spam" element={<Spam />} />
         <Route path="/details/:type/:interval" element={<Details />} />
         <Route path="/payment/table" element={<PaymentTable />} />
