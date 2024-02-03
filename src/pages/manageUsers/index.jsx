@@ -6,6 +6,7 @@ import UserCard from '../../components/UserCard';
 import { getAllUsers } from '../../services/api';
 import { set } from 'date-fns';
 import { globalMessage } from '../../services/api';
+import userNotFound from  "../../assets/images/user-notFound.svg"
 
 function ManageUsers() {
 
@@ -78,9 +79,16 @@ function ManageUsers() {
                 </div>
                 <div className={styles.cardContainer}>
                     {
+                        usersListFiltered.length  ?
+
                         usersListFiltered?.map((item, index) => (
                             <UserCard user={item} key={index}/>
                         ) )
+                        :
+                        <div className={styles.notFound}>
+                            <h1>Usúario não encontrado</h1>
+                            <img src={userNotFound} />
+                        </div>
                     }
                 </div>
             </div>

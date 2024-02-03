@@ -100,3 +100,17 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.notFound{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 30px;
+    color: var(--purple);
+    height: 550px;
+    
+    img{
+        height: 400px;
+    }
+}
