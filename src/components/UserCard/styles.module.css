@@ -8,6 +8,7 @@
     padding: 10px 20px;
     height: 60px;
     width: 100%;
+    gap: 10px;
 
     img{
         width: 30px;

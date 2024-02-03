@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./styles.module.css";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import { useNavigate } from "react-router-dom";
 import UserCard from '../../components/UserCard';
+import { getAllUsers } from '../../services/api';
+import { set } from 'date-fns';
 
 function ManageUsers() {
 
@@ -10,6 +12,12 @@ function ManageUsers() {
 
     const [globalMsg, setGlobalMsg] = useState();
     const [searchUser, setSearchUser] = useState();
+    const [usersList, setUsersList] = useState();
+
+    useEffect( async () => {
+        const { data: users } = await getAllUsers();
+        setUsersList(users.personals);
+    }, [])
 
     const sendGlobalMsg = () => {
 
@@ -42,8 +50,11 @@ function ManageUsers() {
                     </div>
                 </div>
                 <div className={styles.cardContainer}>
-                    <UserCard />
-                    <UserCard />
+                    {
+                        usersList?.map((item, index) => (
+                            <UserCard user={item} key={index}/>
+                        ) )
+                    }
                 </div>
             </div>
         </div>

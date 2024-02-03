@@ -362,3 +362,13 @@ export const chargePayment = async (ann) => {
     return null;
   }
 }
+
+export const getAllUsers = async () => {
+   try {
+    const response = await api.get("/personal")
+
+    return response;
+   } catch (error) {
+      return null;
+   }
+}
