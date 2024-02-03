@@ -8,7 +8,8 @@ function ManageUsers() {
 
     const navigate = useNavigate();
 
-    const [globalMsg, setGlobalMsg] = useState()
+    const [globalMsg, setGlobalMsg] = useState();
+    const [searchUser, setSearchUser] = useState();
 
     const sendGlobalMsg = () => {
 
@@ -37,10 +38,8 @@ function ManageUsers() {
                 <div className={styles.globalMsgContainer}>
                     <label>Pesquisar usúario</label>
                     <div className={styles.inputWrapper}>
-                        <input className={styles.inputCalendar} style={{height: "20px"}} onChange={(e) => setGlobalMsg(e.target.value)}></input>
-                        <span>Preencha o campo</span>
+                        <input className={styles.inputCalendar} style={{height: "20px"}} onChange={(e) => setSearchUser(e.target.value)}></input>
                     </div>
-                    <button onClick={sendGlobalMsg} style={{height: "23px"}} >Buscar</button>
                 </div>
                 <div className={styles.cardContainer}>
                     <UserCard />

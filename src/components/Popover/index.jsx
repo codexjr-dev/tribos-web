@@ -4,17 +4,14 @@ import { MixerHorizontalIcon, Cross2Icon } from '@radix-ui/react-icons';
 import './styles.css';
 import DialogModal from '../Dialog';
 
-const PopoverAction = ( { Trigger } ) => (
+const PopoverAction = ( { Trigger, Content } ) => (
   <Popover.Root>
     <Popover.Trigger asChild>
         {Trigger}
     </Popover.Trigger>
     <Popover.Portal>
       <Popover.Content className="PopoverContent" sideOffset={5}>
-          <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
-              <span style={{color: "red", cursor: "pointer"}}>Banir Usúario</span>
-              <DialogModal Trigger={"Enviar mensagem"} />
-          </div>
+          {Content}
         <Popover.Close className="PopoverClose" aria-label="Close">
           <Cross2Icon />
         </Popover.Close>
