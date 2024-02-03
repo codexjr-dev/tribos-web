@@ -372,3 +372,14 @@ export const getAllUsers = async () => {
       return null;
    }
 }
+
+export const AdmNotifyUser = async (idUser, message) => {
+
+  try {
+    const response = api
+                        .post(`/personal/notifications/AdmNotification/${idUser}`,
+                             {message})
+  } catch (error) {
+    
+  }
+}
