@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import './styles.css';
 
-const DialogModal = ( { Trigger } ) => (
+const DialogModal = ( { Trigger, user } ) => (
   <Dialog.Root>
     <Dialog.Trigger asChild>
       <button className="Button violet">{Trigger}</button>
@@ -11,25 +11,19 @@ const DialogModal = ( { Trigger } ) => (
     <Dialog.Portal>
       <Dialog.Overlay className="DialogOverlay" />
       <Dialog.Content className="DialogContent">
-        <Dialog.Title className="DialogTitle">Edit profile</Dialog.Title>
+        <Dialog.Title className="DialogTitle">Enviar mensagem para {}</Dialog.Title>
         <Dialog.Description className="DialogDescription">
-          Make changes to your profile here. Click save when you're done.
+          
         </Dialog.Description>
         <fieldset className="Fieldset">
-          <label className="Label" htmlFor="name">
-            Name
+          <label className="Label" htmlFor="mensagem">
+            Mensagem
           </label>
-          <input className="Input" id="name" defaultValue="Pedro Duarte" />
-        </fieldset>
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="username">
-            Username
-          </label>
-          <input className="Input" id="username" defaultValue="@peduarte" />
+          <textarea className="Textarea" id="mensagem" placeholder='Mensagem' />
         </fieldset>
         <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
           <Dialog.Close asChild>
-            <button className="Button green">Save changes</button>
+            <button className="Button green">Enviar</button>
           </Dialog.Close>
         </div>
         <Dialog.Close asChild>
