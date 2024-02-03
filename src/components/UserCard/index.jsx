@@ -24,10 +24,15 @@ function UserCard( { user } ) {
   return (
     <div className={styles.container}>
         <div>
-            <img src={defaultProfilePic}></img>
+            <img src={user.profilePic.url ?? defaultProfilePic}></img>
         </div>
         <div>
-            <div>Nome: {user.name} username: {user.username} telefone: {user.phone ?? "Não informado"} email: {user.email}</div>
+        <div>
+          <strong>Nome:</strong> {user.name} 
+          <strong> username:</strong> {user.username} 
+          <strong> telefone:</strong> {user.phone ?? "Não informado"} 
+          <strong> email:</strong> {user.email}
+        </div>
         </div>
         <PopoverAction Trigger={<MoreVertical />} Content={popoverContent}/>
     </div>

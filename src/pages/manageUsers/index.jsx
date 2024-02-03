@@ -79,7 +79,7 @@ function ManageUsers() {
                 </div>
                 <div className={styles.cardContainer}>
                     {
-                        usersListFiltered.length  ?
+                        usersListFiltered.length && usersList  ?
 
                         usersListFiltered?.map((item, index) => (
                             <UserCard user={item} key={index}/>
