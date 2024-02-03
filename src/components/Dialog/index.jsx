@@ -11,7 +11,7 @@ const DialogModal = ( { Trigger, user } ) => (
     <Dialog.Portal>
       <Dialog.Overlay className="DialogOverlay" />
       <Dialog.Content className="DialogContent">
-        <Dialog.Title className="DialogTitle">Enviar mensagem para {}</Dialog.Title>
+        <Dialog.Title className="DialogTitle">Enviar mensagem para {user.username}</Dialog.Title>
         <Dialog.Description className="DialogDescription">
           
         </Dialog.Description>
