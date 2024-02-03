@@ -26,3 +26,15 @@ div strong{
     font-weight: bold;
     text-decoration: underline;
 }
+
+.messageContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100px;
+
+    span{
+        margin-bottom: -10px;
+        color:red;
+    }
+}

@@ -1,24 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "./styles.module.css"
 import defaultProfilePic from  "../../assets/images/default-profile-pic.svg"
 import { MoreVertical } from 'lucide-react';
 import PopoverAction from '../Popover';
 import DialogModal from '../Dialog';
 import { PopoverClose } from '@radix-ui/react-popover';
+import * as Dialog from '@radix-ui/react-dialog';
+import { AdmNotifyUser } from '../../services/api';
 
 function UserCard( { user } ) {
+
+    const [message, setMessage] = useState(null);
 
 
     const banirUser = () => console.log("teste")
     
 
+    const notifyUser = async () => {
+      if(message){
+        const response = await AdmNotifyUser(user._id, message);
+        setMessage(null)
+      }
+    }
+
+    const dialogContent = (<>
+       <fieldset className="Fieldset">
+          <label className="Label" htmlFor="mensagem">
+            Mensagem
+          </label>
+          <div className={styles.messageContainer}>
+            <textarea className="Textarea" id="mensagem"  value={message} onChange={(e) => setMessage(e.target.value)} />
+            <span> {message ? "" : 'Preencha o campo' }</span> 
+          </div>
+        </fieldset>
+        <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
+          <Dialog.Close asChild>
+            <button  className="Button green" onClick={notifyUser} disabled={message ? false : true}>Enviar</button>
+          </Dialog.Close>
+        </div>
+        </>
+        )
+
    const popoverContent = 
      ( <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
                 <PopoverClose style={{border: "none", marginLeft: "-15px"}}><span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span></PopoverClose>
     
-                <DialogModal Trigger={"Enviar mensagem"} user={user}/>
+                <DialogModal Trigger={"Enviar mensagem"} user={user} closeFunction={notifyUser} mainContent={dialogContent}/>
        </div> 
     )
+
 
   return (
     <div className={styles.container}>
@@ -33,7 +63,7 @@ function UserCard( { user } ) {
           <strong> email:</strong> {user.email}
         </div>
         </div>
-        <PopoverAction Trigger={<MoreVertical />} Content={popoverContent}/>
+        <PopoverAction Trigger={<MoreVertical />} Content={popoverContent} />
     </div>
   )
 }
