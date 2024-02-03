@@ -33,7 +33,7 @@ const DialogModal = ( { Trigger } ) => (
           </Dialog.Close>
         </div>
         <Dialog.Close asChild>
-          <button className="IconButton" aria-label="Close">
+          <button className="closeButton" aria-label="Close">
             <Cross2Icon />
           </button>
         </Dialog.Close>
