@@ -8,9 +8,15 @@ import DialogModal from '../Dialog';
 
 function UserCard( { user } ) {
 
+
+    const banirUser = () => console.log("teste")
+    
+
    const popoverContent = 
      ( <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
-                <span style={{color: "red", cursor: "pointer"}}>Banir Usúario</span>
+                <span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span>
+    
+
                 <DialogModal Trigger={"Enviar mensagem"} />
        </div> 
     )

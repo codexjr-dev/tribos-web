@@ -11,8 +11,8 @@ function ManageUsers() {
     const navigate = useNavigate();
 
     const [globalMsg, setGlobalMsg] = useState();
-    const [searchUser, setSearchUser] = useState();
-    const [usersList, setUsersList] = useState();
+    const [searchUser, setSearchUser] = useState("");
+    const [usersList, setUsersList] = useState([]);
 
     useEffect( async () => {
         const { data: users } = await getAllUsers();
@@ -22,6 +22,20 @@ function ManageUsers() {
     const sendGlobalMsg = () => {
 
     }
+
+    const filterUsers = (user) => {
+        const searchText = searchUser.toLowerCase();
+
+
+        return (
+            user.name?.toLowerCase().startsWith(searchText) ||
+            user.username?.toLowerCase().startsWith(searchText) ||
+            user.phone?.toLowerCase().startsWith(searchText)
+        );
+    };
+
+    const usersListFiltered = usersList.filter((item) => filterUsers(item))
+
 
     return (
         <div className={styles.container}>
@@ -51,7 +65,7 @@ function ManageUsers() {
                 </div>
                 <div className={styles.cardContainer}>
                     {
-                        usersList?.map((item, index) => (
+                        usersListFiltered?.map((item, index) => (
                             <UserCard user={item} key={index}/>
                         ) )
                     }
