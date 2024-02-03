@@ -1,0 +1,103 @@
+.container {
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 16px;
+    padding-bottom: 2.4rem;
+  }
+
+.container header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+}
+
+.container header div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 0 1rem 0 0;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: all ease .2s;
+  }
+  
+.container header div h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 3rem;
+  }
+  
+.container header div:hover,
+  .container .buttonsHeader img:hover {
+    filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg) brightness(92%) contrast(98%);
+    cursor: pointer;
+  }
+
+
+.titleOpacity {
+    opacity: 20%;
+}
+
+.inputCalendar{
+    padding: 0.5rem 1rem;
+    height: 50px;
+    border: 2px solid var(--purple);
+    font-size: 16px;
+    color: var(--purple);
+    background: none;
+    outline: none;
+    border: 2px solid var(--purple);
+    border-radius: 24px;
+}
+
+.globalMsgContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    label{
+        font-size: 20px;
+    }
+
+    button{
+        height: 50px;
+        width: 100px;
+    }
+
+    button:hover{
+        background-color: var(--purple);
+        color: #fff;
+        font-weight: 700;
+    }
+}
+
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+
+    span{
+        color: red;
+        margin-bottom: -23px;
+    }
+}
+
+.UsersContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.cardContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

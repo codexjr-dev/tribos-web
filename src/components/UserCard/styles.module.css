@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #8127BB;
+    border-radius: 10px;
+    padding: 10px 20px;
+    height: 60px;
+    width: 100%;
+
+    img{
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+    }
+}
+
+.moreVertical{
+    display: flex;
+    flex-direction: column; 
+}
