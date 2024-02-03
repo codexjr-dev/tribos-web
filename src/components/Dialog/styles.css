@@ -63,13 +63,16 @@ input {
 .Button.violet {
   background-color: white;
   color: var(--violet-11);
-  box-shadow: 0 2px 10px var(--black-a7);
+  border: none;
+  display: flex;
+  justify-content: start;
+  margin-left: -14px;
 }
 .Button.violet:hover {
   background-color: var(--mauve-3);
 }
 .Button.violet:focus {
-  box-shadow: 0 0 0 2px black;
+  box-shadow: 0 0 0 2px white;
 }
 .Button.green {
   background-color: var(--green-4);

@@ -21,9 +21,7 @@ function UserCard() {
             <img src={defaultProfilePic}></img>
         </div>
         <div>
-            <div>
-                
-            </div>
+            <div>Nome: Igor Falcão username: cleber telefone: 8398167862 email: igor@gmail.com </div>
         </div>
         <PopoverAction Trigger={<MoreVertical />}/>
     </div>
