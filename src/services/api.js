@@ -376,10 +376,18 @@ export const getAllUsers = async () => {
 export const AdmNotifyUser = async (idUser, message) => {
 
   try {
-    const response = api
+    const response = await api
                         .post(`/personal/notifications/AdmNotification/${idUser}`,
                              {message})
   } catch (error) {
-    
+    return null
+  }
+}
+
+export const BanUser = async (idUser) => {
+  try {
+    const response = await api.post(`/personal/banUser/${idUser}`)
+  } catch (error) {
+    return null
   }
 }

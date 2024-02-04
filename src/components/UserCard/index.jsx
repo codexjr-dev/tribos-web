@@ -6,14 +6,17 @@ import PopoverAction from '../Popover';
 import DialogModal from '../Dialog';
 import { PopoverClose } from '@radix-ui/react-popover';
 import * as Dialog from '@radix-ui/react-dialog';
-import { AdmNotifyUser } from '../../services/api';
+import { AdmNotifyUser, BanUser } from '../../services/api';
 
-function UserCard( { user } ) {
+function UserCard( { user, updateUserList } ) {
 
     const [message, setMessage] = useState(null);
 
 
-    const banirUser = () => console.log("teste")
+    const banirUser = async () =>{
+      const response = await BanUser(user._id)
+      updateUserList()
+    }
     
 
     const notifyUser = async () => {

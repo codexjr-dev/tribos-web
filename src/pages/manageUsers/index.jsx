@@ -83,7 +83,7 @@ function ManageUsers() {
                         usersListFiltered.length && usersList  ?
 
                         usersListFiltered?.map((item, index) => (
-                            <UserCard user={item} key={index}/>
+                            <UserCard user={item} key={index} updateUserList={() => fetchUsers()}/>
                         ) )
                         :
                         <div className={styles.notFound}>
