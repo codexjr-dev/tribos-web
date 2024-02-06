@@ -11,7 +11,7 @@ import { typeLabels, intervalLabels } from "../../util/options";
 import { useNavigate } from "react-router-dom";
 import { PaymentList } from "../../components/PaymentList";
 import styles from "./styles.module.css";
-import { mapIntervalOptionToList } from "../../data/Data"
+import { mapIntervalOptionToList } from "../../data/Data";
 
 export const PaymentDashboard = () => {
   const [showDetailsActive, setShowDetailsActive] = useState(false);
@@ -34,32 +34,36 @@ export const PaymentDashboard = () => {
   };
 
   const getOptionDates = () => {
-    let option = (selectedInterval === 0) ? "day" : (selectedInterval === 1) ? "month" : "week";
-    var datas = mapIntervalOptionToList(option)
-    var startDate = datas[0].currentDate
-    var endDate = datas[datas.length - 1].nextDate
-    return [startDate, endDate]
-  }
-
+    let option =
+      selectedInterval === 0
+        ? "day"
+        : selectedInterval === 1
+        ? "month"
+        : "week";
+    var datas = mapIntervalOptionToList(option);
+    var startDate = datas[0].currentDate;
+    var endDate = datas[datas.length - 1].nextDate;
+    return [startDate, endDate];
+  };
 
   useEffect(() => {
-    searchFinanceByDate()
-  },[selectedInterval])
+    searchFinanceByDate();
+  }, [selectedInterval]);
 
   const searchFinanceByDate = async (datas) => {
-    if(!datas){
-      if(selectedInterval < intervalLabels.length) {
+    if (!datas) {
+      if (selectedInterval < intervalLabels.length) {
         setFinanceChart(null);
-        var datas = getOptionDates()
-        var data = await api.getGeneralFinancesByDate(datas)
+        var datas = getOptionDates();
+        var data = await api.getGeneralFinancesByDate(datas);
         setFinanceChart(data);
       }
-    }else{
+    } else {
       setFinanceChart(null);
-      var data = await api.getGeneralFinancesByDate(datas)
+      var data = await api.getGeneralFinancesByDate(datas);
       setFinanceChart(data);
     }
-  }
+  };
 
   return (
     <>
@@ -70,7 +74,7 @@ export const PaymentDashboard = () => {
       ) : null}
       <div className={styles.container}>
         <header>
-          <div onClick={() => navigate("/dashboard")}>
+          <div onClick={() => navigate("/dashboard/day")}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Pagamentos </h2>
           </div>
@@ -81,14 +85,18 @@ export const PaymentDashboard = () => {
             alt="Ajustar"
             onClick={() => navigate("/payment/table")}
           />
-          <ButtonChain labels={intervalLabels} searchDates searchFinanceByDate={searchFinanceByDate} selected={setSelectedInterval}/>
+          <ButtonChain
+            labels={intervalLabels}
+            searchDates
+            searchFinanceByDate={searchFinanceByDate}
+            selected={setSelectedInterval}
+          />
         </div>
         <main>
           <div className={styles.generalInfo}>
-            {
-              !financeChart ? 
-                <Loading />
-              :
+            {!financeChart ? (
+              <Loading />
+            ) : (
               <>
                 <h2>Visão Geral</h2>
                 <p id={styles.amount}>R$ {financeChart.total}</p>
@@ -96,7 +104,7 @@ export const PaymentDashboard = () => {
                   <StackedChart data={financeChart.finances} />
                 </div>
               </>
-            }
+            )}
           </div>
           <div className={styles.paymentList}>
             <div className={styles.tableHeader}>
