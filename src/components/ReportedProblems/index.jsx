@@ -5,15 +5,15 @@ import errorIcon from "../../assets/icons/error-icon.svg";
 import styles from "./styles.module.css";
 import { NavigateButton } from "../NavigateButton";
 
-const ReportedProblems = () => {
+const ReportedProblems = ( { title, navigateIcon, navigateTo, navigateName  } ) => {
   return (
     <nav className={styles.container}>
-      <h3>Problemas Reportados</h3>
+      <h3>{title ?? "Problemas Reportados"}</h3>
       <div className={styles.listContainer}>
         <NavigateButton
-          name="Spam ou abusos"
-          srcIcon={reportIcon}
-          navigateTo="spam"
+          name={navigateName ?? "Spam ou abusos"}
+          srcIcon={navigateIcon ?? reportIcon}
+          navigateTo={navigateTo ?? "spam"}
         />
       </div>
     </nav>

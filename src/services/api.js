@@ -362,3 +362,32 @@ export const chargePayment = async (ann) => {
     return null;
   }
 }
+
+export const getAllUsers = async () => {
+   try {
+    const response = await api.get("/personal")
+
+    return response;
+   } catch (error) {
+      return null;
+   }
+}
+
+export const AdmNotifyUser = async (idUser, message) => {
+
+  try {
+    const response = await api
+                        .post(`/personal/notifications/AdmNotification/${idUser}`,
+                             {message})
+  } catch (error) {
+    return null
+  }
+}
+
+export const BanUser = async (idUser) => {
+  try {
+    const response = await api.post(`/personal/banUser/${idUser}`)
+  } catch (error) {
+    return null
+  }
+}
