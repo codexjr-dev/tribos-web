@@ -130,7 +130,19 @@ const Dashboard = () => {
             />
           </div>
           <ReportedProblems />
-          <ReportedProblems navigateTo={"manageUsers"} title={"Gerenciar Usúarios"} navigateName={"Banir e enviar mensagens"}/>
+          <ReportedProblems
+            navigateTo={"manageUsers"}
+            title={"Gerenciar Usúarios"}
+            navigateName={"Banir e enviar mensagens"}
+          />
+          <div className={styles.paymentButtonContainer}>
+            <h2>Gerenciar Usúario</h2>
+            <NavigateButton
+              name="Alterar senha"
+              srcIcon={logo}
+              navigateTo="tribos/change"
+            />
+          </div>
         </nav>
       </main>
     </div>

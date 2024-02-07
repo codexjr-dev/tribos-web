@@ -39,11 +39,11 @@ export const TribosPost = () => {
 
   return (
     <div>
-      <div className={styles.triboInfoContainer}>
+      <div className={styles.container}>
         <header>
           <div onClick={() => navigate(`/tribos/profile/${triboId}`)}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <span style={{ fontWeight: "bold" }}> Tribos </span>
+            <h2> Tribos </h2>
           </div>
         </header>
       </div>
