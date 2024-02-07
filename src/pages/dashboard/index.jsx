@@ -49,9 +49,14 @@ const Dashboard = () => {
   const handleInterval = (interval) => {
     let selected = intervalToCalendarWord(interval);
 
-    navigate(`/dashboard/${selected}`);
+    navigate(`/dashboard/${selectedType}/${selected}`);
     setSelectedInterval(interval);
   };
+
+  const handleSelectedType = (type) => {
+    navigate(`/dashboard/${type}/${intervalToCalendarWord(selectedInterval)}`);
+    setSelectedType(type)
+  }
 
   const handleCheckDetails = () => {
     let selected = intervalToCalendarWord(selectedInterval);
@@ -67,13 +72,14 @@ const Dashboard = () => {
   useEffect(() => {
     async function loadData() {
       if (selectedInterval < intervalLabels.length) {
-        if (params.interval) {
+        if (params.interval && params.selectedType) {
           const newStatistics = await getStatistics(
             params.interval,
-            selectedType
+            params.selectedType
           );
           let interval = intervalWordToCalendar(params.interval);
           setSelectedInterval(interval);
+          setSelectedType(params.selectedType)
           setStatistics(newStatistics);
         } else {
           let selected = intervalToCalendarWord(selectedInterval);
@@ -84,7 +90,7 @@ const Dashboard = () => {
     }
 
     loadData();
-  }, [selectedInterval, params?.interval, selectedType, setStatistics]);
+  }, [selectedInterval, params?.interval, selectedType, params.selectedType, setStatistics]);
 
   return (
     <div className={styles.container}>
@@ -97,7 +103,7 @@ const Dashboard = () => {
             <Select
               fieldName="type"
               optionsList={typeOptions}
-              setValue={setSelectedType}
+              setValue={handleSelectedType}
               value={selectedType}
               className={styles.test}
             />

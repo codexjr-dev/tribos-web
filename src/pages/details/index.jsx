@@ -40,7 +40,7 @@ const Details = () => {
   return (
     <div className={styles.container}>
       <header>
-        <div onClick={() => navigate(`/dashboard/${params.interval}`)}>
+        <div onClick={() => navigate(`/dashboard/${params.type}/${params.interval}`)}>
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2>
             {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(
