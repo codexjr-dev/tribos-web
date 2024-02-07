@@ -55,7 +55,7 @@ function ManageUsers() {
     return (
         <div className={styles.container}>
             <header style={{marginBottom: '3rem'}}>
-                <div onClick={() => navigate("/dashboard/day")}>
+                <div onClick={() => navigate(-1)}>
                     <img src={LeftArrowIcon} alt="Voltar" />
                     <h2> Gerenciar usúarios </h2>
                 </div>
