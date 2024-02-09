@@ -28,7 +28,7 @@ const Login = () => {
   const handleLogin = async () => {
     await authenticate(usernameRef.current.value, passwordRef.current.value)
       .then(() => {
-        navigate("/dashboard/day");
+        navigate("/dashboard/users/day");
       })
       .catch((e) => {
         toast.error("Cheque suas credenciais e tente novamente.");

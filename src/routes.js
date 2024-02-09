@@ -22,7 +22,10 @@ export default function MainRoutes() {
       <Route path="/" element={<Login />} />
       <Route element={<PrivateRoute />}>
         <Route path="/manageUsers" element={<ManageUsers />} />
-        <Route path="/dashboard/:interval" element={<Dashboard />} />
+        <Route
+          path="/dashboard/:selectedType/:interval"
+          element={<Dashboard />}
+        />
         <Route path="/spam" element={<Spam />} />
         <Route path="/details/:type/:interval" element={<Details />} />
         <Route path="/payment/table" element={<PaymentTable />} />

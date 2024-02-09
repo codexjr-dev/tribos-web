@@ -55,7 +55,7 @@ const Spam = () => {
             <h2> Spam ou Abusos </h2>
           </div>
         ) : (
-          <div onClick={() => navigate("/dashboard/day")}>
+          <div onClick={() => navigate(-1)}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Spam ou Abusos </h2>
           </div>

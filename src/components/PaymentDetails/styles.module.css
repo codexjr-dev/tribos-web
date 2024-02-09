@@ -105,6 +105,11 @@
   width: 20px;
 }
 
+
+.checkbox{
+  width: 100%;
+}
+
 .values #edit img:hover {
   cursor: pointer;
 }
@@ -137,19 +142,33 @@
 }*/
 
 .values .info #paid input {
-  border: none;
   width: 30px;
   height: 24px;
   font-size: 1.1rem;
+  display: block;
+  background-color: #dedede;
+  border: solid 1px var(--purple-dark);
+}
+
+.values .info #paid input:checked {
+  width: 30px;
+  height: 24px;
+  font-size: 1.1rem;
+  display: block;
+  background-color: rgb(50, 245, 50);
+  border: solid 1px var(--purple-dark);
+}
+
+.values .info #paid input:checked::before {
+  content: "\2713"; 
+  font-size: 1.1rem; 
   color: var(--purple-dark);
-  margin-left: 0.65rem;
+  display: inline-block;
 }
 
 .values .info #paid #editActive {
-    background-color: #dedede;
     border-radius: 8px;
     padding: 0.2em;
-    outline: none;
 }
 
 .values .info #paid span {
@@ -178,4 +197,3 @@
   background-color: blueviolet;
   color: white;
 }
-

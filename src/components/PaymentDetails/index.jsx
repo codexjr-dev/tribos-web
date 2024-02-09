@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { chargePayment } from "../../services/api"
 
 export const PaymentDetails = ({ handleClose, details }) => {
-  const [editModeActive, setEditModeActive] = useState(Boolean(false));
+  const [editModeActive, setEditModeActive] = useState(Boolean(true));
   const [amountPaid, setAmountPaid] = useState(Number(details.caciquePartPaid));
   const [triboInfo, setTriboInfo] = useState({});
   const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid);
@@ -147,8 +147,8 @@ export const PaymentDetails = ({ handleClose, details }) => {
                   <input
                     type="checkbox"
                     onChange={handleCheckbox}
-                    value={amountPaid}
                     checked={caciquePaid}
+                    className={styles.checkbox}
                     id={editModeActive ? styles.editActive : ""}
                   />
                 </span>

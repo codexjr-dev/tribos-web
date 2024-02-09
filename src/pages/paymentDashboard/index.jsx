@@ -74,7 +74,7 @@ export const PaymentDashboard = () => {
       ) : null}
       <div className={styles.container}>
         <header>
-          <div onClick={() => navigate("/dashboard/day")}>
+          <div onClick={() => navigate(-1)}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Pagamentos </h2>
           </div>
