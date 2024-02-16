@@ -30,7 +30,7 @@ export const findAllCacique = async () => {
 
 export const globalMessage = async (message) => {
   await api.post("/personal/global", {
-    message
+    message,
   });
 };
 
@@ -353,69 +353,76 @@ export const findPostComments = async (idPost) => {
 };
 
 export const chargePayment = async (ann) => {
-  try{
-    const res  = await api.post(`/annoucement/chargePayment`, {
-      announcement: ann
-    })
-    return res.data
-  }catch (e) {
+  try {
+    const res = await api.post(`/annoucement/chargePayment`, {
+      announcement: ann,
+    });
+    return res.data;
+  } catch (e) {
     return null;
   }
-}
+};
 
 export const getAllUsers = async () => {
-   try {
-    const response = await api.get("/personal")
+  try {
+    const response = await api.get("/personal");
 
     return response;
-   } catch (error) {
-      return null;
-   }
-}
+  } catch (error) {
+    return null;
+  }
+};
 
 export const AdmNotifyUser = async (idUser, message) => {
-
   try {
-    const response = await api
-                        .post(`/personal/notifications/AdmNotification/${idUser}`,
-                             {message})
+    const response = await api.post(
+      `/personal/notifications/AdmNotification/${idUser}`,
+      { message }
+    );
   } catch (error) {
-    return null
+    return null;
   }
-}
+};
 
 export const BanUser = async (idUser) => {
   try {
-    const response = await api.post(`/personal/banUser/${idUser}`)
+    const response = await api.post(`/personal/banUser/${idUser}`);
   } catch (error) {
-    return null
+    return null;
   }
-}
+};
 
+export const redefinePassword = async (email) => {
+  await api.put(`/redefine-password/${email}`, {});
+};
+
+export const changePasswordWeb = async (oldPassword, idUser, newPassword) => {
+  await api.put(`/personal/changePasswordWeb`, {});
+};
 
 export const getFinancesPerDay = async () => {
   try {
-    const response = await api.get("/statistics/generalFinances/day")
-    return response
+    const response = await api.get("/statistics/generalFinances/day");
+    return response;
   } catch (error) {
-    return null
+    return null;
   }
-}
+};
 
 export const getFinancesPerWeek = async () => {
   try {
-    const response = await api.get("/statistics/generalFinances/week")
-    return response
+    const response = await api.get("/statistics/generalFinances/week");
+    return response;
   } catch (error) {
-    return null
+    return null;
   }
-}
+};
 
 export const getFinancesPerMonth = async () => {
   try {
-    const response = await api.get("/statistics/generalFinances/month")
-    return response
+    const response = await api.get("/statistics/generalFinances/month");
+    return response;
   } catch (error) {
-    return null
+    return null;
   }
-}
+};

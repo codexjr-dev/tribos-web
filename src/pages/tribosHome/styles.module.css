@@ -1,3 +1,46 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 90%;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  /* max-height: 85vh; */
+}
+
+.container header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0 1rem 0;
+}
+
+.container header div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0 1rem 0 0;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: all ease 0.2s;
+}
+
+.container header div h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 3rem;
+}
+
+.container header div:hover,
+.container .buttonsHeader img:hover {
+  filter: invert(19%) sepia(70%) saturate(3100%) hue-rotate(267deg)
+    brightness(92%) contrast(98%);
+  cursor: pointer;
+}
+
 .triboInfoContainer {
   display: flex;
   flex-direction: column;

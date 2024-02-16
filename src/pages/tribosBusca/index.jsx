@@ -52,12 +52,12 @@ export const TribosBusca = () => {
   }
 
   return (
-    <div>
-      <div className={styles.triboInfo2}>
+    <div className={styles.container}>
+      <div>
         <header className={styles.tribosTittle}>
           <div onClick={() => navigate("/tribos")}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <span> Buscar tribos </span>
+            <h2> Buscar tribos </h2>
           </div>
         </header>
         <div>
@@ -65,6 +65,7 @@ export const TribosBusca = () => {
             type="text"
             value={busca}
             onChange={(ev) => handleInputChange(ev.target.value)}
+            className={styles.userInput}
             style={{
               borderRadius: "10px",
               borderColor: "#8127bb",

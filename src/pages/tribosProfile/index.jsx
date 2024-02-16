@@ -46,14 +46,14 @@ export const TribosProfile = () => {
 
   return (
     <div>
-      <div className={styles.triboInfo2}>
+      <div className={styles.container}>
         <header>
           <div
             onClick={() => navigate("/tribos")}
             className={styles.tribosTittle}
           >
             <img src={LeftArrowIcon} alt="Voltar" />
-            <span> {tribo.tribo.username} </span>
+            <h2> {tribo.tribo.username} </h2>
           </div>
         </header>
         <div>
