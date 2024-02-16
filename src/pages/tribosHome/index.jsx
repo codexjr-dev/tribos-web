@@ -29,11 +29,7 @@ export const TribosHome = () => {
     <div>
       <div className={styles.container}>
         <header className={styles.tribosTittle}>
-<<<<<<< HEAD
-          <div onClick={() => navigate("/dashboard/users/week")}>
-=======
           <div onClick={() => navigate("/dashboard/users/day")}>
->>>>>>> 0e9831be2bbf19b2e792ff4ebab79768b24d2a57
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Tribos </h2>
           </div>
