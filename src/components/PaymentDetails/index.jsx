@@ -74,6 +74,14 @@ export const PaymentDetails = ({ handleClose, details }) => {
     loadAll();
   }, [editModeActive, details.tribo._id]);
 
+  function formatDate(data) {
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+
+    return `${dia}-${mes}-${ano}`;
+}
+
 
   return (
     <>
@@ -97,9 +105,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <span>
               <span>Criada em: </span>
               <b>
-                {formatISO(new Date(triboInfo.tribo.createdAt), {
-                  representation: "date",
-                })}
+                {formatDate(new Date(triboInfo.tribo.createdAt))}
               </b>
             </span>
           </div>
@@ -125,6 +131,10 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <div id={styles.key}>
               <h3>Banco do PIX</h3>
               <span>{details.caciquePixBanco}</span>
+            </div>
+            <div id={styles.key} style={{marginTop: "15px"}}>
+              <h3>Data do Pagamento</h3>
+              <span>{details?.paymentDate ?  formatDate(new Date(details?.paymentDate)) :  "Data não atualizada!" }</span>
             </div>
           </div>
           <div className={styles.values}>
