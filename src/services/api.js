@@ -29,7 +29,7 @@ export const findAllCacique = async () => {
 };
 
 export const globalMessage = async (message) => {
-  await api.post("/personal/global/not", {
+  await api.post("/personal/global", {
     message,
   });
 };
@@ -398,4 +398,31 @@ export const redefinePassword = async (email) => {
 
 export const changePasswordWeb = async (oldPassword, idUser, newPassword) => {
   await api.put(`/personal/changePasswordWeb`, {});
+};
+
+export const getFinancesPerDay = async () => {
+  try {
+    const response = await api.get("/statistics/generalFinances/day");
+    return response;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getFinancesPerWeek = async () => {
+  try {
+    const response = await api.get("/statistics/generalFinances/week");
+    return response;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getFinancesPerMonth = async () => {
+  try {
+    const response = await api.get("/statistics/generalFinances/month");
+    return response;
+  } catch (error) {
+    return null;
+  }
 };
