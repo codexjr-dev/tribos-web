@@ -392,8 +392,10 @@ export const BanUser = async (idUser) => {
   }
 };
 
-export const redefinePassword = async (email, value) => {
-  await api.put("/redefine-password/:email", {
-    amountPaid: value,
-  });
+export const redefinePassword = async (email) => {
+  await api.put(`/redefine-password/${email}`, {});
+};
+
+export const changePasswordWeb = async (oldPassword, idUser, newPassword) => {
+  await api.put(`/personal/changePasswordWeb`, {});
 };
