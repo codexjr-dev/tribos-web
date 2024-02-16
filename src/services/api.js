@@ -391,3 +391,31 @@ export const BanUser = async (idUser) => {
     return null
   }
 }
+
+
+export const getFinancesPerDay = async () => {
+  try {
+    const response = await api.get("/statistics/generalFinances/day")
+    return response
+  } catch (error) {
+    return null
+  }
+}
+
+export const getFinancesPerWeek = async () => {
+  try {
+    const response = await api.get("/statistics/generalFinances/week")
+    return response
+  } catch (error) {
+    return null
+  }
+}
+
+export const getFinancesPerMonth = async () => {
+  try {
+    const response = await api.get("/statistics/generalFinances/month")
+    return response
+  } catch (error) {
+    return null
+  }
+}
