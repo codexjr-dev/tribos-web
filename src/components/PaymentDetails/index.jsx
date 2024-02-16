@@ -126,6 +126,10 @@ export const PaymentDetails = ({ handleClose, details }) => {
               <h3>Banco do PIX</h3>
               <span>{details.caciquePixBanco}</span>
             </div>
+            <div id={styles.key} style={{marginTop: "15px"}}>
+              <h3>Data do Pagamento</h3>
+              <span>{details?.paymentDate ?? "Não tinha ainda" }</span>
+            </div>
           </div>
           <div className={styles.values}>
             <h2>Valores</h2>
