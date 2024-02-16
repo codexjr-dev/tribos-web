@@ -29,8 +29,8 @@ export const findAllCacique = async () => {
 };
 
 export const globalMessage = async (message) => {
-  await api.post("/personal/global/not", {
-    message,
+  await api.post("/personal/global", {
+    message
   });
 };
 
