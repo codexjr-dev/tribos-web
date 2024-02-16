@@ -29,7 +29,7 @@ export const TribosHome = () => {
     <div>
       <div className={styles.container}>
         <header className={styles.tribosTittle}>
-          <div onClick={() => navigate(-1)}>
+          <div onClick={() => navigate("/dashboard/users/week")}>
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Tribos </h2>
           </div>
