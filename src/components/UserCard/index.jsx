@@ -12,9 +12,8 @@ function UserCard( { user, updateUserList } ) {
 
     const [message, setMessage] = useState(null);
 
-
-    const banirUser = async () =>{
-      const response = await BanUser(user._id)
+    const updateBannedStatus = async () =>{
+      const response = await BanUser(user._id, !user.banned)
       updateUserList()
     }
     
@@ -46,15 +45,19 @@ function UserCard( { user, updateUserList } ) {
 
    const popoverContent = 
      ( <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
-                <PopoverClose style={{border: "none", marginLeft: "-15px"}}><span style={{color: "red", cursor: "pointer"}}  onClick={banirUser} >Banir Usúario</span></PopoverClose>
+                <PopoverClose style={{border: "none", marginLeft: "-15px"}}>
+
+                    <span style={{color: "red", cursor: "pointer"}}  onClick={updateBannedStatus}>{user.banned ? "Desbanir Usúario" : "Banir Usúario"}</span>
+                
+                </PopoverClose>
     
-                <DialogModal Trigger={"Enviar mensagem"} user={user} closeFunction={notifyUser} mainContent={dialogContent}/>
+                {!user.banned && <DialogModal Trigger={"Enviar mensagem"} user={user} closeFunction={notifyUser} mainContent={dialogContent}/>}
        </div> 
     )
 
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={ user.banned ? {backgroundColor: "rgb(240, 132, 132)"} : {}}>
         <div>
             <img src={user.profilePic.url ?? defaultProfilePic}></img>
         </div>

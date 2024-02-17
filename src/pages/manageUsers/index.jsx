@@ -16,6 +16,7 @@ function ManageUsers() {
     const [searchUser, setSearchUser] = useState("");
     const [usersList, setUsersList] = useState([]);
     const [inputMsg, setInputMsg] = useState(null);
+    const [getBanned, setGetBanned] = useState(false)
     
     async function fetchUsers() {
         const { data: users } = await getAllUsers();
@@ -43,10 +44,15 @@ function ManageUsers() {
             user.username?.toLowerCase().startsWith(searchText) ||
             user.phone?.toLowerCase().startsWith(searchText) ||
             user.email?.toLowerCase().startsWith(searchText)
-            );
-        };
+        );
+    };
+
+
+    const handleCheckbox = () => {
+        setGetBanned(!getBanned)
+    }
         
-    const usersListFiltered = usersList.filter((item) => filterUsers(item))
+    const usersListFiltered = usersList.filter(user => user.banned == getBanned).filter((item) => filterUsers(item))
         
     useEffect(() => {
         fetchUsers()
@@ -76,6 +82,10 @@ function ManageUsers() {
                     <label>Pesquisar usúario</label>
                     <div className={styles.inputWrapper}>
                         <input className={styles.inputCalendar} style={{height: "20px"}} onChange={(e) => setSearchUser(e.target.value)}></input>
+                    </div>
+                    <label>Banidos</label>
+                    <div >
+                        <input  checked={getBanned} className={styles.checkbox} type="checkbox" onChange={handleCheckbox} ></input>
                     </div>
                 </div>
                 <div className={styles.cardContainer}>
