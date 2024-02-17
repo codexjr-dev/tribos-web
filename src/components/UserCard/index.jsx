@@ -57,7 +57,7 @@ function UserCard( { user, updateUserList } ) {
 
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={ user.banned ? {backgroundColor: "rgb(240, 132, 132)"} : {}}>
         <div>
             <img src={user.profilePic.url ?? defaultProfilePic}></img>
         </div>
