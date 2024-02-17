@@ -114,3 +114,28 @@
         height: 400px;
     }
 }
+
+.checkbox{
+    background-color: rgb(235, 225, 225);
+    display: block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: solid 1px var(--purple-dark);
+}
+ 
+input:checked {
+    font-size: 1.1rem;
+    display: block;
+    background-color: rgb(187, 243, 187);
+  }
+  
+input:checked::before {
+    content: "\2713"; 
+    font-size: 1.1rem; 
+    color: var(--purple-dark);
+    display: inline-block;
+    top: 80%;
+    left: 50%;
+    transform: translate(30%, -5%);
+}

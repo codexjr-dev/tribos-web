@@ -16,6 +16,7 @@ function ManageUsers() {
     const [searchUser, setSearchUser] = useState("");
     const [usersList, setUsersList] = useState([]);
     const [inputMsg, setInputMsg] = useState(null);
+    const [getBanned, setGetBanned] = useState(false)
     
     async function fetchUsers() {
         const { data: users } = await getAllUsers();
@@ -52,6 +53,8 @@ function ManageUsers() {
         fetchUsers()
     }, [])
 
+    console.log(getBanned)
+
     return (
         <div className={styles.container}>
             <header style={{marginBottom: '3rem'}}>
@@ -76,6 +79,10 @@ function ManageUsers() {
                     <label>Pesquisar usúario</label>
                     <div className={styles.inputWrapper}>
                         <input className={styles.inputCalendar} style={{height: "20px"}} onChange={(e) => setSearchUser(e.target.value)}></input>
+                    </div>
+                    <label>Banidos</label>
+                    <div >
+                        <input  checked={getBanned} className={styles.checkbox} type="checkbox" onChange={() => setGetBanned(!getBanned)} ></input>
                     </div>
                 </div>
                 <div className={styles.cardContainer}>
