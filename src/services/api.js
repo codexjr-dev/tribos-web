@@ -384,9 +384,10 @@ export const AdmNotifyUser = async (idUser, message) => {
   }
 };
 
-export const BanUser = async (idUser) => {
+export const BanUser = async (idUser, banValue) => {
   try {
-    const response = await api.post(`/personal/banUser/${idUser}`);
+    const response = await api.patch(`/personal/banUser/${idUser}`, { banValue });
+    return response
   } catch (error) {
     return null;
   }

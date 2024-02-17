@@ -43,7 +43,8 @@ function ManageUsers() {
             user.name?.toLowerCase().startsWith(searchText) ||
             user.username?.toLowerCase().startsWith(searchText) ||
             user.phone?.toLowerCase().startsWith(searchText) ||
-            user.email?.toLowerCase().startsWith(searchText)
+            user.email?.toLowerCase().startsWith(searchText) ||
+            user.banned == getBanned
             );
         };
         
@@ -52,8 +53,6 @@ function ManageUsers() {
     useEffect(() => {
         fetchUsers()
     }, [])
-
-    console.log(getBanned)
 
     return (
         <div className={styles.container}>
