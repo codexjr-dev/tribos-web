@@ -25,26 +25,23 @@ export const TribosHome = () => {
     fetchData();
   }, []);
 
-  console.log(tribos);
-
   return (
     <div>
-      <div className={styles.triboInfo2}>
+      <div className={styles.container}>
         <header className={styles.tribosTittle}>
-          <div onClick={() => navigate("/dashboard")}>
+          <div onClick={() => navigate("/dashboard/users/day")}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <span> Tribos </span>
+            <h2> Tribos </h2>
           </div>
         </header>
         <main>
           <div className={styles.triboInfoContainer}>
-            {tribos.slice(0, 4).map((tribo) => {
+            {tribos.map((tribo) => {
               return (
                 <TriboInfo
                   key={tribo._id}
                   triboId={tribo._id}
                   photoUrl={tribo.profilePic.url}
-                  title={tribo.name}
                   username={tribo.username}
                 />
               );

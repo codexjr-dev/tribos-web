@@ -11,13 +11,13 @@ import Select from "../../components/Select";
 import moneyIcon from "../../assets/icons/money-icon.svg";
 
 import { getStatistics, getStatisticsByDateRange } from "../../data/Data";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
 import { globalMessage } from "../../services/api";
-import { ButtonChain } from "../../components/ButtonChain"
+import { ButtonChain } from "../../components/ButtonChain";
 import { intervalLabels } from "../../util/options";
 
 const Dashboard = () => {
@@ -25,7 +25,8 @@ const Dashboard = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [statistics, setStatistics] = useState([]);
   const [value, setValue] = useState("");
-  const [dates, setDates] = useState([])
+  const [dates, setDates] = useState([]);
+  const params = useParams();
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -34,13 +35,28 @@ const Dashboard = () => {
   const handleSubmit = () => {
     if (value === "") return;
     globalMessage(value);
-    setValue('');
+    setValue("");
   };
 
-  const intervalToCalendarWord = (interval) => (interval === 0) ? "day" : (interval === 1) ? "month" : "week";
-   
+  const intervalToCalendarWord = (interval) =>
+    interval === 0 ? "day" : interval === 1 ? "month" : "week";
+
+  const intervalWordToCalendar = (interval) =>
+    interval === "day" ? 0 : interval === "month" ? 1 : 2;
 
   const navigate = useNavigate();
+
+  const handleInterval = (interval) => {
+    let selected = intervalToCalendarWord(interval);
+
+    navigate(`/dashboard/${selectedType}/${selected}`);
+    setSelectedInterval(interval);
+  };
+
+  const handleSelectedType = (type) => {
+    navigate(`/dashboard/${type}/${intervalToCalendarWord(selectedInterval)}`);
+    setSelectedType(type)
+  }
 
   const handleCheckDetails = () => {
     let selected = intervalToCalendarWord(selectedInterval);
@@ -51,19 +67,30 @@ const Dashboard = () => {
   const searchBetweenDates = async (dates) => {
     const newStatistics = await getStatisticsByDateRange(selectedType, dates);
     setStatistics(newStatistics);
-  }
+  };
 
   useEffect(() => {
     async function loadData() {
-      if((selectedInterval < intervalLabels.length)){
-        let selected = intervalToCalendarWord(selectedInterval);
-        const newStatistics = await getStatistics(selected, selectedType);
-        setStatistics(newStatistics);
+      if (selectedInterval < intervalLabels.length) {
+        if (params.interval && params.selectedType) {
+          const newStatistics = await getStatistics(
+            params.interval,
+            params.selectedType
+          );
+          let interval = intervalWordToCalendar(params.interval);
+          setSelectedInterval(interval);
+          setSelectedType(params.selectedType)
+          setStatistics(newStatistics);
+        } else {
+          let selected = intervalToCalendarWord(selectedInterval);
+          const newStatistics = await getStatistics(selected, selectedType);
+          setStatistics(newStatistics);
+        }
       }
     }
 
     loadData();
-  }, [selectedInterval, selectedType, setStatistics]);
+  }, [selectedInterval, params?.interval, selectedType, params.selectedType, setStatistics]);
 
   return (
     <div className={styles.container}>
@@ -76,11 +103,17 @@ const Dashboard = () => {
             <Select
               fieldName="type"
               optionsList={typeOptions}
-              setValue={setSelectedType}
+              setValue={handleSelectedType}
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain labels={intervalLabels} searchDates selected={setSelectedInterval} searchFinanceByDate={searchBetweenDates}></ButtonChain>
+            <ButtonChain
+              labels={intervalLabels}
+              searchDates
+              selected={handleInterval}
+              searchFinanceByDate={searchBetweenDates}
+              intervalIndex={intervalWordToCalendar(params.interval)}
+            ></ButtonChain>
           </div>
           <DataChart
             key={selectedType} // Forçar re-render
@@ -103,14 +136,19 @@ const Dashboard = () => {
             />
           </div>
           <ReportedProblems />
-          <input
-            type="text"
-            value={value}
-            onChange={handleChange}
-            placeholder="Mensagem global"
-            style={{ marginBottom: 20, borderRadius: 10 }}
+          <ReportedProblems
+            navigateTo={"manageUsers"}
+            title={"Gerenciar Usúarios"}
+            navigateName={"Banir e enviar mensagens"}
           />
-          <button onClick={handleSubmit}>Enviar</button>
+          <div className={styles.paymentButtonContainer}>
+            <h2>Gerenciar Usúario</h2>
+            <NavigateButton
+              name="Alterar senha"
+              srcIcon={logo}
+              navigateTo="tribos/change"
+            />
+          </div>
         </nav>
       </main>
     </div>

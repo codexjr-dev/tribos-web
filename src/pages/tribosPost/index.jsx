@@ -17,7 +17,7 @@ export const TribosPost = () => {
 
   useEffect(() => {
     async function fetchPost() {
-      const fetchedPost = await privatePosts();
+      const fetchedPost = await privatePosts(triboId);
       setPost(fetchedPost);
     }
 
@@ -33,19 +33,17 @@ export const TribosPost = () => {
     fetchComments();
   }, []);
 
-  console.log(comments);
-
   if (!posts) {
     return <div>Carregando...</div>;
   }
 
   return (
     <div>
-      <div className={styles.triboInfoContainer}>
+      <div className={styles.container}>
         <header>
           <div onClick={() => navigate(`/tribos/profile/${triboId}`)}>
             <img src={LeftArrowIcon} alt="Voltar" />
-            <span style={{ fontWeight: "bold" }}> Tribos </span>
+            <h2> Tribos </h2>
           </div>
         </header>
       </div>

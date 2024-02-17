@@ -4,6 +4,7 @@ import { reportTime } from "../../data/Data.js";
 import { VideoPlayer } from "../VideoPlayer";
 import Loading from "../Loading";
 import { useState } from "react";
+import { useRef } from "react";
 
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -30,6 +31,18 @@ const Post = ({
     SetValue(true);
   }
 
+  const [IsVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  const handleSlideChange = (selectedIndex, e) => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      setIsVideoPlaying(false);
+    }
+  };
+
+
   return (
     <div className={styles.postContainer}>
       <div className={styles.mainContent}>          
@@ -45,14 +58,19 @@ const Post = ({
             <b>Patrocinado</b>
           </span>}
         </div>
-        <Carousel controls={Content.length > 1} indicators={Content.length > 1}>
+        <Carousel controls={Content.length > 1} onSelect={handleSlideChange} interval={IsVideoPlaying ? null : 2500} indicators={IsVideoPlaying ? null : Content.length > 1} >
           {Content.map((value, i) => {
+            const isVideo = value.type === "image";
+
             return <Carousel.Item key={i}>      
               <div className={styles.photoAndSubtitle}>
                 {value.type === "image" ? (
                   <img src={value.url} className={styles.image} alt="Imagem" />
                 ) : (
-                  <VideoPlayer source={value.url} />
+                <div className={styles.videoWrapper}>
+                  <video  ref={videoRef} src={value.url} controls onPlay={() => setIsVideoPlaying(true)} autoPlay={isVideo} onPause={() => setIsVideoPlaying(false)} className={styles.video}/>
+                </div>
+                  //<VideoPlayer source={value.url} />
                 )}
               </div>
             </Carousel.Item>
