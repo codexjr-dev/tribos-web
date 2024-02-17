@@ -43,12 +43,16 @@ function ManageUsers() {
             user.name?.toLowerCase().startsWith(searchText) ||
             user.username?.toLowerCase().startsWith(searchText) ||
             user.phone?.toLowerCase().startsWith(searchText) ||
-            user.email?.toLowerCase().startsWith(searchText) ||
-            user.banned == getBanned
-            );
-        };
+            user.email?.toLowerCase().startsWith(searchText)
+        );
+    };
+
+
+    const handleCheckbox = () => {
+        setGetBanned(!getBanned)
+    }
         
-    const usersListFiltered = usersList.filter((item) => filterUsers(item))
+    const usersListFiltered = usersList.filter(user => user.banned == getBanned).filter((item) => filterUsers(item))
         
     useEffect(() => {
         fetchUsers()
@@ -81,7 +85,7 @@ function ManageUsers() {
                     </div>
                     <label>Banidos</label>
                     <div >
-                        <input  checked={getBanned} className={styles.checkbox} type="checkbox" onChange={() => setGetBanned(!getBanned)} ></input>
+                        <input  checked={getBanned} className={styles.checkbox} type="checkbox" onChange={handleCheckbox} ></input>
                     </div>
                 </div>
                 <div className={styles.cardContainer}>
