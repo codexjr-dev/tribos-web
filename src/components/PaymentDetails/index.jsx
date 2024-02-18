@@ -118,10 +118,10 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <div className={styles.ownerWrapper}>
               <div id={styles.owner}>
                 <h3>Chave PIX</h3>
-                <span>{details.caciquePix}</span>
+                <span>{details.user.chavePix ?? "Não adicionou a chave pix." }</span>
               </div>
               {
-                !details.caciquePaid && details.caciquePix == "Não adicionou Pix" &&
+                !details.user.chavePix &&
                   <div className={styles.cobrarWrapper}>
                     <button className={styles.cobrarCheckbox} onClick={sendChargeNotification}>Cobrar Usuario</button>
                     {showChargeMsg && <span style={{fontSize: "12px"}}>Cobrança enviada</span> }
@@ -130,7 +130,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
             </div>
             <div id={styles.key}>
               <h3>Banco do PIX</h3>
-              <span>{details.caciquePixBanco}</span>
+              <span>{details.user.bancoPix ?? "Não adicionou o banco do pix."}</span>
             </div>
             <div id={styles.key} style={{marginTop: "15px"}}>
               <h3>Data do Pagamento</h3>
