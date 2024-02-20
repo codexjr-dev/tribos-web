@@ -47,7 +47,7 @@ function UserCard( { user, updateUserList } ) {
      ( <div style={{display: "flex", flexDirection: "column", gap: "10px"}}>
                 <PopoverClose style={{border: "none", marginLeft: "-15px"}}>
 
-                    <span style={{color: "red", cursor: "pointer"}}  onClick={updateBannedStatus}>{user.banned ? "Desbanir Usúario" : "Banir Usúario"}</span>
+                    <span style={{color: "red", cursor: "pointer"}}  onClick={updateBannedStatus}>{user.banned ? "Reincorporar Usúario" : "Banir Usúario"}</span>
                 
                 </PopoverClose>
     
