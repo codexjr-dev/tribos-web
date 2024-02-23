@@ -60,7 +60,7 @@ export const PaymentDashboard = () => {
 
   useEffect(() => {
     searchFinanceByDate();
-  }, [selectedInterval]);
+  }, [selectedInterval, selectedType]);
 
   const searchFinanceByDate = async (datas) => {
     if (!datas) {
@@ -129,6 +129,7 @@ export const PaymentDashboard = () => {
             <PaymentList
               type={selectedType}
               handleShowDetails={handleShowDetails}
+              ads={announcements}
             />
           </div>
         </main>
