@@ -5,36 +5,11 @@ import { findAllCacique, findAllMaster, findAllFeed } from "../../services/api";
 
 import styles from "./styles.module.css";
 
-export const PaymentList = ({ type, handleShowDetails }) => {
-  const [salesList, setSalesList] = useState([]);
-
-  useEffect(() => {
-    async function loadAll() {
-      setSalesList(null);  // Adicione esta linha
-
-      switch (type) {
-        case 0:
-          setSalesList(await findAllFeed());
-          break;
-        case 1:
-          setSalesList(await findAllCacique());
-          break;
-        case 2:
-          setSalesList(await findAllMaster());
-          break;
-        default:
-          break;
-      }
-    }
-
-    loadAll();
-}, [type, handleShowDetails]);
-
-
+export const PaymentList = ({ type, handleShowDetails, ads }) => {
 
   return (
     <div className={styles.tableContainer}>
-      {!salesList ? (
+      {!ads ? (
         <Loading />
       ) : (
         <table>
@@ -48,7 +23,7 @@ export const PaymentList = ({ type, handleShowDetails }) => {
             </tr>
           </thead>
           <tbody>
-            {salesList.map((element) => {
+            {ads.map((element) => {
               return (
                 <tr
                   key={element._id}

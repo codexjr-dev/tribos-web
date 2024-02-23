@@ -19,6 +19,8 @@ export const PaymentDashboard = () => {
   const [selectedType, setSelectedType] = useState(0);
   const [financeChart, setFinanceChart] = useState(null);
   const [selectedInterval, setSelectedInterval] = useState(0);
+  const [announcements, setAnnouncements] = useState([])
+  const [dates, setDates] = useState(null)
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -33,18 +35,23 @@ export const PaymentDashboard = () => {
     }
   };
 
+  //SELECTED TYPE
+  // 0 - FEED
+  // 1 - Cacique
+  // 2 - Tribo Master
+
   const getChartValues = async () => {
       switch (selectedInterval) {
         case 0: {
-          let result = await api.getFinancesPerDay();
+          let result = await api.getFinancesPerDay(selectedType);
           return result;
         }
         case 1: {
-          let result = await api.getFinancesPerMonth();
+          let result = await api.getFinancesPerMonth(selectedType);
           return result;
         }
         case 2: {
-          let result = await api.getFinancesPerWeek();
+          let result = await api.getFinancesPerWeek(selectedType);
           return result;
         }
         default:
@@ -54,19 +61,21 @@ export const PaymentDashboard = () => {
 
   useEffect(() => {
     searchFinanceByDate();
-  }, [selectedInterval]);
+  }, [selectedInterval, selectedType, dates]);
 
-  const searchFinanceByDate = async (datas) => {
-    if (!datas) {
+  const searchFinanceByDate = async () => {
+    if (selectedInterval != 3) {
       if (selectedInterval < intervalLabels.length) {
         setFinanceChart(null);
-        const { data:chart } = await getChartValues()
-        setFinanceChart(chart);
+        const { data } = await getChartValues()
+        setFinanceChart(data.finances);
+        setAnnouncements(data.announcements)
       }
     } else {
       setFinanceChart(null);
-      var data = await api.getGeneralFinancesByDate(datas);
-      setFinanceChart(data);
+      var data = await api.getGeneralFinancesByDate(dates, selectedType);
+      setFinanceChart(data.finances);
+      setAnnouncements(data.announcements)
     }
   };
 
@@ -95,6 +104,7 @@ export const PaymentDashboard = () => {
             searchDates
             searchFinanceByDate={searchFinanceByDate}
             selected={setSelectedInterval}
+            setDatas={setDates}
           />
         </div>
         <main>
@@ -121,6 +131,7 @@ export const PaymentDashboard = () => {
             <PaymentList
               type={selectedType}
               handleShowDetails={handleShowDetails}
+              ads={announcements}
             />
           </div>
         </main>

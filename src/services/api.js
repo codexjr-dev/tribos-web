@@ -294,23 +294,6 @@ export const getGeneralFinances = async () => {
   return data;
 };
 
-export const getGeneralFinancesByDate = async (datas) => {
-  let data = null;
-  await api
-    .get("/statistics/generalFinancesByDate/", {
-      params: {
-        startDate: datas[0],
-        endDate: datas[1],
-      },
-    })
-    .then((res) => {
-      data = res.data;
-    })
-    .catch((ex) => {
-      data = null;
-    });
-  return data;
-};
 
 export const privatePosts = async (TriboId) => {
   try {
@@ -366,7 +349,7 @@ export const chargePayment = async (ann) => {
 export const getAllUsers = async () => {
   try {
     const response = await api.get("/personal");
-
+    
     return response;
   } catch (error) {
     return null;
@@ -378,52 +361,70 @@ export const AdmNotifyUser = async (idUser, message) => {
     const response = await api.post(
       `/personal/notifications/AdmNotification/${idUser}`,
       { message }
-    );
-  } catch (error) {
-    return null;
-  }
-};
-
-export const BanUser = async (idUser, banValue) => {
-  try {
-    const response = await api.patch(`/personal/banUser/${idUser}`, { banValue });
-    return response
-  } catch (error) {
-    return null;
-  }
-};
-
-export const redefinePassword = async (email) => {
-  await api.put(`/redefine-password/${email}`, {});
-};
-
-export const changePasswordWeb = async (oldPassword, idUser, newPassword) => {
-  await api.put(`/personal/changePasswordWeb`, {});
-};
-
-export const getFinancesPerDay = async () => {
-  try {
-    const response = await api.get("/statistics/generalFinances/day");
-    return response;
-  } catch (error) {
-    return null;
-  }
-};
-
-export const getFinancesPerWeek = async () => {
-  try {
-    const response = await api.get("/statistics/generalFinances/week");
-    return response;
-  } catch (error) {
-    return null;
-  }
-};
-
-export const getFinancesPerMonth = async () => {
-  try {
-    const response = await api.get("/statistics/generalFinances/month");
-    return response;
-  } catch (error) {
-    return null;
-  }
-};
+      );
+    } catch (error) {
+      return null;
+    }
+  };
+  
+  export const BanUser = async (idUser, banValue) => {
+    try {
+      const response = await api.patch(`/personal/banUser/${idUser}`, { banValue });
+      return response
+    } catch (error) {
+      return null;
+    }
+  };
+  
+  export const redefinePassword = async (email) => {
+    await api.put(`/redefine-password/${email}`, {});
+  };
+  
+  export const changePasswordWeb = async (oldPassword, idUser, newPassword) => {
+    await api.put(`/personal/changePasswordWeb`, {});
+  };
+  
+  export const getFinancesPerDay = async ( selectedType ) => {
+    try {
+      const response = await api.get(`/statistics/generalFinances/day/${selectedType}`);
+      return response;
+    } catch (error) {
+      return null;
+    }
+  };
+  
+  export const getFinancesPerWeek = async ( selectedType ) => {
+    try {
+      const response = await api.get(`/statistics/generalFinances/week/${selectedType}`);
+      return response;
+    } catch (error) {
+      return null;
+    }
+  };
+  
+  export const getFinancesPerMonth = async (  selectedType ) => {
+    try {
+      const response = await api.get(`/statistics/generalFinances/month/${selectedType}`);
+      return response;
+    } catch (error) {
+      return null;
+    }
+  };
+  
+  export const getGeneralFinancesByDate = async (datas, selectedType) => {
+    let data = null;
+    await api
+      .get(`/statistics/generalFinancesByDate/${selectedType}`, {
+        params: {
+          startDate: datas[0],
+          endDate: datas[1],
+        },
+      })
+      .then((res) => {
+        data = res.data;
+      })
+      .catch((ex) => {
+        data = null;
+      });
+    return data;
+  };
