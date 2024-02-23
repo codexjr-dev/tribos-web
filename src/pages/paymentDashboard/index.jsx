@@ -20,6 +20,7 @@ export const PaymentDashboard = () => {
   const [financeChart, setFinanceChart] = useState(null);
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [announcements, setAnnouncements] = useState([])
+  const [dates, setDates] = useState(null)
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -62,8 +63,8 @@ export const PaymentDashboard = () => {
     searchFinanceByDate();
   }, [selectedInterval, selectedType]);
 
-  const searchFinanceByDate = async (datas) => {
-    if (!datas) {
+  const searchFinanceByDate = async () => {
+    if (selectedInterval != 3) {
       if (selectedInterval < intervalLabels.length) {
         setFinanceChart(null);
         const { data } = await getChartValues()
@@ -72,7 +73,7 @@ export const PaymentDashboard = () => {
       }
     } else {
       setFinanceChart(null);
-      var data = await api.getGeneralFinancesByDate(datas);
+      var data = await api.getGeneralFinancesByDate(dates, selectedType);
       setFinanceChart(data.finances);
       setAnnouncements(data.announcements)
     }
@@ -103,6 +104,7 @@ export const PaymentDashboard = () => {
             searchDates
             searchFinanceByDate={searchFinanceByDate}
             selected={setSelectedInterval}
+            setDatas={setDates}
           />
         </div>
         <main>
