@@ -61,7 +61,7 @@ export const PaymentDashboard = () => {
 
   useEffect(() => {
     searchFinanceByDate();
-  }, [selectedInterval, selectedType]);
+  }, [selectedInterval, selectedType, dates]);
 
   const searchFinanceByDate = async () => {
     if (selectedInterval != 3) {
