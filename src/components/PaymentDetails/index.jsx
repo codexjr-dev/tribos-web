@@ -113,12 +113,12 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <h2>Informações de Pagamento</h2>
             <div id={styles.owner}>
               <h3>Proprietário</h3>
-              <span>{details.user.name}</span>
+              <span>{details.tribo.creator.name}</span>
             </div>
             <div className={styles.ownerWrapper}>
               <div id={styles.owner}>
                 <h3>Chave PIX</h3>
-                <span>{details.user.chavePix ?? "Não adicionou a chave pix." }</span>
+                <span>{details.tribo.creator.chavePix ?? "Não adicionou a chave pix." }</span>
               </div>
               {
                 !details.user.chavePix &&
@@ -130,7 +130,7 @@ export const PaymentDetails = ({ handleClose, details }) => {
             </div>
             <div id={styles.key}>
               <h3>Banco do PIX</h3>
-              <span>{details.user.bancoPix ?? "Não adicionou o banco do pix."}</span>
+              <span>{details.tribo.creator.bancoPix ?? "Não adicionou o banco do pix."}</span>
             </div>
             <div id={styles.key} style={{marginTop: "15px"}}>
               <h3>Data do Pagamento</h3>
