@@ -12,7 +12,7 @@ const MotivoDenuncia = [
 ];
 
 export const ReportModal = ({ idPost, onDenunciation, onClose }) => {
-  const [motivoSelecionado, setMotivoSelecionado] = useState();
+  const [motivoSelecionado, setMotivoSelecionado] = useState(0);
 
   const handleMotivoSelecionadoChange = (e) => {
     setMotivoSelecionado(e.target.value);
