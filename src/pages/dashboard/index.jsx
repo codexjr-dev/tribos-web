@@ -17,8 +17,9 @@ import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
 import { globalMessage } from "../../services/api";
-import { ButtonChain } from "../../components/ButtonChain";
+import { ChainButton } from "../../components/ChainButton";
 import { intervalLabels } from "../../util/options";
+import { useLocation } from "react-router-dom";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
@@ -27,6 +28,16 @@ const Dashboard = () => {
   const [value, setValue] = useState("");
   const [dates, setDates] = useState([]);
   const params = useParams();
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const date = queryParams.get("date");
+
+  const getFormatedDate = (date) => {
+    setDates(date);
+  };
+
+  console.log(dates);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -55,13 +66,13 @@ const Dashboard = () => {
 
   const handleSelectedType = (type) => {
     navigate(`/dashboard/${type}/${intervalToCalendarWord(selectedInterval)}`);
-    setSelectedType(type)
-  }
+    setSelectedType(type);
+  };
 
   const handleCheckDetails = () => {
     let selected = intervalToCalendarWord(selectedInterval);
 
-    navigate(`/details/${selectedType}/${selected}`);
+    navigate(`/details/${selectedType}/${selected}?date=${dates}`);
   };
 
   const searchBetweenDates = async (dates) => {
@@ -79,7 +90,7 @@ const Dashboard = () => {
           );
           let interval = intervalWordToCalendar(params.interval);
           setSelectedInterval(interval);
-          setSelectedType(params.selectedType)
+          setSelectedType(params.selectedType);
           setStatistics(newStatistics);
         } else {
           let selected = intervalToCalendarWord(selectedInterval);
@@ -90,7 +101,13 @@ const Dashboard = () => {
     }
 
     loadData();
-  }, [selectedInterval, params?.interval, selectedType, params.selectedType, setStatistics]);
+  }, [
+    selectedInterval,
+    params?.interval,
+    selectedType,
+    params.selectedType,
+    setStatistics,
+  ]);
 
   return (
     <div className={styles.container}>
@@ -107,13 +124,15 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain
+            <ChainButton
               labels={intervalLabels}
               searchDates
               selected={handleInterval}
               searchFinanceByDate={searchBetweenDates}
               intervalIndex={intervalWordToCalendar(params.interval)}
-            ></ButtonChain>
+              formatedDates={getFormatedDate}
+              dateText={date}
+            ></ChainButton>
           </div>
           <DataChart
             key={selectedType} // Forçar re-render
