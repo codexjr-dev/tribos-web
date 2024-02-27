@@ -14,10 +14,14 @@ import DataChart from "../../components/Chart";
 import { getNewStatistics, getStatistics } from "../../data/Data";
 import { MapIconToLabel } from "../../util/utils";
 import { getAmountStatistics, getCountByMonth } from "../../services/api";
+import { useLocation } from "react-router-dom";
 
 const Details = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const dates = queryParams.get("date");
 
   const [statistics, setStatistics] = useState([]);
   const [amountStatistics, setAmount] = useState(0);
@@ -33,14 +37,20 @@ const Details = () => {
     }
 
     loadData();
-  }, []);
+  }, [params.interval, params.type]);
 
   const [chartData, setChartData] = useState(statistics);
 
   return (
     <div className={styles.container}>
       <header>
-        <div onClick={() => navigate(`/dashboard/${params.type}/${params.interval}`)}>
+        <div
+          onClick={() =>
+            navigate(
+              `/dashboard/${params.type}/${params.interval}?date=${dates}`
+            )
+          }
+        >
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2>
             {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(
