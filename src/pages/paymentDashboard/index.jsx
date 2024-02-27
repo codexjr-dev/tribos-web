@@ -34,22 +34,22 @@ export const PaymentDashboard = () => {
   };
 
   const getChartValues = async () => {
-      switch (selectedInterval) {
-        case 0: {
-          let result = await api.getFinancesPerDay();
-          return result;
-        }
-        case 1: {
-          let result = await api.getFinancesPerMonth();
-          return result;
-        }
-        case 2: {
-          let result = await api.getFinancesPerWeek();
-          return result;
-        }
-        default:
-          return null
+    switch (selectedInterval) {
+      case 0: {
+        let result = await api.getFinancesPerDay();
+        return result;
       }
+      case 1: {
+        let result = await api.getFinancesPerMonth();
+        return result;
+      }
+      case 2: {
+        let result = await api.getFinancesPerWeek();
+        return result;
+      }
+      default:
+        return null;
+    }
   };
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export const PaymentDashboard = () => {
     if (!datas) {
       if (selectedInterval < intervalLabels.length) {
         setFinanceChart(null);
-        const { data:chart } = await getChartValues()
+        const { data: chart } = await getChartValues();
         setFinanceChart(chart);
       }
     } else {
