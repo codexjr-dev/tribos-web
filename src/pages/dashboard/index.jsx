@@ -16,7 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
-import { globalMessage } from "../../services/api";
+import { getDetailsByDate, getDetailsInfo, globalMessage } from "../../services/api";
 import { ChainButton } from "../../components/ChainButton";
 import { intervalLabels } from "../../util/options";
 import { useLocation } from "react-router-dom";
@@ -74,28 +74,49 @@ const Dashboard = () => {
     if(regex.test(dates)) navigate(`/details/${selectedType}/${selected}?date=${dates}`);
     else navigate(`/details/${selectedType}/${selected}?date=`)
   };
+  
+    function formatarData(dataString) {
+      var dataOriginal = new Date(dataString);
+  
+   
+      var dia = dataOriginal.getDate() + 1;
+      var mes = dataOriginal.getMonth() + 1; 
+      var ano = dataOriginal.getFullYear();
+  
 
+      dia = dia < 10 ? '0' + dia : dia;
+      mes = mes < 10 ? '0' + mes : mes;
+  
+
+      var dataFormatada = dia + '-' + mes + '-' + ano;
+  
+      // Retornar a data formatada
+      return dataFormatada;
+  }
+  
   const searchBetweenDates = async (dates) => {
-    const newStatistics = await getStatisticsByDateRange(selectedType, dates);
-    setStatistics(newStatistics);
+    
+    const newStatistics = await getDetailsByDate(selectedType, formatarData(dates[0]), formatarData(dates[1]));
+    setStatistics(newStatistics.data);
   };
+
 
   useEffect(() => {
     async function loadData() {
       if (selectedInterval < intervalLabels.length) {
         if (params.interval && params.selectedType) {
-          const newStatistics = await getStatistics(
+          const newStatistics = await getDetailsInfo(
             params.interval,
             params.selectedType
           );
           let interval = intervalWordToCalendar(params.interval);
           setSelectedInterval(interval);
           setSelectedType(params.selectedType);
-          setStatistics(newStatistics);
+          setStatistics(newStatistics.data);
         } else {
           let selected = intervalToCalendarWord(selectedInterval);
-          const newStatistics = await getStatistics(selected, selectedType);
-          setStatistics(newStatistics);
+          const newStatistics = await getDetailsInfo(selected, selectedType);
+          setStatistics(newStatistics.data);
         }
       }
     }
