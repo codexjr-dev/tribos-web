@@ -11,9 +11,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DataChart from "../../components/Chart";
 
-import { getNewStatistics, getStatistics } from "../../data/Data";
 import { MapIconToLabel } from "../../util/utils";
-import { getAmountStatistics, getCountByMonth } from "../../services/api";
+import { getAmountStatistics, getCountByMonth, getDetailsInfo, getDetailsByDate } from "../../services/api";
 import { useLocation } from "react-router-dom";
 
 const Details = () => {
@@ -30,10 +29,18 @@ const Details = () => {
 
   useEffect(() => {
     async function loadData() {
-      setStatistics(await getStatistics(params.interval, params.type));
-      setAmount(await getAmountStatistics(params.type));
-      setNewStats(await getNewStatistics(params.interval, params.type));
-      setMonthStatistics(await getCountByMonth(params.type));
+      if(dates){
+        let datesArr = dates.split("-")
+        let { data } = await getDetailsByDate(params.type, datesArr[0].replace(/\//g, "-"), datesArr[1].replace(/\//g, "-"))
+        setStatistics(data)
+        setNewStats(data[data.length - 1].stats)
+      }else{
+        let { data }  = await getDetailsInfo(params.interval, params.type)
+        setStatistics(data);
+        setNewStats(data[data.length - 1].stats)
+      }
+      setAmount(await getAmountStatistics(params.type)); // PEGA TOTAL
+      setMonthStatistics(await getCountByMonth(params.type)); 
     }
 
     loadData();
@@ -53,7 +60,7 @@ const Details = () => {
         >
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2>
-            {`${mapLabelToValueType(params.type)} - ${mapLabelToValueType(
+            {dates ?  `${mapLabelToValueType(params.type)} - ${dates}`  : `${mapLabelToValueType(params.type)} - ${mapLabelToValueType(
               params.interval
             )}`}
           </h2>

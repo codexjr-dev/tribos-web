@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://tribos.herokuapp.com",
+  baseURL: "http://localhost:4444/",
 });
 
 api.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
@@ -154,6 +154,7 @@ export const getAmountStatistics = async (type) => {
 
 export const getCountByMonth = async (type) => {
   let data;
+  console.log(type)
   await api
     .get(`/statistics/details/${type}`)
     .then((res) => {
@@ -427,3 +428,23 @@ export const getFinancesPerMonth = async () => {
     return null;
   }
 };
+
+
+export const getDetailsInfo = async (interval, type) => {
+  try {
+    const response = await api.get(`/statistics/details/interval/${interval}/${type}`)
+    return response
+  } catch (error) {
+    return null
+  }
+}
+
+
+export const getDetailsByDate = async (type, initialDate, lastDate) => {
+  try {
+    const response = await api.get(`/statistics/details/dates/${type}/${initialDate}/${lastDate}`)
+    return response
+  } catch (error) {
+    return null
+  }
+}
