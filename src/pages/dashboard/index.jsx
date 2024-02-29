@@ -37,8 +37,6 @@ const Dashboard = () => {
     setDates(date);
   };
 
-  console.log(dates);
-
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -72,7 +70,9 @@ const Dashboard = () => {
   const handleCheckDetails = () => {
     let selected = intervalToCalendarWord(selectedInterval);
 
-    navigate(`/details/${selectedType}/${selected}?date=${dates}`);
+    const regex = /\d{2}\/\d{2}\/\d{4}-\d{2}\/\d{2}\/\d{4}/;
+    if(regex.test(dates)) navigate(`/details/${selectedType}/${selected}?date=${dates}`);
+    else navigate(`/details/${selectedType}/${selected}?date=`)
   };
 
   const searchBetweenDates = async (dates) => {
