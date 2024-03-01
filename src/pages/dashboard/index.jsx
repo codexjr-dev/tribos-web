@@ -71,8 +71,9 @@ const Dashboard = () => {
   const handleCheckDetails = () => {
     let selected = intervalToCalendarWord(selectedInterval);
 
+    
     const regex = /\d{2}\/\d{2}\/\d{4}-\d{2}\/\d{2}\/\d{4}/;
-    if(regex.test(dates)) navigate(`/details/${selectedType}/${selected}?date=${dates}`);
+    if(selectedInterval == 3 && regex.test(dates)) navigate(`/details/${selectedType}/${selected}?date=${dates}`);
     else navigate(`/details/${selectedType}/${selected}?date=`)
   };
   
@@ -125,7 +126,6 @@ const Dashboard = () => {
       var data2 = date.split("-")[1]
       const initialDate = criarDataValida(data1)
       const endDate =  criarDataValida(data2)
-      console.log(data1)
       const newStatistics = await getDetailsByDate(selectedType, formatarData(initialDate), formatarData(endDate));
       setStatistics(newStatistics.data);
     }

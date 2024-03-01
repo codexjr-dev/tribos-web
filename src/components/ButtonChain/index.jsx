@@ -34,8 +34,8 @@ export const ButtonChain = ({
       setDates(null);
     } else {
       const splitted = text.split("-");
-      let data1 = new Date(convertDateFormat(splitted[0]));
-      let data2 = new Date(convertDateFormat(splitted[1]));
+      let data1 = convertDateFormat(splitted[0]);
+      let data2 = convertDateFormat(splitted[1]);
       setDates([data1, data2]);
       setAlertMsg(false);
     }
