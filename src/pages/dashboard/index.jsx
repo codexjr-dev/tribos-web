@@ -20,6 +20,7 @@ import { getDetailsByDate, getDetailsInfo, globalMessage } from "../../services/
 import { ChainButton } from "../../components/ChainButton";
 import { intervalLabels } from "../../util/options";
 import { useLocation } from "react-router-dom";
+import { setDate } from "date-fns";
 
 const Dashboard = () => {
   const [selectedType, setSelectedType] = useState("users");
@@ -79,7 +80,7 @@ const Dashboard = () => {
       var dataOriginal = new Date(dataString);
   
    
-      var dia = dataOriginal.getDate() + 1;
+      var dia = dataOriginal.getDate();
       var mes = dataOriginal.getMonth() + 1; 
       var ano = dataOriginal.getFullYear();
   
@@ -93,11 +94,42 @@ const Dashboard = () => {
       // Retornar a data formatada
       return dataFormatada;
   }
+
+  function criarDataValida(dataString) {
+    // Separando a string de data em partes
+    var partes = dataString.split("/");
+    
+    // Obtendo o ano, mês e dia
+    var ano = parseInt(partes[2], 10);
+    var mes = parseInt(partes[1], 10) - 1; // O mês é base 0, então subtrai 1
+    var dia = parseInt(partes[0], 10);
+    
+    // Criando o objeto Date
+    var data = new Date(ano, mes, dia);
+    
+    // Verificando se a data criada é válida
+    if (data.getFullYear() === ano && data.getMonth() === mes && data.getDate() === dia) {
+        return data;
+    } else {
+        return null; // Retornar null se a data não for válida
+    }
+}
   
   const searchBetweenDates = async (dates) => {
-    
-    const newStatistics = await getDetailsByDate(selectedType, formatarData(dates[0]), formatarData(dates[1]));
-    setStatistics(newStatistics.data);
+
+    if (dates[0] && dates[0] instanceof Date){
+      const newStatistics = await getDetailsByDate(selectedType, formatarData(dates[0]), formatarData(dates[1]));
+      setStatistics(newStatistics.data);
+    }else{
+      var data1 = date.split("-")[0]
+      var data2 = date.split("-")[1]
+      const initialDate = criarDataValida(data1)
+      const endDate =  criarDataValida(data2)
+      console.log(data1)
+      const newStatistics = await getDetailsByDate(selectedType, formatarData(initialDate), formatarData(endDate));
+      setStatistics(newStatistics.data);
+    }
+
   };
 
 
@@ -120,8 +152,11 @@ const Dashboard = () => {
         }
       }
     }
-
-    loadData();
+    if(date){
+      searchBetweenDates(date)
+    }else{
+      loadData();
+    }
   }, [
     selectedInterval,
     params?.interval,
