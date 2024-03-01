@@ -10,7 +10,7 @@ export const ButtonChain = ({
   searchDates,
   searchFinanceByDate,
   intervalIndex,
-  setDatas,
+  setDatas
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(intervalIndex ?? 0);
   const [alertMsg, setAlertMsg] = useState(false);
