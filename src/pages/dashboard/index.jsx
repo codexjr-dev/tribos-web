@@ -30,6 +30,9 @@ const Dashboard = () => {
   const [dates, setDates] = useState([]);
   const params = useParams();
 
+  // TO-DO REFATORAR ESSA PAGINA MAS POR ENQUANTO TA FUNCIONANDO
+
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const date = queryParams.get("date");

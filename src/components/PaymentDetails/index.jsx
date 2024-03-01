@@ -17,6 +17,10 @@ export const PaymentDetails = ({ handleClose, details }) => {
   const [caciquePaid, setCaciquePaid] = useState(details.caciquePaid);
   const [showChargeMsg, setShowChargeMsg] = useState(false);
 
+
+  console.log("Detalhes da tribo")
+  console.log(details)
+
   const handleClickEditMode = () => {
     if (editModeActive) {
       handlePayCacique();
@@ -113,15 +117,15 @@ export const PaymentDetails = ({ handleClose, details }) => {
             <h2>Informações de Pagamento</h2>
             <div id={styles.owner}>
               <h3>Proprietário</h3>
-              <span>{details.tribo.creator.name}</span>
+              <span>{details.tribo?.creator?.name}</span>
             </div>
             <div className={styles.ownerWrapper}>
               <div id={styles.owner}>
                 <h3>Chave PIX</h3>
-                <span>{details.tribo.creator.chavePix ?? "Não adicionou a chave pix." }</span>
+                <span>{details.tribo?.creator?.chavePix ?? "Não adicionou a chave pix." }</span>
               </div>
               {
-                !details.user.chavePix &&
+                !details.tribo?.creator?.chavePix &&
                   <div className={styles.cobrarWrapper}>
                     <button className={styles.cobrarCheckbox} onClick={sendChargeNotification}>Cobrar Usuario</button>
                     {showChargeMsg && <span style={{fontSize: "12px"}}>Cobrança enviada</span> }
