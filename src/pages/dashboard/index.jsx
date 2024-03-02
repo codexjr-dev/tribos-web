@@ -23,19 +23,29 @@ import { useLocation } from "react-router-dom";
 import { setDate } from "date-fns";
 
 const Dashboard = () => {
-  const [selectedType, setSelectedType] = useState("users");
-  const [selectedInterval, setSelectedInterval] = useState(0);
+
+  const intervalToCalendarWord = (interval) =>
+    interval === 0 ? "day" : interval === 1 ? "month" :  2 ? "week" : "date";
+
+  const intervalWordToCalendar = (interval) =>
+    interval === "day" ? 0 : interval === "month" ? 1 : interval === "week" ? 2 : 3;
+
+  const params = useParams();
+  const a = params.interval ? intervalWordToCalendar(params.interval) : 0
+
+  const [selectedType, setSelectedType] = useState(params.selectedType ?? "users");
+  const [selectedInterval, setSelectedInterval] = useState(a);
   const [statistics, setStatistics] = useState([]);
   const [value, setValue] = useState("");
   const [dates, setDates] = useState([]);
-  const params = useParams();
 
   // TO-DO REFATORAR ESSA PAGINA MAS POR ENQUANTO TA FUNCIONANDO
-
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const date = queryParams.get("date");
+
+  console.log(selectedInterval)
 
   const getFormatedDate = (date) => {
     setDates(date);
@@ -50,12 +60,6 @@ const Dashboard = () => {
     globalMessage(value);
     setValue("");
   };
-
-  const intervalToCalendarWord = (interval) =>
-    interval === 0 ? "day" : interval === 1 ? "month" : "week";
-
-  const intervalWordToCalendar = (interval) =>
-    interval === "day" ? 0 : interval === "month" ? 1 : 2;
 
   const navigate = useNavigate();
 
@@ -76,7 +80,7 @@ const Dashboard = () => {
 
     
     const regex = /\d{2}\/\d{2}\/\d{4}-\d{2}\/\d{2}\/\d{4}/;
-    if(selectedInterval == 3 && regex.test(dates)) navigate(`/details/${selectedType}/${selected}?date=${dates}`);
+    if(selectedInterval == 3 && regex.test(dates)) navigate(`/details/${selectedType}/date?date=${dates}`);
     else navigate(`/details/${selectedType}/${selected}?date=`)
   };
   
