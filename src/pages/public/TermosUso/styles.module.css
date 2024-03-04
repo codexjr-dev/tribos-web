@@ -1,0 +1,8 @@
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body > div {
+  height: 100vh;
+}
