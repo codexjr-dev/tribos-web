@@ -448,3 +448,13 @@ export const getDetailsByDate = async (type, initialDate, lastDate) => {
     return null
   }
 }
+
+
+export const removeUserFromWeb = async (username, password) => {
+  try {
+    const response = await api.delete(`/personal/`, { username, password })
+    return response
+  } catch (error) {
+    return null
+  }
+}
