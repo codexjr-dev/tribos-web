@@ -1,0 +1,59 @@
+input[type="text"], input[type="password"] {
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--gray);
+  height: 2.4rem;
+  color: var(--dark);
+  padding-left: 1rem;
+  font-family: "Inter";
+  font-weight: 400;
+  outline: none;
+  padding-right: 3rem;
+  cursor: text;
+}
+
+input[type="checkbox"] {
+  background-color: rgb(255, 255, 255);
+  display: block;
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1;
+  cursor: pointer;
+  border: solid 2px var(--purple-dark);
+  border-radius: 2px;
+  margin-right: 1em;
+}
+
+input[type="checkbox"]:checked {
+  background-color: rgb(160, 39, 160);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.outer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+}
+
+button:hover {
+  background-color: rgb(219, 219, 219);
+}
+
+button[disabled] {
+  cursor: initial;
+  background-color: #aaa;
+}

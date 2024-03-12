@@ -13,7 +13,9 @@ import { TribosProfile } from "./pages/tribosProfile";
 import { TribosBusca } from "./pages/tribosBusca";
 import { TribosPost } from "./pages/tribosPost";
 import { ChangePassword } from "./pages/ChangePassword";
+import { TermosUso } from "./pages/public/TermosUso";
 import ManageUsers from "./pages/manageUsers";
+import { ExcluirDados } from "./pages/public/ExcluirDados";
 
 export default function MainRoutes() {
   return (
@@ -36,6 +38,8 @@ export default function MainRoutes() {
         <Route path="/tribos/Post/:triboId/:postId" element={<TribosPost />} />
         <Route path="/tribos/Change" element={<ChangePassword />} />
       </Route>
+      <Route path="/public/termosUso" element={<TermosUso />} /> 
+      <Route path="/public/excluirDados" element={<ExcluirDados />} /> 
     </Routes>
   );
 }
