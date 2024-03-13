@@ -16,17 +16,40 @@ import { useNavigate, useParams } from "react-router-dom";
 import { typeOptions, intervalOptions } from "../../util/options";
 import { mapLabelToValueType } from "../../util/utils";
 import { NavigateButton } from "../../components/NavigateButton";
-import { globalMessage } from "../../services/api";
-import { ButtonChain } from "../../components/ButtonChain";
+import { getDetailsByDate, getDetailsInfo, globalMessage } from "../../services/api";
+import { ChainButton } from "../../components/ChainButton";
 import { intervalLabels } from "../../util/options";
+import { useLocation } from "react-router-dom";
+import { setDate } from "date-fns";
 
 const Dashboard = () => {
-  const [selectedType, setSelectedType] = useState("users");
-  const [selectedInterval, setSelectedInterval] = useState(0);
+
+  const intervalToCalendarWord = (interval) =>
+    interval === 0 ? "day" : interval === 1 ? "month" :  2 ? "week" : "date";
+
+  const intervalWordToCalendar = (interval) =>
+    interval === "day" ? 0 : interval === "month" ? 1 : interval === "week" ? 2 : 3;
+
+  const params = useParams();
+  const a = params.interval ? intervalWordToCalendar(params.interval) : 0
+
+  const [selectedType, setSelectedType] = useState(params.selectedType ?? "users");
+  const [selectedInterval, setSelectedInterval] = useState(a);
   const [statistics, setStatistics] = useState([]);
   const [value, setValue] = useState("");
   const [dates, setDates] = useState([]);
-  const params = useParams();
+
+  // TO-DO REFATORAR ESSA PAGINA MAS POR ENQUANTO TA FUNCIONANDO
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const date = queryParams.get("date");
+
+  console.log(selectedInterval)
+
+  const getFormatedDate = (date) => {
+    setDates(date);
+  };
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -37,12 +60,6 @@ const Dashboard = () => {
     globalMessage(value);
     setValue("");
   };
-
-  const intervalToCalendarWord = (interval) =>
-    interval === 0 ? "day" : interval === 1 ? "month" : "week";
-
-  const intervalWordToCalendar = (interval) =>
-    interval === "day" ? 0 : interval === "month" ? 1 : 2;
 
   const navigate = useNavigate();
 
@@ -55,42 +72,105 @@ const Dashboard = () => {
 
   const handleSelectedType = (type) => {
     navigate(`/dashboard/${type}/${intervalToCalendarWord(selectedInterval)}`);
-    setSelectedType(type)
-  }
+    setSelectedType(type);
+  };
 
   const handleCheckDetails = () => {
     let selected = intervalToCalendarWord(selectedInterval);
 
-    navigate(`/details/${selectedType}/${selected}`);
+    
+    const regex = /\d{2}\/\d{2}\/\d{4}-\d{2}\/\d{2}\/\d{4}/;
+    if(selectedInterval == 3 && regex.test(dates)) navigate(`/details/${selectedType}/date?date=${dates}`);
+    else navigate(`/details/${selectedType}/${selected}?date=`)
+  };
+  
+    function formatarData(dataString) {
+      var dataOriginal = new Date(dataString);
+  
+   
+      var dia = dataOriginal.getDate();
+      var mes = dataOriginal.getMonth() + 1; 
+      var ano = dataOriginal.getFullYear();
+  
+
+      dia = dia < 10 ? '0' + dia : dia;
+      mes = mes < 10 ? '0' + mes : mes;
+  
+
+      var dataFormatada = dia + '-' + mes + '-' + ano;
+  
+      // Retornar a data formatada
+      return dataFormatada;
+  }
+
+  function criarDataValida(dataString) {
+    // Separando a string de data em partes
+    var partes = dataString.split("/");
+    
+    // Obtendo o ano, mês e dia
+    var ano = parseInt(partes[2], 10);
+    var mes = parseInt(partes[1], 10) - 1; // O mês é base 0, então subtrai 1
+    var dia = parseInt(partes[0], 10);
+    
+    // Criando o objeto Date
+    var data = new Date(ano, mes, dia);
+    
+    // Verificando se a data criada é válida
+    if (data.getFullYear() === ano && data.getMonth() === mes && data.getDate() === dia) {
+        return data;
+    } else {
+        return null; // Retornar null se a data não for válida
+    }
+}
+  
+  const searchBetweenDates = async (dates) => {
+
+    if (dates[0] && dates[0] instanceof Date){
+      const newStatistics = await getDetailsByDate(selectedType, formatarData(dates[0]), formatarData(dates[1]));
+      setStatistics(newStatistics.data);
+    }else{
+      var data1 = date.split("-")[0]
+      var data2 = date.split("-")[1]
+      const initialDate = criarDataValida(data1)
+      const endDate =  criarDataValida(data2)
+      const newStatistics = await getDetailsByDate(selectedType, formatarData(initialDate), formatarData(endDate));
+      setStatistics(newStatistics.data);
+    }
+
   };
 
-  const searchBetweenDates = async (dates) => {
-    const newStatistics = await getStatisticsByDateRange(selectedType, dates);
-    setStatistics(newStatistics);
-  };
 
   useEffect(() => {
     async function loadData() {
       if (selectedInterval < intervalLabels.length) {
         if (params.interval && params.selectedType) {
-          const newStatistics = await getStatistics(
+          const newStatistics = await getDetailsInfo(
             params.interval,
             params.selectedType
           );
           let interval = intervalWordToCalendar(params.interval);
           setSelectedInterval(interval);
-          setSelectedType(params.selectedType)
-          setStatistics(newStatistics);
+          setSelectedType(params.selectedType);
+          setStatistics(newStatistics.data);
         } else {
           let selected = intervalToCalendarWord(selectedInterval);
-          const newStatistics = await getStatistics(selected, selectedType);
-          setStatistics(newStatistics);
+          const newStatistics = await getDetailsInfo(selected, selectedType);
+          setStatistics(newStatistics.data);
         }
       }
     }
-
-    loadData();
-  }, [selectedInterval, params?.interval, selectedType, params.selectedType, setStatistics]);
+    if(date){
+      searchBetweenDates(date)
+    }else{
+      loadData();
+    }
+  }, [
+    selectedInterval,
+    params?.interval,
+    selectedType,
+    params.selectedType,
+    setStatistics,
+  ]);
 
   return (
     <div className={styles.container}>
@@ -107,13 +187,15 @@ const Dashboard = () => {
               value={selectedType}
               className={styles.test}
             />
-            <ButtonChain
+            <ChainButton
               labels={intervalLabels}
               searchDates
               selected={handleInterval}
               searchFinanceByDate={searchBetweenDates}
               intervalIndex={intervalWordToCalendar(params.interval)}
-            ></ButtonChain>
+              formatedDates={getFormatedDate}
+              dateText={date}
+            ></ChainButton>
           </div>
           <DataChart
             key={selectedType} // Forçar re-render

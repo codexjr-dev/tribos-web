@@ -2,15 +2,16 @@ import { set } from "date-fns";
 import styles from "./styles.module.css";
 import loadingReq from "../../assets/icons/button-loading.svg";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export const ButtonChain = ({
+export const ChainButton = ({
   labels,
   selected,
   searchDates,
   searchFinanceByDate,
   intervalIndex,
-  setDatas
+  formatedDates,
+  dateText,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(intervalIndex ?? 0);
   const [alertMsg, setAlertMsg] = useState(false);
@@ -20,6 +21,18 @@ export const ButtonChain = ({
   const handleSelect = (currentIndex) => {
     setSelectedIndex(currentIndex);
     selected(currentIndex);
+  };
+
+  useEffect(() => {
+    if (dateText == "null") {
+      dateText = "";
+    } else {
+      handleDate(dateText);
+    }
+  }, []);
+
+  const handleChange = (text) => {
+    formatedDates(text);
   };
 
   const convertDateFormat = (dateString) => {
@@ -34,17 +47,18 @@ export const ButtonChain = ({
       setDates(null);
     } else {
       const splitted = text.split("-");
-      let data1 = convertDateFormat(splitted[0]);
-      let data2 = convertDateFormat(splitted[1]);
+      let data1 = new Date(convertDateFormat(splitted[0]));
+      let data2 = new Date(convertDateFormat(splitted[1]));
       setDates([data1, data2]);
       setAlertMsg(false);
     }
+    handleChange(text);
   };
 
   const handleSearch = async () => {
     if (dates) {
       setLoading(true);
-      setDatas(dates);
+      await searchFinanceByDate(dates);
       setLoading(false);
     } else {
       setAlertMsg(true);
@@ -74,6 +88,7 @@ export const ButtonChain = ({
             <input
               className={styles.inputCalendar}
               onChange={(e) => handleDate(e.target.value)}
+              defaultValue={dateText}
             ></input>
             <button
               key={labels.length}

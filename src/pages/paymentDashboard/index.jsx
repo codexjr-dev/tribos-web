@@ -57,7 +57,8 @@ export const PaymentDashboard = () => {
         default:
           return null
       }
-  };
+    }
+    
 
   useEffect(() => {
     searchFinanceByDate();
@@ -72,10 +73,12 @@ export const PaymentDashboard = () => {
         setAnnouncements(data.announcements)
       }
     } else {
-      setFinanceChart(null);
-      var data = await api.getGeneralFinancesByDate(dates, selectedType);
-      setFinanceChart(data.finances);
-      setAnnouncements(data.announcements)
+      if(dates){
+        setFinanceChart(null);
+        var data = await api.getGeneralFinancesByDate(dates, selectedType);
+        setFinanceChart(data.finances);
+        setAnnouncements(data.announcements)
+      }
     }
   };
 
