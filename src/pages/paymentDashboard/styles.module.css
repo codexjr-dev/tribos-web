@@ -7,10 +7,11 @@
   background-color: rgba(206, 206, 206, 0.6);
   height: 100vh;
   width: 100vw;
-
 }
 
 .container {
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -166,23 +167,26 @@ table thead tr th {
   outline: 3px solid var(--purple);
 }
 
-.almostPaidRow td, .normalRow td {
+.almostPaidRow td,
+.normalRow td {
   padding: 1.25rem 0;
   font-size: 15px;
   color: var(--dark);
   text-align: center;
 }
 
-.almostPaidRow td:first-child, .normalRow td:first-child {
+.almostPaidRow td:first-child,
+.normalRow td:first-child {
   border-radius: 8px 0 0 8px;
   padding: 16px;
   max-width: 160px;
 }
 
-.almostPaidRow td:last-child, .normalRow td:last-child {
+.almostPaidRow td:last-child,
+.normalRow td:last-child {
   border-radius: 0 8px 8px 0;
 }
 
 .almostPaidRow {
-  background-color: #FFAEFB;
+  background-color: #ffaefb;
 }
