@@ -43,7 +43,7 @@ export const ChainButton = ({
   const handleDate = (text) => {
     const regex = /\d{2}\/\d{2}\/\d{4}-\d{2}\/\d{2}\/\d{4}/;
     if (!regex.test(text)) {
-      setAlertMsg(true);
+      setAlertMsg(false);
       setDates(null);
     } else {
       const splitted = text.split("-");
@@ -61,7 +61,7 @@ export const ChainButton = ({
       await searchFinanceByDate(dates);
       setLoading(false);
     } else {
-      setAlertMsg(true);
+      setAlertMsg(false);
     }
   };
 
@@ -109,11 +109,7 @@ export const ChainButton = ({
           <span
             className={styles.spanAdvice}
             style={alertMsg ? { color: "red" } : {}}
-          >
-            {" "}
-            Insira a data separada por "-". <br />
-            Exemplo: "24/03/2000-20/11/2024"
-          </span>
+          ></span>
         </div>
       )}
     </div>

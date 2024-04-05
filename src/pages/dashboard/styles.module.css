@@ -1,8 +1,10 @@
 .container {
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
   padding-bottom: 2rem;
 }
 
@@ -56,8 +58,7 @@
   align-items: center;
   margin-left: 3.5rem;
 
-
-  @media(max-width: 1129px){
+  @media (max-width: 1129px) {
     margin-top: 100px;
   }
 }
@@ -92,6 +93,6 @@
   }
 }
 
-.test{
+.test {
   border: 2px solid red;
 }
