@@ -97,3 +97,33 @@ button {
   color: var(--purple);
   transition: background-color ease-in-out 0.2s;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--white);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple);
+  border-radius: 10px;
+  border: 3px solid var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-dark);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--purple) var(--light-gray);
+}
+
+body {
+  overflow-y: overlay;
+  scrollbar-gutter: stable;
+}
