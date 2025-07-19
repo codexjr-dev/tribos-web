@@ -19,7 +19,7 @@ const Login = () => {
 
   const handleClick = useCallback(() => {
     if (showPassword === "password") {
-      setShowPassword("name");
+      setShowPassword("text");
     } else {
       setShowPassword("password");
     }
