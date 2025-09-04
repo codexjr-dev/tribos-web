@@ -1,21 +1,19 @@
 .container {
-  height: 100%;
+  height: 100vh;
   overflow-y: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
   width: 90%;
+  margin: 0 auto 2rem;
   padding: 1.5rem 0;
-  margin-bottom: 2rem;
-  /* max-height: 85vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container header {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 1rem 0 1rem 0;
+  margin: 1rem 0;
 }
 
 .container header div {
@@ -46,9 +44,9 @@
 .triboInfoContainer {
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: left;
-  overflow: auto;
+  align-items: flex-start;   /* corrected from "left" */
+  justify-content: flex-start;
+  /* no overflow here → content expands naturally */
 }
 
 .triboInfo2 {

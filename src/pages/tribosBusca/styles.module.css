@@ -8,6 +8,16 @@
   margin-bottom: 2rem;
   /* max-height: 85vh; */
 }
+.container {
+  height: 100vh;        /* fixed to viewport */
+  overflow-y: auto;     /* scrolling inside */
+  width: 90%;
+  margin: 0 auto 2rem;
+  padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* ✅ keep horizontal centering */
+}
 
 .container header {
   display: flex;
