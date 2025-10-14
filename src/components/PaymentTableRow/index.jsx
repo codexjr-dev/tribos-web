@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { useChangePrice } from "../../contexts/changePrice";
 
@@ -12,7 +12,7 @@ export const PaymentTableRow = ({
   editMode,
   data,
 }) => {
-  const { handleChangePrice } = useChangePrice();
+  const { priceChange, handleChangePrice } = useChangePrice();
   const [price, setPrice] = useState(data.price);
   const [checked, setChecked] = useState(data.pago)
   
@@ -23,6 +23,30 @@ export const PaymentTableRow = ({
     setPrice(event.target.value);
     handleChangePrice(objectKey, event.target.value);
   };
+
+  const calculatedValues = useMemo(() => {
+
+    const currentPrice = priceChange[objectKey] > 0 ? priceChange[objectKey] : parseFloat(price);
+
+    const tax = (currentPrice * 0.2).toFixed(2);
+
+    const caciquePercent = selectedButton === "cacique" ? 0.7 : 0.3;
+    const masterPercent = selectedButton === "master" ? 0.7 : 0.3;
+
+    if (data.id === 'feed') {
+      return {
+        tax,
+        cacique: (0).toFixed(2),
+        master: (currentPrice * 0.8).toFixed(2)
+      };
+    }
+
+    return {
+      tax,
+      cacique: (currentPrice * 0.8 * caciquePercent).toFixed(2),
+      master: (currentPrice * 0.8 * masterPercent).toFixed(2)
+    };
+  }, [price, priceChange, objectKey, selectedButton, data.id]);
 
   /*const handleCheckbox = () => {
     setChecked(!checked)
@@ -57,9 +81,9 @@ export const PaymentTableRow = ({
               name="price"
             />
           </td>
-          <td>{`R$ ${data.tax}`}</td>
-          <td>{`R$ ${data.cacique}`}</td>
-          <td>{`R$ ${data.master}`}</td>
+          <td>{`R$ ${calculatedValues.tax}`}</td>
+          <td>{`R$ ${calculatedValues.cacique}`}</td>
+          <td>{`R$ ${calculatedValues.master}`}</td>
         </tr>
       )}
     </>

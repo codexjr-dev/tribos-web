@@ -53,7 +53,7 @@ export const PaymentTable = () => {
     }
 
     loadAll();
-  }, [typeSelectedButton]);
+  }, [typeSelectedButton, priceChange]);
 
 
   return (
