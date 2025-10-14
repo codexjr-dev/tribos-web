@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
+import logo from "../../assets/images/logo-pequeno.svg";
 
 import InfoCard from "../../components/InfoCard";
 import { mapLabelToValueType } from "../../util/utils";
@@ -65,6 +66,12 @@ const Details = () => {
             )}`}
           </h2>
         </div>
+        <img 
+          src={logo} 
+          alt="Logo"
+          onClick={() => navigate("/dashboard/users/day")}
+          style={{cursor: 'pointer', width: '112px'}}
+        />
       </header>
       <main>
         <div className={styles.chartContainer}>

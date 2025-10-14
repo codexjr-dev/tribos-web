@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./styles.module.css";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
+import logo from "../../assets/images/logo-pequeno.svg";
 import { useNavigate } from "react-router-dom";
 import UserCard from '../../components/UserCard';
 import { getAllUsers } from '../../services/api';
@@ -65,6 +66,12 @@ function ManageUsers() {
                     <img src={LeftArrowIcon} alt="Voltar" />
                     <h2> Gerenciar usúarios </h2>
                 </div>
+                <img 
+                    src={logo} 
+                    alt="Logo"
+                    onClick={() => navigate("/dashboard/users/day")}
+                    style={{cursor: 'pointer', width: '112px'}}
+                />
             </header>
             <div className={styles.globalMsgContainer}>
                 <label>Mensagem Global</label>

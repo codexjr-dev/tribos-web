@@ -33,6 +33,12 @@ export const TribosHome = () => {
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Tribos </h2>
           </div>
+          <img 
+            src={logo} 
+            alt="Logo"
+            onClick={() => navigate("/dashboard/users/day")}
+            style={{cursor: 'pointer', width: '112px'}}
+          />
         </header>
         <main>
           <div className={styles.triboInfoContainer}>
