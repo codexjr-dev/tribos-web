@@ -18,10 +18,7 @@ export default function ChangePriceProvider({ children }) {
   });
 
   const handleChangePrice = (key, value) => {
-    const temp = priceChange;
-    temp[key] = Number(value);
-
-    setPriceChange(temp);
+    setPriceChange(prev => ({ ...prev, [key]: Number(value) }));
   };
 
   return (
