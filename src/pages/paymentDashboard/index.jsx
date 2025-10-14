@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
 import ConfigIcon from "../../assets/icons/config-icon.svg";
 import { generalFinances } from "../../data/Data";
@@ -12,8 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { PaymentList } from "../../components/PaymentList";
 import styles from "./styles.module.css";
 import { mapIntervalOptionToList } from "../../data/Data";
+import logo from "../../assets/images/logo-pequeno.svg";
 
 export const PaymentDashboard = () => {
+  console.log('PaymentDashboard renderizado');
+
   const [showDetailsActive, setShowDetailsActive] = useState(false);
   const [triboDetails, setTriboDetails] = useState(null);
   const [selectedType, setSelectedType] = useState(0);
@@ -21,6 +24,7 @@ export const PaymentDashboard = () => {
   const [selectedInterval, setSelectedInterval] = useState(0);
   const [announcements, setAnnouncements] = useState([])
   const [dates, setDates] = useState(null)
+  const [error, setError] = useState(null)
 
   const handleShowDetails = (element) => {
     setShowDetailsActive(!showDetailsActive);
@@ -40,7 +44,8 @@ export const PaymentDashboard = () => {
   // 1 - Cacique
   // 2 - Tribo Master
 
-  const getChartValues = async () => {
+  const getChartValues = useCallback(async () => {
+    try {
       switch (selectedInterval) {
         case 0: {
           let result = await api.getFinancesPerDay(selectedType);
@@ -57,30 +62,89 @@ export const PaymentDashboard = () => {
         default:
           return null
       }
+    } catch (error) {
+      console.error("Error fetching chart values:", error);
+      setError(error);
+      throw error;
     }
-    
+  }, [selectedInterval, selectedType]);
+
+  const searchFinanceByDate = useCallback(async () => {
+    console.log("=== searchFinanceByDate ===");
+    console.log("selectedInterval:", selectedInterval);
+    console.log("dates:", dates);
+
+    try {
+      if (selectedInterval !== 3) {
+        if (selectedInterval < intervalLabels.length) {
+          console.log("Buscando dados para intervalo:", selectedInterval);
+          setFinanceChart(null);
+          setError(null);
+          
+          const result = await getChartValues();
+          
+          if (!result) {
+            throw new Error("Resposta vazia da API");
+          }
+
+          console.log("Resultado completo:", result);
+          
+          // ✅ CORREÇÃO 3: Validar estrutura dos dados
+          const data = result.data || result;
+          
+          if (data.finances) {
+            setFinanceChart(data.finances);
+          } else {
+            console.error("data.finances está undefined");
+            setFinanceChart(null);
+          }
+          
+          if (data.announcements) {
+            setAnnouncements(data.announcements);
+          } else {
+            console.warn("data.announcements está undefined");
+            setAnnouncements([]);
+          }
+        }
+      } else {
+        if (dates) {
+          console.log("Buscando com datas customizadas:", dates);
+          setFinanceChart(null);
+          setError(null);
+          
+          var data = await api.getGeneralFinancesByDate(dates, selectedType);
+          
+          if (data.finances) {
+            setFinanceChart(data.finances);
+          } else {
+            console.error("data.finances está undefined");
+            setFinanceChart(null);
+          }
+          
+          if (data.announcements) {
+            setAnnouncements(data.announcements);
+          } else {
+            setAnnouncements([]);
+          }
+        } else {
+          console.warn("Intervalo 3 selecionado mas sem datas");
+        }
+      }
+    } catch (error) {
+      console.error("Erro em searchFinanceByDate:", error);
+      setError(error.message);
+      setFinanceChart(null);
+      setAnnouncements([]);
+    }
+  }, [selectedInterval, selectedType, dates, getChartValues]);
 
   useEffect(() => {
+    console.log("UseEffect disparado");
+    console.log("selectedInterval:", selectedInterval);
+    console.log("selectedType:", selectedType);
+    console.log("dates:", dates);
     searchFinanceByDate();
-  }, [selectedInterval, selectedType, dates]);
-
-  const searchFinanceByDate = async () => {
-    if (selectedInterval != 3) {
-      if (selectedInterval < intervalLabels.length) {
-        setFinanceChart(null);
-        const { data } = await getChartValues()
-        setFinanceChart(data.finances);
-        setAnnouncements(data.announcements)
-      }
-    } else {
-      if(dates){
-        setFinanceChart(null);
-        var data = await api.getGeneralFinancesByDate(dates, selectedType);
-        setFinanceChart(data.finances);
-        setAnnouncements(data.announcements)
-      }
-    }
-  };
+  }, [selectedInterval, selectedType, dates, searchFinanceByDate]);
 
   return (
     <>
@@ -95,6 +159,12 @@ export const PaymentDashboard = () => {
             <img src={LeftArrowIcon} alt="Voltar" />
             <h2> Pagamentos </h2>
           </div>
+          <img 
+            src={logo} 
+            alt="Logo"
+            onClick={() => navigate("/dashboard/users/day")}
+            style={{cursor: 'pointer', width: '112px'}}
+          />
         </header>
         <div className={styles.buttonsHeader}>
           <img

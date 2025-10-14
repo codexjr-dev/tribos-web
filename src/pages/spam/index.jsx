@@ -8,6 +8,7 @@ import { getAllReports, getAllReportsByCount } from "../../services/api";
 import { spamOptions } from "../../util/utils";
 import Select from "../../components/Select";
 import Loading from "../../components/Loading";
+import logo from "../../assets/images/logo-pequeno.svg";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -60,6 +61,12 @@ const Spam = () => {
             <h2> Spam ou Abusos </h2>
           </div>
         )}
+        <img 
+          src={logo} 
+          alt="Logo"
+          onClick={() => navigate("/dashboard/users/day")}
+          style={{cursor: 'pointer', width: '112px'}}
+        />
       </header>
 
       {isModalVisible ? (

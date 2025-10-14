@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useChangePrice } from "../../contexts/changePrice";
+import logo from "../../assets/images/logo-pequeno.svg";
 
 import { PaymentTableRow } from "../../components/PaymentTableRow";
 import Loading from "../../components/Loading";
@@ -57,94 +58,102 @@ export const PaymentTable = () => {
 
 
   return (
-    <div className={styles.container}>
-      <header>
-        <div onClick={() => navigate("/payment")}>
-          <img src={LeftArrowIcon} alt="Voltar" />
-          <h2> Ajustes </h2>
-        </div>
-      </header>
-      <main>
-        <div className={styles.mainContainer}>
-          <div className={styles.headerInfo}>
-            <h2>Tabela de valores</h2>
-            {!isEditMode ? (
-              <span id={styles.editButton} onClick={handleClickOnEdit}>
-                Editar
-              </span>
-            ) : (
-              <span id={styles.editButton} onClick={handleClickOnSave}>
-                Salvar
-              </span>
-            )}
+    <>
+      <div className={styles.container}>
+        <header>
+          <div onClick={() => navigate("/payment")}>
+            <img src={LeftArrowIcon} alt="Voltar" />
+            <h2> Ajustes </h2>
           </div>
-          <div className={styles.buttons}>
-            <button
-              id={
-                typeSelectedButton === "cacique"
-                  ? styles.selected
-                  : styles.normal
-              }
-              onClick={(event) => {
-                handleChangeTypeSelectedButton("cacique");
-              }}
-            >
-              Venda Cacique
-            </button>
-            <button
-              id={
-                typeSelectedButton === "master"
-                  ? styles.selected
-                  : styles.normal
-              }
-              onClick={(event) => {
-                handleChangeTypeSelectedButton("master");
-              }}
-            >
-              Venda Tribo Master
-            </button>
-          </div>
-          <div className={styles.tableContainer}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nº participantes</th>
-                  <th>Preço Total</th>
-                  <th>
-                    Imposto (<b>{`${20}%`}</b>)
-                  </th>
-                  <th>
-                    Cacique (
-                    <b>{`${typeSelectedButton === "cacique" ? 70 : 30}%`}</b>)
-                  </th>
-                  <th>
-                    Tribo Master (
-                    <b>{`${typeSelectedButton === "master" ? 70 : 30}%`}</b>)
-                  </th>
-                </tr>
-              </thead>
+          <img 
+            src={logo} 
+            alt="Logo"
+            onClick={() => navigate("/dashboard/users/day")}
+            style={{cursor: 'pointer', width: '112px'}}
+          />
+        </header>
+        <main>
+          <div className={styles.mainContainer}>
+            <div className={styles.headerInfo}>
+              <h2>Tabela de valores</h2>
+              {!isEditMode ? (
+                <span id={styles.editButton} onClick={handleClickOnEdit}>
+                  Editar
+                </span>
+              ) : (
+                <span id={styles.editButton} onClick={handleClickOnSave}>
+                  Salvar
+                </span>
+              )}
+            </div>
+            <div className={styles.buttons}>
+              <button
+                id={
+                  typeSelectedButton === "cacique"
+                    ? styles.selected
+                    : styles.normal
+                }
+                onClick={(event) => {
+                  handleChangeTypeSelectedButton("cacique");
+                }}
+              >
+                Venda Cacique
+              </button>
+              <button
+                id={
+                  typeSelectedButton === "master"
+                    ? styles.selected
+                    : styles.normal
+                }
+                onClick={(event) => {
+                  handleChangeTypeSelectedButton("master");
+                }}
+              >
+                Venda Tribo Master
+              </button>
+            </div>
+            <div className={styles.tableContainer}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nº participantes</th>
+                    <th>Preço Total</th>
+                    <th>
+                      Imposto (<b>{`${20}%`}</b>)
+                    </th>
+                    <th>
+                      Cacique (
+                      <b>{`${typeSelectedButton === "cacique" ? 70 : 30}%`}</b>)
+                    </th>
+                    <th>
+                      Tribo Master (
+                      <b>{`${typeSelectedButton === "master" ? 70 : 30}%`}</b>)
+                    </th>
+                  </tr>
+                </thead>
 
-              <tbody>
-                {!priceTable ? (
-                  <Loading />
-                ) : (
-                  priceTable.map((object, index) => {
-                    return (
-                      <PaymentTableRow
-                        key={object.id}
-                        objectKey={object.id}
-                        selectedButton={typeSelectedButton}
-                        editMode={isEditMode}
-                        data={object}
-                      />
-                    );
-                  })
-                )}
-              </tbody>
-            </table>
+                <tbody>
+                  {!priceTable ? (
+                    <Loading />
+                  ) : (
+                    priceTable.map((object, index) => {
+                      return (
+                        <PaymentTableRow
+                          key={object.id}
+                          objectKey={object.id}
+                          selectedButton={typeSelectedButton}
+                          editMode={isEditMode}
+                          data={object}
+                        />
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 };

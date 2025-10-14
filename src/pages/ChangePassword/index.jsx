@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import LeftArrowIcon from "../../assets/icons/left-arrow-icon.svg";
+import logo from "../../assets/images/logo-pequeno.svg";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { useAuth } from "../../contexts/auth";
@@ -34,6 +35,12 @@ export const ChangePassword = () => {
           <img src={LeftArrowIcon} alt="Voltar" />
           <h2> Alterar Senha </h2>
         </div>
+        <img
+          src={logo}
+          alt="Logo"
+          onClick={() => navigate("/dashboard/users/day")}
+          style={{ cursor: "pointer", width: "112px" }}
+        />
       </header>
       <div>
         <p>Senha atual</p>
