@@ -1,38 +1,36 @@
 import { useNavigate } from "react-router-dom";
+import styles from "./TriboInfo.module.css";
 
 export const TriboInfo = ({ triboId, photoUrl, username }) => {
-  const triboInfoContainer = {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    overflow: "auto",
-    padding: "5px",
-  };
-
-  const fotoRedonda = {
-    width: "40px",
-    height: "40px",
-    borderRadius: "100%",
-  };
-
-  console.log(photoUrl, username);
-
   const navigate = useNavigate();
-  console.log(triboId);
+
+  console.log("TriboInfo:", { photoUrl, username, triboId });
 
   return (
-    <div style={triboInfoContainer}>
-      <img style={fotoRedonda} src={photoUrl} alt="Imagem da tribo" />
-      <span
-        style={{ fontWeight: "bold", paddingRight: "5px" }}
-        onClick={() => navigate(`/tribos/profile/${triboId}`)}
-      >
-        {username}
-      </span>
-      <button onClick={() => navigate(`/tribos/profile/${triboId}`)}>
-        ver perfil
-      </button>
+    <div className={styles.triboInfoCard}>
+      <div className={styles.imageContainer}>
+        {photoUrl ? (
+          <img 
+            src={photoUrl} 
+            alt={`Foto da tribo ${username}`}
+            className={styles.triboImage}
+          />
+        ) : (
+          <div className={styles.placeholderImage}>
+            <span>{username?.charAt(0)?.toUpperCase() || "T"}</span>
+          </div>
+        )}
+      </div>
+      
+      <div className={styles.triboInfo}>
+        <span className={styles.username}>{username}</span>
+        <button 
+          className={styles.viewProfileButton}
+          onClick={() => navigate(`/tribos/profile/${triboId}`)}
+        >
+          Ver perfil
+        </button>
+      </div>
     </div>
   );
 };
